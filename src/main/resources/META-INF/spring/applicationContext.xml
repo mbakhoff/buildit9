@@ -75,8 +75,8 @@
     </bean>
 
     <bean class="java.net.URI" id="dbUrl">
-        <constructor-arg
-                value="postgres://mlmgsbkcxqefcq:LcKfsUCn4lBY5ipMjYrJLRyU4r@ec2-54-228-235-198.eu-west-1.compute.amazonaws.com:5432/d57hjl61s8s0gv"/>
+        <constructor-arg value="${DATABASE_URL}"/>
+        <!-- postgres://mlmgsbkcxqefcq:LcKfsUCn4lBY5ipMjYrJLRyU4r@ec2-54-228-235-198.eu-west-1.compute.amazonaws.com:5432/d57hjl61s8s0gv -->
     </bean>
 
 </beans>
