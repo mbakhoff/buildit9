@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_esi_buildit9_domain_PurchaseOrderLine" object="${purchaseorderline}" path="/purchaseorderlines" z="7VOE7V+u4JtXzidRRed+oALS9OM=">
+        <field:display field="purchaseOrder" id="s_esi_buildit9_domain_PurchaseOrderLine_purchaseOrder" object="${purchaseorderline}" z="k11EVWKG0A07EW2MUltQFl7Lo/w="/>
+        <field:display field="plantId" id="s_esi_buildit9_domain_PurchaseOrderLine_plantId" object="${purchaseorderline}" z="ElooIGEOLyZh+8L1PW1asssIMyE="/>
+        <field:display field="plantName" id="s_esi_buildit9_domain_PurchaseOrderLine_plantName" object="${purchaseorderline}" z="ElsgkTOH5k6IWuJxaqkZ4zKyPjU="/>
+        <field:display field="amount" id="s_esi_buildit9_domain_PurchaseOrderLine_amount" object="${purchaseorderline}" z="ZkVn6boOOCaLVTUvieb/mg2xlO0="/>
+        <field:display calendar="true" dateTimePattern="${purchaseOrderLine_startdate_date_format}" field="startDate" id="s_esi_buildit9_domain_PurchaseOrderLine_startDate" object="${purchaseorderline}" z="3szgodgZh3BS1KOcMiDyg/+qQF8="/>
+        <field:display calendar="true" dateTimePattern="${purchaseOrderLine_enddate_date_format}" field="endDate" id="s_esi_buildit9_domain_PurchaseOrderLine_endDate" object="${purchaseorderline}" z="4iVIcLFwCujRwGYLIIEpy/ZDQXg="/>
+    </page:show>
+</div>

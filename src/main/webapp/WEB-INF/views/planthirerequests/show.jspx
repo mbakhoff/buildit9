@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_esi_buildit9_domain_PlantHireRequest" object="${planthirerequest}" path="/planthirerequests" z="yEunZQGsrDPBIVNGAZxGkSPGXFI=">
+        <field:display field="totalPrice" id="s_esi_buildit9_domain_PlantHireRequest_totalPrice" object="${planthirerequest}" z="ilnVnmZXzT+D7rSmgDSYMYE21KY="/>
+        <field:display field="siteEngineer" id="s_esi_buildit9_domain_PlantHireRequest_siteEngineer" object="${planthirerequest}" z="ZGITJFxg3EgkInT15+gif4pXvZs="/>
+        <field:display field="site" id="s_esi_buildit9_domain_PlantHireRequest_site" object="${planthirerequest}" z="n4qn+UDTOLZzno9hlfTKB3okyHA="/>
+        <field:display field="rentit" id="s_esi_buildit9_domain_PlantHireRequest_rentit" object="${planthirerequest}" z="7kTYbOxfQx5xc0nsWKCz6UpHRRA="/>
+    </page:show>
+</div>

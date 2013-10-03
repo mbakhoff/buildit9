@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_esi_buildit9_domain_PurchaseOrder" items="${purchaseorders}" z="qMYWAXz66gAlqOkZ+5Sgi1t8pHk=">
+        <table:table data="${purchaseorders}" id="l_esi_buildit9_domain_PurchaseOrder" path="/purchaseorders" z="BbEwNfi7T7D2+q/vsEH6P7huW9E=">
+            <table:column id="c_esi_buildit9_domain_PurchaseOrder_site" property="site" z="W3UUNAB4HOSI1MhnG/bk/mR+378="/>
+            <table:column calendar="true" dateTimePattern="${purchaseOrder_startdate_date_format}" id="c_esi_buildit9_domain_PurchaseOrder_startDate" property="startDate" z="lU6kdcX8ly+SOlbtmFUrgIUal80="/>
+            <table:column calendar="true" dateTimePattern="${purchaseOrder_enddate_date_format}" id="c_esi_buildit9_domain_PurchaseOrder_endDate" property="endDate" z="4KaUEIhaIUr4S9dpOzQLpXy5YbY="/>
+            <table:column id="c_esi_buildit9_domain_PurchaseOrder_hireRequest" property="hireRequest" z="15HftU7Dytfo1Da4OImYWiPr44g="/>
+            <table:column id="c_esi_buildit9_domain_PurchaseOrder_worksEngineerName" property="worksEngineerName" z="P0Ewpq5jCrRxPIRU1dpqUIjbQSg="/>
+        </table:table>
+    </page:list>
+</div>

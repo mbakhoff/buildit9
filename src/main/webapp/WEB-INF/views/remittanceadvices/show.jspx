@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_esi_buildit9_domain_RemittanceAdvice" object="${remittanceadvice}" path="/remittanceadvices" z="ov6WNXX+vnM0U2ugYv+RP62fAjI=">
+        <field:display field="invoice" id="s_esi_buildit9_domain_RemittanceAdvice_invoice" object="${remittanceadvice}" z="zu7IFZbmBzMr0eJPMg72KgR59vI="/>
+        <field:display calendar="true" dateTimePattern="${remittanceAdvice_payday_date_format}" field="payDay" id="s_esi_buildit9_domain_RemittanceAdvice_payDay" object="${remittanceadvice}" z="PKk616NbaywkNCAl+A878TF5R/4="/>
+    </page:show>
+</div>

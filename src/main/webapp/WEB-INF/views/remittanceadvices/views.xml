@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+    <definition extends="default" name="remittanceadvices/list">
+        <put-attribute name="body" value="/WEB-INF/views/remittanceadvices/list.jspx"/>
+    </definition>
+<definition extends="default" name="remittanceadvices/show">
+        <put-attribute name="body" value="/WEB-INF/views/remittanceadvices/show.jspx"/>
+    </definition>
+<definition extends="default" name="remittanceadvices/create">
+        <put-attribute name="body" value="/WEB-INF/views/remittanceadvices/create.jspx"/>
+    </definition>
+<definition extends="default" name="remittanceadvices/update">
+        <put-attribute name="body" value="/WEB-INF/views/remittanceadvices/update.jspx"/>
+    </definition>
+</tiles-definitions>

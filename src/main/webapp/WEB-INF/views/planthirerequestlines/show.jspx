@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_esi_buildit9_domain_PlantHireRequestLine" object="${planthirerequestline}" path="/planthirerequestlines" z="9pdAIw8syhm5EJIbhCDCIcDxcUo=">
+        <field:display field="plantId" id="s_esi_buildit9_domain_PlantHireRequestLine_plantId" object="${planthirerequestline}" z="6OjS0gEXTUpjaZfEQYlWAMmeX9c="/>
+        <field:display field="amount" id="s_esi_buildit9_domain_PlantHireRequestLine_amount" object="${planthirerequestline}" z="VRQOTV6cgFyRK36M/4mg6nnR1zU="/>
+        <field:display field="plantName" id="s_esi_buildit9_domain_PlantHireRequestLine_plantName" object="${planthirerequestline}" z="AHElZkUpn3jwaOLJjJTBuPVWhRc="/>
+        <field:display calendar="true" dateTimePattern="${plantHireRequestLine_startdate_date_format}" field="startDate" id="s_esi_buildit9_domain_PlantHireRequestLine_startDate" object="${planthirerequestline}" z="s3Q8T+INeRtYJMnOhvFnIrm72Nw="/>
+        <field:display calendar="true" dateTimePattern="${plantHireRequestLine_enddate_date_format}" field="endDate" id="s_esi_buildit9_domain_PlantHireRequestLine_endDate" object="${planthirerequestline}" z="Nw8Sy1MiOb9Wm94/Deg1ycLPj7s="/>
+        <field:display field="request" id="s_esi_buildit9_domain_PlantHireRequestLine_request" object="${planthirerequestline}" z="4ouQT841kpjm1Oe1Af+GsHPYsDc="/>
+    </page:show>
+</div>

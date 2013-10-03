@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:update id="fu_esi_buildit9_domain_PlantHireRequest" modelAttribute="plantHireRequest" path="/planthirerequests" versionField="Version" z="AulLyScToP5nrSfNGg5meA1K2as=">
+        <field:input field="totalPrice" id="c_esi_buildit9_domain_PlantHireRequest_totalPrice" z="vKZnrLLPvN2OSjEduf6kiMu+p24="/>
+        <field:input field="siteEngineer" id="c_esi_buildit9_domain_PlantHireRequest_siteEngineer" z="U6X+cNVTER2jHH+7XP7DyYiPuQk="/>
+        <field:select field="site" id="c_esi_buildit9_domain_PlantHireRequest_site" itemValue="id" items="${sites}" path="/sites" z="L3xhh3v9eijs3PrNL7t43ak/+rI="/>
+        <field:select field="rentit" id="c_esi_buildit9_domain_PlantHireRequest_rentit" itemValue="id" items="${rentits}" path="/rentits" z="fq6h5u/XabK5iSB/ZHBb1zj2ve8="/>
+    </form:update>
+</div>

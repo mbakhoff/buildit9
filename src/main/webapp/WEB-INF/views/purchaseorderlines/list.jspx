@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_esi_buildit9_domain_PurchaseOrderLine" items="${purchaseorderlines}" z="KtiMq70T4gNEP9e8irnghA8XN4E=">
+        <table:table data="${purchaseorderlines}" id="l_esi_buildit9_domain_PurchaseOrderLine" path="/purchaseorderlines" z="LLWpQLJicjcJMo7UtzOlgI62OcA=">
+            <table:column id="c_esi_buildit9_domain_PurchaseOrderLine_purchaseOrder" property="purchaseOrder" z="ezxAtGBygUIqr8BYcDbvpuG2mQs="/>
+            <table:column id="c_esi_buildit9_domain_PurchaseOrderLine_plantId" property="plantId" z="42odPiVBUwAAuwjEhWp+AssuHNo="/>
+            <table:column id="c_esi_buildit9_domain_PurchaseOrderLine_plantName" property="plantName" z="pl8vFzd6kcqJsH8dE+I/rQznl1s="/>
+            <table:column id="c_esi_buildit9_domain_PurchaseOrderLine_amount" property="amount" z="pihDrhy7gBQxMLkEV0S0ImetxMc="/>
+            <table:column calendar="true" dateTimePattern="${purchaseOrderLine_startdate_date_format}" id="c_esi_buildit9_domain_PurchaseOrderLine_startDate" property="startDate" z="tql0iMVWvR/fbnx/kvQ05UlL2MY="/>
+            <table:column calendar="true" dateTimePattern="${purchaseOrderLine_enddate_date_format}" id="c_esi_buildit9_domain_PurchaseOrderLine_endDate" property="endDate" z="nP/xhR1P42BUivcObr1D8ZlTckg="/>
+        </table:table>
+    </page:list>
+</div>
