@@ -2,3 +2,7 @@
 target
 *.iml
 log.roo
+.project
+.classpath
+.settings
+.springBeans
