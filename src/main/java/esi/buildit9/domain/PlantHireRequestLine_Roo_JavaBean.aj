@@ -9,20 +9,20 @@ import java.util.Calendar;
 
 privileged aspect PlantHireRequestLine_Roo_JavaBean {
     
-    public Integer PlantHireRequestLine.getPlantId() {
-        return this.plantId;
+    public String PlantHireRequestLine.getPlantExternalId() {
+        return this.plantExternalId;
     }
     
-    public void PlantHireRequestLine.setPlantId(Integer plantId) {
-        this.plantId = plantId;
+    public void PlantHireRequestLine.setPlantExternalId(String plantExternalId) {
+        this.plantExternalId = plantExternalId;
     }
     
-    public Integer PlantHireRequestLine.getAmount() {
-        return this.amount;
+    public Float PlantHireRequestLine.getTotalCost() {
+        return this.totalCost;
     }
     
-    public void PlantHireRequestLine.setAmount(Integer amount) {
-        this.amount = amount;
+    public void PlantHireRequestLine.setTotalCost(Float totalCost) {
+        this.totalCost = totalCost;
     }
     
     public String PlantHireRequestLine.getPlantName() {

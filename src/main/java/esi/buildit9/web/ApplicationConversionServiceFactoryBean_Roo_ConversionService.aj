@@ -7,7 +7,6 @@ import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.PlantHireRequest;
 import esi.buildit9.domain.PlantHireRequestLine;
 import esi.buildit9.domain.PurchaseOrder;
-import esi.buildit9.domain.PurchaseOrderLine;
 import esi.buildit9.domain.RemittanceAdvice;
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
@@ -47,7 +46,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<PlantHireRequest, String> ApplicationConversionServiceFactoryBean.getPlantHireRequestToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.PlantHireRequest, java.lang.String>() {
             public String convert(PlantHireRequest plantHireRequest) {
-                return new StringBuilder().append(plantHireRequest.getTotalPrice()).append(' ').append(plantHireRequest.getSiteEngineer()).toString();
+                return new StringBuilder().append(plantHireRequest.getTotalPrice()).append(' ').append(plantHireRequest.getSiteEngineerName()).append(' ').append(plantHireRequest.getWorksEngineerName()).toString();
             }
         };
     }
@@ -71,7 +70,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<PlantHireRequestLine, String> ApplicationConversionServiceFactoryBean.getPlantHireRequestLineToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.PlantHireRequestLine, java.lang.String>() {
             public String convert(PlantHireRequestLine plantHireRequestLine) {
-                return new StringBuilder().append(plantHireRequestLine.getPlantId()).append(' ').append(plantHireRequestLine.getAmount()).append(' ').append(plantHireRequestLine.getPlantName()).append(' ').append(plantHireRequestLine.getStartDate()).toString();
+                return new StringBuilder().append(plantHireRequestLine.getPlantExternalId()).append(' ').append(plantHireRequestLine.getTotalCost()).append(' ').append(plantHireRequestLine.getPlantName()).append(' ').append(plantHireRequestLine.getStartDate()).toString();
             }
         };
     }
@@ -116,29 +115,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<PurchaseOrderLine, String> ApplicationConversionServiceFactoryBean.getPurchaseOrderLineToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.PurchaseOrderLine, java.lang.String>() {
-            public String convert(PurchaseOrderLine purchaseOrderLine) {
-                return new StringBuilder().append(purchaseOrderLine.getPlantId()).append(' ').append(purchaseOrderLine.getPlantName()).append(' ').append(purchaseOrderLine.getAmount()).append(' ').append(purchaseOrderLine.getStartDate()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, PurchaseOrderLine> ApplicationConversionServiceFactoryBean.getIdToPurchaseOrderLineConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, esi.buildit9.domain.PurchaseOrderLine>() {
-            public esi.buildit9.domain.PurchaseOrderLine convert(java.lang.Long id) {
-                return PurchaseOrderLine.findPurchaseOrderLine(id);
-            }
-        };
-    }
-    
-    public Converter<String, PurchaseOrderLine> ApplicationConversionServiceFactoryBean.getStringToPurchaseOrderLineConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, esi.buildit9.domain.PurchaseOrderLine>() {
-            public esi.buildit9.domain.PurchaseOrderLine convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), PurchaseOrderLine.class);
-            }
-        };
-    }
     
     public Converter<RemittanceAdvice, String> ApplicationConversionServiceFactoryBean.getRemittanceAdviceToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.RemittanceAdvice, java.lang.String>() {
@@ -225,9 +201,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getPurchaseOrderToStringConverter());
         registry.addConverter(getIdToPurchaseOrderConverter());
         registry.addConverter(getStringToPurchaseOrderConverter());
-        registry.addConverter(getPurchaseOrderLineToStringConverter());
-        registry.addConverter(getIdToPurchaseOrderLineConverter());
-        registry.addConverter(getStringToPurchaseOrderLineConverter());
         registry.addConverter(getRemittanceAdviceToStringConverter());
         registry.addConverter(getIdToRemittanceAdviceConverter());
         registry.addConverter(getStringToRemittanceAdviceConverter());

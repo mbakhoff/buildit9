@@ -4,12 +4,12 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_esi_buildit9_domain_PlantHireRequestLine" items="${planthirerequestlines}" z="lH4r7l3QGCGJfjxvHDo0ks3bTII=">
         <table:table data="${planthirerequestlines}" id="l_esi_buildit9_domain_PlantHireRequestLine" path="/planthirerequestlines" z="u2boa2CIvlc5TX04yE0UGUrjsuM=">
-            <table:column id="c_esi_buildit9_domain_PlantHireRequestLine_plantId" property="plantId" z="EZeAoqf/RHkb0dnstm6ck+f2ob8="/>
-            <table:column id="c_esi_buildit9_domain_PlantHireRequestLine_amount" property="amount" z="Yp82LaVjWzXSotbwM52dIK+vpuI="/>
             <table:column id="c_esi_buildit9_domain_PlantHireRequestLine_plantName" property="plantName" z="5hac/w3FevkAAD7VodloY71b93o="/>
             <table:column calendar="true" dateTimePattern="${plantHireRequestLine_startdate_date_format}" id="c_esi_buildit9_domain_PlantHireRequestLine_startDate" property="startDate" z="Toc8TYdVCMv7NjqjjMb5zBFWq00="/>
             <table:column calendar="true" dateTimePattern="${plantHireRequestLine_enddate_date_format}" id="c_esi_buildit9_domain_PlantHireRequestLine_endDate" property="endDate" z="S+Rl5uctrdqOquiyZ0eDp47mzwo="/>
             <table:column id="c_esi_buildit9_domain_PlantHireRequestLine_request" property="request" z="TYwP1gTpLJwzBaXl4dalQjwRRiI="/>
+            <table:column id="c_esi_buildit9_domain_PlantHireRequestLine_plantExternalId" property="plantExternalId" z="gvbJnpj1h2NoX9TKvUjyUFLuRgk="/>
+            <table:column id="c_esi_buildit9_domain_PlantHireRequestLine_totalCost" property="totalCost" z="897Vgn/CgJvXuaC+0w1mOYGK5PM="/>
         </table:table>
     </page:list>
 </div>

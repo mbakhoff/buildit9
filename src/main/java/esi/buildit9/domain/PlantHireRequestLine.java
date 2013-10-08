@@ -16,11 +16,11 @@ public class PlantHireRequestLine {
 
     /**
      */
-    private Integer plantId;
+    private String plantExternalId;
 
     /**
      */
-    private Integer amount;
+    private Float totalCost;
 
     /**
      */

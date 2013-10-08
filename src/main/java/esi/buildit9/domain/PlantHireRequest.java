@@ -15,7 +15,7 @@ public class PlantHireRequest {
 
     /**
      */
-    private String siteEngineer;
+    private String siteEngineerName;
 
     /**
      */
@@ -26,4 +26,8 @@ public class PlantHireRequest {
      */
     @ManyToOne
     private RentIt rentit;
+
+    /**
+     */
+    private String worksEngineerName;
 }

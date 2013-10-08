@@ -17,12 +17,12 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
         this.totalPrice = totalPrice;
     }
     
-    public String PlantHireRequest.getSiteEngineer() {
-        return this.siteEngineer;
+    public String PlantHireRequest.getSiteEngineerName() {
+        return this.siteEngineerName;
     }
     
-    public void PlantHireRequest.setSiteEngineer(String siteEngineer) {
-        this.siteEngineer = siteEngineer;
+    public void PlantHireRequest.setSiteEngineerName(String siteEngineerName) {
+        this.siteEngineerName = siteEngineerName;
     }
     
     public Site PlantHireRequest.getSite() {
@@ -39,6 +39,14 @@ privileged aspect PlantHireRequest_Roo_JavaBean {
     
     public void PlantHireRequest.setRentit(RentIt rentit) {
         this.rentit = rentit;
+    }
+    
+    public String PlantHireRequest.getWorksEngineerName() {
+        return this.worksEngineerName;
+    }
+    
+    public void PlantHireRequest.setWorksEngineerName(String worksEngineerName) {
+        this.worksEngineerName = worksEngineerName;
     }
     
 }
