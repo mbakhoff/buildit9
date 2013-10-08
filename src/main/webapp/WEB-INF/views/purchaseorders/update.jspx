@@ -8,5 +8,6 @@
         <field:datetime dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="c_esi_buildit9_domain_PurchaseOrder_endDate" z="/A/WL4gKuqr2j5bcTTK641y3Cu0="/>
         <field:select field="hireRequest" id="c_esi_buildit9_domain_PurchaseOrder_hireRequest" itemValue="id" items="${planthirerequests}" path="/planthirerequests" z="Vb5iVUHMKYtmmEww0MIJgRA9cgY="/>
         <field:input field="worksEngineerName" id="c_esi_buildit9_domain_PurchaseOrder_worksEngineerName" z="M0rns5X1ujHj3i65NH2SN0/wJGE="/>
+        <field:select field="orderStatus" id="c_esi_buildit9_domain_PurchaseOrder_orderStatus" items="${purchaseorderstatusenums}" path="purchaseorderstatusenums" z="yKPgGprjoTeIapO/6lZdBuhna6w="/>
     </form:update>
 </div>

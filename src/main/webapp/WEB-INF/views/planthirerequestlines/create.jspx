@@ -3,12 +3,12 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_esi_buildit9_domain_PlantHireRequestLine" modelAttribute="plantHireRequestLine" path="/planthirerequestlines" render="${empty dependencies}" z="oeO8OeTEIalh6SCfO0yRIiTQJ+g=">
+        <field:input field="plantExternalId" id="c_esi_buildit9_domain_PlantHireRequestLine_plantExternalId" z="Ai0S2rZvO1sltEysFhBLh5lH0tA="/>
+        <field:input field="totalCost" id="c_esi_buildit9_domain_PlantHireRequestLine_totalCost" validationMessageCode="field_invalid_number" z="azB/rYHigdGaZgx9y8rqV4OJW+w="/>
         <field:input field="plantName" id="c_esi_buildit9_domain_PlantHireRequestLine_plantName" z="zp6z7AGqX4JKv7K9MB3Jnf4ASXg="/>
         <field:datetime dateTimePattern="${plantHireRequestLine_startdate_date_format}" field="startDate" id="c_esi_buildit9_domain_PlantHireRequestLine_startDate" z="bNw3Z/vrM9IS9Pfpc1zFxI5vvfs="/>
         <field:datetime dateTimePattern="${plantHireRequestLine_enddate_date_format}" field="endDate" id="c_esi_buildit9_domain_PlantHireRequestLine_endDate" z="tWXbPhHaOhMu5SUpzC+h6vCggBs="/>
         <field:select field="request" id="c_esi_buildit9_domain_PlantHireRequestLine_request" itemValue="id" items="${planthirerequests}" path="/planthirerequests" z="CCnyIHPA8iozeWFL8u3w4deMZ/s="/>
-        <field:input field="plantExternalId" id="c_esi_buildit9_domain_PlantHireRequestLine_plantExternalId" z="Ai0S2rZvO1sltEysFhBLh5lH0tA="/>
-        <field:input field="totalCost" id="c_esi_buildit9_domain_PlantHireRequestLine_totalCost" validationMessageCode="field_invalid_number" z="azB/rYHigdGaZgx9y8rqV4OJW+w="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_esi_buildit9_domain_PlantHireRequestLine" render="${not empty dependencies}" z="mD6I0tlGyv8dS1r7gfEs1AgmspM="/>
 </div>

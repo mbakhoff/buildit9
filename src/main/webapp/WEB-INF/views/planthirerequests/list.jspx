@@ -5,9 +5,9 @@
     <page:list id="pl_esi_buildit9_domain_PlantHireRequest" items="${planthirerequests}" z="If2YOVFwZe5IDC+y3mSwfvzNkR8=">
         <table:table data="${planthirerequests}" id="l_esi_buildit9_domain_PlantHireRequest" path="/planthirerequests" z="klZ7XWnIpTIN6RcJtffSm8NITMc=">
             <table:column id="c_esi_buildit9_domain_PlantHireRequest_totalPrice" property="totalPrice" z="TaAEIMbcdG0bG8VwImGUV3GzmQk="/>
+            <table:column id="c_esi_buildit9_domain_PlantHireRequest_siteEngineerName" property="siteEngineerName" z="43/x0S4MDXedHM42kdNY/t5u9nU="/>
             <table:column id="c_esi_buildit9_domain_PlantHireRequest_site" property="site" z="F9DtEHbfVw9XZCC/Rb0R+CDsNeY="/>
             <table:column id="c_esi_buildit9_domain_PlantHireRequest_rentit" property="rentit" z="QRue3qoM7hlCRpFR2rtAzwTOI+Y="/>
-            <table:column id="c_esi_buildit9_domain_PlantHireRequest_siteEngineerName" property="siteEngineerName" z="43/x0S4MDXedHM42kdNY/t5u9nU="/>
             <table:column id="c_esi_buildit9_domain_PlantHireRequest_worksEngineerName" property="worksEngineerName" z="2/frDU599R5mLNnQfUC4+B2ACjU="/>
         </table:table>
     </page:list>

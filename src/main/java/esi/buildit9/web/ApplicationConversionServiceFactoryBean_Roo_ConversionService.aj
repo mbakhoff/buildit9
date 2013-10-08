@@ -115,7 +115,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    
     public Converter<RemittanceAdvice, String> ApplicationConversionServiceFactoryBean.getRemittanceAdviceToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.RemittanceAdvice, java.lang.String>() {
             public String convert(RemittanceAdvice remittanceAdvice) {

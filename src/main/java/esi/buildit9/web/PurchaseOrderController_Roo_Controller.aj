@@ -5,9 +5,11 @@ package esi.buildit9.web;
 
 import esi.buildit9.domain.PlantHireRequest;
 import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.PurchaseOrderStatusEnum;
 import esi.buildit9.domain.Site;
 import esi.buildit9.web.PurchaseOrderController;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
@@ -99,6 +101,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         uiModel.addAttribute("purchaseOrder", purchaseOrder);
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("planthirerequests", PlantHireRequest.findAllPlantHireRequests());
+        uiModel.addAttribute("purchaseorderstatusenums", Arrays.asList(PurchaseOrderStatusEnum.values()));
         uiModel.addAttribute("sites", Site.findAllSites());
     }
     

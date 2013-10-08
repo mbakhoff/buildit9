@@ -4,9 +4,9 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_esi_buildit9_domain_PlantHireRequest" object="${planthirerequest}" path="/planthirerequests" z="yEunZQGsrDPBIVNGAZxGkSPGXFI=">
         <field:display field="totalPrice" id="s_esi_buildit9_domain_PlantHireRequest_totalPrice" object="${planthirerequest}" z="ilnVnmZXzT+D7rSmgDSYMYE21KY="/>
+        <field:display field="siteEngineerName" id="s_esi_buildit9_domain_PlantHireRequest_siteEngineerName" object="${planthirerequest}" z="6aq+tAp15w2gHRwEI0OHnzERjCA="/>
         <field:display field="site" id="s_esi_buildit9_domain_PlantHireRequest_site" object="${planthirerequest}" z="n4qn+UDTOLZzno9hlfTKB3okyHA="/>
         <field:display field="rentit" id="s_esi_buildit9_domain_PlantHireRequest_rentit" object="${planthirerequest}" z="7kTYbOxfQx5xc0nsWKCz6UpHRRA="/>
-        <field:display field="siteEngineerName" id="s_esi_buildit9_domain_PlantHireRequest_siteEngineerName" object="${planthirerequest}" z="6aq+tAp15w2gHRwEI0OHnzERjCA="/>
         <field:display field="worksEngineerName" id="s_esi_buildit9_domain_PlantHireRequest_worksEngineerName" object="${planthirerequest}" z="/N3KNhTKxJfk7buK6B6D7Gqribo="/>
     </page:show>
 </div>

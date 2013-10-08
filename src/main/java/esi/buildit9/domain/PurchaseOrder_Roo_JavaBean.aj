@@ -5,6 +5,7 @@ package esi.buildit9.domain;
 
 import esi.buildit9.domain.PlantHireRequest;
 import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.PurchaseOrderStatusEnum;
 import esi.buildit9.domain.Site;
 import java.util.Calendar;
 
@@ -48,6 +49,14 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public void PurchaseOrder.setWorksEngineerName(String worksEngineerName) {
         this.worksEngineerName = worksEngineerName;
+    }
+    
+    public PurchaseOrderStatusEnum PurchaseOrder.getOrderStatus() {
+        return this.orderStatus;
+    }
+    
+    public void PurchaseOrder.setOrderStatus(PurchaseOrderStatusEnum orderStatus) {
+        this.orderStatus = orderStatus;
     }
     
 }

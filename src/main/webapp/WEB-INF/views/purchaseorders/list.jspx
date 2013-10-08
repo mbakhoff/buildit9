@@ -9,6 +9,7 @@
             <table:column calendar="true" dateTimePattern="${purchaseOrder_enddate_date_format}" id="c_esi_buildit9_domain_PurchaseOrder_endDate" property="endDate" z="4KaUEIhaIUr4S9dpOzQLpXy5YbY="/>
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_hireRequest" property="hireRequest" z="15HftU7Dytfo1Da4OImYWiPr44g="/>
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_worksEngineerName" property="worksEngineerName" z="P0Ewpq5jCrRxPIRU1dpqUIjbQSg="/>
+            <table:column id="c_esi_buildit9_domain_PurchaseOrder_orderStatus" property="orderStatus" z="pNsZW3JUyAtbZnaB+2io8Mc4zWg="/>
         </table:table>
     </page:list>
 </div>

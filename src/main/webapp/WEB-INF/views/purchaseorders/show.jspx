@@ -8,5 +8,6 @@
         <field:display calendar="true" dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="s_esi_buildit9_domain_PurchaseOrder_endDate" object="${purchaseorder}" z="/4bqArF3QwBc0kEeLqiAV+fnRyA="/>
         <field:display field="hireRequest" id="s_esi_buildit9_domain_PurchaseOrder_hireRequest" object="${purchaseorder}" z="btz8apxu0rz3HcPYpHBPyLw8puk="/>
         <field:display field="worksEngineerName" id="s_esi_buildit9_domain_PurchaseOrder_worksEngineerName" object="${purchaseorder}" z="nsApI4jzn5o6cYEsSYvbhjXvUqQ="/>
+        <field:display field="orderStatus" id="s_esi_buildit9_domain_PurchaseOrder_orderStatus" object="${purchaseorder}" z="9/iaEfEBgWoTXCekqssJ79JPj2M="/>
     </page:show>
 </div>
