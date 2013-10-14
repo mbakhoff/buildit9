@@ -3,13 +3,13 @@
 
 package esi.buildit9.domain;
 
-import esi.buildit9.domain.PlantHireRequestLine;
+import esi.buildit9.domain.PurchaseOrderLine;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-privileged aspect PlantHireRequestLine_Roo_ToString {
+privileged aspect PurchaseOrderLine_Roo_ToString {
     
-    public String PlantHireRequestLine.toString() {
+    public String PurchaseOrderLine.toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     

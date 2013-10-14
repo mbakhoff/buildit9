@@ -12,7 +12,7 @@ import java.util.Calendar;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
-public class PlantHireRequestLine {
+public class PurchaseOrderLine {
 
     /**
      */
@@ -41,5 +41,5 @@ public class PlantHireRequestLine {
     /**
      */
     @ManyToOne
-    private PlantHireRequest request;
+    private PurchaseOrder request;
 }

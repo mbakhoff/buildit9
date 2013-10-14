@@ -3,17 +3,15 @@
 
 package esi.buildit9.web;
 
-import esi.buildit9.domain.PlantHireRequest;
+import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
-import esi.buildit9.domain.PurchaseOrderStatusEnum;
+import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
 import esi.buildit9.web.PurchaseOrderController;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import org.joda.time.format.DateTimeFormat;
-import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +42,6 @@ privileged aspect PurchaseOrderController_Roo_Controller {
     
     @RequestMapping(value = "/{id}", produces = "text/html")
     public String PurchaseOrderController.show(@PathVariable("id") Long id, Model uiModel) {
-        addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("purchaseorder", PurchaseOrder.findPurchaseOrder(id));
         uiModel.addAttribute("itemId", id);
         return "purchaseorders/show";
@@ -61,7 +58,6 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         } else {
             uiModel.addAttribute("purchaseorders", PurchaseOrder.findAllPurchaseOrders());
         }
-        addDateTimeFormatPatterns(uiModel);
         return "purchaseorders/list";
     }
     
@@ -92,16 +88,10 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         return "redirect:/purchaseorders";
     }
     
-    void PurchaseOrderController.addDateTimeFormatPatterns(Model uiModel) {
-        uiModel.addAttribute("purchaseOrder_startdate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-        uiModel.addAttribute("purchaseOrder_enddate_date_format", DateTimeFormat.patternForStyle("M-", LocaleContextHolder.getLocale()));
-    }
-    
     void PurchaseOrderController.populateEditForm(Model uiModel, PurchaseOrder purchaseOrder) {
         uiModel.addAttribute("purchaseOrder", purchaseOrder);
-        addDateTimeFormatPatterns(uiModel);
-        uiModel.addAttribute("planthirerequests", PlantHireRequest.findAllPlantHireRequests());
-        uiModel.addAttribute("purchaseorderstatusenums", Arrays.asList(PurchaseOrderStatusEnum.values()));
+        uiModel.addAttribute("orderstatuses", Arrays.asList(OrderStatus.values()));
+        uiModel.addAttribute("rentits", RentIt.findAllRentIts());
         uiModel.addAttribute("sites", Site.findAllSites());
     }
     

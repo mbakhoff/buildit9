@@ -3,73 +3,73 @@
 
 package esi.buildit9.domain;
 
-import esi.buildit9.domain.PlantHireRequest;
+import esi.buildit9.domain.PurchaseOrderLine;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
 
-privileged aspect PlantHireRequest_Roo_Jpa_ActiveRecord {
+privileged aspect PurchaseOrderLine_Roo_Jpa_ActiveRecord {
     
     @PersistenceContext
-    transient EntityManager PlantHireRequest.entityManager;
+    transient EntityManager PurchaseOrderLine.entityManager;
     
-    public static final EntityManager PlantHireRequest.entityManager() {
-        EntityManager em = new PlantHireRequest().entityManager;
+    public static final EntityManager PurchaseOrderLine.entityManager() {
+        EntityManager em = new PurchaseOrderLine().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }
     
-    public static long PlantHireRequest.countPlantHireRequests() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM PlantHireRequest o", Long.class).getSingleResult();
+    public static long PurchaseOrderLine.countPurchaseOrderLines() {
+        return entityManager().createQuery("SELECT COUNT(o) FROM PurchaseOrderLine o", Long.class).getSingleResult();
     }
     
-    public static List<PlantHireRequest> PlantHireRequest.findAllPlantHireRequests() {
-        return entityManager().createQuery("SELECT o FROM PlantHireRequest o", PlantHireRequest.class).getResultList();
+    public static List<PurchaseOrderLine> PurchaseOrderLine.findAllPurchaseOrderLines() {
+        return entityManager().createQuery("SELECT o FROM PurchaseOrderLine o", PurchaseOrderLine.class).getResultList();
     }
     
-    public static PlantHireRequest PlantHireRequest.findPlantHireRequest(Long id) {
+    public static PurchaseOrderLine PurchaseOrderLine.findPurchaseOrderLine(Long id) {
         if (id == null) return null;
-        return entityManager().find(PlantHireRequest.class, id);
+        return entityManager().find(PurchaseOrderLine.class, id);
     }
     
-    public static List<PlantHireRequest> PlantHireRequest.findPlantHireRequestEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM PlantHireRequest o", PlantHireRequest.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    public static List<PurchaseOrderLine> PurchaseOrderLine.findPurchaseOrderLineEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM PurchaseOrderLine o", PurchaseOrderLine.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional
-    public void PlantHireRequest.persist() {
+    public void PurchaseOrderLine.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
     }
     
     @Transactional
-    public void PlantHireRequest.remove() {
+    public void PurchaseOrderLine.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
         if (this.entityManager.contains(this)) {
             this.entityManager.remove(this);
         } else {
-            PlantHireRequest attached = PlantHireRequest.findPlantHireRequest(this.id);
+            PurchaseOrderLine attached = PurchaseOrderLine.findPurchaseOrderLine(this.id);
             this.entityManager.remove(attached);
         }
     }
     
     @Transactional
-    public void PlantHireRequest.flush() {
+    public void PurchaseOrderLine.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
     }
     
     @Transactional
-    public void PlantHireRequest.clear() {
+    public void PurchaseOrderLine.clear() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.clear();
     }
     
     @Transactional
-    public PlantHireRequest PlantHireRequest.merge() {
+    public PurchaseOrderLine PurchaseOrderLine.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
-        PlantHireRequest merged = this.entityManager.merge(this);
+        PurchaseOrderLine merged = this.entityManager.merge(this);
         this.entityManager.flush();
         return merged;
     }

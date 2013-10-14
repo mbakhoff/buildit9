@@ -4,9 +4,8 @@
 package esi.buildit9.web;
 
 import esi.buildit9.domain.Invoice;
-import esi.buildit9.domain.PlantHireRequest;
-import esi.buildit9.domain.PlantHireRequestLine;
 import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.PurchaseOrderLine;
 import esi.buildit9.domain.RemittanceAdvice;
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
@@ -43,58 +42,10 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         };
     }
     
-    public Converter<PlantHireRequest, String> ApplicationConversionServiceFactoryBean.getPlantHireRequestToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.PlantHireRequest, java.lang.String>() {
-            public String convert(PlantHireRequest plantHireRequest) {
-                return new StringBuilder().append(plantHireRequest.getTotalPrice()).append(' ').append(plantHireRequest.getSiteEngineerName()).append(' ').append(plantHireRequest.getWorksEngineerName()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, PlantHireRequest> ApplicationConversionServiceFactoryBean.getIdToPlantHireRequestConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, esi.buildit9.domain.PlantHireRequest>() {
-            public esi.buildit9.domain.PlantHireRequest convert(java.lang.Long id) {
-                return PlantHireRequest.findPlantHireRequest(id);
-            }
-        };
-    }
-    
-    public Converter<String, PlantHireRequest> ApplicationConversionServiceFactoryBean.getStringToPlantHireRequestConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, esi.buildit9.domain.PlantHireRequest>() {
-            public esi.buildit9.domain.PlantHireRequest convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), PlantHireRequest.class);
-            }
-        };
-    }
-    
-    public Converter<PlantHireRequestLine, String> ApplicationConversionServiceFactoryBean.getPlantHireRequestLineToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.PlantHireRequestLine, java.lang.String>() {
-            public String convert(PlantHireRequestLine plantHireRequestLine) {
-                return new StringBuilder().append(plantHireRequestLine.getPlantExternalId()).append(' ').append(plantHireRequestLine.getTotalCost()).append(' ').append(plantHireRequestLine.getPlantName()).append(' ').append(plantHireRequestLine.getStartDate()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, PlantHireRequestLine> ApplicationConversionServiceFactoryBean.getIdToPlantHireRequestLineConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, esi.buildit9.domain.PlantHireRequestLine>() {
-            public esi.buildit9.domain.PlantHireRequestLine convert(java.lang.Long id) {
-                return PlantHireRequestLine.findPlantHireRequestLine(id);
-            }
-        };
-    }
-    
-    public Converter<String, PlantHireRequestLine> ApplicationConversionServiceFactoryBean.getStringToPlantHireRequestLineConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, esi.buildit9.domain.PlantHireRequestLine>() {
-            public esi.buildit9.domain.PlantHireRequestLine convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), PlantHireRequestLine.class);
-            }
-        };
-    }
-    
     public Converter<PurchaseOrder, String> ApplicationConversionServiceFactoryBean.getPurchaseOrderToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.PurchaseOrder, java.lang.String>() {
             public String convert(PurchaseOrder purchaseOrder) {
-                return new StringBuilder().append(purchaseOrder.getStartDate()).append(' ').append(purchaseOrder.getEndDate()).append(' ').append(purchaseOrder.getWorksEngineerName()).toString();
+                return new StringBuilder().append(purchaseOrder.getTotalPrice()).append(' ').append(purchaseOrder.getSiteEngineerName()).append(' ').append(purchaseOrder.getWorksEngineerName()).toString();
             }
         };
     }
@@ -111,6 +62,30 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         return new org.springframework.core.convert.converter.Converter<java.lang.String, esi.buildit9.domain.PurchaseOrder>() {
             public esi.buildit9.domain.PurchaseOrder convert(String id) {
                 return getObject().convert(getObject().convert(id, Long.class), PurchaseOrder.class);
+            }
+        };
+    }
+    
+    public Converter<PurchaseOrderLine, String> ApplicationConversionServiceFactoryBean.getPurchaseOrderLineToStringConverter() {
+        return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.PurchaseOrderLine, java.lang.String>() {
+            public String convert(PurchaseOrderLine purchaseOrderLine) {
+                return new StringBuilder().append(purchaseOrderLine.getPlantExternalId()).append(' ').append(purchaseOrderLine.getTotalCost()).append(' ').append(purchaseOrderLine.getPlantName()).append(' ').append(purchaseOrderLine.getStartDate()).toString();
+            }
+        };
+    }
+    
+    public Converter<Long, PurchaseOrderLine> ApplicationConversionServiceFactoryBean.getIdToPurchaseOrderLineConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.Long, esi.buildit9.domain.PurchaseOrderLine>() {
+            public esi.buildit9.domain.PurchaseOrderLine convert(java.lang.Long id) {
+                return PurchaseOrderLine.findPurchaseOrderLine(id);
+            }
+        };
+    }
+    
+    public Converter<String, PurchaseOrderLine> ApplicationConversionServiceFactoryBean.getStringToPurchaseOrderLineConverter() {
+        return new org.springframework.core.convert.converter.Converter<java.lang.String, esi.buildit9.domain.PurchaseOrderLine>() {
+            public esi.buildit9.domain.PurchaseOrderLine convert(String id) {
+                return getObject().convert(getObject().convert(id, Long.class), PurchaseOrderLine.class);
             }
         };
     }
@@ -191,15 +166,12 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
         registry.addConverter(getInvoiceToStringConverter());
         registry.addConverter(getIdToInvoiceConverter());
         registry.addConverter(getStringToInvoiceConverter());
-        registry.addConverter(getPlantHireRequestToStringConverter());
-        registry.addConverter(getIdToPlantHireRequestConverter());
-        registry.addConverter(getStringToPlantHireRequestConverter());
-        registry.addConverter(getPlantHireRequestLineToStringConverter());
-        registry.addConverter(getIdToPlantHireRequestLineConverter());
-        registry.addConverter(getStringToPlantHireRequestLineConverter());
         registry.addConverter(getPurchaseOrderToStringConverter());
         registry.addConverter(getIdToPurchaseOrderConverter());
         registry.addConverter(getStringToPurchaseOrderConverter());
+        registry.addConverter(getPurchaseOrderLineToStringConverter());
+        registry.addConverter(getIdToPurchaseOrderLineConverter());
+        registry.addConverter(getStringToPurchaseOrderLineConverter());
         registry.addConverter(getRemittanceAdviceToStringConverter());
         registry.addConverter(getIdToRemittanceAdviceConverter());
         registry.addConverter(getStringToRemittanceAdviceConverter());

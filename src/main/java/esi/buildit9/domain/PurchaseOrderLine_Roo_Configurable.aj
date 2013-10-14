@@ -3,11 +3,11 @@
 
 package esi.buildit9.domain;
 
-import esi.buildit9.domain.PlantHireRequest;
+import esi.buildit9.domain.PurchaseOrderLine;
 import org.springframework.beans.factory.annotation.Configurable;
 
-privileged aspect PlantHireRequest_Roo_Configurable {
+privileged aspect PurchaseOrderLine_Roo_Configurable {
     
-    declare @type: PlantHireRequest: @Configurable;
+    declare @type: PurchaseOrderLine: @Configurable;
     
 }

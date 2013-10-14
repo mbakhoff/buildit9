@@ -1,0 +1,14 @@
+package esi.buildit9.domain;
+
+public enum OrderStatus {
+
+	CREATED,
+	WAITING_APPROVAL,
+	APPROVED,
+    CANCELLED,
+	ORDER_SENT,
+	ORDER_CONFIRMED,
+	INVOICE_RECEIVED,
+	PAYMENT_COMPLETED
+
+}

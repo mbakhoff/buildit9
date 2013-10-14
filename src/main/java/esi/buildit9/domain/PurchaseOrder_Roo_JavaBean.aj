@@ -3,13 +3,28 @@
 
 package esi.buildit9.domain;
 
-import esi.buildit9.domain.PlantHireRequest;
+import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
-import esi.buildit9.domain.PurchaseOrderStatusEnum;
+import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
-import java.util.Calendar;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
+    
+    public float PurchaseOrder.getTotalPrice() {
+        return this.totalPrice;
+    }
+    
+    public void PurchaseOrder.setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+    
+    public String PurchaseOrder.getSiteEngineerName() {
+        return this.siteEngineerName;
+    }
+    
+    public void PurchaseOrder.setSiteEngineerName(String siteEngineerName) {
+        this.siteEngineerName = siteEngineerName;
+    }
     
     public Site PurchaseOrder.getSite() {
         return this.site;
@@ -19,28 +34,20 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.site = site;
     }
     
-    public Calendar PurchaseOrder.getStartDate() {
-        return this.startDate;
+    public RentIt PurchaseOrder.getRentit() {
+        return this.rentit;
     }
     
-    public void PurchaseOrder.setStartDate(Calendar startDate) {
-        this.startDate = startDate;
+    public void PurchaseOrder.setRentit(RentIt rentit) {
+        this.rentit = rentit;
     }
     
-    public Calendar PurchaseOrder.getEndDate() {
-        return this.endDate;
+    public OrderStatus PurchaseOrder.getOrderStatus() {
+        return this.orderStatus;
     }
     
-    public void PurchaseOrder.setEndDate(Calendar endDate) {
-        this.endDate = endDate;
-    }
-    
-    public PlantHireRequest PurchaseOrder.getHireRequest() {
-        return this.hireRequest;
-    }
-    
-    public void PurchaseOrder.setHireRequest(PlantHireRequest hireRequest) {
-        this.hireRequest = hireRequest;
+    public void PurchaseOrder.setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
     
     public String PurchaseOrder.getWorksEngineerName() {
@@ -49,14 +56,6 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public void PurchaseOrder.setWorksEngineerName(String worksEngineerName) {
         this.worksEngineerName = worksEngineerName;
-    }
-    
-    public PurchaseOrderStatusEnum PurchaseOrder.getOrderStatus() {
-        return this.orderStatus;
-    }
-    
-    public void PurchaseOrder.setOrderStatus(PurchaseOrderStatusEnum orderStatus) {
-        this.orderStatus = orderStatus;
     }
     
 }

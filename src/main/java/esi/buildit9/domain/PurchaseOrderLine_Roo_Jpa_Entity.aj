@@ -3,7 +3,7 @@
 
 package esi.buildit9.domain;
 
-import esi.buildit9.domain.PlantHireRequestLine;
+import esi.buildit9.domain.PurchaseOrderLine;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,32 +11,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
-privileged aspect PlantHireRequestLine_Roo_Jpa_Entity {
+privileged aspect PurchaseOrderLine_Roo_Jpa_Entity {
     
-    declare @type: PlantHireRequestLine: @Entity;
+    declare @type: PurchaseOrderLine: @Entity;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long PlantHireRequestLine.id;
+    private Long PurchaseOrderLine.id;
     
     @Version
     @Column(name = "version")
-    private Integer PlantHireRequestLine.version;
+    private Integer PurchaseOrderLine.version;
     
-    public Long PlantHireRequestLine.getId() {
+    public Long PurchaseOrderLine.getId() {
         return this.id;
     }
     
-    public void PlantHireRequestLine.setId(Long id) {
+    public void PurchaseOrderLine.setId(Long id) {
         this.id = id;
     }
     
-    public Integer PlantHireRequestLine.getVersion() {
+    public Integer PurchaseOrderLine.getVersion() {
         return this.version;
     }
     
-    public void PlantHireRequestLine.setVersion(Integer version) {
+    public void PurchaseOrderLine.setVersion(Integer version) {
         this.version = version;
     }
     

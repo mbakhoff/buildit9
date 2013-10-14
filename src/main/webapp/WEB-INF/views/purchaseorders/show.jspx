@@ -3,11 +3,11 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_esi_buildit9_domain_PurchaseOrder" object="${purchaseorder}" path="/purchaseorders" z="izvY1R9zb9O13F9XhaAPBp0oMRA=">
+        <field:display field="totalPrice" id="s_esi_buildit9_domain_PurchaseOrder_totalPrice" object="${purchaseorder}" z="tziZv8MzFCp1Ih5/Uweda5JHKe4="/>
+        <field:display field="siteEngineerName" id="s_esi_buildit9_domain_PurchaseOrder_siteEngineerName" object="${purchaseorder}" z="x2VEW5W0gFiZcsUHK1T7kHiNisU="/>
         <field:display field="site" id="s_esi_buildit9_domain_PurchaseOrder_site" object="${purchaseorder}" z="dCwYJ1ga7eONPIKVqp0HiWUbkpY="/>
-        <field:display calendar="true" dateTimePattern="${purchaseOrder_startdate_date_format}" field="startDate" id="s_esi_buildit9_domain_PurchaseOrder_startDate" object="${purchaseorder}" z="p3B9CX5pRN94v4lgcRtBe1i34EY="/>
-        <field:display calendar="true" dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="s_esi_buildit9_domain_PurchaseOrder_endDate" object="${purchaseorder}" z="/4bqArF3QwBc0kEeLqiAV+fnRyA="/>
-        <field:display field="hireRequest" id="s_esi_buildit9_domain_PurchaseOrder_hireRequest" object="${purchaseorder}" z="btz8apxu0rz3HcPYpHBPyLw8puk="/>
-        <field:display field="worksEngineerName" id="s_esi_buildit9_domain_PurchaseOrder_worksEngineerName" object="${purchaseorder}" z="nsApI4jzn5o6cYEsSYvbhjXvUqQ="/>
+        <field:display field="rentit" id="s_esi_buildit9_domain_PurchaseOrder_rentit" object="${purchaseorder}" z="IwRtZkdC13rW8wwTqvgkPVPirkk="/>
         <field:display field="orderStatus" id="s_esi_buildit9_domain_PurchaseOrder_orderStatus" object="${purchaseorder}" z="9/iaEfEBgWoTXCekqssJ79JPj2M="/>
+        <field:display field="worksEngineerName" id="s_esi_buildit9_domain_PurchaseOrder_worksEngineerName" object="${purchaseorder}" z="nsApI4jzn5o6cYEsSYvbhjXvUqQ="/>
     </page:show>
 </div>
