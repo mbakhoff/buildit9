@@ -45,4 +45,5 @@ public class PurchaseOrder {
 
     @OneToMany
     private List<PurchaseOrderLine> lines;
+
 }
