@@ -3,7 +3,7 @@ package esi.buildit9.rest.controller;
 
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.PurchaseOrderLine;
-import esi.buildit9.domain.RentIt;
+import esi.buildit9.rest.PurchaseOrderAssembler;
 import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderResource;
 import org.springframework.http.HttpHeaders;
@@ -24,10 +24,9 @@ public class PurchaseOrderRestController {
 
     @RequestMapping(value = "pos", method = RequestMethod.POST)
     public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
-        PurchaseOrder order = new PurchaseOrder();
-		order.setRentit(getOrCreateRentIt(res.getRentit()));
-		order.setSite(res.getOrCreateSite(res.getSiteAddress()));
-		order.persist();
+        PurchaseOrder order= new PurchaseOrderAssembler().fromResource(res);
+
+        order.persist();
 
 		attachLines(order, res.getPurchaseOrderLines());
 
@@ -37,12 +36,6 @@ public class PurchaseOrderRestController {
 						pathSegment(order.getId().toString()).build().toUri();
 		headers.setLocation(location);
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-    }
-
-    private RentIt getOrCreateRentIt(String rentit) {
-        RentIt rentit1 = (RentIt) RentIt.findRentItsByNameEquals(rentit);
-        //TODO implement findRentItByName
-        return rentit1;
     }
 
     private void attachLines(PurchaseOrder order, List<PurchaseOrderLineResource> purchaseOrderLines) {

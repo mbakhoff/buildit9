@@ -3,6 +3,7 @@
 
 package esi.buildit9.rest;
 
+import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderResource;
 import java.util.List;
@@ -31,6 +32,38 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
     public void PurchaseOrderResource.setSiteAddress(String siteAddress) {
         this.siteAddress = siteAddress;
+    }
+    
+    public OrderStatus PurchaseOrderResource.getOrderStatus() {
+        return this.orderStatus;
+    }
+    
+    public void PurchaseOrderResource.setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+    
+    public float PurchaseOrderResource.getTotalPrice() {
+        return this.totalPrice;
+    }
+    
+    public void PurchaseOrderResource.setTotalPrice(float totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+    
+    public String PurchaseOrderResource.getSiteEngineerName() {
+        return this.siteEngineerName;
+    }
+    
+    public void PurchaseOrderResource.setSiteEngineerName(String siteEngineerName) {
+        this.siteEngineerName = siteEngineerName;
+    }
+    
+    public String PurchaseOrderResource.getWorksEngineerName() {
+        return this.worksEngineerName;
+    }
+    
+    public void PurchaseOrderResource.setWorksEngineerName(String worksEngineerName) {
+        this.worksEngineerName = worksEngineerName;
     }
     
     public List<PurchaseOrderLineResource> PurchaseOrderResource.getPurchaseOrderLines() {

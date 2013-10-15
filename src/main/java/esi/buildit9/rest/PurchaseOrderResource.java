@@ -1,5 +1,6 @@
 package esi.buildit9.rest;
 
+import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.Site;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
@@ -13,10 +14,10 @@ public class PurchaseOrderResource {
     private String buildit;
     private String rentit;
 	private String siteAddress;
-    private List<PurchaseOrderLineResource> purchaseOrderLines;
+    private OrderStatus orderStatus;
+    private float totalPrice;
+    private String siteEngineerName;
+    private String worksEngineerName;
 
-    public Site getOrCreateSite(String siteAddress) {
-        //TODO implement findSiteAddress
-        return null;  //To change body of created methods use File | Settings | File Templates.
-    }
+    private List<PurchaseOrderLineResource> purchaseOrderLines;
 }

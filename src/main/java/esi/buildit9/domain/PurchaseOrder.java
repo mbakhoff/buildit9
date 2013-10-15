@@ -20,10 +20,6 @@ public class PurchaseOrder {
 
     /**
      */
-    private String siteEngineerName;
-
-    /**
-     */
     @ManyToOne
     private Site site;
 
@@ -38,6 +34,9 @@ public class PurchaseOrder {
 	@Enumerated(EnumType.STRING)
 	private OrderStatus orderStatus;
 
+    /**
+     */
+    private String siteEngineerName;
 
 	/**
      */

@@ -20,14 +20,6 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.totalPrice = totalPrice;
     }
     
-    public String PurchaseOrder.getSiteEngineerName() {
-        return this.siteEngineerName;
-    }
-    
-    public void PurchaseOrder.setSiteEngineerName(String siteEngineerName) {
-        this.siteEngineerName = siteEngineerName;
-    }
-    
     public Site PurchaseOrder.getSite() {
         return this.site;
     }
@@ -50,6 +42,14 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public void PurchaseOrder.setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+    
+    public String PurchaseOrder.getSiteEngineerName() {
+        return this.siteEngineerName;
+    }
+    
+    public void PurchaseOrder.setSiteEngineerName(String siteEngineerName) {
+        this.siteEngineerName = siteEngineerName;
     }
     
     public String PurchaseOrder.getWorksEngineerName() {

@@ -5,7 +5,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord
+@RooJpaActiveRecord(finders = { "findSitesByAddressEquals" })
 public class Site {
 
     /**
