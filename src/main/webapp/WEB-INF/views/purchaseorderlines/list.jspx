@@ -9,7 +9,7 @@
             <table:column id="c_esi_buildit9_domain_PurchaseOrderLine_plantName" property="plantName" z="pl8vFzd6kcqJsH8dE+I/rQznl1s="/>
             <table:column calendar="true" dateTimePattern="${purchaseOrderLine_startdate_date_format}" id="c_esi_buildit9_domain_PurchaseOrderLine_startDate" property="startDate" z="tql0iMVWvR/fbnx/kvQ05UlL2MY="/>
             <table:column calendar="true" dateTimePattern="${purchaseOrderLine_enddate_date_format}" id="c_esi_buildit9_domain_PurchaseOrderLine_endDate" property="endDate" z="nP/xhR1P42BUivcObr1D8ZlTckg="/>
-            <table:column id="c_esi_buildit9_domain_PurchaseOrderLine_request" property="request" z="NK51aAloFMnJWsuZTja3JPcvNu0="/>
+            <table:column id="c_esi_buildit9_domain_PurchaseOrderLine_purchaseOrder" property="purchaseOrder" z="ezxAtGBygUIqr8BYcDbvpuG2mQs="/>
         </table:table>
     </page:list>
 </div>

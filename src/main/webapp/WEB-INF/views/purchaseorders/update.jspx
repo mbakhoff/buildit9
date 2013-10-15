@@ -9,5 +9,6 @@
         <field:select field="rentit" id="c_esi_buildit9_domain_PurchaseOrder_rentit" itemValue="id" items="${rentits}" path="/rentits" z="BWD4h6xlhYU+85QOooea3Z9Cv3k="/>
         <field:select field="orderStatus" id="c_esi_buildit9_domain_PurchaseOrder_orderStatus" items="${orderstatuses}" path="orderstatuses" z="vveq1qdi2ZP9WeOPRKWtrwRE3es="/>
         <field:input field="worksEngineerName" id="c_esi_buildit9_domain_PurchaseOrder_worksEngineerName" z="M0rns5X1ujHj3i65NH2SN0/wJGE="/>
+        <field:simple field="lines" id="c_esi_buildit9_domain_PurchaseOrder_lines" messageCode="entity_reference_not_managed" messageCodeAttribute="Purchase Order Line" z="jFI6e3ght/ef9FzL+uK7ffn5enI="/>
     </form:update>
 </div>

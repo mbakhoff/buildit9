@@ -8,7 +8,7 @@
         <field:input field="plantName" id="c_esi_buildit9_domain_PurchaseOrderLine_plantName" z="hdk26rVhO6+UgooZyA0DRxOCajI="/>
         <field:datetime dateTimePattern="${purchaseOrderLine_startdate_date_format}" field="startDate" id="c_esi_buildit9_domain_PurchaseOrderLine_startDate" z="yHsPOleOCqdw+jk8bAPYkoHEo44="/>
         <field:datetime dateTimePattern="${purchaseOrderLine_enddate_date_format}" field="endDate" id="c_esi_buildit9_domain_PurchaseOrderLine_endDate" z="J6fkLy+X/pafTdHCTsU3ATSNhWM="/>
-        <field:select field="request" id="c_esi_buildit9_domain_PurchaseOrderLine_request" itemValue="id" items="${purchaseorders}" path="/purchaseorders" z="inn3BihqS9h0orRbT+h1ALCKeHE="/>
+        <field:select field="purchaseOrder" id="c_esi_buildit9_domain_PurchaseOrderLine_purchaseOrder" itemValue="id" items="${purchaseorders}" path="/purchaseorders" z="eKDOS0q6tOMeCqNoQ+TRhdoPF20="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_esi_buildit9_domain_PurchaseOrderLine" render="${not empty dependencies}" z="sOrdWHYq3DHkFUOBbpFd0g4CJi0="/>
 </div>

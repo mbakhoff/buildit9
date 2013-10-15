@@ -8,6 +8,6 @@
         <field:display field="plantName" id="s_esi_buildit9_domain_PurchaseOrderLine_plantName" object="${purchaseorderline}" z="ElsgkTOH5k6IWuJxaqkZ4zKyPjU="/>
         <field:display calendar="true" dateTimePattern="${purchaseOrderLine_startdate_date_format}" field="startDate" id="s_esi_buildit9_domain_PurchaseOrderLine_startDate" object="${purchaseorderline}" z="3szgodgZh3BS1KOcMiDyg/+qQF8="/>
         <field:display calendar="true" dateTimePattern="${purchaseOrderLine_enddate_date_format}" field="endDate" id="s_esi_buildit9_domain_PurchaseOrderLine_endDate" object="${purchaseorderline}" z="4iVIcLFwCujRwGYLIIEpy/ZDQXg="/>
-        <field:display field="request" id="s_esi_buildit9_domain_PurchaseOrderLine_request" object="${purchaseorderline}" z="PSknMz+mIaEVXphjmss58XcNkGI="/>
+        <field:display field="purchaseOrder" id="s_esi_buildit9_domain_PurchaseOrderLine_purchaseOrder" object="${purchaseorderline}" z="k11EVWKG0A07EW2MUltQFl7Lo/w="/>
     </page:show>
 </div>

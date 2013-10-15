@@ -5,6 +5,7 @@ package esi.buildit9.web;
 
 import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.PurchaseOrderLine;
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
 import esi.buildit9.web.PurchaseOrderController;
@@ -91,6 +92,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
     void PurchaseOrderController.populateEditForm(Model uiModel, PurchaseOrder purchaseOrder) {
         uiModel.addAttribute("purchaseOrder", purchaseOrder);
         uiModel.addAttribute("orderstatuses", Arrays.asList(OrderStatus.values()));
+        uiModel.addAttribute("purchaseorderlines", PurchaseOrderLine.findAllPurchaseOrderLines());
         uiModel.addAttribute("rentits", RentIt.findAllRentIts());
         uiModel.addAttribute("sites", Site.findAllSites());
     }

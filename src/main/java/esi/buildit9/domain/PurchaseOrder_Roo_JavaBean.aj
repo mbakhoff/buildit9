@@ -5,8 +5,10 @@ package esi.buildit9.domain;
 
 import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.PurchaseOrderLine;
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
+import java.util.List;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
     
@@ -56,6 +58,14 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public void PurchaseOrder.setWorksEngineerName(String worksEngineerName) {
         this.worksEngineerName = worksEngineerName;
+    }
+    
+    public List<PurchaseOrderLine> PurchaseOrder.getLines() {
+        return this.lines;
+    }
+    
+    public void PurchaseOrder.setLines(List<PurchaseOrderLine> lines) {
+        this.lines = lines;
     }
     
 }

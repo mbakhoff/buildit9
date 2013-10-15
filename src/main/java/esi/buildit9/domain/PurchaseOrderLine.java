@@ -41,5 +41,5 @@ public class PurchaseOrderLine {
     /**
      */
     @ManyToOne
-    private PurchaseOrder request;
+    private PurchaseOrder purchaseOrder;
 }

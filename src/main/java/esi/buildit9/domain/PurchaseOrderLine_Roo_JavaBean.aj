@@ -49,12 +49,12 @@ privileged aspect PurchaseOrderLine_Roo_JavaBean {
         this.endDate = endDate;
     }
     
-    public PurchaseOrder PurchaseOrderLine.getRequest() {
-        return this.request;
+    public PurchaseOrder PurchaseOrderLine.getPurchaseOrder() {
+        return this.purchaseOrder;
     }
     
-    public void PurchaseOrderLine.setRequest(PurchaseOrder request) {
-        this.request = request;
+    public void PurchaseOrderLine.setPurchaseOrder(PurchaseOrder purchaseOrder) {
+        this.purchaseOrder = purchaseOrder;
     }
     
 }

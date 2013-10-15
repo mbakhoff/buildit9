@@ -6,6 +6,8 @@ import org.springframework.roo.addon.tostring.RooToString;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @RooJavaBean
 @RooToString
@@ -40,4 +42,7 @@ public class PurchaseOrder {
 	/**
      */
     private String worksEngineerName;
+
+    @OneToMany
+    private List<PurchaseOrderLine> lines;
 }
