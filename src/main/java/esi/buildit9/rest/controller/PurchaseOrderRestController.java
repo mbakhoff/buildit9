@@ -25,6 +25,12 @@ import java.util.List;
 @RequestMapping("/rest")
 public class PurchaseOrderRestController {
 
+    private PurchaseOrderAssembler assembler;
+
+    public PurchaseOrderRestController() {
+        assembler = new PurchaseOrderAssembler();
+    }
+
     @RequestMapping(value = "pos", method = RequestMethod.POST)
     public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
         PurchaseOrder order= new PurchaseOrderAssembler().fromResource(res);
@@ -39,6 +45,13 @@ public class PurchaseOrderRestController {
 						pathSegment(order.getId().toString()).build().toUri();
 		headers.setLocation(location);
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping("po/{id}")
+    public ResponseEntity<PurchaseOrderResource> getById(@PathVariable Long id) {
+        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        PurchaseOrderResource resources = assembler.toResource(order);
+        return new ResponseEntity<PurchaseOrderResource>(resources, HttpStatus.OK);
     }
 
     @RequestMapping(value = "po/{id}/modify", method = RequestMethod.PUT)
