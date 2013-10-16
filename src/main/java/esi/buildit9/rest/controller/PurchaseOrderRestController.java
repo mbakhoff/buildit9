@@ -38,6 +38,8 @@ public class PurchaseOrderRestController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
+
+
     private void attachLines(PurchaseOrder order, List<PurchaseOrderLineResource> purchaseOrderLines) {
 		for (PurchaseOrderLineResource res : purchaseOrderLines) {
 			attachLine(order, res);
@@ -47,6 +49,7 @@ public class PurchaseOrderRestController {
 	private void attachLine(PurchaseOrder order, PurchaseOrderLineResource res) {
 		PurchaseOrderLine line = new PurchaseOrderLine();
 		line.setPlantExternalId(res.getPlantId());
+        line.setPlantName(res.getPlantName());
 		line.setStartDate(res.getStartDate());
 		line.setEndDate(res.getEndDate());
 		line.setTotalCost(res.getTotalCost()); // TODO: recalculate
