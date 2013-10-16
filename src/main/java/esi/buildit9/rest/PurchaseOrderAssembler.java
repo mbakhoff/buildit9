@@ -17,6 +17,7 @@ public class PurchaseOrderAssembler {
 
 	public PurchaseOrderResource toResource(PurchaseOrder order) {
 		PurchaseOrderResource res = new PurchaseOrderResource();
+		res.setId(order.getId());
 		res.setBuildit("builtit9"); //TODO this must e changed.. someday
 		res.setSiteAddress(order.getSite().getAddress());
 		res.setPurchaseOrderLines(lineAssembler.toResource(order.getLines()));
