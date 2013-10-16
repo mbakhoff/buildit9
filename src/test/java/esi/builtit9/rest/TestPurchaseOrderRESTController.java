@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TestPurchaseOrderRESTController {
 
-    public static final String URL_PO = "http://localhost:8080/rest/pos";
+    public static final String URL_PO = "https://buildit9.herokuapp.com/rest/pos";
 
     @Test
     public void testResources() throws Exception {
