@@ -1,10 +1,7 @@
 package esi.buildit9.rest.controller;
 
 
-import esi.buildit9.domain.PurchaseOrder;
-import esi.buildit9.domain.PurchaseOrderLine;
-import esi.buildit9.domain.RentIt;
-import esi.buildit9.domain.Site;
+import esi.buildit9.domain.*;
 import esi.buildit9.rest.PurchaseOrderAssembler;
 import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderResource;
@@ -34,6 +31,7 @@ public class PurchaseOrderRestController {
     @RequestMapping(value = "pos", method = RequestMethod.POST)
     public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
         PurchaseOrder order= new PurchaseOrderAssembler().fromResource(res);
+        order.setOrderStatus(OrderStatus.CREATED);
 
         order.persist();
 
@@ -44,6 +42,7 @@ public class PurchaseOrderRestController {
 				ServletUriComponentsBuilder.fromCurrentRequestUri().
 						pathSegment(order.getId().toString()).build().toUri();
 		headers.setLocation(location);
+        headers.add("BuildItId", order.getId().toString());
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
