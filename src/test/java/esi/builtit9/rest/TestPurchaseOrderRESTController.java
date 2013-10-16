@@ -61,6 +61,25 @@ public class TestPurchaseOrderRESTController {
     }
 
     @Test
+    public void testCancelPurchaseOrder() throws Exception {
+        Client client = Client.create();
+        WebResource webResource = client.resource(URL_POS);
+        PurchaseOrderResource newResource = createPurchaseOrderResource();
+
+        ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
+                .accept(MediaType.APPLICATION_XML).post(ClientResponse.class, newResource);
+
+        String id = response.getHeaders().getFirst("BuildItId");
+        String requestUrl = URL_PO +"/"+id;
+
+        webResource = client.resource(requestUrl);
+        response = webResource.type(MediaType.APPLICATION_XML)
+                .accept(MediaType.APPLICATION_XML).delete(ClientResponse.class);
+        assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
+
+    }
+
+    @Test
     public void testCheckStatus() throws Exception {
         Client client = Client.create();
         WebResource webResource = client.resource(URL_POS);
