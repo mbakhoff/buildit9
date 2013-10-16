@@ -4,6 +4,7 @@ import esi.buildit9.domain.PurchaseOrderLine;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class PurchaseOrderLineAssembler {
 
@@ -16,7 +17,7 @@ public class PurchaseOrderLineAssembler {
 		return res;
     }
 
-    public List<PurchaseOrderLineResource> toResource(List<PurchaseOrderLine> lines){
+    public List<PurchaseOrderLineResource> toResource(Set<PurchaseOrderLine> lines){
         List<PurchaseOrderLineResource> all = new ArrayList<PurchaseOrderLineResource>();
 		for (PurchaseOrderLine line : lines) {
 			all.add(toResource(line));

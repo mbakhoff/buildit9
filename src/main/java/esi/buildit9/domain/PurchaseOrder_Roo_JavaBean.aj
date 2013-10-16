@@ -8,7 +8,7 @@ import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.PurchaseOrderLine;
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
-import java.util.List;
+import java.util.Set;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
     
@@ -60,11 +60,11 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.worksEngineerName = worksEngineerName;
     }
     
-    public List<PurchaseOrderLine> PurchaseOrder.getLines() {
+    public Set<PurchaseOrderLine> PurchaseOrder.getLines() {
         return this.lines;
     }
     
-    public void PurchaseOrder.setLines(List<PurchaseOrderLine> lines) {
+    public void PurchaseOrder.setLines(Set<PurchaseOrderLine> lines) {
         this.lines = lines;
     }
     
