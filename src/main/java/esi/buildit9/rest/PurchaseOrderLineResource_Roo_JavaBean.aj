@@ -16,6 +16,14 @@ privileged aspect PurchaseOrderLineResource_Roo_JavaBean {
         this.plantId = plantId;
     }
     
+    public String PurchaseOrderLineResource.getPlantName() {
+        return this.plantName;
+    }
+    
+    public void PurchaseOrderLineResource.setPlantName(String plantName) {
+        this.plantName = plantName;
+    }
+    
     public Calendar PurchaseOrderLineResource.getStartDate() {
         return this.startDate;
     }

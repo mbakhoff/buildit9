@@ -10,6 +10,7 @@ import java.util.Calendar;
 public class PurchaseOrderLineResource {
 
     private String plantId;
+    private String plantName;
     private Calendar startDate;
     private Calendar endDate;
     private float totalCost;
