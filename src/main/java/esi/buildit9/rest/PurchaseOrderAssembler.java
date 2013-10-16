@@ -19,13 +19,31 @@ public class PurchaseOrderAssembler {
     public PurchaseOrderResource toResource(PurchaseOrder order) {
         PurchaseOrderResource res = new PurchaseOrderResource();
 		res.setId(order.getId());
+		res.setOrderStatus(order.getOrderStatus());
         res.setBuildit("builtit9"); //TODO this must e changed.. someday
-        res.setSiteAddress(order.getSite().getAddress());
-        res.setOrderLines(lineAssembler.toResource(order.getLines())); //.setPurchaseOrderLines(lineAssembler.toResource(order.getLines()));
+		res.setRentit(getName(order));
+        res.setSiteAddress(getAddress(order));
+        res.setOrderLines(lineAssembler.toResource(order.getLines()));
+		res.setTotalPrice(order.getTotalPrice());
+		res.setWorksEngineerName(order.getWorksEngineerName());
         return res;
     }
 
-    public PurchaseOrderListResource toResource(List<PurchaseOrder> orders) {
+	private String getAddress(PurchaseOrder order) {
+		if (order.getSite() != null) {
+			return order.getSite().getAddress();
+		}
+		return "default";
+	}
+
+	private String getName(PurchaseOrder order) {
+		if (order.getRentit() != null) {
+			return order.getRentit().getName();
+		}
+		return "rentit9";
+	}
+
+	public PurchaseOrderListResource toResource(List<PurchaseOrder> orders) {
         Set<PurchaseOrderResource> all = new HashSet<PurchaseOrderResource>();
         for (PurchaseOrder order : orders) {
             all.add(toResource(order));
