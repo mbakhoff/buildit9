@@ -3,6 +3,7 @@ package esi.buildit9.rest;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
+import org.springframework.dao.DataRetrievalFailureException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,19 +42,37 @@ public class PurchaseOrderAssembler {
         return order;
     }
 
-    private RentIt getOrCreateRentIt(String rentit) {
-        RentIt rentit1 = RentIt.findRentItsByNameEquals(rentit).getSingleResult();
-        //rentit1.setName(rentit);
-        //TODO implement findRentItByName
-        return rentit1;
+    private RentIt getOrCreateRentIt(String name) {
+        RentIt rentIt;
+        try{
+            rentIt = RentIt.findRentItsByNameEquals(name).getSingleResult();
+        }
+        catch (DataRetrievalFailureException ee){
+            rentIt=new RentIt();
+            rentIt.setName(name);
+            rentIt.persist();
+
+        }
+        return rentIt;
     }
 
-    public Site getOrCreateSite(String siteAddress) {
-        Site site1=Site.findSitesByAddressEquals(siteAddress).getSingleResult();
+    private Site getOrCreateSite(String siteAddress) {
+        Site site;
+        try{
+            site = Site.findSitesByAddressEquals(siteAddress).getSingleResult();//.findRentItsByNameEquals(name).getSingleResult();
+        }
+        catch (DataRetrievalFailureException ee){
+            site=new Site();
+            site.setAddress(siteAddress);
+            site.persist();
+
+        }
+        return site;
+        //Site site1=Site.findSitesByAddressEquals(siteAddress).getSingleResult();
         //site1.setAddress(siteAddress);
 
         //TODO implement findSiteAddress
-        return site1; //To change body of created methods use File | Settings | File Templates.
+        //return site; //To change body of created methods use File | Settings | File Templates.
     }
 
 }

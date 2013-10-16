@@ -28,18 +28,10 @@ public class TestPurchaseOrderRESTController {
     public static final String URL_PO = "http://localhost:8080/rest/pos";
 
     @Test
-    @Transactional
     public void testResources() throws Exception {
         Client client = Client.create();
         WebResource webResource = client.resource(URL_PO);
         PurchaseOrderResource newResource = new PurchaseOrderResource();
-        Site site = new Site();
-        site.setAddress("Address");
-        site.persist();
-
-        RentIt rentIt = new RentIt();
-        rentIt.setName("Rentit");
-        rentIt.persist();
 
         newResource.setBuildit("Buildit");
         newResource.setRentit("Rentit");

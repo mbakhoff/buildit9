@@ -38,8 +38,6 @@ public class PurchaseOrderRestController {
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-
-
     private void attachLines(PurchaseOrder order, List<PurchaseOrderLineResource> purchaseOrderLines) {
 		for (PurchaseOrderLineResource res : purchaseOrderLines) {
 			attachLine(order, res);
