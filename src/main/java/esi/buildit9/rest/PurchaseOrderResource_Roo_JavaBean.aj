@@ -9,6 +9,14 @@ import esi.buildit9.rest.PurchaseOrderResource;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
+    public Long PurchaseOrderResource.getId() {
+        return this.id;
+    }
+    
+    public void PurchaseOrderResource.setId(Long id) {
+        this.id = id;
+    }
+    
     public String PurchaseOrderResource.getBuildit() {
         return this.buildit;
     }

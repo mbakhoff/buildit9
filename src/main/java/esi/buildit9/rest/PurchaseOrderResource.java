@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "purchaseorder")
 public class PurchaseOrderResource {
 
+	private Long id;
     private String buildit;
     private String rentit;
     private String siteAddress;

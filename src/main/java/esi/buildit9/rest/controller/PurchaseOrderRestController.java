@@ -62,7 +62,7 @@ public class PurchaseOrderRestController {
         return new ResponseEntity<PurchaseOrderResource>(resources, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "po/{id}/modify", method = RequestMethod.PUT)
+    @RequestMapping(value = "po/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> modifyOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
         PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
         order.setRentit(RentIt.getOrCreateRentIt(res.getRentit()));

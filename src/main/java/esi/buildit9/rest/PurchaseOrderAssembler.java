@@ -10,11 +10,11 @@ import java.util.Set;
 
 public class PurchaseOrderAssembler {
 
-    private PurchaseOrderLineAssembler lineAssembler;
+	private PurchaseOrderLineAssembler lineAssembler;
 
-    public PurchaseOrderAssembler() {
-        lineAssembler = new PurchaseOrderLineAssembler();
-    }
+	public PurchaseOrderAssembler() {
+		lineAssembler = new PurchaseOrderLineAssembler();
+	}
 
     public PurchaseOrderResource toResource(PurchaseOrder order) {
         PurchaseOrderResource res = new PurchaseOrderResource();
@@ -34,7 +34,7 @@ public class PurchaseOrderAssembler {
         return purchaseOrderListResource;
     }
 
-    public PurchaseOrder fromResource(PurchaseOrderResource res) {
+    public PurchaseOrder fromResource(PurchaseOrderResource res){
         PurchaseOrder order = new PurchaseOrder();
         order.setRentit(RentIt.getOrCreateRentIt(res.getRentit()));
         order.setSite(Site.getOrCreateSite(res.getSiteAddress()));

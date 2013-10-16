@@ -23,15 +23,15 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
-@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
+//@RunWith(SpringJUnit4ClassRunner.class)
 public class TestPurchaseOrderRESTController {
 
     public static final String URL_POS = "https://buildit9.herokuapp.com/rest/pos";
     public static final String URL_PO = "https://buildit9.herokuapp.com/rest/po";
 
     @Test
-    public void testResources() throws Exception {
+    public void testCreateResources() throws Exception {
         Client client = Client.create();
         WebResource webResource = client.resource(URL_POS);
         PurchaseOrderResource newResource = createPurchaseOrderResource();
@@ -39,6 +39,47 @@ public class TestPurchaseOrderRESTController {
         ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
                 .accept(MediaType.APPLICATION_XML).post(ClientResponse.class, newResource);
         assertTrue(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode());
+    }
+
+    @Test
+    public void testModifyPurchaseOrder() throws Exception {
+        Client client = Client.create();
+        WebResource webResource = client.resource(URL_POS);
+        PurchaseOrderResource newResource = createPurchaseOrderResource();
+
+        ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
+                .accept(MediaType.APPLICATION_XML).post(ClientResponse.class, newResource);
+
+        String id = response.getHeaders().getFirst("BuildItId");
+        String requestUrl = URL_PO +"/"+id;
+
+        PurchaseOrderResource modifiedResource = createPurchaseOrderResource();
+        createPurchaseOrderResource().setSiteAddress("ModifiedAddress");
+
+        webResource = client.resource(requestUrl);
+        response = webResource.type(MediaType.APPLICATION_XML)
+                .accept(MediaType.APPLICATION_XML).put(ClientResponse.class, modifiedResource);
+        assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
+
+    }
+
+    @Test
+    public void testCancelPurchaseOrder() throws Exception {
+        Client client = Client.create();
+        WebResource webResource = client.resource(URL_POS);
+        PurchaseOrderResource newResource = createPurchaseOrderResource();
+
+        ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
+                .accept(MediaType.APPLICATION_XML).post(ClientResponse.class, newResource);
+
+        String id = response.getHeaders().getFirst("BuildItId");
+        String requestUrl = URL_PO +"/"+id;
+
+        webResource = client.resource(requestUrl);
+        response = webResource.type(MediaType.APPLICATION_XML)
+                .accept(MediaType.APPLICATION_XML).delete(ClientResponse.class);
+        assertTrue(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
+
     }
 
     @Test
