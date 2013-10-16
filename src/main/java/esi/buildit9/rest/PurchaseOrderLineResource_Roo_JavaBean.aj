@@ -3,49 +3,48 @@
 
 package esi.buildit9.rest;
 
-import esi.buildit9.rest.PurchaseOrderLineResource;
 import java.util.Calendar;
 
 privileged aspect PurchaseOrderLineResource_Roo_JavaBean {
-    
+
     public String PurchaseOrderLineResource.getPlantId() {
         return this.plantId;
     }
-    
+
     public void PurchaseOrderLineResource.setPlantId(String plantId) {
         this.plantId = plantId;
     }
-    
+
     public String PurchaseOrderLineResource.getPlantName() {
         return this.plantName;
     }
-    
+
     public void PurchaseOrderLineResource.setPlantName(String plantName) {
         this.plantName = plantName;
     }
-    
+
     public Calendar PurchaseOrderLineResource.getStartDate() {
         return this.startDate;
     }
-    
+
     public void PurchaseOrderLineResource.setStartDate(Calendar startDate) {
         this.startDate = startDate;
     }
-    
+
     public Calendar PurchaseOrderLineResource.getEndDate() {
         return this.endDate;
     }
-    
+
     public void PurchaseOrderLineResource.setEndDate(Calendar endDate) {
         this.endDate = endDate;
     }
-    
+
     public float PurchaseOrderLineResource.getTotalCost() {
         return this.totalCost;
     }
-    
+
     public void PurchaseOrderLineResource.setTotalCost(float totalCost) {
         this.totalCost = totalCost;
     }
-    
+
 }

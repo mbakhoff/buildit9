@@ -5,6 +5,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import esi.buildit9.domain.OrderStatus;
+import esi.buildit9.rest.PurchaseOrderLineListResource;
 import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderResource;
 import org.junit.Test;
@@ -16,6 +17,8 @@ import javax.ws.rs.core.MediaType;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -70,9 +73,12 @@ public class TestPurchaseOrderRESTController {
         newResourceLine.setTotalCost(1000000);
         newResourceLine.setPlantId("1");
 
-        ArrayList<PurchaseOrderLineResource> newName = new ArrayList<PurchaseOrderLineResource>();
+        Set<PurchaseOrderLineResource> newName = new HashSet<PurchaseOrderLineResource>();
         newName.add(newResourceLine);
-        newResource.setPurchaseOrderLines(newName);
+
+        PurchaseOrderLineListResource orderLineListResource =new PurchaseOrderLineListResource();
+
+        newResource.setOrderLines(orderLineListResource);
         return newResource;
     }
 }

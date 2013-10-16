@@ -4,6 +4,7 @@ package esi.buildit9.rest.controller;
 import esi.buildit9.domain.*;
 import esi.buildit9.rest.PurchaseOrderAssembler;
 import esi.buildit9.rest.PurchaseOrderLineResource;
+import esi.buildit9.rest.PurchaseOrderListResource;
 import esi.buildit9.rest.PurchaseOrderResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,22 +29,30 @@ public class PurchaseOrderRestController {
         assembler = new PurchaseOrderAssembler();
     }
 
+    @RequestMapping(value="pos", method = RequestMethod.GET)
+    public ResponseEntity<PurchaseOrderListResource> getAll() {
+        List<PurchaseOrder> orders = PurchaseOrder.findAllPurchaseOrders();
+        PurchaseOrderListResource resources = assembler.toResource(orders);
+        return new ResponseEntity<PurchaseOrderListResource>(
+                resources, HttpStatus.OK);
+    }
+
     @RequestMapping(value = "pos", method = RequestMethod.POST)
     public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
-        PurchaseOrder order= new PurchaseOrderAssembler().fromResource(res);
+        PurchaseOrder order = new PurchaseOrderAssembler().fromResource(res);
         order.setOrderStatus(OrderStatus.CREATED);
 
         order.persist();
 
-		attachLines(order, res.getPurchaseOrderLines());
+        attachLines(order, res.getOrderLines().orderLines);
 
-		HttpHeaders headers = new HttpHeaders();
-		URI location =
-				ServletUriComponentsBuilder.fromCurrentRequestUri().
-						pathSegment(order.getId().toString()).build().toUri();
-		headers.setLocation(location);
+        HttpHeaders headers = new HttpHeaders();
+        URI location =
+                ServletUriComponentsBuilder.fromCurrentRequestUri().
+                        pathSegment(order.getId().toString()).build().toUri();
+        headers.setLocation(location);
         headers.add("BuildItId", order.getId().toString());
-		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping("po/{id}")
@@ -66,7 +75,7 @@ public class PurchaseOrderRestController {
 
         deleteLines(order);
 
-        attachLines(order, res.getPurchaseOrderLines());
+        attachLines(order, res.getOrderLines().orderLines);
 
         HttpHeaders headers = new HttpHeaders();
         URI location =
@@ -77,7 +86,7 @@ public class PurchaseOrderRestController {
     }
 
     private void deleteLines(PurchaseOrder order) {
-        for (PurchaseOrderLine line : order.getLines()){
+        for (PurchaseOrderLine line : order.getLines()) {
             line.remove();
         }
     }
@@ -92,20 +101,20 @@ public class PurchaseOrderRestController {
 
 
     private void attachLines(PurchaseOrder order, List<PurchaseOrderLineResource> purchaseOrderLines) {
-		for (PurchaseOrderLineResource res : purchaseOrderLines) {
-			attachLine(order, res);
-		}
-	}
+        for (PurchaseOrderLineResource res : purchaseOrderLines) {
+            attachLine(order, res);
+        }
+    }
 
-	private void attachLine(PurchaseOrder order, PurchaseOrderLineResource res) {
-		PurchaseOrderLine line = new PurchaseOrderLine();
-		line.setPlantExternalId(res.getPlantId());
+    private void attachLine(PurchaseOrder order, PurchaseOrderLineResource res) {
+        PurchaseOrderLine line = new PurchaseOrderLine();
+        line.setPlantExternalId(res.getPlantId());
         line.setPlantName(res.getPlantName());
-		line.setStartDate(res.getStartDate());
-		line.setEndDate(res.getEndDate());
-		line.setTotalCost(res.getTotalCost()); // TODO: recalculate
-		line.setPurchaseOrder(order);
-		line.persist();
-	}
+        line.setStartDate(res.getStartDate());
+        line.setEndDate(res.getEndDate());
+        line.setTotalCost(res.getTotalCost()); // TODO: recalculate
+        line.setPurchaseOrder(order);
+        line.persist();
+    }
 
 }

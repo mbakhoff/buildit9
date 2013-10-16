@@ -4,9 +4,8 @@
 package esi.buildit9.rest;
 
 import esi.buildit9.domain.OrderStatus;
-import esi.buildit9.rest.PurchaseOrderLineResource;
+import esi.buildit9.rest.PurchaseOrderLineListResource;
 import esi.buildit9.rest.PurchaseOrderResource;
-import java.util.List;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
@@ -66,12 +65,12 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.worksEngineerName = worksEngineerName;
     }
     
-    public List<PurchaseOrderLineResource> PurchaseOrderResource.getPurchaseOrderLines() {
-        return this.purchaseOrderLines;
+    public PurchaseOrderLineListResource PurchaseOrderResource.getOrderLines() {
+        return this.orderLines;
     }
     
-    public void PurchaseOrderResource.setPurchaseOrderLines(List<PurchaseOrderLineResource> purchaseOrderLines) {
-        this.purchaseOrderLines = purchaseOrderLines;
+    public void PurchaseOrderResource.setOrderLines(PurchaseOrderLineListResource orderLines) {
+        this.orderLines = orderLines;
     }
     
 }
