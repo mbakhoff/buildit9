@@ -20,8 +20,8 @@ import java.util.Calendar;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
-@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
+//@RunWith(SpringJUnit4ClassRunner.class)
 public class TestPurchaseOrderRESTController {
 
     public static final String URL_POS = "https://buildit9.herokuapp.com/rest/pos";

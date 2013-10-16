@@ -9,5 +9,6 @@
         <field:display field="rentit" id="s_esi_buildit9_domain_PurchaseOrder_rentit" object="${purchaseorder}" z="IwRtZkdC13rW8wwTqvgkPVPirkk="/>
         <field:display field="orderStatus" id="s_esi_buildit9_domain_PurchaseOrder_orderStatus" object="${purchaseorder}" z="9/iaEfEBgWoTXCekqssJ79JPj2M="/>
         <field:display field="worksEngineerName" id="s_esi_buildit9_domain_PurchaseOrder_worksEngineerName" object="${purchaseorder}" z="nsApI4jzn5o6cYEsSYvbhjXvUqQ="/>
+        <field:display field="lines" id="s_esi_buildit9_domain_PurchaseOrder_lines" object="${purchaseorder}" z="cliJFc0En9v6fq2wP3IJS9F+3xE="/>
     </page:show>
 </div>
