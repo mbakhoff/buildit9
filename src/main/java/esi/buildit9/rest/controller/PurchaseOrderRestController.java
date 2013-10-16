@@ -24,6 +24,12 @@ import java.util.List;
 @RequestMapping("/rest")
 public class PurchaseOrderRestController {
 
+    private PurchaseOrderAssembler assembler;
+
+    public PurchaseOrderRestController() {
+        assembler = new PurchaseOrderAssembler();
+    }
+
     @RequestMapping(value = "pos", method = RequestMethod.POST)
     public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
         PurchaseOrder order= new PurchaseOrderAssembler().fromResource(res);
@@ -38,6 +44,42 @@ public class PurchaseOrderRestController {
 						pathSegment(order.getId().toString()).build().toUri();
 		headers.setLocation(location);
 		return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+
+    @RequestMapping("po/{id}")
+    public ResponseEntity<PurchaseOrderResource> getById(@PathVariable Long id) {
+        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        PurchaseOrderResource resources = assembler.toResource(order);
+        return new ResponseEntity<PurchaseOrderResource>(resources, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "po/{id}/modify", method = RequestMethod.PUT)
+    public ResponseEntity<Void> modifyOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
+        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        order.setRentit(RentIt.getOrCreateRentIt(res.getRentit()));
+        order.setOrderStatus(res.getOrderStatus());
+        order.setSite(Site.getOrCreateSite(res.getSiteAddress()));
+        order.setSiteEngineerName(res.getSiteEngineerName());
+        order.setTotalPrice(res.getTotalPrice());
+        order.setWorksEngineerName(res.getWorksEngineerName());
+        order.persist();
+
+        deleteLines(order);
+
+        attachLines(order, res.getPurchaseOrderLines());
+
+        HttpHeaders headers = new HttpHeaders();
+        URI location =
+                ServletUriComponentsBuilder.fromCurrentRequestUri().
+                        pathSegment(order.getId().toString()).build().toUri();
+        headers.setLocation(location);
+        return new ResponseEntity<Void>(headers, HttpStatus.OK);
+    }
+
+    private void deleteLines(PurchaseOrder order) {
+        for (PurchaseOrderLine line : order.getLines()){
+            line.remove();
+        }
     }
 
     @RequestMapping(value = "po/{id}", method = RequestMethod.DELETE)
