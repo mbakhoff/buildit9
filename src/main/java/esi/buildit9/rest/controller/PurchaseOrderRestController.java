@@ -82,6 +82,15 @@ public class PurchaseOrderRestController {
         }
     }
 
+    @RequestMapping(value = "po/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteById(@PathVariable Long id) {
+        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        order.setOrderStatus(OrderStatus.CANCELLED);
+        order.persist();
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+
     private void attachLines(PurchaseOrder order, List<PurchaseOrderLineResource> purchaseOrderLines) {
 		for (PurchaseOrderLineResource res : purchaseOrderLines) {
 			attachLine(order, res);
