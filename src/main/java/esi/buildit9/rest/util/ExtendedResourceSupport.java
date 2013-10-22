@@ -27,4 +27,13 @@ public class ExtendedResourceSupport {
         return extendedLinks;
     }
 
+    public ExtendedLink getByRel(String rel) {
+        for (ExtendedLink link : extendedLinks) {
+            if (link.getRel().equals(rel)) {
+                return link;
+            }
+        }
+        return null;
+    }
+
 }

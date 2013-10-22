@@ -30,6 +30,7 @@ public class PurchaseOrderRestController {
     public static final int METHOD_GET_BY_ID = 3;
     public static final int METHOD_MODIFY_ORDER = 4;
     public static final int METHOD_CANCEL_BY_ID = 5;
+    public static final int METHOD_APPROVE_BY_ID = 6;
 
     public static final String HEADER_ENTITY_ID = "EntityId";
 
@@ -76,6 +77,7 @@ public class PurchaseOrderRestController {
         PurchaseOrderResource resources = assembler.toResource(order);
         resources.add(linker.buildLink(METHOD_CANCEL_BY_ID, order.getId()));
         resources.add(linker.buildLink(METHOD_MODIFY_ORDER, order.getId()));
+        resources.add(linker.buildLink(METHOD_APPROVE_BY_ID, order.getId()));
         return new ResponseEntity<PurchaseOrderResource>(resources, HttpStatus.OK);
     }
 
@@ -118,6 +120,14 @@ public class PurchaseOrderRestController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.POST)
+    @MethodLookup(METHOD_APPROVE_BY_ID)
+    public ResponseEntity<PurchaseOrderResource> approveOrder(@PathVariable Long id) {
+        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        order.setOrderStatus(OrderStatus.APPROVED);
+        order.persist();
+        return new ResponseEntity<PurchaseOrderResource>(assembler.toResource(order), HttpStatus.OK);
+    }
 
     private void attachLines(PurchaseOrder order, List<PurchaseOrderLineResource> purchaseOrderLines) {
         for (PurchaseOrderLineResource res : purchaseOrderLines) {
