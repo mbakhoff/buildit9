@@ -3,7 +3,7 @@
 
 package esi.buildit9.domain;
 
-import esi.buildit9.domain.RentIt;
+import esi.buildit9.interop.RentitAdapters;
 
 privileged aspect RentIt_Roo_JavaBean {
     
@@ -13,6 +13,14 @@ privileged aspect RentIt_Roo_JavaBean {
     
     public void RentIt.setName(String name) {
         this.name = name;
+    }
+    
+    public RentitAdapters RentIt.getAdapter() {
+        return this.adapter;
+    }
+    
+    public void RentIt.setAdapter(RentitAdapters adapter) {
+        this.adapter = adapter;
     }
     
 }

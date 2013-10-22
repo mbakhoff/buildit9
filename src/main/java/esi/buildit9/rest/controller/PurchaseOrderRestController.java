@@ -2,6 +2,7 @@ package esi.buildit9.rest.controller;
 
 
 import esi.buildit9.domain.*;
+import esi.buildit9.interop.RentitAdapters;
 import esi.buildit9.rest.PurchaseOrderAssembler;
 import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderListResource;
@@ -128,10 +129,20 @@ public class PurchaseOrderRestController {
         order.setOrderStatus(OrderStatus.APPROVED);
         order.persist();
 
+        sendToRentit(order);
+
         PurchaseOrderResource resource = assembler.toResource(order);
         resource.add(linker.buildLink(METHOD_UPDATE_ORDER, order.getId()));
         resource.add(linker.buildLink(METHOD_CLOSE_BY_ID, order.getId()));
         return new ResponseEntity<PurchaseOrderResource>(resource, HttpStatus.OK);
+    }
+
+    private void sendToRentit(PurchaseOrder order) {
+        RentitAdapters adapter = order.getRentit().getAdapter();
+        if (adapter == null) {
+            adapter = RentitAdapters.Default;
+        }
+        adapter.getRest().submitOrder(order);
     }
 
     @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.DELETE)

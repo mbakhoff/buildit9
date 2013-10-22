@@ -4,6 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_esi_buildit9_domain_RentIt" modelAttribute="rentIt" path="/rentits" render="${empty dependencies}" z="6FvaTvl0CkLWurex1Vaaxppte9A=">
         <field:input field="name" id="c_esi_buildit9_domain_RentIt_name" z="do9VERARM5++OLM1R7rJtgzy47Y="/>
+        <field:select field="adapter" id="c_esi_buildit9_domain_RentIt_adapter" items="${rentitadapterses}" path="rentitadapterses" z="mjd5D6PVPK/ary7HqHziKD2tpio="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_esi_buildit9_domain_RentIt" render="${not empty dependencies}" z="qRDz9duOSM15Ef7dvUXhqk6nLLQ="/>
 </div>

@@ -11,8 +11,8 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         return this.internalId;
     }
     
-    public void PurchaseOrderResource.setInternalId(Long id) {
-        this.internalId = id;
+    public void PurchaseOrderResource.setInternalId(Long internalId) {
+        this.internalId = internalId;
     }
     
     public String PurchaseOrderResource.getBuildit() {
