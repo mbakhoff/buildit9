@@ -74,7 +74,7 @@ public class PurchaseOrderRestController {
     @RequestMapping("pos/{id}")
     @MethodLookup(METHOD_GET_BY_ID)
     public ResponseEntity<PurchaseOrderResource> getById(@PathVariable Long id) {
-        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        PurchaseOrder order = getCheckedOrder(id);
         PurchaseOrderResource resources = assembler.toResource(order);
         resources.add(linker.buildLink(METHOD_CLOSE_BY_ID, order.getId()));
         resources.add(linker.buildLink(METHOD_UPDATE_ORDER, order.getId()));
@@ -85,7 +85,7 @@ public class PurchaseOrderRestController {
     @RequestMapping(value = "pos/{id}", method = RequestMethod.PUT)
     @MethodLookup(METHOD_UPDATE_ORDER)
     public ResponseEntity<Void> updateOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
-        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        PurchaseOrder order = getCheckedOrder(id);
         order.setOrderStatus(OrderStatus.WAITING_APPROVAL);
         order.setRentit(RentIt.getOrCreateRentIt(res.getRentit()));
         order.setSite(Site.getOrCreateSite(res.getSiteAddress()));
@@ -115,7 +115,7 @@ public class PurchaseOrderRestController {
     @RequestMapping(value = "pos/{id}", method = RequestMethod.DELETE)
     @MethodLookup(METHOD_CLOSE_BY_ID)
     public ResponseEntity<Void> closeOrder(@PathVariable Long id) {
-        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        PurchaseOrder order = getCheckedOrder(id);
         order.setOrderStatus(OrderStatus.CLOSED);
         order.persist();
         return new ResponseEntity<Void>(HttpStatus.OK);
@@ -124,7 +124,7 @@ public class PurchaseOrderRestController {
     @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.POST)
     @MethodLookup(METHOD_APPROVE_BY_ID)
     public ResponseEntity<PurchaseOrderResource> approveOrder(@PathVariable Long id) {
-        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        PurchaseOrder order = getCheckedOrder(id);
         order.setOrderStatus(OrderStatus.APPROVED);
         order.persist();
 
@@ -137,7 +137,7 @@ public class PurchaseOrderRestController {
     @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.DELETE)
     @MethodLookup(METHOD_REJECT_BY_ID)
     public ResponseEntity<PurchaseOrderResource> rejectOrder(@PathVariable Long id) {
-        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        PurchaseOrder order = getCheckedOrder(id);
         order.setOrderStatus(OrderStatus.REJECTED);
         order.persist();
 
@@ -161,6 +161,20 @@ public class PurchaseOrderRestController {
         line.setTotalCost(res.getTotalCost()); // TODO: recalculate
         line.setPurchaseOrder(order);
         line.persist();
+    }
+
+    private static PurchaseOrder getCheckedOrder(Long id) {
+        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        if (order == null) {
+            throw new OrderNotFound(id);
+        }
+        return order;
+    }
+
+    public static class OrderNotFound extends RuntimeException {
+        public OrderNotFound(Long id) {
+            super(String.format("Order %d not found", id));
+        }
     }
 
 }
