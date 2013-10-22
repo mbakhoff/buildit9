@@ -9,7 +9,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
         <property name="serviceInterface"
                   value="esi.buildit9.soap.client.PlantSoapService" />
         <property name="wsdlDocumentUrl"
-                  value="http://localhost:8080/PlantSoapService?wsdl" />
+                  value="https://rentit9.herokuapp.com/PlantSoapService?wsdl" />
         <property name="namespaceUri" value="http://web.soap.rentit9.esi/" />
         <property name="portName" value="PlantSoapServicePort" />
     </bean>
