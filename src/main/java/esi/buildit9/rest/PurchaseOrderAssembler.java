@@ -21,7 +21,7 @@ public class PurchaseOrderAssembler extends ResourceAssemblerSupport<PurchaseOrd
 
     public PurchaseOrderResource toResource(PurchaseOrder order) {
         PurchaseOrderResource res = new PurchaseOrderResource();
-		res.setId(order.getId());
+		res.setInternalId(order.getId());
 		res.setOrderStatus(order.getOrderStatus());
         res.setBuildit("builtit9"); //TODO this must e changed.. someday
 		res.setRentit(getName(order));

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "purchaseorder")
 public class PurchaseOrderResource extends ExtendedResourceSupport {
 
-	private Long id;
+	private Long internalId;
     private String buildit;
     private String rentit;
     private String siteAddress;

@@ -4,17 +4,15 @@
 package esi.buildit9.rest;
 
 import esi.buildit9.domain.OrderStatus;
-import esi.buildit9.rest.PurchaseOrderLineListResource;
-import esi.buildit9.rest.PurchaseOrderResource;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
-    public Long PurchaseOrderResource.getId() {
-        return this.id;
+    public Long PurchaseOrderResource.getInternalId() {
+        return this.internalId;
     }
     
-    public void PurchaseOrderResource.setId(Long id) {
-        this.id = id;
+    public void PurchaseOrderResource.setInternalId(Long id) {
+        this.internalId = id;
     }
     
     public String PurchaseOrderResource.getBuildit() {
