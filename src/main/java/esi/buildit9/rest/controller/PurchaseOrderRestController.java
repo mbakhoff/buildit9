@@ -31,6 +31,8 @@ public class PurchaseOrderRestController {
     private static final int METHOD_MODIFY_ORDER = 4;
     private static final int METHOD_CANCEL_BY_ID = 5;
 
+    public static final String HEADER_ENTITY_ID = "EntityId";
+
     private final PurchaseOrderAssembler assembler;
     private final MethodLookupHelper linker;
 
@@ -63,7 +65,7 @@ public class PurchaseOrderRestController {
                 ServletUriComponentsBuilder.fromCurrentRequestUri().
                         pathSegment(order.getId().toString()).build().toUri();
         headers.setLocation(location);
-        headers.add("BuildItId", order.getId().toString());
+        headers.add(HEADER_ENTITY_ID, order.getId().toString());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
