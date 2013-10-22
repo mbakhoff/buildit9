@@ -28,9 +28,10 @@ public class PurchaseOrderRestController {
     public static final int METHOD_GET_ALL = 1;
     public static final int METHOD_CREATE_ORDER = 2;
     public static final int METHOD_GET_BY_ID = 3;
-    public static final int METHOD_MODIFY_ORDER = 4;
-    public static final int METHOD_CANCEL_BY_ID = 5;
+    public static final int METHOD_UPDATE_ORDER = 4;
+    public static final int METHOD_CLOSE_BY_ID = 5;
     public static final int METHOD_APPROVE_BY_ID = 6;
+    public static final int METHOD_REJECT_BY_ID = 7;
 
     public static final String HEADER_ENTITY_ID = "EntityId";
 
@@ -55,7 +56,7 @@ public class PurchaseOrderRestController {
     @MethodLookup(METHOD_CREATE_ORDER)
     public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
         PurchaseOrder order = new PurchaseOrderAssembler().fromResource(res);
-        order.setOrderStatus(OrderStatus.CREATED);
+        order.setOrderStatus(OrderStatus.WAITING_APPROVAL);
 
         order.persist();
 
@@ -75,18 +76,18 @@ public class PurchaseOrderRestController {
     public ResponseEntity<PurchaseOrderResource> getById(@PathVariable Long id) {
         PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
         PurchaseOrderResource resources = assembler.toResource(order);
-        resources.add(linker.buildLink(METHOD_CANCEL_BY_ID, order.getId()));
-        resources.add(linker.buildLink(METHOD_MODIFY_ORDER, order.getId()));
+        resources.add(linker.buildLink(METHOD_CLOSE_BY_ID, order.getId()));
+        resources.add(linker.buildLink(METHOD_UPDATE_ORDER, order.getId()));
         resources.add(linker.buildLink(METHOD_APPROVE_BY_ID, order.getId()));
         return new ResponseEntity<PurchaseOrderResource>(resources, HttpStatus.OK);
     }
 
     @RequestMapping(value = "pos/{id}", method = RequestMethod.PUT)
-    @MethodLookup(METHOD_MODIFY_ORDER)
-    public ResponseEntity<Void> modifyOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
+    @MethodLookup(METHOD_UPDATE_ORDER)
+    public ResponseEntity<Void> updateOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
         PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        order.setOrderStatus(OrderStatus.WAITING_APPROVAL);
         order.setRentit(RentIt.getOrCreateRentIt(res.getRentit()));
-        order.setOrderStatus(res.getOrderStatus());
         order.setSite(Site.getOrCreateSite(res.getSiteAddress()));
         order.setSiteEngineerName(res.getSiteEngineerName());
         order.setTotalPrice(res.getTotalPrice());
@@ -112,10 +113,10 @@ public class PurchaseOrderRestController {
     }
 
     @RequestMapping(value = "pos/{id}", method = RequestMethod.DELETE)
-    @MethodLookup(METHOD_CANCEL_BY_ID)
-    public ResponseEntity<Void> cancelOrder(@PathVariable Long id) {
+    @MethodLookup(METHOD_CLOSE_BY_ID)
+    public ResponseEntity<Void> closeOrder(@PathVariable Long id) {
         PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
-        order.setOrderStatus(OrderStatus.CANCELLED);
+        order.setOrderStatus(OrderStatus.CLOSED);
         order.persist();
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
@@ -126,7 +127,23 @@ public class PurchaseOrderRestController {
         PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
         order.setOrderStatus(OrderStatus.APPROVED);
         order.persist();
-        return new ResponseEntity<PurchaseOrderResource>(assembler.toResource(order), HttpStatus.OK);
+
+        PurchaseOrderResource resource = assembler.toResource(order);
+        resource.add(linker.buildLink(METHOD_UPDATE_ORDER, order.getId()));
+        resource.add(linker.buildLink(METHOD_CLOSE_BY_ID, order.getId()));
+        return new ResponseEntity<PurchaseOrderResource>(resource, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.DELETE)
+    @MethodLookup(METHOD_REJECT_BY_ID)
+    public ResponseEntity<PurchaseOrderResource> rejectOrder(@PathVariable Long id) {
+        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
+        order.setOrderStatus(OrderStatus.REJECTED);
+        order.persist();
+
+        PurchaseOrderResource resource = assembler.toResource(order);
+        resource.add(linker.buildLink(METHOD_UPDATE_ORDER, order.getId()));
+        return new ResponseEntity<PurchaseOrderResource>(resource, HttpStatus.OK);
     }
 
     private void attachLines(PurchaseOrder order, List<PurchaseOrderLineResource> purchaseOrderLines) {
