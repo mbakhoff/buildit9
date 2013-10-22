@@ -25,11 +25,11 @@ import java.util.List;
 @RequestMapping("/rest")
 public class PurchaseOrderRestController {
 
-    private static final int METHOD_GET_ALL = 1;
-    private static final int METHOD_CREATE_ORDER = 2;
-    private static final int METHOD_GET_BY_ID = 3;
-    private static final int METHOD_MODIFY_ORDER = 4;
-    private static final int METHOD_CANCEL_BY_ID = 5;
+    public static final int METHOD_GET_ALL = 1;
+    public static final int METHOD_CREATE_ORDER = 2;
+    public static final int METHOD_GET_BY_ID = 3;
+    public static final int METHOD_MODIFY_ORDER = 4;
+    public static final int METHOD_CANCEL_BY_ID = 5;
 
     public static final String HEADER_ENTITY_ID = "EntityId";
 
