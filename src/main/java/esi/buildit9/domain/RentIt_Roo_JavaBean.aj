@@ -3,6 +3,7 @@
 
 package esi.buildit9.domain;
 
+import esi.buildit9.domain.RentIt;
 import esi.buildit9.interop.RentitAdapters;
 
 privileged aspect RentIt_Roo_JavaBean {

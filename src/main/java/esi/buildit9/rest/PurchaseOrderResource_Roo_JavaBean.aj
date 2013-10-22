@@ -4,6 +4,8 @@
 package esi.buildit9.rest;
 
 import esi.buildit9.domain.OrderStatus;
+import esi.buildit9.rest.PurchaseOrderLineListResource;
+import esi.buildit9.rest.PurchaseOrderResource;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     

@@ -5,6 +5,11 @@ package esi.buildit9.web;
 
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.interop.RentitAdapters;
+import esi.buildit9.web.RentItController;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,11 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
 
 privileged aspect RentItController_Roo_Controller {
     
