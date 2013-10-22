@@ -3,6 +3,9 @@ package esi.buildit9.rest;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
+import esi.buildit9.rest.controller.PurchaseOrderRestController;
+import esi.buildit9.rest.util.ExtendedLink;
+import esi.buildit9.rest.util.MethodLookupHelper;
 
 import java.util.HashSet;
 import java.util.List;
@@ -10,15 +13,18 @@ import java.util.Set;
 
 public class PurchaseOrderAssembler {
 
-	private PurchaseOrderLineAssembler lineAssembler;
+	private final PurchaseOrderLineAssembler lineAssembler;
+    private final MethodLookupHelper linker;
 
 	public PurchaseOrderAssembler() {
-		lineAssembler = new PurchaseOrderLineAssembler();
+        lineAssembler = new PurchaseOrderLineAssembler();
+        linker = new MethodLookupHelper(PurchaseOrderRestController.class);
 	}
 
     public PurchaseOrderResource toResource(PurchaseOrder order) {
         PurchaseOrderResource res = new PurchaseOrderResource();
-		res.setId(order.getId());
+        addSelfLink(order, res);
+        res.setInternalId(order.getId());
 		res.setOrderStatus(order.getOrderStatus());
         res.setBuildit("builtit9"); //TODO this must e changed.. someday
 		res.setRentit(getName(order));
@@ -29,7 +35,12 @@ public class PurchaseOrderAssembler {
         return res;
     }
 
-	private String getAddress(PurchaseOrder order) {
+    private void addSelfLink(PurchaseOrder order, PurchaseOrderResource res) {
+        ExtendedLink getById = linker.buildLink(PurchaseOrderRestController.METHOD_GET_BY_ID, order.getId());
+        res.add(new ExtendedLink(getById.getHref(), "self", getById.getMethod()));
+    }
+
+    private String getAddress(PurchaseOrder order) {
 		if (order.getSite() != null) {
 			return order.getSite().getAddress();
 		}
