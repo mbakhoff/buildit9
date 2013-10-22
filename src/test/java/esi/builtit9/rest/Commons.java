@@ -32,6 +32,11 @@ public class Commons {
     }
 
     public static String getEntityId(ClientResponse response) {
-        return response.getHeaders().getFirst(PurchaseOrderRestController.HEADER_ENTITY_ID);
+        String entityId = response.getHeaders().getFirst(PurchaseOrderRestController.HEADER_ENTITY_ID);
+        if (entityId == null) {
+            throw new RuntimeException("HTTP header did not contain entity id");
+        }
+        return entityId;
     }
+
 }
