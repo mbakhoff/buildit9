@@ -22,7 +22,7 @@ import java.net.URI;
 import java.util.List;
 
 @Controller
-@RequestMapping("/rest")
+@RequestMapping("/rest/")
 public class PurchaseOrderRestController {
 
     public static final int METHOD_GET_ALL = 1;
