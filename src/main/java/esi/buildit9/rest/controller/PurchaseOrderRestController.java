@@ -67,7 +67,7 @@ public class PurchaseOrderRestController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping("po/{id}")
+    @RequestMapping("pos/{id}")
     @MethodLookup(METHOD_GET_BY_ID)
     public ResponseEntity<PurchaseOrderResource> getById(@PathVariable Long id) {
         PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
@@ -77,7 +77,7 @@ public class PurchaseOrderRestController {
         return new ResponseEntity<PurchaseOrderResource>(resources, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "po/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "pos/{id}", method = RequestMethod.PUT)
     @MethodLookup(METHOD_MODIFY_ORDER)
     public ResponseEntity<Void> modifyOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
         PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);
@@ -107,7 +107,7 @@ public class PurchaseOrderRestController {
         }
     }
 
-    @RequestMapping(value = "po/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "pos/{id}", method = RequestMethod.DELETE)
     @MethodLookup(METHOD_CANCEL_BY_ID)
     public ResponseEntity<Void> cancelOrder(@PathVariable Long id) {
         PurchaseOrder order = PurchaseOrder.findPurchaseOrder(id);

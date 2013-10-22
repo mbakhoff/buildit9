@@ -9,13 +9,8 @@ import esi.buildit9.rest.PurchaseOrderLineListResource;
 import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderResource;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.ws.rs.core.MediaType;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,12 +18,10 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-//@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
-//@RunWith(SpringJUnit4ClassRunner.class)
+
 public class TestPurchaseOrderRESTController {
 
     public static final String URL_POS = "https://buildit9.herokuapp.com/rest/pos";
-    public static final String URL_PO = "https://buildit9.herokuapp.com/rest/po";
 
     @Test
     public void testCreateResources() throws Exception {
@@ -51,7 +44,7 @@ public class TestPurchaseOrderRESTController {
                 .accept(MediaType.APPLICATION_XML).post(ClientResponse.class, newResource);
 
         String id = response.getHeaders().getFirst("BuildItId");
-        String requestUrl = URL_PO +"/"+id;
+        String requestUrl = URL_POS +"/"+id;
 
         PurchaseOrderResource modifiedResource = createPurchaseOrderResource();
         createPurchaseOrderResource().setSiteAddress("ModifiedAddress");
@@ -73,7 +66,7 @@ public class TestPurchaseOrderRESTController {
                 .accept(MediaType.APPLICATION_XML).post(ClientResponse.class, newResource);
 
         String id = response.getHeaders().getFirst("BuildItId");
-        String requestUrl = URL_PO +"/"+id;
+        String requestUrl = URL_POS +"/"+id;
 
         webResource = client.resource(requestUrl);
         response = webResource.type(MediaType.APPLICATION_XML)
@@ -93,7 +86,7 @@ public class TestPurchaseOrderRESTController {
         assertTrue(response.getStatus() == ClientResponse.Status.CREATED.getStatusCode());
 
         String id = response.getHeaders().getFirst("BuildItId");
-        String requestUrl = URL_PO +"/"+id;
+        String requestUrl = URL_POS +"/"+id;
 
         WebResource webResourceById = client.resource(requestUrl);
         PurchaseOrderResource purchaseOrder = webResourceById.get(PurchaseOrderResource.class);
