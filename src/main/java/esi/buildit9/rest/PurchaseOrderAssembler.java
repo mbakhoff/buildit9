@@ -36,9 +36,8 @@ public class PurchaseOrderAssembler {
     }
 
     private void addSelfLink(PurchaseOrder order, PurchaseOrderResource res) {
-        ExtendedLink link = linker.buildLink(PurchaseOrderRestController.METHOD_GET_BY_ID, order.getId());
-        link.withRel("self");
-        res.add(link);
+        ExtendedLink getById = linker.buildLink(PurchaseOrderRestController.METHOD_GET_BY_ID, order.getId());
+        res.add(new ExtendedLink(getById.getHref(), "self", getById.getMethod()));
     }
 
     private String getAddress(PurchaseOrder order) {
