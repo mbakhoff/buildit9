@@ -18,7 +18,7 @@ import javax.xml.ws.WebServiceFeature;
  * 
  */
 @WebServiceClient(name = "PlantSoapService", targetNamespace = "http://web.soap.rentit9.esi/", wsdlLocation = "http://localhost:8080/PlantSoapService?wsdl")
-public class PlantSoapServiceService
+public class PlantSoapService_Service
     extends Service
 {
 
@@ -38,27 +38,27 @@ public class PlantSoapServiceService
         PLANTSOAPSERVICE_EXCEPTION = e;
     }
 
-    public PlantSoapServiceService() {
+    public PlantSoapService_Service() {
         super(__getWsdlLocation(), PLANTSOAPSERVICE_QNAME);
     }
 
-    public PlantSoapServiceService(WebServiceFeature... features) {
+    public PlantSoapService_Service(WebServiceFeature... features) {
         super(__getWsdlLocation(), PLANTSOAPSERVICE_QNAME, features);
     }
 
-    public PlantSoapServiceService(URL wsdlLocation) {
+    public PlantSoapService_Service(URL wsdlLocation) {
         super(wsdlLocation, PLANTSOAPSERVICE_QNAME);
     }
 
-    public PlantSoapServiceService(URL wsdlLocation, WebServiceFeature... features) {
+    public PlantSoapService_Service(URL wsdlLocation, WebServiceFeature... features) {
         super(wsdlLocation, PLANTSOAPSERVICE_QNAME, features);
     }
 
-    public PlantSoapServiceService(URL wsdlLocation, QName serviceName) {
+    public PlantSoapService_Service(URL wsdlLocation, QName serviceName) {
         super(wsdlLocation, serviceName);
     }
 
-    public PlantSoapServiceService(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
+    public PlantSoapService_Service(URL wsdlLocation, QName serviceName, WebServiceFeature... features) {
         super(wsdlLocation, serviceName, features);
     }
 

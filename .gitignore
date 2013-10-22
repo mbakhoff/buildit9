@@ -6,3 +6,4 @@ log.roo
 .classpath
 .settings
 .springBeans
+*.class

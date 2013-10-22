@@ -5,11 +5,11 @@
 http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
     <bean id="plantService"
           class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
-        <property name="serviceName" value="PlantSoapServiceService" />
+        <property name="serviceName" value="PlantSoapService" />
         <property name="serviceInterface"
                   value="esi.buildit9.soap.client.PlantSoapService" />
         <property name="wsdlDocumentUrl"
-                  value="http://localhost:8080/PlantSOAPService?wsdl" />
+                  value="http://localhost:8080/PlantSoapService?wsdl" />
         <property name="namespaceUri" value="http://web.soap.rentit9.esi/" />
         <property name="portName" value="PlantSoapServicePort" />
     </bean>

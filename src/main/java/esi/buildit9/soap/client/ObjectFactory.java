@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the esi.rentit9.soap package. 
+ * generated in the esi.buildit9.soap.client package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -30,7 +30,7 @@ public class ObjectFactory {
     private final static QName _Plants_QNAME = new QName("http://web.soap.rentit9.esi/", "plants");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: esi.rentit9.soap
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: esi.buildit9.soap.client
      * 
      */
     public ObjectFactory() {
@@ -69,7 +69,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link PlantResource }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link PlantResource }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "plant")
@@ -78,7 +78,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link GetAllPlants }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAllPlants }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "getAllPlants")
@@ -87,7 +87,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link GetAllPlantsResponse }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetAllPlantsResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "getAllPlantsResponse")
@@ -96,7 +96,7 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link javax.xml.bind.JAXBElement }{@code <}{@link PlantListResource }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link PlantListResource }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "plants")

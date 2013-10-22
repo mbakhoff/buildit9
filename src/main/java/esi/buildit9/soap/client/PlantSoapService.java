@@ -26,12 +26,12 @@ public interface PlantSoapService {
     /**
      * 
      * @return
-     *     returns esi.rentit9.soap.PlantListResource
+     *     returns esi.buildit9.soap.client.PlantListResource
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getAllPlants", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.rentit9.soap.GetAllPlants")
-    @ResponseWrapper(localName = "getAllPlantsResponse", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.rentit9.soap.GetAllPlantsResponse")
+    @RequestWrapper(localName = "getAllPlants", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.buildit9.soap.client.GetAllPlants")
+    @ResponseWrapper(localName = "getAllPlantsResponse", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.buildit9.soap.client.GetAllPlantsResponse")
     @Action(input = "http://web.soap.rentit9.esi/PlantSoapService/getAllPlantsRequest", output = "http://web.soap.rentit9.esi/PlantSoapService/getAllPlantsResponse")
     public PlantListResource getAllPlants();
 
