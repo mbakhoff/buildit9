@@ -3,17 +3,20 @@ package esi.buildit9.rest;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
+import esi.buildit9.rest.controller.PurchaseOrderRestController;
+import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class PurchaseOrderAssembler {
+public class PurchaseOrderAssembler extends ResourceAssemblerSupport<PurchaseOrder, PurchaseOrderResource> {
 
 	private PurchaseOrderLineAssembler lineAssembler;
 
 	public PurchaseOrderAssembler() {
-		lineAssembler = new PurchaseOrderLineAssembler();
+        super(PurchaseOrderRestController.class, PurchaseOrderResource.class);
+        lineAssembler = new PurchaseOrderLineAssembler();
 	}
 
     public PurchaseOrderResource toResource(PurchaseOrder order) {
