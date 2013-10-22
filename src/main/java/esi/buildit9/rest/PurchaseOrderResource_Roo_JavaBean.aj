@@ -73,12 +73,12 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.worksEngineerName = worksEngineerName;
     }
     
-    public PurchaseOrderLineListResource PurchaseOrderResource.getOrderLines() {
-        return this.orderLines;
+    public PurchaseOrderLineListResource PurchaseOrderResource.getPurchaseOrderLines() {
+        return this.purchaseOrderLines;
     }
     
-    public void PurchaseOrderResource.setOrderLines(PurchaseOrderLineListResource orderLines) {
-        this.orderLines = orderLines;
+    public void PurchaseOrderResource.setPurchaseOrderLines(PurchaseOrderLineListResource purchaseOrderLines) {
+        this.purchaseOrderLines = purchaseOrderLines;
     }
     
 }

@@ -26,7 +26,7 @@ public class Commons {
 
         PurchaseOrderLineListResource orderLineListResource =new PurchaseOrderLineListResource();
         orderLineListResource.orderLines.add(newResourceLine);
-        newResource.setOrderLines(orderLineListResource);
+        newResource.setPurchaseOrderLines(orderLineListResource);
 
         return newResource;
     }

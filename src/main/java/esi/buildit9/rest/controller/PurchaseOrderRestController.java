@@ -59,7 +59,7 @@ public class PurchaseOrderRestController {
 
         order.persist();
 
-        attachLines(order, res.getOrderLines().orderLines);
+        attachLines(order, res.getPurchaseOrderLines().orderLines);
 
         HttpHeaders headers = new HttpHeaders();
         URI location =
@@ -95,7 +95,7 @@ public class PurchaseOrderRestController {
 
         deleteLines(order);
 
-        attachLines(order, res.getOrderLines().orderLines);
+        attachLines(order, res.getPurchaseOrderLines().orderLines);
 
         HttpHeaders headers = new HttpHeaders();
         URI location =
