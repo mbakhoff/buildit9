@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <bean id="plantService"
+          class="org.springframework.remoting.jaxws.JaxWsPortProxyFactoryBean">
+        <property name="serviceName" value="PlantSoapServiceService" />
+        <property name="serviceInterface"
+                  value="esi.buildit9.soap.client.PlantSoapService" />
+        <property name="wsdlDocumentUrl"
+                  value="http://localhost:8080/PlantSOAPService?wsdl" />
+        <property name="namespaceUri" value="http://web.soap.rentit9.esi/" />
+        <property name="portName" value="PlantSoapServicePort" />
+    </bean>
+</beans>
