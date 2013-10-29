@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getAllPlants complex type.
+ * <p>Java class for createPurchaseOrder complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getAllPlants">
+ * &lt;complexType name="createPurchaseOrder">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="arg0" type="{http://web.soap.rentit9.esi/}getPlantsResource" minOccurs="0"/>
+ *         &lt;element name="arg0" type="{http://web.soap.rentit9.esi/}purchaseOrderResource" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,22 +26,22 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getAllPlants", propOrder = {
+@XmlType(name = "createPurchaseOrder", propOrder = {
     "arg0"
 })
-public class GetAllPlants {
+public class CreatePurchaseOrder {
 
-    protected GetPlantsResource arg0;
+    protected PurchaseOrderResource arg0;
 
     /**
      * Gets the value of the arg0 property.
      * 
      * @return
      *     possible object is
-     *     {@link GetPlantsResource }
+     *     {@link PurchaseOrderResource }
      *     
      */
-    public GetPlantsResource getArg0() {
+    public PurchaseOrderResource getArg0() {
         return arg0;
     }
 
@@ -50,10 +50,10 @@ public class GetAllPlants {
      * 
      * @param value
      *     allowed object is
-     *     {@link GetPlantsResource }
+     *     {@link PurchaseOrderResource }
      *     
      */
-    public void setArg0(GetPlantsResource value) {
+    public void setArg0(PurchaseOrderResource value) {
         this.arg0 = value;
     }
 

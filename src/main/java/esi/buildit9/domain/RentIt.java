@@ -1,6 +1,6 @@
 package esi.buildit9.domain;
 
-import esi.buildit9.interop.RentitAdapters;
+import esi.buildit9.interop.InteropImplementation;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
@@ -15,7 +15,7 @@ public class RentIt {
      */
     private String name;
 
-    private RentitAdapters adapter;
+    private InteropImplementation provider;
 
     public static RentIt getOrCreateRentIt(String name) {
         RentIt rentIt;

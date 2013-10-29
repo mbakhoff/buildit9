@@ -2,7 +2,7 @@ package esi.buildit9.rest.controller;
 
 
 import esi.buildit9.domain.*;
-import esi.buildit9.interop.RentitAdapters;
+import esi.buildit9.interop.InteropImplementation;
 import esi.buildit9.rest.PurchaseOrderAssembler;
 import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderListResource;
@@ -142,11 +142,11 @@ public class PurchaseOrderRestController {
     }
 
     private void sendToRentit(PurchaseOrder order) {
-        RentitAdapters adapter = order.getRentit().getAdapter();
-        if (adapter == null) {
-            adapter = RentitAdapters.Default;
+        InteropImplementation provider = order.getRentit().getProvider();
+        if (provider == null) {
+            provider = InteropImplementation.Team9;
         }
-        adapter.getRest().submitOrder(order);
+        provider.getRest().submitOrder(order);
     }
 
     @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.DELETE)

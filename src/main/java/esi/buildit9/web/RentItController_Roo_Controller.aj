@@ -4,7 +4,7 @@
 package esi.buildit9.web;
 
 import esi.buildit9.domain.RentIt;
-import esi.buildit9.interop.RentitAdapters;
+import esi.buildit9.interop.InteropImplementation;
 import esi.buildit9.web.RentItController;
 import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
@@ -88,7 +88,7 @@ privileged aspect RentItController_Roo_Controller {
     
     void RentItController.populateEditForm(Model uiModel, RentIt rentIt) {
         uiModel.addAttribute("rentIt", rentIt);
-        uiModel.addAttribute("rentitadapterses", Arrays.asList(RentitAdapters.values()));
+        uiModel.addAttribute("interopimplementations", Arrays.asList(InteropImplementation.values()));
     }
     
     String RentItController.encodeUrlPathSegment(String pathSegment, HttpServletRequest httpServletRequest) {

@@ -8,7 +8,7 @@ import esi.buildit9.rest.PurchaseOrderResource;
 
 import javax.ws.rs.core.MediaType;
 
-public class Team9Rest implements RentitAdapters.RestAdapter {
+public class Team9Rest implements RentitInterop.Rest {
 
     public static final String RENTIT_POS = "https://rentit9.herokuapp.com/rest/pos";
 
@@ -33,7 +33,7 @@ public class Team9Rest implements RentitAdapters.RestAdapter {
 
     private void throwSubmissionFailed(int status) {
         String err = String.format("rentit9 po submission failed (%d)", status);
-        throw new RentitAdapterProvider.InteropFailure(err, null);
+        throw new InteropException(err, null);
     }
 
 

@@ -2,6 +2,7 @@
 package esi.buildit9.soap.client;
 
 import javax.jws.WebMethod;
+import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
@@ -25,14 +26,62 @@ public interface PlantSoapService {
 
     /**
      * 
+     * @param arg0
      * @return
-     *     returns esi.buildit9.soap.client.PlantListResource
+     *     returns esi.buildit9.soap.client.PlantResourceList
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getAllPlants", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.buildit9.soap.client.GetAllPlants")
     @ResponseWrapper(localName = "getAllPlantsResponse", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.buildit9.soap.client.GetAllPlantsResponse")
     @Action(input = "http://web.soap.rentit9.esi/PlantSoapService/getAllPlantsRequest", output = "http://web.soap.rentit9.esi/PlantSoapService/getAllPlantsResponse")
-    public PlantListResource getAllPlants();
+    public PlantResourceList getAllPlants(
+        @WebParam(name = "arg0", targetNamespace = "")
+        GetPlantsResource arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns esi.buildit9.soap.client.PurchaseOrderResource
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "createPurchaseOrder", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.buildit9.soap.client.CreatePurchaseOrder")
+    @ResponseWrapper(localName = "createPurchaseOrderResponse", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.buildit9.soap.client.CreatePurchaseOrderResponse")
+    @Action(input = "http://web.soap.rentit9.esi/PlantSoapService/createPurchaseOrderRequest", output = "http://web.soap.rentit9.esi/PlantSoapService/createPurchaseOrderResponse")
+    public PurchaseOrderResource createPurchaseOrder(
+        @WebParam(name = "arg0", targetNamespace = "")
+        PurchaseOrderResource arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns esi.buildit9.soap.client.PurchaseOrderResource
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "updatePurchaseOrder", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.buildit9.soap.client.UpdatePurchaseOrder")
+    @ResponseWrapper(localName = "updatePurchaseOrderResponse", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.buildit9.soap.client.UpdatePurchaseOrderResponse")
+    @Action(input = "http://web.soap.rentit9.esi/PlantSoapService/updatePurchaseOrderRequest", output = "http://web.soap.rentit9.esi/PlantSoapService/updatePurchaseOrderResponse")
+    public PurchaseOrderResource updatePurchaseOrder(
+        @WebParam(name = "arg0", targetNamespace = "")
+        PurchaseOrderResource arg0);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns esi.buildit9.soap.client.PlantResourceList
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getPlantsBetween", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.buildit9.soap.client.GetPlantsBetween")
+    @ResponseWrapper(localName = "getPlantsBetweenResponse", targetNamespace = "http://web.soap.rentit9.esi/", className = "esi.buildit9.soap.client.GetPlantsBetweenResponse")
+    @Action(input = "http://web.soap.rentit9.esi/PlantSoapService/getPlantsBetweenRequest", output = "http://web.soap.rentit9.esi/PlantSoapService/getPlantsBetweenResponse")
+    public PlantResourceList getPlantsBetween(
+        @WebParam(name = "arg0", targetNamespace = "")
+        GetPlantsBetweenResource arg0);
 
 }

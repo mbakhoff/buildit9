@@ -8,16 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getAllPlantsResponse complex type.
+ * <p>Java class for createPurchaseOrderResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getAllPlantsResponse">
+ * &lt;complexType name="createPurchaseOrderResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://web.soap.rentit9.esi/}plantResourceList" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://web.soap.rentit9.esi/}purchaseOrderResource" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,23 +27,23 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getAllPlantsResponse", propOrder = {
+@XmlType(name = "createPurchaseOrderResponse", propOrder = {
     "_return"
 })
-public class GetAllPlantsResponse {
+public class CreatePurchaseOrderResponse {
 
     @XmlElement(name = "return")
-    protected PlantResourceList _return;
+    protected PurchaseOrderResource _return;
 
     /**
      * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link PlantResourceList }
+     *     {@link PurchaseOrderResource }
      *     
      */
-    public PlantResourceList getReturn() {
+    public PurchaseOrderResource getReturn() {
         return _return;
     }
 
@@ -52,10 +52,10 @@ public class GetAllPlantsResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link PlantResourceList }
+     *     {@link PurchaseOrderResource }
      *     
      */
-    public void setReturn(PlantResourceList value) {
+    public void setReturn(PurchaseOrderResource value) {
         this._return = value;
     }
 

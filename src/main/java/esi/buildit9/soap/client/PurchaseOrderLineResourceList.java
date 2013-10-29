@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for plantListResource complex type.
+ * <p>Java class for purchaseOrderLineResourceList complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="plantListResource">
+ * &lt;complexType name="purchaseOrderLineResourceList">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{http://web.soap.rentit9.esi/}plant" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element ref="{http://web.soap.rentit9.esi/}purchaseorderline" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,41 +29,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "plantListResource", propOrder = {
-    "plant"
+@XmlType(name = "purchaseOrderLineResourceList", propOrder = {
+    "purchaseorderline"
 })
-public class PlantListResource {
+public class PurchaseOrderLineResourceList {
 
     @XmlElement(namespace = "http://web.soap.rentit9.esi/")
-    protected List<PlantResource> plant;
+    protected List<PurchaseOrderLineResource> purchaseorderline;
 
     /**
-     * Gets the value of the plant property.
+     * Gets the value of the purchaseorderline property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the plant property.
+     * This is why there is not a <CODE>set</CODE> method for the purchaseorderline property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getPlant().add(newItem);
+     *    getPurchaseorderline().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link PlantResource }
+     * {@link PurchaseOrderLineResource }
      * 
      * 
      */
-    public List<PlantResource> getPlant() {
-        if (plant == null) {
-            plant = new ArrayList<PlantResource>();
+    public List<PurchaseOrderLineResource> getPurchaseorderline() {
+        if (purchaseorderline == null) {
+            purchaseorderline = new ArrayList<PurchaseOrderLineResource>();
         }
-        return this.plant;
+        return this.purchaseorderline;
     }
 
 }
