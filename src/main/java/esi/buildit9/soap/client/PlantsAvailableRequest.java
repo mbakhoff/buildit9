@@ -9,12 +9,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 
 /**
- * <p>Java class for getPlantsBetweenResource complex type.
+ * <p>Java class for plantsAvailableRequest complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getPlantsBetweenResource">
+ * &lt;complexType name="plantsAvailableRequest">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -30,12 +30,12 @@ import javax.xml.datatype.XMLGregorianCalendar;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getPlantsBetweenResource", propOrder = {
+@XmlType(name = "plantsAvailableRequest", propOrder = {
     "endDate",
     "nameLike",
     "startDate"
 })
-public class GetPlantsBetweenResource {
+public class PlantsAvailableRequest {
 
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar endDate;

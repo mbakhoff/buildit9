@@ -21,7 +21,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="endDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
  *         &lt;element name="plantId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="startDate" type="{http://www.w3.org/2001/XMLSchema}dateTime" minOccurs="0"/>
- *         &lt;element name="totalPrice" type="{http://www.w3.org/2001/XMLSchema}float"/>
+ *         &lt;element name="totalPrice" type="{http://www.w3.org/2001/XMLSchema}float" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -44,7 +44,7 @@ public class PurchaseOrderLineResource {
     protected String plantId;
     @XmlSchemaType(name = "dateTime")
     protected XMLGregorianCalendar startDate;
-    protected float totalPrice;
+    protected Float totalPrice;
 
     /**
      * Gets the value of the endDate property.
@@ -121,16 +121,24 @@ public class PurchaseOrderLineResource {
     /**
      * Gets the value of the totalPrice property.
      * 
+     * @return
+     *     possible object is
+     *     {@link Float }
+     *     
      */
-    public float getTotalPrice() {
+    public Float getTotalPrice() {
         return totalPrice;
     }
 
     /**
      * Sets the value of the totalPrice property.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link Float }
+     *     
      */
-    public void setTotalPrice(float value) {
+    public void setTotalPrice(Float value) {
         this.totalPrice = value;
     }
 

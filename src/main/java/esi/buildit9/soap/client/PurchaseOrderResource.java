@@ -1,8 +1,11 @@
 
 package esi.buildit9.soap.client;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -18,7 +21,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element name="buildit" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="internalId" type="{http://www.w3.org/2001/XMLSchema}long" minOccurs="0"/>
- *         &lt;element name="purchaseOrderLines" type="{http://web.soap.rentit9.esi/}purchaseOrderLineResourceList" minOccurs="0"/>
+ *         &lt;element name="purchaseOrderLines" type="{http://web.soap.rentit9.esi/}purchaseOrderLineResource" maxOccurs="unbounded" minOccurs="0"/>
  *         &lt;element name="senderSideId" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="siteAddress" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *         &lt;element name="status" type="{http://web.soap.rentit9.esi/}orderStatus" minOccurs="0"/>
@@ -43,7 +46,8 @@ public class PurchaseOrderResource {
 
     protected String buildit;
     protected Long internalId;
-    protected PurchaseOrderLineResourceList purchaseOrderLines;
+    @XmlElement(nillable = true)
+    protected List<PurchaseOrderLineResource> purchaseOrderLines;
     protected String senderSideId;
     protected String siteAddress;
     protected OrderStatus status;
@@ -99,25 +103,30 @@ public class PurchaseOrderResource {
     /**
      * Gets the value of the purchaseOrderLines property.
      * 
-     * @return
-     *     possible object is
-     *     {@link PurchaseOrderLineResourceList }
-     *     
-     */
-    public PurchaseOrderLineResourceList getPurchaseOrderLines() {
-        return purchaseOrderLines;
-    }
-
-    /**
-     * Sets the value of the purchaseOrderLines property.
+     * <p>
+     * This accessor method returns a reference to the live list,
+     * not a snapshot. Therefore any modification you make to the
+     * returned list will be present inside the JAXB object.
+     * This is why there is not a <CODE>set</CODE> method for the purchaseOrderLines property.
      * 
-     * @param value
-     *     allowed object is
-     *     {@link PurchaseOrderLineResourceList }
-     *     
+     * <p>
+     * For example, to add a new item, do as follows:
+     * <pre>
+     *    getPurchaseOrderLines().add(newItem);
+     * </pre>
+     * 
+     * 
+     * <p>
+     * Objects of the following type(s) are allowed in the list
+     * {@link PurchaseOrderLineResource }
+     * 
+     * 
      */
-    public void setPurchaseOrderLines(PurchaseOrderLineResourceList value) {
-        this.purchaseOrderLines = value;
+    public List<PurchaseOrderLineResource> getPurchaseOrderLines() {
+        if (purchaseOrderLines == null) {
+            purchaseOrderLines = new ArrayList<PurchaseOrderLineResource>();
+        }
+        return this.purchaseOrderLines;
     }
 
     /**

@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="arg0" type="{http://web.soap.rentit9.esi/}getPlantsBetweenResource" minOccurs="0"/>
+ *         &lt;element name="arg0" type="{http://web.soap.rentit9.esi/}plantsAvailableRequest" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -31,17 +31,17 @@ import javax.xml.bind.annotation.XmlType;
 })
 public class GetPlantsBetween {
 
-    protected GetPlantsBetweenResource arg0;
+    protected PlantsAvailableRequest arg0;
 
     /**
      * Gets the value of the arg0 property.
      * 
      * @return
      *     possible object is
-     *     {@link GetPlantsBetweenResource }
+     *     {@link PlantsAvailableRequest }
      *     
      */
-    public GetPlantsBetweenResource getArg0() {
+    public PlantsAvailableRequest getArg0() {
         return arg0;
     }
 
@@ -50,10 +50,10 @@ public class GetPlantsBetween {
      * 
      * @param value
      *     allowed object is
-     *     {@link GetPlantsBetweenResource }
+     *     {@link PlantsAvailableRequest }
      *     
      */
-    public void setArg0(GetPlantsBetweenResource value) {
+    public void setArg0(PlantsAvailableRequest value) {
         this.arg0 = value;
     }
 
