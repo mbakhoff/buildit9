@@ -4,6 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <page:show id="ps_esi_buildit9_domain_RentIt" object="${rentit}" path="/rentits" z="nl7Q6u70pEVps0sV8AU+AKi7BKY=">
         <field:display field="name" id="s_esi_buildit9_domain_RentIt_name" object="${rentit}" z="5eJy4+1IBIdC2LHMk+uRWzFGCDY="/>
-        <field:display field="adapter" id="s_esi_buildit9_domain_RentIt_adapter" object="${rentit}" z="PzOK82g/PYojQzalMooTcyr6idE="/>
+        <field:display field="provider" id="s_esi_buildit9_domain_RentIt_adapter" object="${rentit}" z="PzOK82g/PYojQzalMooTcyr6idE="/>
+        <field:display field="provider" id="s_esi_buildit9_domain_RentIt_provider" object="${rentit}" z="xbTwBM4XNqN+99lfrhGeXmSA3lo="/>
     </page:show>
 </div>

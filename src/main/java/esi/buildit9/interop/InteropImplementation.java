@@ -1,17 +1,17 @@
 package esi.buildit9.interop;
 
-public enum RentitAdapters implements RentitAdapterProvider {
+public enum InteropImplementation implements RentitInterop {
 
     Team9 {
         @Override
-        public RestAdapter getRest() {
+        public Rest getRest() {
             return new Team9Rest();
         }
     },
 
-    Default {
+    Dummy {
         @Override
-        public RestAdapter getRest() {
+        public Rest getRest() {
             return new DummyRest();
         }
     }

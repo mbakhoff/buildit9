@@ -4,7 +4,7 @@
 package esi.buildit9.domain;
 
 import esi.buildit9.domain.RentIt;
-import esi.buildit9.interop.RentitAdapters;
+import esi.buildit9.interop.InteropImplementation;
 
 privileged aspect RentIt_Roo_JavaBean {
     
@@ -16,12 +16,12 @@ privileged aspect RentIt_Roo_JavaBean {
         this.name = name;
     }
     
-    public RentitAdapters RentIt.getAdapter() {
-        return this.adapter;
+    public InteropImplementation RentIt.getProvider() {
+        return this.provider;
     }
     
-    public void RentIt.setAdapter(RentitAdapters adapter) {
-        this.adapter = adapter;
+    public void RentIt.setProvider(InteropImplementation provider) {
+        this.provider = provider;
     }
     
 }
