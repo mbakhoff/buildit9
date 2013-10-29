@@ -6,7 +6,7 @@
         <field:input field="totalPrice" id="c_esi_buildit9_domain_PurchaseOrder_totalPrice" z="W9wRfgQ91MQTmwrJpndSXdeyVFQ="/>
         <field:input field="siteEngineerName" id="c_esi_buildit9_domain_PurchaseOrder_siteEngineerName" z="LMaENWtPR49FGEm/XhxvEICgtws="/>
         <field:input field="site" id="c_esi_buildit9_domain_PurchaseOrder_site" z="W1zIQ2ydEPczr9vKSsYg/rOHhK0="/>
-        <field:select field="rentit" id="c_esi_buildit9_domain_PurchaseOrder_rentit" itemValue="id" items="${rentits}" path="/rentits" z="BMrX+zPXl4/05xtFpZ7koV218gA="/>
+        <field:select field="rentit" id="c_esi_buildit9_domain_PurchaseOrder_rentit" itemValue="id" items="${rentits}" path="/rentits" z="user-managed"/>
         <field:select field="orderStatus" id="c_esi_buildit9_domain_PurchaseOrder_orderStatus" items="${orderstatuses}" path="orderstatuses" z="vveq1qdi2ZP9WeOPRKWtrwRE3es="/>
         <field:input field="worksEngineerName" id="c_esi_buildit9_domain_PurchaseOrder_worksEngineerName" z="M0rns5X1ujHj3i65NH2SN0/wJGE="/>
         <field:input field="lines" id="c_esi_buildit9_domain_PurchaseOrder_lines" z="tAYiFh9bY+60ui1AQajRAtXLDL0="/>
