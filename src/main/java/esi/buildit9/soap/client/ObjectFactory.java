@@ -24,8 +24,19 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _Plant_QNAME = new QName("http://web.soap.rentit9.esi/", "plant");
+    private final static QName _GetPlantsBetweenResponse_QNAME = new QName("http://web.soap.rentit9.esi/", "getPlantsBetweenResponse");
+    private final static QName _Getplantsrequest_QNAME = new QName("http://web.soap.rentit9.esi/", "getplantsrequest");
+    private final static QName _UpdatePurchaseOrderResponse_QNAME = new QName("http://web.soap.rentit9.esi/", "updatePurchaseOrderResponse");
     private final static QName _GetAllPlants_QNAME = new QName("http://web.soap.rentit9.esi/", "getAllPlants");
+    private final static QName _CreatePurchaseOrderResponse_QNAME = new QName("http://web.soap.rentit9.esi/", "createPurchaseOrderResponse");
+    private final static QName _GetPlantsBetween_QNAME = new QName("http://web.soap.rentit9.esi/", "getPlantsBetween");
+    private final static QName _UpdatePurchaseOrder_QNAME = new QName("http://web.soap.rentit9.esi/", "updatePurchaseOrder");
+    private final static QName _CreatePurchaseOrder_QNAME = new QName("http://web.soap.rentit9.esi/", "createPurchaseOrder");
+    private final static QName _Getplantsbetweenrequest_QNAME = new QName("http://web.soap.rentit9.esi/", "getplantsbetweenrequest");
+    private final static QName _Plant_QNAME = new QName("http://web.soap.rentit9.esi/", "plant");
+    private final static QName _Purchaseorderlines_QNAME = new QName("http://web.soap.rentit9.esi/", "purchaseorderlines");
+    private final static QName _Purchaseorder_QNAME = new QName("http://web.soap.rentit9.esi/", "purchaseorder");
+    private final static QName _Purchaseorderline_QNAME = new QName("http://web.soap.rentit9.esi/", "purchaseorderline");
     private final static QName _GetAllPlantsResponse_QNAME = new QName("http://web.soap.rentit9.esi/", "getAllPlantsResponse");
     private final static QName _Plants_QNAME = new QName("http://web.soap.rentit9.esi/", "plants");
 
@@ -45,11 +56,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link PlantListResource }
+     * Create an instance of {@link GetPlantsBetweenResource }
      * 
      */
-    public PlantListResource createPlantListResource() {
-        return new PlantListResource();
+    public GetPlantsBetweenResource createGetPlantsBetweenResource() {
+        return new GetPlantsBetweenResource();
+    }
+
+    /**
+     * Create an instance of {@link PlantResourceList }
+     * 
+     */
+    public PlantResourceList createPlantResourceList() {
+        return new PlantResourceList();
     }
 
     /**
@@ -61,6 +80,86 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link PurchaseOrderResource }
+     * 
+     */
+    public PurchaseOrderResource createPurchaseOrderResource() {
+        return new PurchaseOrderResource();
+    }
+
+    /**
+     * Create an instance of {@link PurchaseOrderLineResource }
+     * 
+     */
+    public PurchaseOrderLineResource createPurchaseOrderLineResource() {
+        return new PurchaseOrderLineResource();
+    }
+
+    /**
+     * Create an instance of {@link PurchaseOrderLineResourceList }
+     * 
+     */
+    public PurchaseOrderLineResourceList createPurchaseOrderLineResourceList() {
+        return new PurchaseOrderLineResourceList();
+    }
+
+    /**
+     * Create an instance of {@link UpdatePurchaseOrderResponse }
+     * 
+     */
+    public UpdatePurchaseOrderResponse createUpdatePurchaseOrderResponse() {
+        return new UpdatePurchaseOrderResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetPlantsResource }
+     * 
+     */
+    public GetPlantsResource createGetPlantsResource() {
+        return new GetPlantsResource();
+    }
+
+    /**
+     * Create an instance of {@link GetPlantsBetweenResponse }
+     * 
+     */
+    public GetPlantsBetweenResponse createGetPlantsBetweenResponse() {
+        return new GetPlantsBetweenResponse();
+    }
+
+    /**
+     * Create an instance of {@link CreatePurchaseOrder }
+     * 
+     */
+    public CreatePurchaseOrder createCreatePurchaseOrder() {
+        return new CreatePurchaseOrder();
+    }
+
+    /**
+     * Create an instance of {@link UpdatePurchaseOrder }
+     * 
+     */
+    public UpdatePurchaseOrder createUpdatePurchaseOrder() {
+        return new UpdatePurchaseOrder();
+    }
+
+    /**
+     * Create an instance of {@link GetPlantsBetween }
+     * 
+     */
+    public GetPlantsBetween createGetPlantsBetween() {
+        return new GetPlantsBetween();
+    }
+
+    /**
+     * Create an instance of {@link CreatePurchaseOrderResponse }
+     * 
+     */
+    public CreatePurchaseOrderResponse createCreatePurchaseOrderResponse() {
+        return new CreatePurchaseOrderResponse();
+    }
+
+    /**
      * Create an instance of {@link GetAllPlants }
      * 
      */
@@ -69,12 +168,30 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PlantResource }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPlantsBetweenResponse }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "plant")
-    public JAXBElement<PlantResource> createPlant(PlantResource value) {
-        return new JAXBElement<PlantResource>(_Plant_QNAME, PlantResource.class, null, value);
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "getPlantsBetweenResponse")
+    public JAXBElement<GetPlantsBetweenResponse> createGetPlantsBetweenResponse(GetPlantsBetweenResponse value) {
+        return new JAXBElement<GetPlantsBetweenResponse>(_GetPlantsBetweenResponse_QNAME, GetPlantsBetweenResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPlantsResource }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "getplantsrequest")
+    public JAXBElement<GetPlantsResource> createGetplantsrequest(GetPlantsResource value) {
+        return new JAXBElement<GetPlantsResource>(_Getplantsrequest_QNAME, GetPlantsResource.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdatePurchaseOrderResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "updatePurchaseOrderResponse")
+    public JAXBElement<UpdatePurchaseOrderResponse> createUpdatePurchaseOrderResponse(UpdatePurchaseOrderResponse value) {
+        return new JAXBElement<UpdatePurchaseOrderResponse>(_UpdatePurchaseOrderResponse_QNAME, UpdatePurchaseOrderResponse.class, null, value);
     }
 
     /**
@@ -87,6 +204,87 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreatePurchaseOrderResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "createPurchaseOrderResponse")
+    public JAXBElement<CreatePurchaseOrderResponse> createCreatePurchaseOrderResponse(CreatePurchaseOrderResponse value) {
+        return new JAXBElement<CreatePurchaseOrderResponse>(_CreatePurchaseOrderResponse_QNAME, CreatePurchaseOrderResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPlantsBetween }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "getPlantsBetween")
+    public JAXBElement<GetPlantsBetween> createGetPlantsBetween(GetPlantsBetween value) {
+        return new JAXBElement<GetPlantsBetween>(_GetPlantsBetween_QNAME, GetPlantsBetween.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UpdatePurchaseOrder }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "updatePurchaseOrder")
+    public JAXBElement<UpdatePurchaseOrder> createUpdatePurchaseOrder(UpdatePurchaseOrder value) {
+        return new JAXBElement<UpdatePurchaseOrder>(_UpdatePurchaseOrder_QNAME, UpdatePurchaseOrder.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link CreatePurchaseOrder }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "createPurchaseOrder")
+    public JAXBElement<CreatePurchaseOrder> createCreatePurchaseOrder(CreatePurchaseOrder value) {
+        return new JAXBElement<CreatePurchaseOrder>(_CreatePurchaseOrder_QNAME, CreatePurchaseOrder.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetPlantsBetweenResource }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "getplantsbetweenrequest")
+    public JAXBElement<GetPlantsBetweenResource> createGetplantsbetweenrequest(GetPlantsBetweenResource value) {
+        return new JAXBElement<GetPlantsBetweenResource>(_Getplantsbetweenrequest_QNAME, GetPlantsBetweenResource.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link PlantResource }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "plant")
+    public JAXBElement<PlantResource> createPlant(PlantResource value) {
+        return new JAXBElement<PlantResource>(_Plant_QNAME, PlantResource.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link PurchaseOrderLineResourceList }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "purchaseorderlines")
+    public JAXBElement<PurchaseOrderLineResourceList> createPurchaseorderlines(PurchaseOrderLineResourceList value) {
+        return new JAXBElement<PurchaseOrderLineResourceList>(_Purchaseorderlines_QNAME, PurchaseOrderLineResourceList.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link PurchaseOrderResource }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "purchaseorder")
+    public JAXBElement<PurchaseOrderResource> createPurchaseorder(PurchaseOrderResource value) {
+        return new JAXBElement<PurchaseOrderResource>(_Purchaseorder_QNAME, PurchaseOrderResource.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link PurchaseOrderLineResource }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "purchaseorderline")
+    public JAXBElement<PurchaseOrderLineResource> createPurchaseorderline(PurchaseOrderLineResource value) {
+        return new JAXBElement<PurchaseOrderLineResource>(_Purchaseorderline_QNAME, PurchaseOrderLineResource.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetAllPlantsResponse }{@code >}}
      * 
      */
@@ -96,12 +294,12 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link PlantListResource }{@code >}}
+     * Create an instance of {@link JAXBElement }{@code <}{@link PlantResourceList }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://web.soap.rentit9.esi/", name = "plants")
-    public JAXBElement<PlantListResource> createPlants(PlantListResource value) {
-        return new JAXBElement<PlantListResource>(_Plants_QNAME, PlantListResource.class, null, value);
+    public JAXBElement<PlantResourceList> createPlants(PlantResourceList value) {
+        return new JAXBElement<PlantResourceList>(_Plants_QNAME, PlantResourceList.class, null, value);
     }
 
 }

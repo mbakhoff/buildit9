@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for getAllPlantsResponse complex type.
+ * <p>Java class for getPlantsBetweenResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="getAllPlantsResponse">
+ * &lt;complexType name="getPlantsBetweenResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "getAllPlantsResponse", propOrder = {
+@XmlType(name = "getPlantsBetweenResponse", propOrder = {
     "_return"
 })
-public class GetAllPlantsResponse {
+public class GetPlantsBetweenResponse {
 
     @XmlElement(name = "return")
     protected PlantResourceList _return;
