@@ -30,6 +30,8 @@ public class PurchaseOrderRestController {
     public static final int METHOD_CLOSE_BY_ID = 5;
     public static final int METHOD_APPROVE_BY_ID = 6;
     public static final int METHOD_REJECT_BY_ID = 7;
+    private static final int METHOD_RENTIT_CONFIRMED = 8;
+    private static final int METHOD_RENTIT_REJECTED = 9;
 
     public static final String HEADER_ENTITY_ID = "EntityId";
 
@@ -147,6 +149,24 @@ public class PurchaseOrderRestController {
             provider = InteropImplementation.Team9;
         }
         provider.getRest().submitOrder(order);
+    }
+
+    @RequestMapping(value = "pos/{id}/confirm", method = RequestMethod.POST)
+    @MethodLookup(METHOD_RENTIT_CONFIRMED)
+    public ResponseEntity<Void> confirmedOrder(@PathVariable Long id) {
+        PurchaseOrder order = getCheckedOrder(id);
+        order.setOrderStatus(OrderStatus.RENTIT_CONFIRMED);
+        order.persist();
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "pos/{id}/confirm", method = RequestMethod.DELETE)
+    @MethodLookup(METHOD_RENTIT_REJECTED)
+    public ResponseEntity<Void> rejectedOrder(@PathVariable Long id) {
+        PurchaseOrder order = getCheckedOrder(id);
+        order.setOrderStatus(OrderStatus.RENTIT_REJECTED);
+        order.persist();
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.DELETE)
