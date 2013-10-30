@@ -4,6 +4,7 @@ xmlns:spring="http://www.springframework.org/tags"
 xmlns:c="http://java.sun.com/jsp/jstl/core"
 xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
 xmlns:form="http://www.springframework.org/tags/form"
+xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
 xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
   <jsp:directive.page contentType="text/html;charset=UTF-8"/>
   <jsp:output omit-xml-declaration="yes"/>
@@ -16,11 +17,16 @@ xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
     	<field:datetime id="c_esi_buildit9_domain_plantQueryDTO_endDate" field="endDate" dateTimePattern="${plantsAvailableEndDate}" label="End date"></field:datetime>
     	<input type="submit" value="Search"></input>
     
-    </form:form>   
-    <c:forEach var="plant" items="${plants}">
-    	<div class="plant">
-    		<div>${plant.name}</div>
-    	</div>
-    </c:forEach>
+    </form:form>
+	<table>
+		<c:forEach var="plant" items="${plants}">
+	    	<tr class="plant">
+	    		<td>${plant.id}</td>
+	    		<td>${plant.name}</td>
+	    		<td>${plant.description}</td>
+	    	</tr>
+	    </c:forEach>
+	</table>
+    
   </util:panel>
 </div>
