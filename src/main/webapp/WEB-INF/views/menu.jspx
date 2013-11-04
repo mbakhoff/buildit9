@@ -27,5 +27,8 @@
             <menu:item id="i_remittanceadvice_new" messageCode="global_menu_new" url="/remittanceadvices?form" z="mdaqxtYc+2uDpIFZjG8iTphKjv8="/>
             <menu:item id="i_remittanceadvice_list" messageCode="global_menu_list" url="/remittanceadvices?page=1&amp;size=${empty param.size ? 10 : param.size}" z="/Vws+8CGeCRDPu06fspidky19QQ="/>
         </menu:category>
+        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+            <menu:item id="i_controller__plantsindex_id" messageCode="global_generic" url="/plants/index" z="Z9cDMn5g9wZ2ix2gpcPLDr81Bs4="/>
+        </menu:category>
     </menu:menu>
 </div>

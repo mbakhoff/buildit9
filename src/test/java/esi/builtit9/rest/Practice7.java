@@ -11,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -30,18 +31,18 @@ public class Practice7 {
 
     @Test
     public void testGetAllSoapPlants() throws Exception {
-        PlantResourceList plants = service.getAllPlants(new GetPlantsResource());
+        List<PlantResource> plants = service.getAllPlants();
         assertNotNull(plants);
     }
 
     @Test
     public void testGetSoapPlantsBetweenDates() throws Exception {
-        GetPlantsBetweenResource spec = new GetPlantsBetweenResource();
+        PlantsAvailableRequest spec = new PlantsAvailableRequest();
         spec.setNameLike("Dodge");
         spec.setStartDate(create(new DateMidnight(2013, 10, 23)));
         spec.setEndDate(create(new DateMidnight(2013, 10, 29)));
 
-        PlantResourceList plants = service.getPlantsBetween(spec);
+        List<PlantResource> plants = service.getPlantsBetween(spec);
         assertNotNull(plants);
     }
 
@@ -61,14 +62,11 @@ public class Practice7 {
         lineResource.setStartDate(create(new DateMidnight(2013, 10, 23)));
         lineResource.setEndDate(create(new DateMidnight(2013, 10, 29)));
 
-        PurchaseOrderLineResourceList orderLines = new PurchaseOrderLineResourceList();
-        orderLines.getPurchaseorderline().add(lineResource);
-
         PurchaseOrderResource orderResource = new PurchaseOrderResource();
         orderResource.setInternalId(randomId());
         orderResource.setSiteAddress("siteaddr-test");
         orderResource.setBuildit("buildit9");
-        orderResource.setPurchaseOrderLines(orderLines);
+        orderResource.getPurchaseOrderLines().add(lineResource);
         return orderResource;
     }
 
