@@ -33,15 +33,16 @@ public class InvoiceMailPreprocessor {
         Multipart content = getMultipart(msg);
         for (int i = 0; i < content.getCount(); i++) {
             BodyPart part = content.getBodyPart(i);
-            if (isXml(part.getContentType()) && part.getFileName().startsWith("invoice")) {
+            if (isXml(part) && part.getFileName().startsWith("invoice")) {
                 return builder.parse(part.getInputStream());
             }
         }
-        throw new RuntimeException("invoice not attached");
+        throw new IllegalArgumentException("message does not contain an invoice");
     }
 
-    private static boolean isXml(String contentType) throws MessagingException {
-        return contentType.startsWith("text/xml") || contentType.startsWith("application/xml");
+    private static boolean isXml(BodyPart bodyPart) throws MessagingException {
+        String contentType = bodyPart.getContentType();
+        return contentType.equalsIgnoreCase("text/xml") || contentType.equalsIgnoreCase("application/xml");
     }
 
     private static Multipart getMultipart(Message msg) throws IOException, MessagingException {
@@ -49,7 +50,7 @@ public class InvoiceMailPreprocessor {
         if (contentObject instanceof Multipart) {
             return (Multipart) contentObject;
         } else {
-            throw new RuntimeException("Not a multipart message. Check if attachement attached");
+            throw new IllegalArgumentException("not a multipart message");
         }
     }
 
