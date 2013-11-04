@@ -18,28 +18,39 @@ import java.io.IOException;
 @Component
 public class InvoiceMailPreprocessor {
 
+    private final DocumentBuilder builder;
+
+    public InvoiceMailPreprocessor() {
+        try {
+            builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @ServiceActivator
     public Document process(Message msg) throws MessagingException, IOException, ParserConfigurationException, SAXException {
-        Document invoiceXML = null;
-        Object _content = msg.getContent();
-        if (_content instanceof Multipart) {
-            Multipart content = (Multipart) _content;
-            for (int i = 0; i < content.getCount(); i++) {
-                BodyPart part = content.getBodyPart(i);
-                if (part.getContentType().startsWith("text/xml") ||
-                        part.getContentType().startsWith("application/xml")) {
-                }
-                String fileName = part.getFileName();
-                if (fileName.startsWith("invoice")) {
-                    DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-                    invoiceXML = builder.parse(part.getInputStream());
-                    break;
-                }
+        Multipart content = getMultipart(msg);
+        for (int i = 0; i < content.getCount(); i++) {
+            BodyPart part = content.getBodyPart(i);
+            if (isXml(part.getContentType()) && part.getFileName().startsWith("invoice")) {
+                return builder.parse(part.getInputStream());
             }
         }
-        if (invoiceXML == null)
-            throw new IOException("No invoice was found !");
-        return invoiceXML;
+        throw new RuntimeException("invoice not attached");
+    }
+
+    private static boolean isXml(String contentType) throws MessagingException {
+        return contentType.startsWith("text/xml") || contentType.startsWith("application/xml");
+    }
+
+    private static Multipart getMultipart(Message msg) throws IOException, MessagingException {
+        Object contentObject = msg.getContent();
+        if (contentObject instanceof Multipart) {
+            return (Multipart) contentObject;
+        } else {
+            throw new RuntimeException("Not a multipart message. Check if attachement attached");
+        }
     }
 
 }

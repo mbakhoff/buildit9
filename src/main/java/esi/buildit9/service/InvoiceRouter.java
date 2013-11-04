@@ -2,23 +2,27 @@ package esi.buildit9.service;
 
 import org.w3c.dom.Document;
 
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 public class InvoiceRouter {
 
-    // Comparing invoice's total with its corresponding po's total
-    public String analyzeInvoice(Document invoice) throws XPathExpressionException {
-        String destinationChannel = null;
-        XPath xPath = XPathFactory.newInstance().newXPath();
-        String poHRef = xPath.evaluate("//purchaseOrderHRef", invoice);
-        Float total = Float.valueOf(xPath.evaluate("//total", invoice));
-        if (total <= 100)
-            destinationChannel = "MINOR";
-        else
-            destinationChannel = "MAJOR";
-        return destinationChannel;
+    public String analyzeInvoice(Document invoice) {
+        if (getOrderTotal(invoice) <= 100) {
+            return "MINOR";
+        } else {
+            return "MAJOR";
+        }
+    }
+
+    private float getOrderTotal(Document invoice) {
+        try {
+            return Float.parseFloat(XPathFactory.newInstance().newXPath().evaluate("//total", invoice));
+        } catch (XPathExpressionException e) {
+            throw new RuntimeException("failed to parse total from incoming po xml", e);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("total in incoming po xml is not a valid float", e);
+        }
     }
 
 }
