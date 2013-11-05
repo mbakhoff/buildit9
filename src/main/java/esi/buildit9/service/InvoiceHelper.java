@@ -66,6 +66,9 @@ public class InvoiceHelper {
     	remittanceAdvice.setPayDay(Calendar.getInstance());
     	remittanceAdvice.persist();
     	invoice.getRentit().getProvider().getRest().submitRemittanceAdvice(remittanceAdvice);
+
+        invoice.setStatus(InvoiceStatus.COMPLETED);
+        invoice.persist();
     }
 
 }
