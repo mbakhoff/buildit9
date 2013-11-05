@@ -1,8 +1,5 @@
 package esi.buildit9.service;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
@@ -16,6 +13,7 @@ import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import java.util.Calendar;
 
 public class InvoiceHelper {
 

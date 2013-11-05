@@ -1,13 +1,11 @@
 package esi.buildit9.rest;
 
-import java.util.Calendar;
-
-import javax.xml.bind.annotation.XmlRootElement;
-
-import org.springframework.roo.addon.javabean.RooJavaBean;
-
 import esi.buildit9.domain.Invoice;
 import esi.buildit9.rest.util.ExtendedResourceSupport;
+import org.springframework.roo.addon.javabean.RooJavaBean;
+
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Calendar;
 
 @RooJavaBean
 @XmlRootElement(name = "remittanceadvice")

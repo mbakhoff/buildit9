@@ -1,15 +1,11 @@
 package esi.buildit9.rest;
 
-import java.util.Calendar;
-
-import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
-import esi.buildit9.domain.RentIt;
-import esi.buildit9.domain.Site;
-import esi.buildit9.rest.RemittanceAdviceResource;
 import esi.buildit9.rest.controller.PurchaseOrderRestController;
 import esi.buildit9.rest.util.ExtendedLink;
 import esi.buildit9.rest.util.MethodLookupHelper;
+
+import java.util.Calendar;
 
 public class RemittanceAdviceAssembler {
 

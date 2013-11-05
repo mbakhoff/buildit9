@@ -7,11 +7,6 @@ import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RentIt;
-import esi.buildit9.web.InvoiceController;
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 privileged aspect InvoiceController_Roo_Controller {
     
