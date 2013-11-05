@@ -15,6 +15,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
+import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
 
 @Component
@@ -26,13 +27,15 @@ public class InvoiceAutomaticProcessor {
     	float documentTotal = invoiceResource.getTotal();
     	long documentPO = invoiceResource.getPo();
     	float POTotal = PurchaseOrder.findPurchaseOrder(documentPO).getTotalPrice();
-    	String address = ((InternetAddress) invoiceSDO.from[0]).getAddress();
+    	String address = InvoiceHelper.tryGetSender(invoiceSDO.from);
+    	
     	// Check if such PO exists
     	if (PurchaseOrder.findPurchaseOrder(documentPO) != null) {
     		// Check if Totals match
     		if (documentTotal == POTotal) {
-    			// TODO
+    			PurchaseOrder order = PurchaseOrder.findPurchaseOrder(invoiceResource.getPo());
     			sendEmail("Thank you for the invoice with PO" + documentPO + "!", address);
+                InvoiceHelper.persist(order, address, InvoiceStatus.CONFIRMED);
 			}else {
 				sendEmail("Error with invoice - totals don't match!", address);
 			}
