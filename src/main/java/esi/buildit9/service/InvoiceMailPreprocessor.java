@@ -29,12 +29,13 @@ public class InvoiceMailPreprocessor {
     }
 
     @ServiceActivator
-    public Document process(Message msg) throws MessagingException, IOException, ParserConfigurationException, SAXException {
+    public InvoiceSDO process(Message msg) throws MessagingException, IOException, ParserConfigurationException, SAXException {
         Multipart content = getMultipart(msg);
         for (int i = 0; i < content.getCount(); i++) {
             BodyPart part = content.getBodyPart(i);
             if (isXml(part) && part.getFileName().startsWith("invoice")) {
-                return builder.parse(part.getInputStream());
+                Document document = builder.parse(part.getInputStream());
+                return new InvoiceSDO(document, msg.getFrom());
             }
         }
         throw new IllegalArgumentException("message does not contain an invoice");

@@ -7,8 +7,8 @@ import javax.xml.xpath.XPathFactory;
 
 public class InvoiceRouter {
 
-    public String analyzeInvoice(Document invoice) {
-        if (getOrderTotal(invoice) <= 100) {
+    public String analyzeInvoice(InvoiceSDO invoice) {
+        if (getOrderTotal(invoice.document) <= 100) {
             return "MINOR";
         } else {
             return "MAJOR";
