@@ -4,8 +4,7 @@ import esi.buildit9.service.InvoiceResource;
 import esi.buildit9.service.InvoiceSDO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.message.GenericMessage;
 import org.springframework.test.context.ContextConfiguration;
@@ -15,34 +14,27 @@ import org.w3c.dom.Document;
 import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 
-@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext-*.xml")
+@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 public class InvoicingTest {
 
-    public static final String INTEGRATION_CONTEXT =
-            "/META-INF/spring/applicationContext-InvoiceProcessing.xml";
+    @Autowired
+    private DirectChannel invoiceChannel;
 
-    private final DirectChannel invoiceChannel;
     private final DocumentBuilder builder;
     private final Marshaller marshaller;
 
     public InvoicingTest() {
         try {
-            ApplicationContext context = new ClassPathXmlApplicationContext(INTEGRATION_CONTEXT);
-            invoiceChannel = context.getBean("invoiceChannel", DirectChannel.class);
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             marshaller = JAXBContext.newInstance(InvoiceResource.class).createMarshaller();
-        } catch (ParserConfigurationException e) {
-            throw new RuntimeException(e);
-        } catch (JAXBException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

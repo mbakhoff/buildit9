@@ -3,7 +3,6 @@ package esi.buildit9.service;
 import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
-import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.mail.MailMessage;
 import org.springframework.mail.SimpleMailMessage;
@@ -17,15 +16,15 @@ public class InvoiceHumanAssistedHandling {
         InvoiceResource invoiceResource = InvoiceHelper.unmarshall(invoiceSDO.document);
         String senderEmail = InvoiceHelper.tryGetSender(invoiceSDO.from);
 
-        try {
-            PurchaseOrder order = PurchaseOrder.findPurchaseOrder(invoiceResource.getPo());
+        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(invoiceResource.getPo());
+        if (order != null) {
             if (Math.abs(order.getTotalPrice() - invoiceResource.getTotal()) < 0.1) {
                 persist(order, senderEmail);
                 return null;
             } else {
                 return totalDidntMatch(senderEmail, order);
             }
-        } catch (DataRetrievalFailureException e) {
+        } else {
             return noSuchOrder(senderEmail, invoiceResource.getPo());
         }
     }
