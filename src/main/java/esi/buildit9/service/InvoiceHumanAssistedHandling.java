@@ -19,7 +19,7 @@ public class InvoiceHumanAssistedHandling {
         PurchaseOrder order = PurchaseOrder.findPurchaseOrder(invoiceResource.getPo());
         if (order != null) {
             if (Math.abs(order.getTotalPrice() - invoiceResource.getTotal()) < 0.1) {
-                persist(order, senderEmail);
+                InvoiceHelper.persist(order, senderEmail, InvoiceStatus.PENDING);
                 return null;
             } else {
                 return totalDidntMatch(senderEmail, order);
@@ -43,15 +43,6 @@ public class InvoiceHumanAssistedHandling {
         message.setSubject("Invoice auto-rejected");
         message.setText("Total of PO " + order.getId() + " did not match. Expected " + order.getTotalPrice());
         return message;
-    }
-
-    private void persist(PurchaseOrder order, String senderEmail) {
-        Invoice invoice = new Invoice();
-        invoice.setRentit(order.getRentit());
-        invoice.setPurchaseOrder(order);
-        invoice.setStatus(InvoiceStatus.PENDING);
-        invoice.setSenderEmail(senderEmail);
-        invoice.persist();
     }
 
 }

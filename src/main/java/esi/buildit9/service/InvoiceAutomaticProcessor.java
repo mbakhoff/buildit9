@@ -15,6 +15,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
+import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
 
 @Component
@@ -26,30 +27,28 @@ public class InvoiceAutomaticProcessor {
     	float documentTotal = invoiceResource.getTotal();
     	long documentPO = invoiceResource.getPo();
     	float POTotal = PurchaseOrder.findPurchaseOrder(documentPO).getTotalPrice();
-
+    	String address = InvoiceHelper.tryGetSender(invoiceSDO.from);
+    	
     	// Check if such PO exists
     	if (PurchaseOrder.findPurchaseOrder(documentPO) != null) {
     		// Check if Totals match
     		if (documentTotal == POTotal) {
-    			// TODO
-    			JavaMailSenderImpl sender = new JavaMailSenderImpl();
-    			sender.setHost("mail.host.com");
-
-    			MimeMessage message = sender.createMimeMessage();
-    			MimeMessageHelper helper = new MimeMessageHelper(message);
-    			try {
-					helper.setTo(((InternetAddress) invoiceSDO.from[0]).getAddress());
-	    			helper.setText("Thank you for the invoice with PO" + documentPO + "!");
-				} catch (MessagingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-
-    			sender.send(message);
+    			PurchaseOrder order = PurchaseOrder.findPurchaseOrder(invoiceResource.getPo());
+    			sendEmail("Thank you for the invoice with PO" + documentPO + "!", address);
+                InvoiceHelper.persist(order, address, InvoiceStatus.CONFIRMED);
+			}else {
+				sendEmail("Error with invoice - totals don't match!", address);
 			}
+		} else {
+			sendEmail("Error with invoice - no such PO id!", address);
 		}
-    	
-    	
-        throw new UnsupportedOperationException();
+    }
+    
+    public MailMessage sendEmail(String text, String to){
+    	MailMessage message = new SimpleMailMessage();
+    	message.setTo(to);
+    	message.setSubject("Builtit9 invoice reply");
+    	message.setText(text);
+    	return message;
     }
 }
