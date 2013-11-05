@@ -1,10 +1,15 @@
 package esi.buildit9.service;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.xml.bind.JAXBContext;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.springframework.integration.annotation.ServiceActivator;
+import org.springframework.mail.MailMessage;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
@@ -17,31 +22,34 @@ public class InvoiceAutomaticProcessor {
 
     @ServiceActivator
     public void process(InvoiceSDO invoiceSDO) {
-    	
-    	float documentTotal = Float.parseFloat(getOrderTotal(invoiceSDO.document, "//total"));
-    	long documentPOId = Long.parseLong(getOrderTotal(invoiceSDO.document, "//po"));
-    	float POTotal = PurchaseOrder.findPurchaseOrder(documentPOId).getTotalPrice();
+    	InvoiceResource invoiceResource = InvoiceHelper.unmarshall(invoiceSDO.document);
+    	float documentTotal = invoiceResource.getTotal();
+    	long documentPO = invoiceResource.getPo();
+    	float POTotal = PurchaseOrder.findPurchaseOrder(documentPO).getTotalPrice();
 
     	// Check if such PO exists
-    	if (PurchaseOrder.findPurchaseOrder(documentPOId) != null) {
+    	if (PurchaseOrder.findPurchaseOrder(documentPO) != null) {
     		// Check if Totals match
-    		if (documentPOId == POTotal) {
+    		if (documentTotal == POTotal) {
     			// TODO
+    			JavaMailSenderImpl sender = new JavaMailSenderImpl();
+    			sender.setHost("mail.host.com");
+
+    			MimeMessage message = sender.createMimeMessage();
+    			MimeMessageHelper helper = new MimeMessageHelper(message);
+    			try {
+					helper.setTo(((InternetAddress) invoiceSDO.from[0]).getAddress());
+	    			helper.setText("Thank you for the invoice with PO" + documentPO + "!");
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+    			sender.send(message);
 			}
 		}
     	
     	
         throw new UnsupportedOperationException();
     }
-    
-    private String getOrderTotal(Document invoiceSDODocument, String element) {
-        try {
-            return XPathFactory.newInstance().newXPath().evaluate(element, invoiceSDODocument);
-        } catch (XPathExpressionException e) {
-            throw new RuntimeException("failed to parse " + element + " from incoming po xml", e);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException(element + "in incoming po xml is not a valid", e);
-        }
-    }
-
 }

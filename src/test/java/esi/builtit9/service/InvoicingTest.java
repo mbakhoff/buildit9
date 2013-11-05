@@ -63,7 +63,7 @@ public class InvoicingTest {
         pipeOut.close();
         Document document = builder.parse(pipeIn);
         pipeIn.close();
-        Address[] from = new Address[] { new InternetAddress("no-reply@localhost") };
+        Address[] from = new Address[] { new InternetAddress("renit9esi@gmail.com") };
         return new GenericMessage<InvoiceSDO>(new InvoiceSDO(document, from));
     }
 
