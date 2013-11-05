@@ -18,4 +18,6 @@ public class Invoice {
      */
     @ManyToOne
     private RentIt rentit;
+
+    private InvoiceStatus status;
 }

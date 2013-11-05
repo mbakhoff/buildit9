@@ -4,6 +4,7 @@
 package esi.buildit9.domain;
 
 import esi.buildit9.domain.Invoice;
+import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RentIt;
 
@@ -23,6 +24,14 @@ privileged aspect Invoice_Roo_JavaBean {
     
     public void Invoice.setRentit(RentIt rentit) {
         this.rentit = rentit;
+    }
+    
+    public InvoiceStatus Invoice.getStatus() {
+        return this.status;
+    }
+    
+    public void Invoice.setStatus(InvoiceStatus status) {
+        this.status = status;
     }
     
 }
