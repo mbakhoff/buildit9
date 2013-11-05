@@ -40,4 +40,7 @@ public class InvoiceHelper {
         invoice.persist();
     }
 
+    public static void createAndSendRemittanceAdvice(Invoice invoice) {
+    }
+
 }
