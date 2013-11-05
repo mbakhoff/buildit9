@@ -1,6 +1,7 @@
 package esi.buildit9.interop;
 
 import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.RemittanceAdvice;
 import esi.buildit9.rest.PlantResource;
 
 import java.util.ArrayList;
@@ -17,4 +18,9 @@ public class DummyRest implements RentitInterop.Rest {
     public List<PlantResource> getAvailablePlantsBetween(String nameLike, Calendar startDate, Calendar endDate) {
         return new ArrayList<PlantResource>();
     }
+
+	@Override
+	public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
+		System.out.println(DummyRest.class.getCanonicalName() + " remittanceAdvice submit");		
+	}
 }

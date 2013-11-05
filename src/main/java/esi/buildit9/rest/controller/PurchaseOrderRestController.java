@@ -7,6 +7,8 @@ import esi.buildit9.rest.PurchaseOrderAssembler;
 import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderListResource;
 import esi.buildit9.rest.PurchaseOrderResource;
+import esi.buildit9.rest.RemittanceAdviceAssembler;
+import esi.buildit9.rest.RemittanceAdviceResource;
 import esi.buildit9.rest.util.MethodLookup;
 import esi.buildit9.rest.util.MethodLookupHelper;
 import org.springframework.http.HttpHeaders;
@@ -34,6 +36,7 @@ public class PurchaseOrderRestController {
     private static final int METHOD_RENTIT_REJECTED = 9;
 
     public static final String HEADER_ENTITY_ID = "EntityId";
+	private static final int METHOD_CREATE_RA = 10;
 
     private final PurchaseOrderAssembler assembler;
     private final MethodLookupHelper linker;
@@ -75,6 +78,22 @@ public class PurchaseOrderRestController {
                         pathSegment(order.getId().toString()).build().toUri();
         headers.setLocation(location);
         headers.add(HEADER_ENTITY_ID, order.getId().toString());
+        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+    }
+    
+    @RequestMapping(value = "ra", method = RequestMethod.POST)
+    @MethodLookup(METHOD_CREATE_RA)
+    public ResponseEntity<Void> createOrder(@RequestBody RemittanceAdviceResource res) {
+        RemittanceAdvice remittanceAdvice = new RemittanceAdviceAssembler().fromResource(res);
+
+        remittanceAdvice.persist();
+        
+        HttpHeaders headers = new HttpHeaders();
+        URI location =
+                ServletUriComponentsBuilder.fromCurrentRequestUri().
+                        pathSegment(remittanceAdvice.getId().toString()).build().toUri();
+        headers.setLocation(location);
+        headers.add(HEADER_ENTITY_ID, remittanceAdvice.getId().toString());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
 

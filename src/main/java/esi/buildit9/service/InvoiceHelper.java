@@ -1,8 +1,12 @@
 package esi.buildit9.service;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.RemittanceAdvice;
 import org.springframework.context.ApplicationContext;
 import org.springframework.mail.MailMessage;
 import org.springframework.mail.SimpleMailMessage;
@@ -59,6 +63,11 @@ public class InvoiceHelper {
     }
 
     public static void createAndSendRemittanceAdvice(Invoice invoice) {
+    	RemittanceAdvice remittanceAdvice = new RemittanceAdvice();
+    	remittanceAdvice.setInvoice(invoice);
+    	remittanceAdvice.setPayDay(Calendar.getInstance());
+    	remittanceAdvice.persist();
+    	invoice.getRentit().getProvider().getRest().submitRemittanceAdvice(remittanceAdvice);
     }
 
 }
