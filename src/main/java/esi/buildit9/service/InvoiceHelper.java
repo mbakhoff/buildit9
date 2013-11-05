@@ -1,24 +1,13 @@
 package esi.buildit9.service;
 
-import esi.buildit9.domain.Invoice;
-import esi.buildit9.domain.InvoiceStatus;
-import esi.buildit9.domain.PurchaseOrder;
 import org.w3c.dom.Document;
 
+import javax.mail.Address;
+import javax.mail.internet.InternetAddress;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
 public class InvoiceHelper {
-
-    public static Invoice storeInvoice(InvoiceResource invoiceResource, InvoiceStatus status) {
-        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(invoiceResource.getPo());
-        Invoice invoice = new Invoice();
-        invoice.setRentit(order.getRentit());
-        invoice.setPurchaseOrder(order);
-        invoice.setStatus(status);
-        invoice.persist();
-        return invoice;
-    }
 
     public static InvoiceResource unmarshall(Document invoice) {
         try {
@@ -28,4 +17,14 @@ public class InvoiceHelper {
             throw new RuntimeException(e);
         }
     }
+
+    public static String tryGetSender(Address[] senders) {
+        for (Address sender : senders) {
+            if (sender instanceof InternetAddress) {
+                return ((InternetAddress) sender).getAddress();
+            }
+        }
+        throw new IllegalArgumentException("not an InternetAddress");
+    }
+
 }

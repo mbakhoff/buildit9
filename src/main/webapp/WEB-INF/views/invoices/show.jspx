@@ -6,5 +6,6 @@
         <field:display field="purchaseOrder" id="s_esi_buildit9_domain_Invoice_purchaseOrder" object="${invoice}" z="3oPrNKMMvkPtoRKWDBDf21jYNEY="/>
         <field:display field="rentit" id="s_esi_buildit9_domain_Invoice_rentit" object="${invoice}" z="5eRc/ZucLIDDLDN66P1xP66DOd8="/>
         <field:display field="status" id="s_esi_buildit9_domain_Invoice_status" object="${invoice}" z="suPcPfQ9Cu+/pIX0GxmhEsJ6HVI="/>
+        <field:display field="senderEmail" id="s_esi_buildit9_domain_Invoice_senderEmail" object="${invoice}" z="6Sv4po1NQfLV1wD4TOqbfprpjrU="/>
     </page:show>
 </div>

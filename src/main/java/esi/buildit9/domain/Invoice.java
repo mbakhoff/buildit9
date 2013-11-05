@@ -19,5 +19,7 @@ public class Invoice {
     @ManyToOne
     private RentIt rentit;
 
+    private String senderEmail;
+
     private InvoiceStatus status;
 }

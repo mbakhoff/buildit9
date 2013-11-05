@@ -28,7 +28,8 @@
         <bean class="esi.buildit9.service.InvoiceMailPreprocessor"/>
     </int:service-activator>
 
-    <int:service-activator id="invoiceAutomaticProcessor" input-channel="fastTrackPath" method="process">
+    <int:service-activator id="invoiceAutomaticProcessor" input-channel="fastTrackPath" method="process"
+                           output-channel="outboundMailChannel">
         <bean class="esi.buildit9.service.InvoiceAutomaticProcessor"/>
     </int:service-activator>
 
