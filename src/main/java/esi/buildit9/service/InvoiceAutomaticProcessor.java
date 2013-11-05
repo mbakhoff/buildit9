@@ -1,46 +1,35 @@
 package esi.buildit9.service;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import javax.xml.bind.JAXBContext;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
+import esi.buildit9.domain.InvoiceStatus;
+import esi.buildit9.domain.PurchaseOrder;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.mail.MailMessage;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.Document;
-
-import esi.buildit9.domain.InvoiceStatus;
-import esi.buildit9.domain.PurchaseOrder;
 
 @Component
 public class InvoiceAutomaticProcessor {
 
     @ServiceActivator
-    public void process(InvoiceSDO invoiceSDO) {
+    public MailMessage process(InvoiceSDO invoiceSDO) {
     	InvoiceResource invoiceResource = InvoiceHelper.unmarshall(invoiceSDO.document);
     	float documentTotal = invoiceResource.getTotal();
     	long documentPO = invoiceResource.getPo();
-    	float POTotal = PurchaseOrder.findPurchaseOrder(documentPO).getTotalPrice();
+        PurchaseOrder purchaseOrder = PurchaseOrder.findPurchaseOrder(documentPO);
     	String address = InvoiceHelper.tryGetSender(invoiceSDO.from);
     	
     	// Check if such PO exists
-    	if (PurchaseOrder.findPurchaseOrder(documentPO) != null) {
+    	if (purchaseOrder != null) {
+            float poTotal = purchaseOrder.getTotalPrice();
     		// Check if Totals match
-    		if (documentTotal == POTotal) {
-    			PurchaseOrder order = PurchaseOrder.findPurchaseOrder(invoiceResource.getPo());
-    			sendEmail("Thank you for the invoice with PO" + documentPO + "!", address);
-                InvoiceHelper.persist(order, address, InvoiceStatus.CONFIRMED);
+    		if (documentTotal == poTotal) {
+                InvoiceHelper.persist(purchaseOrder, address, InvoiceStatus.CONFIRMED);
+                return sendEmail("Thank you for the invoice with PO" + documentPO + "!", address);
 			}else {
-				sendEmail("Error with invoice - totals don't match!", address);
+				return sendEmail("Error with invoice - totals don't match!", address);
 			}
 		} else {
-			sendEmail("Error with invoice - no such PO id!", address);
+			return sendEmail("Error with invoice - no such PO id!", address);
 		}
     }
     
