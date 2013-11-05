@@ -23,7 +23,7 @@ public class InvoiceAutomaticProcessor {
             float poTotal = purchaseOrder.getTotalPrice();
     		// Check if Totals match
     		if (documentTotal == poTotal) {
-                InvoiceHelper.persist(purchaseOrder, address, InvoiceStatus.CONFIRMED);
+                InvoiceHelper.persist(purchaseOrder, address, InvoiceStatus.APPROVED);
                 return sendEmail("Thank you for the invoice with PO" + documentPO + "!", address);
 			}else {
 				return sendEmail("Error with invoice - totals don't match!", address);

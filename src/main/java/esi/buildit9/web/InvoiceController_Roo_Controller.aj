@@ -61,17 +61,6 @@ privileged aspect InvoiceController_Roo_Controller {
         return "invoices/list";
     }
     
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String InvoiceController.update(@Valid Invoice invoice, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, invoice);
-            return "invoices/update";
-        }
-        uiModel.asMap().clear();
-        invoice.merge();
-        return "redirect:/invoices/" + encodeUrlPathSegment(invoice.getId().toString(), httpServletRequest);
-    }
-    
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String InvoiceController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, Invoice.findInvoice(id));

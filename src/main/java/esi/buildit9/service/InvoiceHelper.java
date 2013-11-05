@@ -3,6 +3,11 @@ package esi.buildit9.service;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.integration.channel.DirectChannel;
+import org.springframework.integration.message.GenericMessage;
+import org.springframework.mail.MailMessage;
+import org.springframework.mail.SimpleMailMessage;
 import org.w3c.dom.Document;
 
 import esi.buildit9.domain.Invoice;
@@ -16,6 +21,16 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
 public class InvoiceHelper {
+
+    public final static class OutgoingChannel {
+
+        @Autowired
+        private DirectChannel outboundMailChannel;
+
+        public void send(MailMessage message) {
+            outboundMailChannel.send(new GenericMessage<Object>(message));
+        }
+    }
 
     public static InvoiceResource unmarshall(Document invoice) {
         try {
@@ -42,6 +57,14 @@ public class InvoiceHelper {
         invoice.setStatus(status);
         invoice.setSenderEmail(senderEmail);
         invoice.persist();
+    }
+
+    public static void sendManuallyRejected(Invoice submitted) {
+        MailMessage message = new SimpleMailMessage();
+        message.setTo(submitted.getSenderEmail());
+        message.setSubject("Invoice manually rejected");
+        message.setText("Invoice for " + submitted.getPurchaseOrder().getId() + " was rejected by user");
+        new OutgoingChannel().send(message);
     }
 
     public static void createAndSendRemittanceAdvice(Invoice invoice) {
