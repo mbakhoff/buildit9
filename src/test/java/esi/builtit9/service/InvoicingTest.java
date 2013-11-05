@@ -3,10 +3,13 @@ package esi.builtit9.service;
 import esi.buildit9.service.InvoiceResource;
 import esi.buildit9.service.InvoiceSDO;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.message.GenericMessage;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.w3c.dom.Document;
 
 import javax.mail.Address;
@@ -20,16 +23,20 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
 
+@ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext-*.xml")
+@RunWith(SpringJUnit4ClassRunner.class)
 public class InvoicingTest {
 
-    private ApplicationContext context;
-    private DirectChannel invoiceChannel;
-    private DocumentBuilder builder;
-    private Marshaller marshaller;
+    public static final String INTEGRATION_CONTEXT =
+            "/META-INF/spring/applicationContext-InvoiceProcessing.xml";
+
+    private final DirectChannel invoiceChannel;
+    private final DocumentBuilder builder;
+    private final Marshaller marshaller;
 
     public InvoicingTest() {
         try {
-            context = new ClassPathXmlApplicationContext("/META-INF/spring/applicationContext-InvoiceProcessing.xml");
+            ApplicationContext context = new ClassPathXmlApplicationContext(INTEGRATION_CONTEXT);
             invoiceChannel = context.getBean("invoiceChannel", DirectChannel.class);
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             marshaller = JAXBContext.newInstance(InvoiceResource.class).createMarshaller();

@@ -26,6 +26,14 @@ privileged aspect Invoice_Roo_JavaBean {
         this.rentit = rentit;
     }
     
+    public String Invoice.getSenderEmail() {
+        return this.senderEmail;
+    }
+    
+    public void Invoice.setSenderEmail(String senderEmail) {
+        this.senderEmail = senderEmail;
+    }
+    
     public InvoiceStatus Invoice.getStatus() {
         return this.status;
     }

@@ -7,6 +7,7 @@
             <table:column id="c_esi_buildit9_domain_Invoice_purchaseOrder" property="purchaseOrder" z="7+NpbD3pMI0PjLZRO/qOz+ubOxg="/>
             <table:column id="c_esi_buildit9_domain_Invoice_rentit" property="rentit" z="wnsRbnKuHVNbLF5qwxVXQJ3XmNY="/>
             <table:column id="c_esi_buildit9_domain_Invoice_status" property="status" z="8nzXZ4w2l4ev7X0S+DszpTxJpk4="/>
+            <table:column id="c_esi_buildit9_domain_Invoice_senderEmail" property="senderEmail" z="URdPyy2aJtA8yh8+JK/A0LRCvA8="/>
         </table:table>
     </page:list>
 </div>
