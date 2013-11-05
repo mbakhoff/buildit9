@@ -5,7 +5,7 @@
     <form:update id="fu_esi_buildit9_domain_Invoice" modelAttribute="invoice" path="/invoices" versionField="Version" z="Mq2iiX6bJnTXXL6XoTuQuKZKZEs=">
         <field:select field="purchaseOrder" id="c_esi_buildit9_domain_Invoice_purchaseOrder" itemValue="id" items="${purchaseorders}" path="/purchaseorders" z="DXdBpQWFDopsQhM+ewzkDVd6/RM="/>
         <field:select field="rentit" id="c_esi_buildit9_domain_Invoice_rentit" itemValue="id" items="${rentits}" path="/rentits" z="uyjF/viDsdzrI6TKImGqcBXMfc0="/>
-        <field:select field="status" id="c_esi_buildit9_domain_Invoice_status" items="${invoicestatuses}" path="invoicestatuses" z="ROyMaCWqYdZaP4OkP8Za69vu2lU="/>
+        <field:input field="status" id="c_esi_buildit9_domain_Invoice_status" z="X0aTFIq+kpDLJc3WyRxl48qRSJA="/>
         <field:input field="senderEmail" id="c_esi_buildit9_domain_Invoice_senderEmail" z="h7WaeWEQXoVj6OLQUvTK028mau8="/>
     </form:update>
 </div>
