@@ -1,13 +1,18 @@
 package esi.buildit9.interop;
 
 import com.sun.jersey.api.client.Client;
+
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.RemittanceAdvice;
 import esi.buildit9.rest.PlantResource;
 import esi.buildit9.rest.PlantResourceList;
 import esi.buildit9.rest.PurchaseOrderAssembler;
 import esi.buildit9.rest.PurchaseOrderResource;
+import esi.buildit9.rest.RemittanceAdviceAssembler;
+import esi.buildit9.rest.RemittanceAdviceResource;
+
 import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
@@ -20,11 +25,14 @@ public class Team9Rest implements RentitInterop.Rest {
 
     public static final String RENTIT_POS = "https://rentit9.herokuapp.com/rest/pos";
     public static final String RENTIT_PLANTS = "https://rentit9.herokuapp.com/rest/plants";
+    public static final String RENTIT_RA = "https://rentit9.herokuapp.com/rest/ra";
 
     private final PurchaseOrderAssembler assembler;
+    private final RemittanceAdviceAssembler remittanceAssembler;
 
     public Team9Rest() {
         assembler = new PurchaseOrderAssembler();
+        remittanceAssembler = new RemittanceAdviceAssembler();
     }
 
     @Override
@@ -62,6 +70,19 @@ public class Team9Rest implements RentitInterop.Rest {
         String err = String.format("rentit9 po submission failed (%d)", status);
         throw new InteropException(err, null);
     }
+
+	@Override
+	public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
+		RemittanceAdviceResource res = remittanceAssembler.toResource(remittanceAdvice);
+        ClientResponse createRequest = Client.create().resource(RENTIT_RA)
+                .type(MediaType.APPLICATION_XML)
+                .post(ClientResponse.class, res);
+
+        int status = createRequest.getStatus();
+        if (status != ClientResponse.Status.CREATED.getStatusCode()) {
+            throwSubmissionFailed(status);
+        }		
+	}
 
 
 }

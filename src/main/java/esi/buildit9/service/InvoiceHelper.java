@@ -1,10 +1,14 @@
 package esi.buildit9.service;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import org.w3c.dom.Document;
 
 import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.RemittanceAdvice;
 
 import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
@@ -41,6 +45,11 @@ public class InvoiceHelper {
     }
 
     public static void createAndSendRemittanceAdvice(Invoice invoice) {
+    	RemittanceAdvice remittanceAdvice = new RemittanceAdvice();
+    	remittanceAdvice.setInvoice(invoice);
+    	remittanceAdvice.setPayDay(Calendar.getInstance());
+    	remittanceAdvice.persist();
+    	invoice.getRentit().getProvider().getRest().submitRemittanceAdvice(remittanceAdvice);
     }
 
 }
