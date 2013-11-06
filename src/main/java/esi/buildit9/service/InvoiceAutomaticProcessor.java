@@ -1,5 +1,6 @@
 package esi.buildit9.service;
 
+import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -24,6 +25,16 @@ public class InvoiceAutomaticProcessor {
     		// Check if Totals match
     		if (documentTotal == poTotal) {
                 InvoiceHelper.persist(purchaseOrder, address, InvoiceStatus.APPROVED);
+                
+                // Creates and sends remittance advice
+                Invoice invoice = new Invoice();
+                invoice.setPurchaseOrder(purchaseOrder);
+                invoice.setRentit(purchaseOrder.getRentit());
+                invoice.setStatus(InvoiceStatus.APPROVED);
+                invoice.setSenderEmail(address);
+                
+                InvoiceHelper.createAndSendRemittanceAdvice(invoice);
+                
                 return sendEmail("Thank you for the invoice with PO" + documentPO + "!", address);
 			}else {
 				return sendEmail("Error with invoice - totals don't match!", address);
