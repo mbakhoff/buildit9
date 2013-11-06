@@ -2,6 +2,7 @@ package esi.buildit9.rest.controller;
 
 
 import esi.buildit9.domain.*;
+import esi.buildit9.interop.InteropImplementation;
 import esi.buildit9.rest.PurchaseOrderAssembler;
 import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderListResource;
@@ -12,10 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -32,6 +30,8 @@ public class PurchaseOrderRestController {
     public static final int METHOD_CLOSE_BY_ID = 5;
     public static final int METHOD_APPROVE_BY_ID = 6;
     public static final int METHOD_REJECT_BY_ID = 7;
+    private static final int METHOD_RENTIT_CONFIRMED = 8;
+    private static final int METHOD_RENTIT_REJECTED = 9;
 
     public static final String HEADER_ENTITY_ID = "EntityId";
 
@@ -41,6 +41,13 @@ public class PurchaseOrderRestController {
     public PurchaseOrderRestController() {
         assembler = new PurchaseOrderAssembler();
         linker = new MethodLookupHelper(PurchaseOrderRestController.class);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception ex) {
+        System.err.println(ex.getMessage());
+        ex.printStackTrace();
+        return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @RequestMapping(value="pos", method = RequestMethod.GET)
@@ -60,7 +67,7 @@ public class PurchaseOrderRestController {
 
         order.persist();
 
-        attachLines(order, res.getOrderLines().orderLines);
+        attachLines(order, res.getPurchaseOrderLines().orderLines);
 
         HttpHeaders headers = new HttpHeaders();
         URI location =
@@ -96,7 +103,7 @@ public class PurchaseOrderRestController {
 
         deleteLines(order);
 
-        attachLines(order, res.getOrderLines().orderLines);
+        attachLines(order, res.getPurchaseOrderLines().orderLines);
 
         HttpHeaders headers = new HttpHeaders();
         URI location =
@@ -128,10 +135,38 @@ public class PurchaseOrderRestController {
         order.setOrderStatus(OrderStatus.APPROVED);
         order.persist();
 
+        sendToRentit(order);
+
         PurchaseOrderResource resource = assembler.toResource(order);
         resource.add(linker.buildLink(METHOD_UPDATE_ORDER, order.getId()));
         resource.add(linker.buildLink(METHOD_CLOSE_BY_ID, order.getId()));
         return new ResponseEntity<PurchaseOrderResource>(resource, HttpStatus.OK);
+    }
+
+    private void sendToRentit(PurchaseOrder order) {
+        InteropImplementation provider = order.getRentit().getProvider();
+        if (provider == null) {
+            provider = InteropImplementation.Team9;
+        }
+        provider.getRest().submitOrder(order);
+    }
+
+    @RequestMapping(value = "pos/{id}/confirm", method = RequestMethod.POST)
+    @MethodLookup(METHOD_RENTIT_CONFIRMED)
+    public ResponseEntity<Void> confirmedOrder(@PathVariable Long id) {
+        PurchaseOrder order = getCheckedOrder(id);
+        order.setOrderStatus(OrderStatus.RENTIT_CONFIRMED);
+        order.persist();
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "pos/{id}/confirm", method = RequestMethod.DELETE)
+    @MethodLookup(METHOD_RENTIT_REJECTED)
+    public ResponseEntity<Void> rejectedOrder(@PathVariable Long id) {
+        PurchaseOrder order = getCheckedOrder(id);
+        order.setOrderStatus(OrderStatus.RENTIT_REJECTED);
+        order.persist();
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.DELETE)

@@ -29,7 +29,7 @@ public class PurchaseOrderAssembler {
         res.setBuildit("builtit9"); //TODO this must e changed.. someday
 		res.setRentit(getName(order));
         res.setSiteAddress(getAddress(order));
-        res.setOrderLines(lineAssembler.toResource(order.getLines()));
+        res.setPurchaseOrderLines(lineAssembler.toResource(order.getLines()));
 		res.setTotalPrice(order.getTotalPrice());
 		res.setWorksEngineerName(order.getWorksEngineerName());
         return res;

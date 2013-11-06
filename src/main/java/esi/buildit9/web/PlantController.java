@@ -1,42 +1,104 @@
 package esi.buildit9.web;
 
-import esi.buildit9.dto.PlantsQuery;
-import esi.buildit9.soap.client.PlantResource;
-import esi.buildit9.soap.client.PlantSoapService;
+
+import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
+import esi.buildit9.domain.*;
+import esi.buildit9.dto.AddLinesDTO;
+import esi.buildit9.dto.CreatePurchaseOrderDTO;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import esi.buildit9.dto.PlantQueryDTO;
+import esi.buildit9.soap.client.*;
 
 @RequestMapping("/plants/**")
+@SessionAttributes({"createPurchaseOrderForm"})
 @Controller
 public class PlantController {
-
-    @Autowired private PlantSoapService plantService;
-
+	@Autowired
+    private PlantSoapService service;
+	
     @RequestMapping
-    public String index() {
-        List<PlantResource> plants = plantService.getAllPlants().getPlant();
+    public String index(Model uiModel) {
+    	List<PlantResource> plants = service.getAllPlants();
 
-        return "plant/index";
+        CreatePurchaseOrderDTO dto = new CreatePurchaseOrderDTO();
+
+        dto.createFromPlants(plants);
+
+        PlantQueryDTO plantQueryDTO = new PlantQueryDTO();
+        dto.setPlantsQuery(plantQueryDTO);
+
+        addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("orderstatuses", Arrays.asList(esi.buildit9.domain.OrderStatus.values()));
+        uiModel.addAttribute("createPurchaseOrderForm",dto);
+
+        return "plants/index";
+    }
+    
+    @RequestMapping(params = "search", method = RequestMethod.POST)
+    public String search(@ModelAttribute("createPurchaseOrderForm") CreatePurchaseOrderDTO dto,
+                         Model uiModel) {
+    	PlantsAvailableRequest req=new PlantsAvailableRequest();
+    	req.setNameLike(dto.getPlantsQuery().getNameLike());
+    	req.setStartDate(convert(dto.getPlantsQuery().getEndDate()));
+    	req.setEndDate(convert(dto.getPlantsQuery().getEndDate()));
+    	
+    	List<PlantResource> plants = service.getPlantsBetween(req);
+
+        //AddLinesDTO addLinesDTO = new AddLinesDTO();
+        dto.createFromPlants(plants);
+        //dto.setAddLines(addLinesDTO);
+
+    	addDateTimeFormatPatterns(uiModel);
+        uiModel.addAttribute("orderstatuses", Arrays.asList(esi.buildit9.domain.OrderStatus.values()));
+
+        uiModel.addAttribute("createPurchaseOrderForm",dto);
+        
+    	return "plants/index";
     }
 
-    @RequestMapping
-    public String search(ModelMap modelMap){
-        addDateTimeFormatPatterns(modelMap);
-        modelMap.addAttribute("plantsquery",new PlantsQuery());
+    @RequestMapping(params = "addLines", method = RequestMethod.POST)
+    public String addLines(@ModelAttribute("createPurchaseOrderForm") CreatePurchaseOrderDTO dto,
+                           Model uiModel) {
 
-        return "plant/search";
+        uiModel.addAttribute("createPurchaseOrderForm",dto);
+        uiModel.addAttribute("orderstatuses", Arrays.asList(esi.buildit9.domain.OrderStatus.values()));
+
+        addDateTimeFormatPatterns(uiModel);
+
+        return "plants/index";
     }
-
-    void addDateTimeFormatPatterns(ModelMap modelMap) {
-        modelMap.put("plantHRBean_startr_date_format",
-                DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
-        modelMap.put("plantHRBean_endr_date_format",
-                DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+    
+    XMLGregorianCalendar convert(Calendar calendar){
+    	GregorianCalendar cal=new GregorianCalendar();
+    	cal.setTimeInMillis(calendar.getTimeInMillis());
+    	XMLGregorianCalendar xmlCal = null;
+    	try{
+    		xmlCal=DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
+    	}
+    	catch(Exception ee){
+    		ee.printStackTrace();
+    	}
+    	
+    	return xmlCal;
+    }
+    
+    void addDateTimeFormatPatterns(Model uiModel){
+    	uiModel.addAttribute("plantsAvailableStartDate", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
+    	uiModel.addAttribute("plantsAvailableEndDate", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
 }

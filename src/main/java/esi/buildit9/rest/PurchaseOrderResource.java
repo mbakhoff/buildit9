@@ -19,5 +19,5 @@ public class PurchaseOrderResource extends ExtendedResourceSupport {
     private String siteEngineerName;
     private String worksEngineerName;
 
-    private PurchaseOrderLineListResource orderLines;
+    private PurchaseOrderLineListResource purchaseOrderLines;
 }

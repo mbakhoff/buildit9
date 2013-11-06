@@ -4,6 +4,8 @@
 package esi.buildit9.rest;
 
 import esi.buildit9.domain.OrderStatus;
+import esi.buildit9.rest.PurchaseOrderLineListResource;
+import esi.buildit9.rest.PurchaseOrderResource;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
@@ -11,8 +13,8 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         return this.internalId;
     }
     
-    public void PurchaseOrderResource.setInternalId(Long id) {
-        this.internalId = id;
+    public void PurchaseOrderResource.setInternalId(Long internalId) {
+        this.internalId = internalId;
     }
     
     public String PurchaseOrderResource.getBuildit() {
@@ -71,12 +73,12 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.worksEngineerName = worksEngineerName;
     }
     
-    public PurchaseOrderLineListResource PurchaseOrderResource.getOrderLines() {
-        return this.orderLines;
+    public PurchaseOrderLineListResource PurchaseOrderResource.getPurchaseOrderLines() {
+        return this.purchaseOrderLines;
     }
     
-    public void PurchaseOrderResource.setOrderLines(PurchaseOrderLineListResource orderLines) {
-        this.orderLines = orderLines;
+    public void PurchaseOrderResource.setPurchaseOrderLines(PurchaseOrderLineListResource purchaseOrderLines) {
+        this.purchaseOrderLines = purchaseOrderLines;
     }
     
 }

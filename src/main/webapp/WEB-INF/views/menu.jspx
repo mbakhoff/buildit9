@@ -28,12 +28,6 @@
             <menu:item id="i_remittanceadvice_list" messageCode="global_menu_list" url="/remittanceadvices?page=1&amp;size=${empty param.size ? 10 : param.size}" z="/Vws+8CGeCRDPu06fspidky19QQ="/>
         </menu:category>
         <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
-            <menu:item id="i_controller__pindex_id" messageCode="global_generic" url="/p/index" z="aEv9pi+Tt/ukEOUZdJNOztcSNsI="/>
-            <menu:item id="i_controller__windex_id" messageCode="global_generic" url="/w/index" z="agXmJ7OLei60wQMkfCyNN1SMJ5o="/>
-            <menu:item id="i_controller__cindex_id" messageCode="global_generic" url="/c/index" z="T35/i6ovr4QZAWNEtW4ojz8Lg4E="/>
-            <menu:item id="i_controller__plantindex_id" messageCode="global_generic" url="/plant/index" z="aXPRWt74ckx012dIOjpQj1aNNqI="/>
-            <menu:item id="i_controller__plannindex_id" messageCode="global_generic" url="/plann/index" z="dy4lyzW4vaujhnnwzVZIAg08tAw="/>
-            <menu:item id="i_controller__planindex_id" messageCode="global_generic" url="/plan/index" z="1dWs9ONRgycF3eOF4HSDPWCTwnw="/>
             <menu:item id="i_controller__plantsindex_id" messageCode="global_generic" url="/plants/index" z="Z9cDMn5g9wZ2ix2gpcPLDr81Bs4="/>
         </menu:category>
     </menu:menu>
