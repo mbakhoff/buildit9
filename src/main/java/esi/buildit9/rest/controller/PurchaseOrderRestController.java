@@ -81,21 +81,21 @@ public class PurchaseOrderRestController {
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
     
-    @RequestMapping(value = "ra", method = RequestMethod.POST)
-    @MethodLookup(METHOD_CREATE_RA)
-    public ResponseEntity<Void> createOrder(@RequestBody RemittanceAdviceResource res) {
-        RemittanceAdvice remittanceAdvice = new RemittanceAdviceAssembler().fromResource(res);
-
-        remittanceAdvice.persist();
-        
-        HttpHeaders headers = new HttpHeaders();
-        URI location =
-                ServletUriComponentsBuilder.fromCurrentRequestUri().
-                        pathSegment(remittanceAdvice.getId().toString()).build().toUri();
-        headers.setLocation(location);
-        headers.add(HEADER_ENTITY_ID, remittanceAdvice.getId().toString());
-        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
-    }
+//    @RequestMapping(value = "ra", method = RequestMethod.POST)
+//    @MethodLookup(METHOD_CREATE_RA)
+//    public ResponseEntity<Void> createOrder(@RequestBody RemittanceAdviceResource res) {
+//        RemittanceAdvice remittanceAdvice = new RemittanceAdviceAssembler().fromResource(res);
+//
+//        remittanceAdvice.persist();
+//        
+//        HttpHeaders headers = new HttpHeaders();
+//        URI location =
+//                ServletUriComponentsBuilder.fromCurrentRequestUri().
+//                        pathSegment(remittanceAdvice.getId().toString()).build().toUri();
+//        headers.setLocation(location);
+//        headers.add(HEADER_ENTITY_ID, remittanceAdvice.getId().toString());
+//        return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
+//    }
 
     @RequestMapping("pos/{id}")
     @MethodLookup(METHOD_GET_BY_ID)
