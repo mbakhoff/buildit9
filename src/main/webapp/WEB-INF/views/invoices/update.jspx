@@ -7,5 +7,6 @@
         <field:select field="rentit" id="c_esi_buildit9_domain_Invoice_rentit" itemValue="id" items="${rentits}" path="/rentits" z="uyjF/viDsdzrI6TKImGqcBXMfc0="/>
         <field:select field="status" id="c_esi_buildit9_domain_Invoice_status" items="${invoicestatuses}" path="invoicestatuses" z="ROyMaCWqYdZaP4OkP8Za69vu2lU="/>
         <field:input field="senderEmail" id="c_esi_buildit9_domain_Invoice_senderEmail" z="h7WaeWEQXoVj6OLQUvTK028mau8="/>
+        <field:input field="idAtRentit" id="c_esi_buildit9_domain_Invoice_idAtRentit" validationMessageCode="field_invalid_integer" z="AFlJG4cmFlsX3StK3ZnvTm40ZQA="/>
     </form:update>
 </div>

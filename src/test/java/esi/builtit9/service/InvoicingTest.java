@@ -44,6 +44,7 @@ public class InvoicingTest {
         InvoiceResource invoice = new InvoiceResource();
         invoice.setPo(1L);
         invoice.setTotal(49.99f);
+        invoice.setId(1L);
         invoiceChannel.send(createMessage(invoice));
     }
 
@@ -52,6 +53,7 @@ public class InvoicingTest {
         InvoiceResource invoice = new InvoiceResource();
         invoice.setPo(1L);
         invoice.setTotal(199.99f);
+        invoice.setId(1L);
         invoiceChannel.send(createMessage(invoice));
     }
 

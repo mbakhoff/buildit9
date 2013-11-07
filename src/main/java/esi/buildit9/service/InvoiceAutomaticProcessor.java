@@ -24,17 +24,9 @@ public class InvoiceAutomaticProcessor {
             float poTotal = purchaseOrder.getTotalPrice();
     		// Check if Totals match
     		if (documentTotal == poTotal) {
-                InvoiceHelper.persist(purchaseOrder, address, InvoiceStatus.APPROVED);
-                
-                // Creates and sends remittance advice
-                Invoice invoice = new Invoice();
-                invoice.setPurchaseOrder(purchaseOrder);
-                invoice.setRentit(purchaseOrder.getRentit());
-                invoice.setStatus(InvoiceStatus.APPROVED);
-                invoice.setSenderEmail(address);
-                
+                Invoice invoice = InvoiceHelper.persist(invoiceResource, purchaseOrder, address, InvoiceStatus.APPROVED);
+
                 InvoiceHelper.createAndSendRemittanceAdvice(invoice);
-                
                 return sendEmail("Thank you for the invoice with PO" + documentPO + "!", address);
 			}else {
 				return sendEmail("Error with invoice - totals don't match!", address);
@@ -43,7 +35,7 @@ public class InvoiceAutomaticProcessor {
 			return sendEmail("Error with invoice - no such PO id!", address);
 		}
     }
-    
+
     public MailMessage sendEmail(String text, String to){
     	MailMessage message = new SimpleMailMessage();
     	message.setTo(to);

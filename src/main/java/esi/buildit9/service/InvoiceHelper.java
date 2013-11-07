@@ -34,14 +34,19 @@ public class InvoiceHelper {
         }
         throw new IllegalArgumentException("not an InternetAddress");
     }
-    
-    public static void persist(PurchaseOrder order, String senderEmail, InvoiceStatus status) {
+
+    public static Invoice persist(InvoiceResource invoiceResource, PurchaseOrder purchaseOrder, String address, final InvoiceStatus status) {
+        if (!invoiceResource.getPo().equals(purchaseOrder.getId())) {
+            throw new IllegalArgumentException("PO id mismatch");
+        }
         Invoice invoice = new Invoice();
-        invoice.setRentit(order.getRentit());
-        invoice.setPurchaseOrder(order);
+        invoice.setRentit(purchaseOrder.getRentit());
+        invoice.setPurchaseOrder(purchaseOrder);
         invoice.setStatus(status);
-        invoice.setSenderEmail(senderEmail);
+        invoice.setSenderEmail(address);
+        invoice.setIdAtRentit(invoiceResource.getId());
         invoice.persist();
+        return invoice;
     }
 
     public static void sendManuallyApproved(ApplicationContext context, Invoice submitted) {
@@ -70,5 +75,4 @@ public class InvoiceHelper {
         invoice.setStatus(InvoiceStatus.COMPLETED);
         invoice.persist();
     }
-
 }

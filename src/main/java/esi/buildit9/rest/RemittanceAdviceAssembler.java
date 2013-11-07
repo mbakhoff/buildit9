@@ -18,7 +18,7 @@ public class RemittanceAdviceAssembler {
     public RemittanceAdviceResource toResource(RemittanceAdvice advice) {
 		RemittanceAdviceResource res = new RemittanceAdviceResource();
 		addSelfLink(advice, res);
-		res.setInvoice(advice.getInvoice());
+		res.setInvoiceId(advice.getInvoice().getIdAtRentit());
 		res.setPayDay(Calendar.getInstance());
     	return null;
 		
@@ -28,11 +28,5 @@ public class RemittanceAdviceAssembler {
         ExtendedLink getById = linker.buildLink(PurchaseOrderRestController.METHOD_GET_BY_ID, advice.getId());
         res.add(new ExtendedLink(getById.getHref(), "self", getById.getMethod()));
     }
-    
-    public RemittanceAdvice fromResource(RemittanceAdviceResource res){
-        RemittanceAdvice remittanceAdvice = new RemittanceAdvice();
-        remittanceAdvice.setInvoice(res.getInvoice());
-        remittanceAdvice.setPayDay(res.getPayDay());
-        return remittanceAdvice;
-    }
+
 }
