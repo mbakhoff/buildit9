@@ -3,25 +3,25 @@
 
 package esi.buildit9.security;
 
-import esi.buildit9.security.Assignments;
+import esi.buildit9.security.AssignmentsDerp;
 import esi.buildit9.security.Authorities;
 import esi.buildit9.security.Users;
 
-privileged aspect Assignments_Roo_JavaBean {
+privileged aspect AssignmentsDerp_Roo_JavaBean {
     
-    public Users Assignments.getUserBuildIt() {
+    public Users AssignmentsDerp.getUserBuildIt() {
         return this.userBuildIt;
     }
     
-    public void Assignments.setUserBuildIt(Users userBuildIt) {
+    public void AssignmentsDerp.setUserBuildIt(Users userBuildIt) {
         this.userBuildIt = userBuildIt;
     }
     
-    public Authorities Assignments.getAuthority() {
+    public Authorities AssignmentsDerp.getAuthority() {
         return this.authority;
     }
     
-    public void Assignments.setAuthority(Authorities authority) {
+    public void AssignmentsDerp.setAuthority(Authorities authority) {
         this.authority = authority;
     }
     

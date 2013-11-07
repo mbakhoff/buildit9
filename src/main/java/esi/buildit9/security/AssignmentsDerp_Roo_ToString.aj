@@ -3,13 +3,13 @@
 
 package esi.buildit9.security;
 
-import esi.buildit9.security.Assignments;
+import esi.buildit9.security.AssignmentsDerp;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-privileged aspect Assignments_Roo_ToString {
+privileged aspect AssignmentsDerp_Roo_ToString {
     
-    public String Assignments.toString() {
+    public String AssignmentsDerp.toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
     

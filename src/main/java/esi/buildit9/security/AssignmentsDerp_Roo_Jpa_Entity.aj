@@ -3,7 +3,7 @@
 
 package esi.buildit9.security;
 
-import esi.buildit9.security.Assignments;
+import esi.buildit9.security.AssignmentsDerp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,32 +11,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Version;
 
-privileged aspect Assignments_Roo_Jpa_Entity {
+privileged aspect AssignmentsDerp_Roo_Jpa_Entity {
     
-    declare @type: Assignments: @Entity;
+    declare @type: AssignmentsDerp: @Entity;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private Long Assignments.id;
+    private Long AssignmentsDerp.id;
     
     @Version
     @Column(name = "version")
-    private Integer Assignments.version;
+    private Integer AssignmentsDerp.version;
     
-    public Long Assignments.getId() {
+    public Long AssignmentsDerp.getId() {
         return this.id;
     }
     
-    public void Assignments.setId(Long id) {
+    public void AssignmentsDerp.setId(Long id) {
         this.id = id;
     }
     
-    public Integer Assignments.getVersion() {
+    public Integer AssignmentsDerp.getVersion() {
         return this.version;
     }
     
-    public void Assignments.setVersion(Integer version) {
+    public void AssignmentsDerp.setVersion(Integer version) {
         this.version = version;
     }
     

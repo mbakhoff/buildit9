@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" id="menu" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:menu="urn:jsptagdir:/WEB-INF/tags/menu" xmlns:sec="http://www.springframework.org/security/tags" id="menu" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
@@ -30,5 +30,19 @@
         <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
             <menu:item id="i_controller__plantsindex_id" messageCode="global_generic" url="/plants/index" z="Z9cDMn5g9wZ2ix2gpcPLDr81Bs4="/>
         </menu:category>
+        <sec:authorize ifAllGranted="ROLE_ADMIN">
+        <menu:category id="c_assignmentsderp" z="8FbhavkqLwgOnZ9i2Bdhjz4dTIU=">
+            <menu:item id="i_assignmentsderp_new" messageCode="global_menu_new" url="/security/assignments?form" z="LE7eoQIbIjXBtnIlR6/MJUwMolY="/>
+            <menu:item id="i_assignmentsderp_list" messageCode="global_menu_list" url="/security/assignments?page=1&amp;size=${empty param.size ? 10 : param.size}" z="NcO0mXq+NV4HU4/OOtun2zmwSmk="/>
+        </menu:category>
+        <menu:category id="c_users" z="Ysam8XVhG5uotPoUGGxkia1RE/s=">
+            <menu:item id="i_users_new" messageCode="global_menu_new" url="/security/users?form" z="NmfbRpM+6nqMtYF9mKD3ToCNCys="/>
+            <menu:item id="i_users_list" messageCode="global_menu_list" url="/security/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="27M02mIdl6oX+h2AR7Cz2fzVA1c="/>
+        </menu:category>
+        <menu:category id="c_authorities" z="GIjKsVX7q9V5I+B/i5YP+XPvlK0=">
+            <menu:item id="i_authorities_new" messageCode="global_menu_new" url="/security/authoroties?form" z="KObEhJaYOVjEjjiitqW4fKpeWzA="/>
+            <menu:item id="i_authorities_list" messageCode="global_menu_list" url="/security/authoroties?page=1&amp;size=${empty param.size ? 10 : param.size}" z="jXBZuokPYR5o/if39Bkp1XAXtbs="/>
+        </menu:category>
+        </sec:authorize>
     </menu:menu>
 </div>

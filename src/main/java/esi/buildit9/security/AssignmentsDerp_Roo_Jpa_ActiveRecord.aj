@@ -3,73 +3,73 @@
 
 package esi.buildit9.security;
 
-import esi.buildit9.security.Assignments;
+import esi.buildit9.security.AssignmentsDerp;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.springframework.transaction.annotation.Transactional;
 
-privileged aspect Assignments_Roo_Jpa_ActiveRecord {
+privileged aspect AssignmentsDerp_Roo_Jpa_ActiveRecord {
     
     @PersistenceContext
-    transient EntityManager Assignments.entityManager;
+    transient EntityManager AssignmentsDerp.entityManager;
     
-    public static final EntityManager Assignments.entityManager() {
-        EntityManager em = new Assignments().entityManager;
+    public static final EntityManager AssignmentsDerp.entityManager() {
+        EntityManager em = new AssignmentsDerp().entityManager;
         if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
         return em;
     }
     
-    public static long Assignments.countAssignmentses() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM Assignments o", Long.class).getSingleResult();
+    public static long AssignmentsDerp.countAssignmentsDerps() {
+        return entityManager().createQuery("SELECT COUNT(o) FROM AssignmentsDerp o", Long.class).getSingleResult();
     }
     
-    public static List<Assignments> Assignments.findAllAssignmentses() {
-        return entityManager().createQuery("SELECT o FROM Assignments o", Assignments.class).getResultList();
+    public static List<AssignmentsDerp> AssignmentsDerp.findAllAssignmentsDerps() {
+        return entityManager().createQuery("SELECT o FROM AssignmentsDerp o", AssignmentsDerp.class).getResultList();
     }
     
-    public static Assignments Assignments.findAssignments(Long id) {
+    public static AssignmentsDerp AssignmentsDerp.findAssignmentsDerp(Long id) {
         if (id == null) return null;
-        return entityManager().find(Assignments.class, id);
+        return entityManager().find(AssignmentsDerp.class, id);
     }
     
-    public static List<Assignments> Assignments.findAssignmentsEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM Assignments o", Assignments.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+    public static List<AssignmentsDerp> AssignmentsDerp.findAssignmentsDerpEntries(int firstResult, int maxResults) {
+        return entityManager().createQuery("SELECT o FROM AssignmentsDerp o", AssignmentsDerp.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
     }
     
     @Transactional
-    public void Assignments.persist() {
+    public void AssignmentsDerp.persist() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.persist(this);
     }
     
     @Transactional
-    public void Assignments.remove() {
+    public void AssignmentsDerp.remove() {
         if (this.entityManager == null) this.entityManager = entityManager();
         if (this.entityManager.contains(this)) {
             this.entityManager.remove(this);
         } else {
-            Assignments attached = Assignments.findAssignments(this.id);
+            AssignmentsDerp attached = AssignmentsDerp.findAssignmentsDerp(this.id);
             this.entityManager.remove(attached);
         }
     }
     
     @Transactional
-    public void Assignments.flush() {
+    public void AssignmentsDerp.flush() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.flush();
     }
     
     @Transactional
-    public void Assignments.clear() {
+    public void AssignmentsDerp.clear() {
         if (this.entityManager == null) this.entityManager = entityManager();
         this.entityManager.clear();
     }
     
     @Transactional
-    public Assignments Assignments.merge() {
+    public AssignmentsDerp AssignmentsDerp.merge() {
         if (this.entityManager == null) this.entityManager = entityManager();
-        Assignments merged = this.entityManager.merge(this);
+        AssignmentsDerp merged = this.entityManager.merge(this);
         this.entityManager.flush();
         return merged;
     }

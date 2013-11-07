@@ -3,11 +3,11 @@
 
 package esi.buildit9.security;
 
-import esi.buildit9.security.Assignments;
+import esi.buildit9.security.AssignmentsDerp;
 import org.springframework.beans.factory.annotation.Configurable;
 
-privileged aspect Assignments_Roo_Configurable {
+privileged aspect AssignmentsDerp_Roo_Configurable {
     
-    declare @type: Assignments: @Configurable;
+    declare @type: AssignmentsDerp: @Configurable;
     
 }

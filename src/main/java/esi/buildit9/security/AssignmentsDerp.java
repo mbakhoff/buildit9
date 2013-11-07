@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 @RooJavaBean
 @RooToString
 @RooJpaActiveRecord
-public class Assignments {
+public class AssignmentsDerp {
 
     /**
      */
