@@ -25,8 +25,9 @@ public class InvoiceAutomaticProcessor {
     		// Check if Totals match
     		if (documentTotal == poTotal) {
                 Invoice invoice = InvoiceHelper.persist(invoiceResource, purchaseOrder, address, InvoiceStatus.APPROVED);
-
                 InvoiceHelper.createAndSendRemittanceAdvice(invoice);
+                invoice.setStatus(InvoiceStatus.COMPLETED);
+                invoice.persist();
                 return sendEmail("Thank you for the invoice with PO" + documentPO + "!", address);
 			}else {
 				return sendEmail("Error with invoice - totals don't match!", address);
