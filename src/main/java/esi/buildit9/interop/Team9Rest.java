@@ -73,7 +73,7 @@ public class Team9Rest implements RentitInterop.Rest {
         }
 	}
 
-    public static class RemoteHostException extends RuntimeException {
+    public static class RemoteHostException extends InteropException {
 
         public final int status;
 
