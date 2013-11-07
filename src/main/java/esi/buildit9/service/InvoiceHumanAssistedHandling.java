@@ -1,6 +1,5 @@
 package esi.buildit9.service;
 
-import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
 import org.springframework.integration.annotation.ServiceActivator;
@@ -19,7 +18,7 @@ public class InvoiceHumanAssistedHandling {
         PurchaseOrder order = PurchaseOrder.findPurchaseOrder(invoiceResource.getPo());
         if (order != null) {
             if (Math.abs(order.getTotalPrice() - invoiceResource.getTotal()) < 0.1) {
-                InvoiceHelper.persist(order, senderEmail, InvoiceStatus.PENDING);
+                InvoiceHelper.persist(invoiceResource, order, senderEmail, InvoiceStatus.PENDING);
                 return null;
             } else {
                 return totalDidntMatch(senderEmail, order);

@@ -30,26 +30,31 @@ public class InvoiceController {
             return "invoices/update";
         }
 
-        InvoiceStatus stored = Invoice.findInvoice(submitted.getId()).getStatus();
-        if (wasApproved(submitted, stored)) {
-            InvoiceHelper.sendManuallyApproved(applicationContext, submitted);
-            InvoiceHelper.createAndSendRemittanceAdvice(submitted);
-        }
-        if (wasRejected(submitted, stored)) {
-            InvoiceHelper.sendManuallyRejected(applicationContext, submitted);
-        }
+        InvoiceStatus oldStatus = Invoice.findInvoice(submitted.getId()).getStatus();
+        InvoiceStatus submittedStatus = submitted.getStatus();
 
         uiModel.asMap().clear();
         submitted.merge();
+
+        if (wasApproved(oldStatus, submittedStatus)) {
+            InvoiceHelper.sendManuallyApproved(applicationContext, submitted);
+            InvoiceHelper.createAndSendRemittanceAdvice(submitted);
+            submitted.setStatus(InvoiceStatus.COMPLETED);
+            submitted.merge();
+        }
+        if (wasRejected(oldStatus, submittedStatus)) {
+            InvoiceHelper.sendManuallyRejected(applicationContext, submitted);
+        }
+
         return "redirect:/invoices/" + encodeUrlPathSegment(submitted.getId().toString(), httpServletRequest);
     }
 
-    private static boolean wasRejected(Invoice submitted, InvoiceStatus stored) {
-        return stored != InvoiceStatus.REJECTED && submitted.getStatus() == InvoiceStatus.REJECTED;
+    private static boolean wasRejected(InvoiceStatus stored, InvoiceStatus submitted) {
+        return stored != InvoiceStatus.REJECTED && submitted == InvoiceStatus.REJECTED;
     }
 
-    private static boolean wasApproved(Invoice submitted, InvoiceStatus stored) {
-        return stored != InvoiceStatus.APPROVED && submitted.getStatus() == InvoiceStatus.APPROVED;
+    private static boolean wasApproved(InvoiceStatus stored, InvoiceStatus submitted) {
+        return stored != InvoiceStatus.APPROVED && submitted == InvoiceStatus.APPROVED;
     }
 
 }

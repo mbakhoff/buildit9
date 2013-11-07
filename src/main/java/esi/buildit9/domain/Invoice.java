@@ -22,4 +22,6 @@ public class Invoice {
     private String senderEmail;
 
     private InvoiceStatus status;
+
+    private Long idAtRentit;
 }

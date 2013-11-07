@@ -8,6 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class InvoiceResource {
 
+    private Long id;
     private Long po;
     private Float total;
 

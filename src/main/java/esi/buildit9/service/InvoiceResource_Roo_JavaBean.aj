@@ -3,9 +3,15 @@
 
 package esi.buildit9.service;
 
-import esi.buildit9.service.InvoiceResource;
-
 privileged aspect InvoiceResource_Roo_JavaBean {
+    
+    public Long InvoiceResource.getId() {
+        return this.id;
+    }
+    
+    public void InvoiceResource.setId(Long id) {
+        this.id = id;
+    }
     
     public Long InvoiceResource.getPo() {
         return this.po;
