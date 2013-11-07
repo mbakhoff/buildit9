@@ -14,6 +14,7 @@
         <intercept-url pattern="/resources/**" access="permitAll" />
         <intercept-url pattern="/login/**" access="permitAll" />
         <intercept-url pattern="/**" access="isAuthenticated()" />
+        <intercept-url pattern="/PlantSoapService**" access="permitAll"/>
     </http>
     <!-- Configure Authentication mechanism -->
     <authentication-manager alias="authenticationManager">
@@ -23,6 +24,8 @@
             <user-service>
                 <user name="admin" password="admin" authorities="ROLE_ADMIN" />
                 <user name="user" password="user" authorities="ROLE_USER" />
+                <user name="siteEngineer" password="user" authorities="ROLE_SITE_ENGINEER" />
+                <user name="worksEngineer" password="user" authorities="ROLE_WORKS_ENGINEER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>

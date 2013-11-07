@@ -3,6 +3,11 @@
 
 package esi.buildit9.domain;
 
+import esi.buildit9.domain.Invoice;
+import esi.buildit9.domain.InvoiceStatus;
+import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.RentIt;
+
 privileged aspect Invoice_Roo_JavaBean {
     
     public PurchaseOrder Invoice.getPurchaseOrder() {

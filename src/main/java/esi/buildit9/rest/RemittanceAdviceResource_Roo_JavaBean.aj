@@ -3,6 +3,7 @@
 
 package esi.buildit9.rest;
 
+import esi.buildit9.rest.RemittanceAdviceResource;
 import java.util.Calendar;
 
 privileged aspect RemittanceAdviceResource_Roo_JavaBean {
