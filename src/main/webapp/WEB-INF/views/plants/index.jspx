@@ -22,13 +22,13 @@
                 <c:forEach var="line" items="${createPurchaseOrderForm.addedLines}" varStatus="x">
                     <tr>
                         <td>
-                            <input type="hidden" name="addedLines[${x.index}].plantExternalId"
-                                   value="${line.plantExternalId}"/>
+                            ${line.plantExternalId}
                         </td>
                         <td>
-                            <input name="addedLines[${x.index}].plantName" value="${line.plantName}"/>
+                            ${line.plantName}
                         </td>
                         <td>
+                            <field:datetime id="addedLines${x.index}.startDate" dateTimePattern="${plantsAvailableStartDate}"></field:datetime>
                             <input name="addedLines[${x.index}].startDate" value="${line.startDate}"/>
                         </td>
                         <td>
@@ -59,7 +59,7 @@
                         <td>
                             <input type="checkbox" id="searchLines${x.index}"
                             name="searchLines[${x.index}].checked"
-                            value="true" checked="true"/>
+                            value="true"/>
                             <input type="hidden" name="_searchLines[${x.index}].checked" value="on"/>
                         </td>
                             <!--<input type="checkbox"-->

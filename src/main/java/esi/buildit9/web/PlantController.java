@@ -13,6 +13,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import esi.buildit9.domain.*;
 import esi.buildit9.dto.AddLinesDTO;
 import esi.buildit9.dto.CreatePurchaseOrderDTO;
+import esi.buildit9.dto.PlantLineDTO;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -76,20 +77,51 @@ public class PlantController {
                            Model uiModel) {
 
         uiModel.addAttribute("createPurchaseOrderForm",dto);
-        uiModel.addAttribute("orderstatuses", Arrays.asList(esi.buildit9.domain.OrderStatus.values()));
 
-        List<String> webFrameworkList = new ArrayList<String>();
-        webFrameworkList.add("Spring MVC");
-        webFrameworkList.add("Struts 1");
-        webFrameworkList.add("Struts 2");
-        webFrameworkList.add("Apache Wicket");
-        uiModel.addAttribute("webFrameworkList",webFrameworkList);
+        addPurchaseOrderLines(dto);
+
+        uiModel.addAttribute("orderstatuses", Arrays.asList(esi.buildit9.domain.OrderStatus.values()));
 
         addDateTimeFormatPatterns(uiModel);
 
         return "plants/index";
     }
-    
+
+    private void addPurchaseOrderLines(CreatePurchaseOrderDTO dto) {
+        Calendar startDate = dto.getPlantsQuery().getStartDate();;
+
+        Calendar endDate = dto.getPlantsQuery().getEndDate();
+        if (dto.getPlantsQuery()==null){
+            setToNow(startDate, endDate);
+        }
+        else{
+            startDate = dto.getPlantsQuery().getStartDate();;
+            endDate = dto.getPlantsQuery().getEndDate();
+            setToNow(startDate,endDate);
+        }
+
+        for (PlantLineDTO pl:dto.getSearchLines()){
+            if (pl.getChecked()==true){
+                PurchaseOrderLine pr =new PurchaseOrderLine();
+                pr.setPlantExternalId(pl.getId().toString());
+                pr.setPlantName(pl.getName());
+                pr.setStartDate(startDate);
+                pr.setEndDate(endDate);
+                dto.getAddedLines().add(pr);
+            }
+        }
+
+    }
+
+    private void setToNow(Calendar startDate, Calendar endDate) {
+        if (startDate==null){
+            startDate=Calendar.getInstance();
+        }
+        if (endDate==null){
+            endDate=Calendar.getInstance();
+        }
+    }
+
     XMLGregorianCalendar convert(Calendar calendar){
     	GregorianCalendar cal=new GregorianCalendar();
     	cal.setTimeInMillis(calendar.getTimeInMillis());
