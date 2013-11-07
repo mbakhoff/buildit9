@@ -51,19 +51,25 @@
 
             <div>Add lines</div>
             <hr/>
+            <!--<form:checkboxes items="${createPurchaseOrderForm.searchLines}"-->
+                             <!--path="searchLines" />-->
             <table>
                 <c:forEach var="plant" items="${createPurchaseOrderForm.searchLines}" varStatus="x">
                     <tr class="plant">
                         <td>
-                            <form:checkbox path="searchLines[${x.index}].checked" id="searchLines[${x.index}]_checked"/>
+                            <input type="checkbox" id="searchLines${x.index}"
+                            name="searchLines[${x.index}].checked"
+                            value="true" checked="true"/>
+                            <input type="hidden" name="_searchLines[${x.index}].checked" value="on"/>
+                        </td>
                             <!--<input type="checkbox"-->
                                    <!--name="searchLines[${x.index}].checked"-->
                                    <!--value="true"/>-->
-                        </td>
-                        <!--<td>-->
-                            <!--<form:hidden path="searchLines[${x.index}].id"/>-->
-                            <!--${plant.id}-->
                         <!--</td>-->
+                        <td>
+                            <form:hidden path="searchLines[${x.index}].id"/>
+                            ${plant.id}
+                        </td>
                         <!--<td>-->
                             <!--<input type="hidden"-->
                                    <!--name="searchLines${x.index}.name"-->

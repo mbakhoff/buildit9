@@ -5,21 +5,12 @@ package esi.buildit9.dto;
 
 import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrderLine;
-import esi.buildit9.dto.AddLinesDTO;
 import esi.buildit9.dto.CreatePurchaseOrderDTO;
 import esi.buildit9.dto.PlantLineDTO;
 import esi.buildit9.dto.PlantQueryDTO;
 import java.util.List;
 
 privileged aspect CreatePurchaseOrderDTO_Roo_JavaBean {
-    
-    public AddLinesDTO CreatePurchaseOrderDTO.getAddLines() {
-        return this.addLines;
-    }
-    
-    public void CreatePurchaseOrderDTO.setAddLines(AddLinesDTO addLines) {
-        this.addLines = addLines;
-    }
     
     public PlantQueryDTO CreatePurchaseOrderDTO.getPlantsQuery() {
         return this.plantsQuery;

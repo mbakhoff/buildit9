@@ -11,7 +11,7 @@ import java.util.List;
 
 @RooJavaBean
 public class CreatePurchaseOrderDTO {
-    private AddLinesDTO addLines;
+    //private AddLinesDTO addLines;
     private PlantQueryDTO plantsQuery;
 
 

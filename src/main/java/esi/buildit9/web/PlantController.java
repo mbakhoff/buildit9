@@ -78,6 +78,13 @@ public class PlantController {
         uiModel.addAttribute("createPurchaseOrderForm",dto);
         uiModel.addAttribute("orderstatuses", Arrays.asList(esi.buildit9.domain.OrderStatus.values()));
 
+        List<String> webFrameworkList = new ArrayList<String>();
+        webFrameworkList.add("Spring MVC");
+        webFrameworkList.add("Struts 1");
+        webFrameworkList.add("Struts 2");
+        webFrameworkList.add("Apache Wicket");
+        uiModel.addAttribute("webFrameworkList",webFrameworkList);
+
         addDateTimeFormatPatterns(uiModel);
 
         return "plants/index";
