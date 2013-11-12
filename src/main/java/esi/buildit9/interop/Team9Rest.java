@@ -3,6 +3,7 @@ package esi.buildit9.interop;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
 import esi.buildit9.rest.*;
@@ -32,7 +33,7 @@ public class Team9Rest implements RentitInterop.Rest {
     @Override
     public void submitOrder(PurchaseOrder order) {
         PurchaseOrderResource res = assembler.toResource(order);
-        ClientResponse createRequest = Client.create().resource(RENTIT_POS)
+        ClientResponse createRequest = getClient().resource(RENTIT_POS)
                 .type(MediaType.APPLICATION_XML)
                 .post(ClientResponse.class, res);
 
@@ -44,7 +45,7 @@ public class Team9Rest implements RentitInterop.Rest {
 
     @Override
     public List<PlantResource> getAvailablePlantsBetween(String nameLike, Calendar startDate, Calendar endDate) {
-        WebResource webResource = Client.create().resource(
+        WebResource webResource = getClient().resource(
                 getFindUrl(nameLike, new DateMidnight(startDate), new DateMidnight(endDate)));
         ClientResponse request = webResource.get(ClientResponse.class);
 
@@ -63,7 +64,7 @@ public class Team9Rest implements RentitInterop.Rest {
     @Override
 	public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
 		RemittanceAdviceResource res = remittanceAssembler.toResource(remittanceAdvice);
-        ClientResponse createRequest = Client.create().resource(RENTIT_RA)
+        ClientResponse createRequest = getClient().resource(RENTIT_RA)
                 .type(MediaType.APPLICATION_XML)
                 .post(ClientResponse.class, res);
 
@@ -72,6 +73,12 @@ public class Team9Rest implements RentitInterop.Rest {
             throw new RemoteHostException(createRequest);
         }
 	}
+
+    private static Client getClient() {
+        Client client = Client.create();
+        client.addFilter(new HTTPBasicAuthFilter("user", "user"));
+        return client;
+    }
 
     public static class RemoteHostException extends InteropException {
 
