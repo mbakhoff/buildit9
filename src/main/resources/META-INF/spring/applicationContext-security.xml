@@ -15,6 +15,8 @@
         <intercept-url pattern="/login/**" access="permitAll" />
         <intercept-url pattern="/**" access="isAuthenticated()" />
         <intercept-url pattern="/PlantSoapService**" access="permitAll"/>
+        <intercept-url pattern="/rest/**" access="isAuthenticated()" />
+        <http-basic />
     </http>
     <!-- Configure Authentication mechanism -->
     <authentication-manager alias="authenticationManager">

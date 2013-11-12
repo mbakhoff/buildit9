@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
 
+import static esi.builtit9.rest.Commons.withBasicAuth;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -18,7 +19,7 @@ public class TestPurchaseOrderRESTController {
 
     @Test
     public void testCreateResources() throws Exception {
-        Client client = Client.create();
+        Client client = withBasicAuth(Client.create());
         WebResource webResource = client.resource(Commons.URL_POS);
         PurchaseOrderResource newResource = Commons.createPurchaseOrderResource();
 
@@ -29,7 +30,7 @@ public class TestPurchaseOrderRESTController {
 
     @Test
     public void testModifyPurchaseOrder() throws Exception {
-        Client client = Client.create();
+        Client client = withBasicAuth(Client.create());
         WebResource webResource = client.resource(Commons.URL_POS);
         PurchaseOrderResource newResource = Commons.createPurchaseOrderResource();
 
@@ -50,7 +51,7 @@ public class TestPurchaseOrderRESTController {
 
     @Test
     public void testCancelPurchaseOrder() throws Exception {
-        Client client = Client.create();
+        Client client = withBasicAuth(Client.create());
         WebResource webResource = client.resource(Commons.URL_POS);
         PurchaseOrderResource newResource = Commons.createPurchaseOrderResource();
 
@@ -68,7 +69,7 @@ public class TestPurchaseOrderRESTController {
 
     @Test
     public void testCheckStatus() throws Exception {
-        Client client = Client.create();
+        Client client = withBasicAuth(Client.create());
         WebResource webResource = client.resource(Commons.URL_POS);
         PurchaseOrderResource newResource = Commons.createPurchaseOrderResource();
 

@@ -1,6 +1,8 @@
 package esi.builtit9.rest;
 
+import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.buildit9.rest.PurchaseOrderLineListResource;
 import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderResource;
@@ -39,4 +41,8 @@ public class Commons {
         return entityId;
     }
 
+    public static Client withBasicAuth(Client client) {
+        client.addFilter(new HTTPBasicAuthFilter("user", "user"));
+        return client;
+    }
 }
