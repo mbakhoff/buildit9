@@ -1,32 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" 
-xmlns:spring="http://www.springframework.org/tags" 
-xmlns:c="http://java.sun.com/jsp/jstl/core"
-xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" 
-xmlns:form="http://www.springframework.org/tags/form"
-xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
-xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
-  <jsp:directive.page contentType="text/html;charset=UTF-8"/>
-  <jsp:output omit-xml-declaration="yes"/>
-  <spring:message code="label_plants_index" htmlEscape="false" var="title"/>
-  <util:panel id="title" title="${title}">
-    <spring:message code="application_name" htmlEscape="false" var="app_name"/>
-    <form:form modelAttribute="plantsAvailableRequest" method="POST" >
-    	<field:input label="Name contains" id="c_esi_buildit9_domain_plantQueryDTO_nameLike" field="nameLike"></field:input>    
-    	<field:datetime id="c_esi_buildit9_domain_plantQueryDTO_startDate" field="startDate" dateTimePattern="${plantsAvailableStartDate}" label="Start date"></field:datetime>
-    	<field:datetime id="c_esi_buildit9_domain_plantQueryDTO_endDate" field="endDate" dateTimePattern="${plantsAvailableEndDate}" label="End date"></field:datetime>
-    	<input type="submit" value="Search"></input>
-    
-    </form:form>
-	<table>
-		<c:forEach var="plant" items="${plants}">
-	    	<tr class="plant">
-	    		<td>${plant.id}</td>
-	    		<td>${plant.name}</td>
-	    		<td>${plant.description}</td>
-	    	</tr>
-	    </c:forEach>
-	</table>
-    
-  </util:panel>
+<div xmlns:jsp="http://java.sun.com/JSP/Page"
+     xmlns:spring="http://www.springframework.org/tags"
+     xmlns:c="http://java.sun.com/jsp/jstl/core"
+     xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
+     xmlns:form="http://www.springframework.org/tags/form"
+     xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <spring:message code="label_plants_index" htmlEscape="false" var="title"/>
+    <util:panel id="title" title="${title}">
+        <spring:message code="application_name" htmlEscape="false" var="app_name"/>
+        <form:form modelAttribute="createPurchaseOrderForm">
+            <div>Purchase order</div>
+            <hr/>
+            <field:select field="orderStatus" id="c_esi_buildit9_domain_purchaseOrder_orderStatus"
+                          items="${orderstatuses}" path="orderstatuses"/>
+
+            <div>Items</div>
+            <table>
+                <c:forEach var="line" items="${createPurchaseOrderForm.addedLines}" varStatus="x">
+                    <tr>
+                        <td>
+                            <input type="hidden" id="addedLines${x.index}.plantExternalId" value="addedLines[${x.index}].plantExternalId"/>
+                            ${line.plantExternalId}
+                        </td>
+                        <td>
+                            ${line.plantName}
+                        </td>
+                        <td>
+                            <field:datetime field="addedLines[${x.index}].startDate" label=" " id="addedLines${x.index}.startDate"
+                                            dateTimePattern="${plantsAvailableStartDate}"/>
+                        </td>
+                        <td>
+                            <field:datetime field="addedLines[${x.index}].endDate" label=" " id="addedLines${x.index}.endDate"
+                                            dateTimePattern="${plantsAvailableEndDate}"/>
+                        </td>
+                    </tr>
+                </c:forEach>/home/kmetsalu
+            </table>
+            <input type="submit" value="Create" name="create"/>
+            <div>Search</div>
+            <hr/>
+
+            <field:input label="Name contains" id="c_esi_buildit9_domain_plantQueryDTO_nameLike"
+                         field="nameLike"/>
+            <field:datetime id="c_esi_buildit9_domain_plantQueryDTO_startDate" field="startDate"
+                            dateTimePattern="${plantsAvailableStartDate}" label="Start date"/>
+            <field:datetime id="c_esi_buildit9_domain_plantQueryDTO_endDate" field="endDate"
+                            dateTimePattern="${plantsAvailableEndDate}" label="End date"/>
+            <input type="submit" value="Search" name="search"/>
+
+            <div>Add lines</div>
+            <hr/>
+            <table>
+                <c:forEach var="plant" items="${createPurchaseOrderForm.searchLines}" varStatus="x">
+                    <tr class="plant">
+                        <td>
+                            <input type="checkbox" id="searchLines${x.index}"
+                            name="searchLines[${x.index}].checked"
+                            value="true"/>
+                            <input type="hidden" name="_searchLines[${x.index}].checked" value="on"/>
+                        </td>
+                        <td>
+                            <form:hidden path="searchLines[${x.index}].id"/>
+                            ${plant.id}
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+            <input type="submit" value="Add Lines" name="addLines"/>
+        </form:form>
+    </util:panel>
 </div>
