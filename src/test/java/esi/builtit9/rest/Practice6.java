@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
 
+import static esi.builtit9.rest.Commons.withBasicAuth;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -20,7 +21,7 @@ public class Practice6 {
 
         // Create a Plant Hire Request using the RESTful service in Heroku.
         PurchaseOrderResource newResource = Commons.createPurchaseOrderResource();
-        ClientResponse createRequest = Client.create().resource(Commons.URL_POS)
+        ClientResponse createRequest = withBasicAuth(Client.create()).resource(Commons.URL_POS)
                 .type(MediaType.APPLICATION_XML)
                 .post(ClientResponse.class, newResource);
         assertEquals(ClientResponse.Status.CREATED.getStatusCode(), createRequest.getStatus());
@@ -34,7 +35,7 @@ public class Practice6 {
         assertNotNull(approvalLink);
 
         // Approve the obtained Plant Hire Request
-        ClientResponse approvalRequest = Client.create().resource(approvalLink.getHref())
+        ClientResponse approvalRequest = withBasicAuth(Client.create()).resource(approvalLink.getHref())
                 .accept(MediaType.APPLICATION_XML)
                 .post(ClientResponse.class);
         assertEquals(ClientResponse.Status.OK.getStatusCode(), approvalRequest.getStatus());
@@ -47,7 +48,7 @@ public class Practice6 {
     }
 
     private static PurchaseOrderResource getPurchaseOrder(String id) {
-        return Client.create().resource(Commons.URL_POS +"/"+ id).get(PurchaseOrderResource.class);
+        return withBasicAuth(Client.create()).resource(Commons.URL_POS +"/"+ id).get(PurchaseOrderResource.class);
     }
 
 }

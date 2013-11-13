@@ -5,6 +5,9 @@
     <form:create id="fc_esi_buildit9_domain_Invoice" modelAttribute="invoice" path="/invoices" render="${empty dependencies}" z="F/9LAxA86Sb20BO+2qwrOkX7a1Y=">
         <field:select field="purchaseOrder" id="c_esi_buildit9_domain_Invoice_purchaseOrder" itemValue="id" items="${purchaseorders}" path="/purchaseorders" z="DXdBpQWFDopsQhM+ewzkDVd6/RM="/>
         <field:select field="rentit" id="c_esi_buildit9_domain_Invoice_rentit" itemValue="id" items="${rentits}" path="/rentits" z="uyjF/viDsdzrI6TKImGqcBXMfc0="/>
+        <field:select field="status" id="c_esi_buildit9_domain_Invoice_status" items="${invoicestatuses}" path="invoicestatuses" z="ROyMaCWqYdZaP4OkP8Za69vu2lU="/>
+        <field:input field="senderEmail" id="c_esi_buildit9_domain_Invoice_senderEmail" z="h7WaeWEQXoVj6OLQUvTK028mau8="/>
+        <field:input field="idAtRentit" id="c_esi_buildit9_domain_Invoice_idAtRentit" validationMessageCode="field_invalid_integer" z="AFlJG4cmFlsX3StK3ZnvTm40ZQA="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_esi_buildit9_domain_Invoice" render="${not empty dependencies}" z="TtXLoqO2DEljy4yaVkVqlt1ajXE="/>
 </div>

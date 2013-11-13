@@ -3,11 +3,11 @@ package esi.buildit9.interop;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
+import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.buildit9.domain.PurchaseOrder;
-import esi.buildit9.rest.PlantResource;
-import esi.buildit9.rest.PlantResourceList;
-import esi.buildit9.rest.PurchaseOrderAssembler;
-import esi.buildit9.rest.PurchaseOrderResource;
+import esi.buildit9.domain.RemittanceAdvice;
+import esi.buildit9.rest.*;
+import esi.buildit9.rest.util.HttpHelpers;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
@@ -20,34 +20,37 @@ public class Team9Rest implements RentitInterop.Rest {
 
     public static final String RENTIT_POS = "https://rentit9.herokuapp.com/rest/pos";
     public static final String RENTIT_PLANTS = "https://rentit9.herokuapp.com/rest/plants";
+    public static final String RENTIT_RA = "https://rentit9.herokuapp.com/rest/ra";
 
     private final PurchaseOrderAssembler assembler;
+    private final RemittanceAdviceAssembler remittanceAssembler;
 
     public Team9Rest() {
         assembler = new PurchaseOrderAssembler();
+        remittanceAssembler = new RemittanceAdviceAssembler();
     }
 
     @Override
     public void submitOrder(PurchaseOrder order) {
         PurchaseOrderResource res = assembler.toResource(order);
-        ClientResponse createRequest = Client.create().resource(RENTIT_POS)
+        ClientResponse createRequest = getClient().resource(RENTIT_POS)
                 .type(MediaType.APPLICATION_XML)
                 .post(ClientResponse.class, res);
 
         int status = createRequest.getStatus();
         if (status != ClientResponse.Status.CREATED.getStatusCode()) {
-            throwSubmissionFailed(status);
+            throw new RemoteHostException(createRequest);
         }
     }
 
     @Override
     public List<PlantResource> getAvailablePlantsBetween(String nameLike, Calendar startDate, Calendar endDate) {
-        WebResource webResource = Client.create().resource(
+        WebResource webResource = getClient().resource(
                 getFindUrl(nameLike, new DateMidnight(startDate), new DateMidnight(endDate)));
         ClientResponse request = webResource.get(ClientResponse.class);
 
         if (request.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
-            throw new InteropException("query response not HTTP 200", null);
+            throw new RemoteHostException(request);
         }
         return request.getEntity(PlantResourceList.class).getPlant();
     }
@@ -58,10 +61,33 @@ public class Team9Rest implements RentitInterop.Rest {
                 RENTIT_PLANTS, name, startDate.toString(fmt), endDate.toString(fmt));
     }
 
-    private void throwSubmissionFailed(int status) {
-        String err = String.format("rentit9 po submission failed (%d)", status);
-        throw new InteropException(err, null);
+    @Override
+	public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
+		RemittanceAdviceResource res = remittanceAssembler.toResource(remittanceAdvice);
+        ClientResponse createRequest = getClient().resource(RENTIT_RA)
+                .type(MediaType.APPLICATION_XML)
+                .post(ClientResponse.class, res);
+
+        int status = createRequest.getStatus();
+        if (status != ClientResponse.Status.CREATED.getStatusCode()) {
+            throw new RemoteHostException(createRequest);
+        }
+	}
+
+    private static Client getClient() {
+        Client client = Client.create();
+        client.addFilter(new HTTPBasicAuthFilter("user", "user"));
+        return client;
     }
 
+    public static class RemoteHostException extends InteropException {
+
+        public final int status;
+
+        public RemoteHostException(ClientResponse response) {
+            super(HttpHelpers.readAsUtf8(response));
+            status = response.getStatus();
+        }
+    }
 
 }

@@ -4,10 +4,12 @@
 package esi.buildit9.web;
 
 import esi.buildit9.domain.Invoice;
+import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.web.InvoiceController;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import org.springframework.ui.Model;
@@ -59,17 +61,6 @@ privileged aspect InvoiceController_Roo_Controller {
         return "invoices/list";
     }
     
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String InvoiceController.update(@Valid Invoice invoice, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, invoice);
-            return "invoices/update";
-        }
-        uiModel.asMap().clear();
-        invoice.merge();
-        return "redirect:/invoices/" + encodeUrlPathSegment(invoice.getId().toString(), httpServletRequest);
-    }
-    
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String InvoiceController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, Invoice.findInvoice(id));
@@ -88,6 +79,7 @@ privileged aspect InvoiceController_Roo_Controller {
     
     void InvoiceController.populateEditForm(Model uiModel, Invoice invoice) {
         uiModel.addAttribute("invoice", invoice);
+        uiModel.addAttribute("invoicestatuses", Arrays.asList(InvoiceStatus.values()));
         uiModel.addAttribute("purchaseorders", PurchaseOrder.findAllPurchaseOrders());
         uiModel.addAttribute("rentits", RentIt.findAllRentIts());
     }
