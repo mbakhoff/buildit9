@@ -20,6 +20,22 @@ privileged aspect CreatePurchaseOrderDTO_Roo_JavaBean {
         this.nameLike = nameLike;
     }
     
+    public String CreatePurchaseOrderDTO.getSiteAddress() {
+        return this.siteAddress;
+    }
+    
+    public void CreatePurchaseOrderDTO.setSiteAddress(String siteAddress) {
+        this.siteAddress = siteAddress;
+    }
+    
+    public String CreatePurchaseOrderDTO.getWorksEngineerName() {
+        return this.worksEngineerName;
+    }
+    
+    public void CreatePurchaseOrderDTO.setWorksEngineerName(String worksEngineerName) {
+        this.worksEngineerName = worksEngineerName;
+    }
+    
     public Calendar CreatePurchaseOrderDTO.getStartDate() {
         return this.startDate;
     }

@@ -17,4 +17,12 @@ privileged aspect PurchaseOrder_Roo_Finder {
         return q;
     }
     
+    public static TypedQuery<PurchaseOrder> PurchaseOrder.findPurchaseOrdersByWorksEngineerNameEquals(String worksEngineerName) {
+        if (worksEngineerName == null || worksEngineerName.length() == 0) throw new IllegalArgumentException("The worksEngineerName argument is required");
+        EntityManager em = PurchaseOrder.entityManager();
+        TypedQuery<PurchaseOrder> q = em.createQuery("SELECT o FROM PurchaseOrder AS o WHERE o.worksEngineerName = :worksEngineerName", PurchaseOrder.class);
+        q.setParameter("worksEngineerName", worksEngineerName);
+        return q;
+    }
+    
 }

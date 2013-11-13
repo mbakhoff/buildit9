@@ -5,10 +5,10 @@
     <form:create id="fc_esi_buildit9_domain_PurchaseOrderLine" modelAttribute="purchaseOrderLine" path="/purchaseorderlines" render="${empty dependencies}" z="06r1FvDpPueg8RNJwa2EZVkA3SM=">
         <field:input field="plantExternalId" id="c_esi_buildit9_domain_PurchaseOrderLine_plantExternalId" z="WgORmsSKO8EsXjZBojlmTmU562E="/>
         <field:input field="totalCost" id="c_esi_buildit9_domain_PurchaseOrderLine_totalCost" validationMessageCode="field_invalid_number" z="pe0IJ2ncLLP58VrAAskaU8q5cxo="/>
-        <field:input field="plantName" id="c_esi_buildit9_domain_PurchaseOrderLine_plantName" z="hdk26rVhO6+UgooZyA0DRxOCajI="/>  
+        <field:input field="plantName" id="c_esi_buildit9_domain_PurchaseOrderLine_plantName" z="hdk26rVhO6+UgooZyA0DRxOCajI="/>
         <field:datetime dateTimePattern="${purchaseOrderLine_startdate_date_format}" field="startDate" id="c_esi_buildit9_domain_PurchaseOrderLine_startDate" z="yHsPOleOCqdw+jk8bAPYkoHEo44="/>
         <field:datetime dateTimePattern="${purchaseOrderLine_enddate_date_format}" field="endDate" id="c_esi_buildit9_domain_PurchaseOrderLine_endDate" z="J6fkLy+X/pafTdHCTsU3ATSNhWM="/>
-        <field:select field="purchaseOrder" id="c_esi_buildit9_domain_PurchaseOrderLine_purchaseOrder" itemValue="id" items="${purchaseorders}" path="/purchaseorders" z="eKDOS0q6tOMeCqNoQ+TRhdoPF20="/>
+        <field:select field="purchaseOrder" id="c_esi_buildit9_domain_PurchaseOrderLine_purchaseOrder" itemValue="id" items="${purchaseorders}" path="/se/po" z="P2mpD8w4+HIIr/qm09NZssGTDWg="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_esi_buildit9_domain_PurchaseOrderLine" render="${not empty dependencies}" z="sOrdWHYq3DHkFUOBbpFd0g4CJi0="/>
 </div>
