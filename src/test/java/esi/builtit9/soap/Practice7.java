@@ -1,4 +1,4 @@
-package esi.builtit9.rest;
+package esi.builtit9.soap;
 
 import esi.buildit9.soap.client.*;
 import org.joda.time.DateMidnight;
