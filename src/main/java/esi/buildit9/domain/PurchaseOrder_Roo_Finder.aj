@@ -9,11 +9,11 @@ import javax.persistence.TypedQuery;
 
 privileged aspect PurchaseOrder_Roo_Finder {
     
-    public static TypedQuery<PurchaseOrder> PurchaseOrder.findPurchaseOrdersByWorksEngineerNameEquals(String worksEngineerName) {
-        if (worksEngineerName == null || worksEngineerName.length() == 0) throw new IllegalArgumentException("The worksEngineerName argument is required");
+    public static TypedQuery<PurchaseOrder> PurchaseOrder.findPurchaseOrdersBySiteEngineerNameEquals(String siteEngineerName) {
+        if (siteEngineerName == null || siteEngineerName.length() == 0) throw new IllegalArgumentException("The siteEngineerName argument is required");
         EntityManager em = PurchaseOrder.entityManager();
-        TypedQuery<PurchaseOrder> q = em.createQuery("SELECT o FROM PurchaseOrder AS o WHERE o.worksEngineerName = :worksEngineerName", PurchaseOrder.class);
-        q.setParameter("worksEngineerName", worksEngineerName);
+        TypedQuery<PurchaseOrder> q = em.createQuery("SELECT o FROM PurchaseOrder AS o WHERE o.siteEngineerName = :siteEngineerName", PurchaseOrder.class);
+        q.setParameter("siteEngineerName", siteEngineerName);
         return q;
     }
     
