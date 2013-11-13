@@ -4,7 +4,6 @@
      xmlns:c="http://java.sun.com/jsp/jstl/core"
      xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields"
      xmlns:form="http://www.springframework.org/tags/form"
-     xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields"
      xmlns:util="urn:jsptagdir:/WEB-INF/tags/util" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
@@ -22,37 +21,37 @@
                 <c:forEach var="line" items="${createPurchaseOrderForm.addedLines}" varStatus="x">
                     <tr>
                         <td>
+                            <input type="hidden" id="addedLines${x.index}.plantExternalId" value="addedLines[${x.index}].plantExternalId"/>
                             ${line.plantExternalId}
                         </td>
                         <td>
                             ${line.plantName}
                         </td>
                         <td>
-                            <field:datetime id="addedLines${x.index}.startDate" dateTimePattern="${plantsAvailableStartDate}"></field:datetime>
-                            <input name="addedLines[${x.index}].startDate" value="${line.startDate}"/>
+                            <field:datetime field="addedLines[${x.index}].startDate" label=" " id="addedLines${x.index}.startDate"
+                                            dateTimePattern="${plantsAvailableStartDate}"/>
                         </td>
                         <td>
-                            <input name="addedLines[${x.index}].endDate" value="${line.endDate}"/>
+                            <field:datetime field="addedLines[${x.index}].endDate" label=" " id="addedLines${x.index}.endDate"
+                                            dateTimePattern="${plantsAvailableEndDate}"/>
                         </td>
                     </tr>
-                </c:forEach>
+                </c:forEach>/home/kmetsalu
             </table>
-            <input type="submit" value="create" name="create"/>
+            <input type="submit" value="Create" name="create"/>
             <div>Search</div>
             <hr/>
 
             <field:input label="Name contains" id="c_esi_buildit9_domain_plantQueryDTO_nameLike"
-                         field="plantsQuery.nameLike"/>
-            <field:datetime id="c_esi_buildit9_domain_plantQueryDTO_startDate" field="plantsQuery.startDate"
+                         field="nameLike"/>
+            <field:datetime id="c_esi_buildit9_domain_plantQueryDTO_startDate" field="startDate"
                             dateTimePattern="${plantsAvailableStartDate}" label="Start date"/>
-            <field:datetime id="c_esi_buildit9_domain_plantQueryDTO_endDate" field="plantsQuery.endDate"
+            <field:datetime id="c_esi_buildit9_domain_plantQueryDTO_endDate" field="endDate"
                             dateTimePattern="${plantsAvailableEndDate}" label="End date"/>
-            <input type="submit" value="search" name="search"/>
+            <input type="submit" value="Search" name="search"/>
 
             <div>Add lines</div>
             <hr/>
-            <!--<form:checkboxes items="${createPurchaseOrderForm.searchLines}"-->
-                             <!--path="searchLines" />-->
             <table>
                 <c:forEach var="plant" items="${createPurchaseOrderForm.searchLines}" varStatus="x">
                     <tr class="plant">
@@ -62,26 +61,10 @@
                             value="true"/>
                             <input type="hidden" name="_searchLines[${x.index}].checked" value="on"/>
                         </td>
-                            <!--<input type="checkbox"-->
-                                   <!--name="searchLines[${x.index}].checked"-->
-                                   <!--value="true"/>-->
-                        <!--</td>-->
                         <td>
                             <form:hidden path="searchLines[${x.index}].id"/>
                             ${plant.id}
                         </td>
-                        <!--<td>-->
-                            <!--<input type="hidden"-->
-                                   <!--name="searchLines${x.index}.name"-->
-                                   <!--value="${plant.name}"/>-->
-                            <!--${plant.name}-->
-                        <!--</td>-->
-                        <!--<td>-->
-                            <!--<input type="hidden"-->
-                                   <!--name="searchLines${x.index}.description"-->
-                                   <!--value="${plant.description}"/>-->
-                            <!--${plant.description}-->
-                        <!--</td>-->
                     </tr>
                 </c:forEach>
             </table>

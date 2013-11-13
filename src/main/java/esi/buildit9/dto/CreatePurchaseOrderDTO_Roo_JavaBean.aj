@@ -7,17 +7,33 @@ import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrderLine;
 import esi.buildit9.dto.CreatePurchaseOrderDTO;
 import esi.buildit9.dto.PlantLineDTO;
-import esi.buildit9.dto.PlantQueryDTO;
+import java.util.Calendar;
 import java.util.List;
 
 privileged aspect CreatePurchaseOrderDTO_Roo_JavaBean {
     
-    public PlantQueryDTO CreatePurchaseOrderDTO.getPlantsQuery() {
-        return this.plantsQuery;
+    public String CreatePurchaseOrderDTO.getNameLike() {
+        return this.nameLike;
     }
     
-    public void CreatePurchaseOrderDTO.setPlantsQuery(PlantQueryDTO plantsQuery) {
-        this.plantsQuery = plantsQuery;
+    public void CreatePurchaseOrderDTO.setNameLike(String nameLike) {
+        this.nameLike = nameLike;
+    }
+    
+    public Calendar CreatePurchaseOrderDTO.getStartDate() {
+        return this.startDate;
+    }
+    
+    public void CreatePurchaseOrderDTO.setStartDate(Calendar startDate) {
+        this.startDate = startDate;
+    }
+    
+    public Calendar CreatePurchaseOrderDTO.getEndDate() {
+        return this.endDate;
+    }
+    
+    public void CreatePurchaseOrderDTO.setEndDate(Calendar endDate) {
+        this.endDate = endDate;
     }
     
     public OrderStatus CreatePurchaseOrderDTO.getOrderStatus() {

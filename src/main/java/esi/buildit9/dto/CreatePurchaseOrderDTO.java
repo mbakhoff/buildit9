@@ -3,17 +3,28 @@ package esi.buildit9.dto;
 import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrderLine;
 import esi.buildit9.soap.client.PlantResource;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.util.AutoPopulatingList;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 @RooJavaBean
 public class CreatePurchaseOrderDTO {
     //private AddLinesDTO addLines;
-    private PlantQueryDTO plantsQuery;
+    //private PlantQueryDTO plantsQuery;
+    private String nameLike;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "MM")
+    private Calendar startDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "MM")
+    private Calendar endDate;
 
     public CreatePurchaseOrderDTO() {
         orderStatus = OrderStatus.CREATED;

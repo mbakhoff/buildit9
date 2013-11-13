@@ -40,8 +40,8 @@ public class PlantController {
 
         dto.createFromPlants(plants);
 
-        PlantQueryDTO plantQueryDTO = new PlantQueryDTO();
-        dto.setPlantsQuery(plantQueryDTO);
+        //PlantQueryDTO plantQueryDTO = new PlantQueryDTO();
+        //dto.setPlantsQuery(plantQueryDTO);
 
         addDateTimeFormatPatterns(uiModel);
         uiModel.addAttribute("orderstatuses", Arrays.asList(esi.buildit9.domain.OrderStatus.values()));
@@ -54,9 +54,9 @@ public class PlantController {
     public String search(@ModelAttribute("createPurchaseOrderForm") CreatePurchaseOrderDTO dto,
                          Model uiModel) {
     	PlantsAvailableRequest req=new PlantsAvailableRequest();
-    	req.setNameLike(dto.getPlantsQuery().getNameLike());
-    	req.setStartDate(convert(dto.getPlantsQuery().getEndDate()));
-    	req.setEndDate(convert(dto.getPlantsQuery().getEndDate()));
+    	req.setNameLike(dto.getNameLike());
+    	req.setStartDate(convert(dto.getEndDate()));
+    	req.setEndDate(convert(dto.getEndDate()));
     	
     	List<PlantResource> plants = service.getPlantsBetween(req);
 
@@ -87,18 +87,22 @@ public class PlantController {
         return "plants/index";
     }
 
-    private void addPurchaseOrderLines(CreatePurchaseOrderDTO dto) {
-        Calendar startDate = dto.getPlantsQuery().getStartDate();;
+    @RequestMapping(params = "create",method = RequestMethod.POST)
+    public String create(@ModelAttribute("createPurchaseOrderForm") CreatePurchaseOrderDTO dto,
+                           Model uiModel){
+        //TODO: implement creating of PurchaseOrder
 
-        Calendar endDate = dto.getPlantsQuery().getEndDate();
-        if (dto.getPlantsQuery()==null){
-            setToNow(startDate, endDate);
-        }
-        else{
-            startDate = dto.getPlantsQuery().getStartDate();;
-            endDate = dto.getPlantsQuery().getEndDate();
-            setToNow(startDate,endDate);
-        }
+
+        return "purchaseorders/index";
+    }
+
+
+    private void addPurchaseOrderLines(CreatePurchaseOrderDTO dto) {
+
+        Calendar startDate = dto.getStartDate();
+        Calendar endDate = dto.getEndDate();
+        setToNow(startDate,endDate);
+
 
         for (PlantLineDTO pl:dto.getSearchLines()){
             if (pl.getChecked()==true){
