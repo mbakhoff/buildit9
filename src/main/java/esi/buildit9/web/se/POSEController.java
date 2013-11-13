@@ -19,7 +19,7 @@ public class POSEController {
 		if (page != null || size != null) {
             int sizeNo = size == null ? 10 : size.intValue();
             final int firstResult = page == null ? 0 : (page.intValue() - 1) * sizeNo;
-            uiModel.addAttribute("purchaseorders", PurchaseOrder.findPurchaseOrdersBySiteEngineerNameEquals(name).getResultList());
+            uiModel.addAttribute("purchaseorders", PurchaseOrder.findPurchaseOrdersBySiteEngineerNameEquals(name).setFirstResult(firstResult).setMaxResults(sizeNo));
             float nrOfPages = (float) PurchaseOrder.countPurchaseOrders() / sizeNo;
             uiModel.addAttribute("maxPages", (int) ((nrOfPages > (int) nrOfPages || nrOfPages == 0.0) ? nrOfPages + 1 : nrOfPages));
         } else {
