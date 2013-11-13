@@ -9,7 +9,7 @@ import java.util.Set;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(finders = { "findPurchaseOrdersByWorksEngineerNameEquals" })
+@RooJpaActiveRecord(finders = { "findPurchaseOrdersByWorksEngineerNameEquals", "findPurchaseOrdersBySiteEngineerNameEquals" })
 public class PurchaseOrder {
 
     /**
