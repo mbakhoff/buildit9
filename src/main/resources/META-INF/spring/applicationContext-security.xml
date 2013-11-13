@@ -37,7 +37,7 @@
         								FROM users 
         								WHERE username=?;"
         	authorities-by-username-query="SELECT p.username, a.authority 
-        								FROM users p, authorities a, assignments ra 
+        								FROM users p, authorities a, assignments_derp ra 
         								WHERE p.id = ra.user_build_it 
         									AND a.id = ra.authority 
         									AND p.username = ?;"/>
