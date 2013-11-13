@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show create="false" id="ps_esi_buildit9_domain_PurchaseOrder" object="${purchaseorder}" path="/we/po" z="vT1gYTQDeL4LYBfS0evxKntBt6w=">
+        <field:display field="totalPrice" id="s_esi_buildit9_domain_PurchaseOrder_totalPrice" object="${purchaseorder}" z="tziZv8MzFCp1Ih5/Uweda5JHKe4="/>
+        <field:display field="site" id="s_esi_buildit9_domain_PurchaseOrder_site" object="${purchaseorder}" z="dCwYJ1ga7eONPIKVqp0HiWUbkpY="/>
+        <field:display field="rentit" id="s_esi_buildit9_domain_PurchaseOrder_rentit" object="${purchaseorder}" z="IwRtZkdC13rW8wwTqvgkPVPirkk="/>
+        <field:display field="orderStatus" id="s_esi_buildit9_domain_PurchaseOrder_orderStatus" object="${purchaseorder}" z="9/iaEfEBgWoTXCekqssJ79JPj2M="/>
+        <field:display field="siteEngineerName" id="s_esi_buildit9_domain_PurchaseOrder_siteEngineerName" object="${purchaseorder}" z="x2VEW5W0gFiZcsUHK1T7kHiNisU="/>
+        <field:display field="worksEngineerName" id="s_esi_buildit9_domain_PurchaseOrder_worksEngineerName" object="${purchaseorder}" z="nsApI4jzn5o6cYEsSYvbhjXvUqQ="/>
+        <field:display field="lines" id="s_esi_buildit9_domain_PurchaseOrder_lines" object="${purchaseorder}" z="cliJFc0En9v6fq2wP3IJS9F+3xE="/>
+    </page:show>
+</div>

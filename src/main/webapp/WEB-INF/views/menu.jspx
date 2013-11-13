@@ -20,33 +20,43 @@
             <menu:item id="i_site_new" messageCode="global_menu_new" url="/sites?form" z="ewAqg8Z+CTUpvmsxXaCRBnq6+TU="/>
             <menu:item id="i_site_list" messageCode="global_menu_list" url="/sites?page=1&amp;size=${empty param.size ? 10 : param.size}" z="vhoCo6kXZ4paxcavA4SM71sw7EQ="/>
         </menu:category>
-        <menu:category id="c_purchaseorder" z="LdgN+Z53I4kIOyJx+mc8CFmbIuU=">
-            <menu:item id="i_purchaseorder_new" messageCode="global_menu_new" url="/purchaseorders?form" z="I6gpOtV3+H+iGlPgmv55Zhufszk="/>
-            <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/purchaseorders?page=1&amp;size=${empty param.size ? 10 : param.size}" z="DHer7WK9MJB49FXJX9B6Kds2DxY="/>
-        </menu:category>
+        <sec:authorize ifAllGranted="ROLE_ADMIN">
+            <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
+                <menu:item id="i_controller__plantsindex_id" messageCode="global_generic" url="/plants/index" z="Z9cDMn5g9wZ2ix2gpcPLDr81Bs4="/>
+            </menu:category>
+            <menu:category id="c_purchaseorder" z="LdgN+Z53I4kIOyJx+mc8CFmbIuU=">
+                <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/purchaseorders?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+            </menu:category>
+        </sec:authorize>
+        <sec:authorize ifAllGranted="ROLE_WORKS_ENGINEER">
+            <menu:category id="c_purchaseorder" z="LdgN+Z53I4kIOyJx+mc8CFmbIuU=">
+                <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/we/po?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+            </menu:category>
+        </sec:authorize>
+        <sec:authorize ifAllGranted="ROLE_SITE_ENGINEER">
+            <menu:category id="c_purchaseorder" z="user-managed">
+                <menu:item id="i_controller__plantsindex_id" messageCode="global_generic" url="/plants/index" z="user-managed"/>
+                <menu:item id="i_purchaseorder_new" messageCode="global_menu_new" url="/se/po?form" z="user-managed"/>
+                <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/se/po?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+            </menu:category>
+        </sec:authorize>
         <menu:category id="c_remittanceadvice" z="+IT6zNB9yTzdnF/vS8JQB0NgwEs=">
             <menu:item id="i_remittanceadvice_new" messageCode="global_menu_new" url="/remittanceadvices?form" z="mdaqxtYc+2uDpIFZjG8iTphKjv8="/>
             <menu:item id="i_remittanceadvice_list" messageCode="global_menu_list" url="/remittanceadvices?page=1&amp;size=${empty param.size ? 10 : param.size}" z="/Vws+8CGeCRDPu06fspidky19QQ="/>
         </menu:category>
-        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
-            <menu:item id="i_controller__plantsindex_id" messageCode="global_generic" url="/plants/index" z="Z9cDMn5g9wZ2ix2gpcPLDr81Bs4="/>
-        </menu:category>
         <sec:authorize ifAllGranted="ROLE_ADMIN">
-        <menu:category id="c_assignmentsderp" z="8FbhavkqLwgOnZ9i2Bdhjz4dTIU=">
-            <menu:item id="i_assignmentsderp_new" messageCode="global_menu_new" url="/security/assignments?form" z="LE7eoQIbIjXBtnIlR6/MJUwMolY="/>
-            <menu:item id="i_assignmentsderp_list" messageCode="global_menu_list" url="/security/assignments?page=1&amp;size=${empty param.size ? 10 : param.size}" z="NcO0mXq+NV4HU4/OOtun2zmwSmk="/>
-        </menu:category>
-        <menu:category id="c_users" z="Ysam8XVhG5uotPoUGGxkia1RE/s=">
-            <menu:item id="i_users_new" messageCode="global_menu_new" url="/security/users?form" z="NmfbRpM+6nqMtYF9mKD3ToCNCys="/>
-            <menu:item id="i_users_list" messageCode="global_menu_list" url="/security/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="27M02mIdl6oX+h2AR7Cz2fzVA1c="/>
-        </menu:category>
-        <menu:category id="c_authorities" z="GIjKsVX7q9V5I+B/i5YP+XPvlK0=">
-            <menu:item id="i_authorities_new" messageCode="global_menu_new" url="/security/authoroties?form" z="KObEhJaYOVjEjjiitqW4fKpeWzA="/>
-            <menu:item id="i_authorities_list" messageCode="global_menu_list" url="/security/authoroties?page=1&amp;size=${empty param.size ? 10 : param.size}" z="jXBZuokPYR5o/if39Bkp1XAXtbs="/>
-        </menu:category>
+            <menu:category id="c_assignmentsderp" z="8FbhavkqLwgOnZ9i2Bdhjz4dTIU=">
+                <menu:item id="i_assignmentsderp_new" messageCode="global_menu_new" url="/security/assignments?form" z="LE7eoQIbIjXBtnIlR6/MJUwMolY="/>
+                <menu:item id="i_assignmentsderp_list" messageCode="global_menu_list" url="/security/assignments?page=1&amp;size=${empty param.size ? 10 : param.size}" z="NcO0mXq+NV4HU4/OOtun2zmwSmk="/>
+            </menu:category>
+            <menu:category id="c_users" z="Ysam8XVhG5uotPoUGGxkia1RE/s=">
+                <menu:item id="i_users_new" messageCode="global_menu_new" url="/security/users?form" z="NmfbRpM+6nqMtYF9mKD3ToCNCys="/>
+                <menu:item id="i_users_list" messageCode="global_menu_list" url="/security/users?page=1&amp;size=${empty param.size ? 10 : param.size}" z="27M02mIdl6oX+h2AR7Cz2fzVA1c="/>
+            </menu:category>
+            <menu:category id="c_authorities" z="GIjKsVX7q9V5I+B/i5YP+XPvlK0=">
+                <menu:item id="i_authorities_new" messageCode="global_menu_new" url="/security/authoroties?form" z="KObEhJaYOVjEjjiitqW4fKpeWzA="/>
+                <menu:item id="i_authorities_list" messageCode="global_menu_list" url="/security/authoroties?page=1&amp;size=${empty param.size ? 10 : param.size}" z="jXBZuokPYR5o/if39Bkp1XAXtbs="/>
+            </menu:category>
         </sec:authorize>
-        <menu:category id="c_controller" z="nj8Dm3hojIyIEyPkwE1UMDIs+K8=">
-            <menu:item id="i_controller__plantsindex_id" messageCode="global_generic" url="/plants/index" z="Z9cDMn5g9wZ2ix2gpcPLDr81Bs4="/>
-        </menu:category>
     </menu:menu>
 </div>
