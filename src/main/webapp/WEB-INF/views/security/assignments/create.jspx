@@ -3,8 +3,8 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_esi_buildit9_security_AssignmentsDerp" modelAttribute="assignmentsDerp" path="/security/assignments" render="${empty dependencies}" z="qwDatty7O8p4ztdwwPvA3TdjVlQ=">
-        <field:select field="userBuildIt" id="c_esi_buildit9_security_AssignmentsDerp_userBuildIt" itemValue="id" items="${userses}" path="/userses" z="i22rjeS977lbIvGmmerQjtv9pP8="/>
-        <field:select field="authority" id="c_esi_buildit9_security_AssignmentsDerp_authority" itemValue="id" items="${authoritieses}" path="/authoritieses" z="jj/5Z6hBWE80gHPTunyrSJbgP+A="/>
+        <field:select field="userBuildIt" id="c_esi_buildit9_security_AssignmentsDerp_userBuildIt" itemValue="id" items="${userses}" path="/security/users" z="c60uOUWpivLC+vi58Luo1PL+TW8="/>
+        <field:select field="authority" id="c_esi_buildit9_security_AssignmentsDerp_authority" itemValue="id" items="${authoritieses}" path="/security/authoroties" z="AuD9a1eKhYxJRDY5sFz6Ee45XQI="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_esi_buildit9_security_AssignmentsDerp" render="${not empty dependencies}" z="lf4BZs13P4LKgPrTBnMQElqVM60="/>
 </div>
