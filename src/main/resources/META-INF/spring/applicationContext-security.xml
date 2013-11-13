@@ -26,6 +26,7 @@
                 <user name="admin" password="admin" authorities="ROLE_ADMIN" />
                 <user name="user" password="user" authorities="ROLE_USER" />
                 <user name="siteEngineer" password="user" authorities="ROLE_SITE_ENGINEER" />
+                <user name="sE" password="user" authorities="ROLE_SITE_ENGINEER" />
                 <user name="worksEngineer" password="user" authorities="ROLE_WORKS_ENGINEER" />
             </user-service>
         </authentication-provider>
