@@ -41,6 +41,12 @@ public class PlantController {
         return "plants/index";
     }
 
+    @RequestMapping(params = "update", method = RequestMethod.GET)
+    public String updateForm(Model uiModel){
+
+        return "se/po/updateForm";
+    }
+
     @RequestMapping(params = "search", method = RequestMethod.POST)
     public String search(@ModelAttribute("createPurchaseOrderForm") CreatePurchaseOrderDTO dto,
                          Model uiModel) {

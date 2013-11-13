@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RooWebScaffold(path = "se/po", formBackingObject = PurchaseOrder.class, delete = false)
 public class POSEController {
-	
+
 	@RequestMapping(produces = "text/html")
     public String list(@RequestParam(value = "page", required = false) Integer page, @RequestParam(value = "size", required = false) Integer size, Model uiModel) {
         String name = SecurityContextHolder.getContext().getAuthentication().getName();
