@@ -106,7 +106,6 @@ public class PlantController {
         uiModel.addAttribute("plantsAvailableStartDate", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
 
-
     private void addPurchaseOrderLines(CreatePurchaseOrderDTO dto) {
 
         Calendar startDate = dto.getStartDate();
