@@ -11,12 +11,16 @@
     <util:panel id="title" title="${title}">
         <spring:message code="application_name" htmlEscape="false" var="app_name"/>
         <form:form modelAttribute="createPurchaseOrderForm">
-            <div>Purchase order</div>
+
+            <h2>Purchase order</h2>
             <hr/>
             <field:select field="orderStatus" id="c_esi_buildit9_domain_purchaseOrder_orderStatus"
                           items="${orderstatuses}" path="orderstatuses"/>
+            <field:input id="s_esi_buildit9_domain_Site_address"
+                         field="siteAddress"/>
+            <field:input field="worksEngineerName" id="c_esi_buildit9_domain_PurchaseOrder_worksEngineerName"/>
 
-            <div>Items</div>
+            <h3>Items</h3>
             <table>
                 <c:forEach var="line" items="${createPurchaseOrderForm.addedLines}" varStatus="x">
                     <tr>
@@ -25,21 +29,23 @@
                             ${line.plantExternalId}
                         </td>
                         <td>
+                            <input type="hidden" id="addedLines${x.index}.plantName" value="addedLines[${x.index}].plantName"/>
                             ${line.plantName}
                         </td>
                         <td>
                             <field:datetime field="addedLines[${x.index}].startDate" label=" " id="addedLines${x.index}.startDate"
-                                            dateTimePattern="${plantsAvailableStartDate}"/>
+                                            dateTimePattern="${addedStart}"/>
                         </td>
                         <td>
                             <field:datetime field="addedLines[${x.index}].endDate" label=" " id="addedLines${x.index}.endDate"
-                                            dateTimePattern="${plantsAvailableEndDate}"/>
+                                            dateTimePattern="${addedEnd}"/>
                         </td>
                     </tr>
-                </c:forEach>/home/kmetsalu
+                </c:forEach>
             </table>
             <input type="submit" value="Create" name="create"/>
-            <div>Search</div>
+
+            <h2>Search</h2>
             <hr/>
 
             <field:input label="Name contains" id="c_esi_buildit9_domain_plantQueryDTO_nameLike"
@@ -50,7 +56,7 @@
                             dateTimePattern="${plantsAvailableEndDate}" label="End date"/>
             <input type="submit" value="Search" name="search"/>
 
-            <div>Add lines</div>
+            <h2>Add lines</h2>
             <hr/>
             <table>
                 <c:forEach var="plant" items="${createPurchaseOrderForm.searchLines}" varStatus="x">
@@ -65,9 +71,14 @@
                             <form:hidden path="searchLines[${x.index}].id"/>
                             ${plant.id}
                         </td>
+                        <td>
+                            <form:hidden path="searchLines[${x.index}].name"></form:hidden>
+                            ${plant.name}
+                        </td>
                     </tr>
                 </c:forEach>
             </table>
+
             <input type="submit" value="Add Lines" name="addLines"/>
         </form:form>
     </util:panel>

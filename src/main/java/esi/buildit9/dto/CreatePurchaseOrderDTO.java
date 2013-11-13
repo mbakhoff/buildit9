@@ -2,6 +2,7 @@ package esi.buildit9.dto;
 
 import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrderLine;
+import esi.buildit9.domain.Site;
 import esi.buildit9.soap.client.PlantResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
@@ -18,6 +19,8 @@ public class CreatePurchaseOrderDTO {
     //private AddLinesDTO addLines;
     //private PlantQueryDTO plantsQuery;
     private String nameLike;
+    private String siteAddress;
+    private String worksEngineerName;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "MM")
