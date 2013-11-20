@@ -48,6 +48,9 @@ public class PurchaseOrderRestController {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception ex) {
         ex.printStackTrace();
+        if (ex instanceof RBAC.UnauthorizedAccessException) {
+            return new ResponseEntity<String>(HttpHelpers.getStack(ex), HttpStatus.FORBIDDEN);
+        }
         return new ResponseEntity<String>(HttpHelpers.getStack(ex), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
