@@ -42,7 +42,7 @@ public class Commons {
     }
 
     public static Client withBasicAuth(Client client) {
-        client.addFilter(new HTTPBasicAuthFilter("user", "user"));
+        client.addFilter(new HTTPBasicAuthFilter("admin", "admin"));
         return client;
     }
 }
