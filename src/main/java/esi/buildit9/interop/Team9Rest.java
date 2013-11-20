@@ -7,7 +7,6 @@ import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
 import esi.buildit9.rest.*;
-import esi.buildit9.rest.util.HttpHelpers;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
@@ -78,16 +77,6 @@ public class Team9Rest implements RentitInterop.Rest {
         Client client = Client.create();
         client.addFilter(new HTTPBasicAuthFilter("user", "user"));
         return client;
-    }
-
-    public static class RemoteHostException extends InteropException {
-
-        public final int status;
-
-        public RemoteHostException(ClientResponse response) {
-            super(HttpHelpers.readAsUtf8(response));
-            status = response.getStatus();
-        }
     }
 
 }

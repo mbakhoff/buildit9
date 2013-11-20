@@ -3,7 +3,7 @@ package esi.builtit9.service;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.interop.InteropImplementation;
-import esi.buildit9.interop.Team9Rest;
+import esi.buildit9.interop.RemoteHostException;
 import esi.buildit9.service.InvoiceAutomaticProcessor;
 import esi.buildit9.service.InvoiceHumanAssistedHandling;
 import esi.buildit9.service.InvoiceResource;
@@ -91,7 +91,7 @@ public class InvoicingTest {
 
         try {
             new InvoiceAutomaticProcessor().process(createInvoiceSdo(invoice));
-        } catch (Team9Rest.RemoteHostException ignored) {
+        } catch (RemoteHostException ignored) {
         }
     }
 
@@ -110,7 +110,7 @@ public class InvoicingTest {
 
         try {
             new InvoiceHumanAssistedHandling().process(createInvoiceSdo(invoice));
-        } catch (Team9Rest.RemoteHostException ignored) {
+        } catch (RemoteHostException ignored) {
         }
     }
 
