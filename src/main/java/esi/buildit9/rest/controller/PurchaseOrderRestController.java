@@ -7,8 +7,7 @@ import esi.buildit9.rest.PurchaseOrderAssembler;
 import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderListResource;
 import esi.buildit9.rest.PurchaseOrderResource;
-import esi.buildit9.rest.RemittanceAdviceAssembler;
-import esi.buildit9.rest.RemittanceAdviceResource;
+import esi.buildit9.rest.util.HttpHelpers;
 import esi.buildit9.rest.util.MethodLookup;
 import esi.buildit9.rest.util.MethodLookupHelper;
 import org.springframework.http.HttpHeaders;
@@ -48,9 +47,8 @@ public class PurchaseOrderRestController {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handleException(Exception ex) {
-        System.err.println(ex.getMessage());
         ex.printStackTrace();
-        return new ResponseEntity<String>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<String>(HttpHelpers.getStack(ex), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @RequestMapping(value="pos", method = RequestMethod.GET)
@@ -80,14 +78,14 @@ public class PurchaseOrderRestController {
         headers.add(HEADER_ENTITY_ID, order.getId().toString());
         return new ResponseEntity<Void>(headers, HttpStatus.CREATED);
     }
-    
+
 //    @RequestMapping(value = "ra", method = RequestMethod.POST)
 //    @MethodLookup(METHOD_CREATE_RA)
 //    public ResponseEntity<Void> createOrder(@RequestBody RemittanceAdviceResource res) {
 //        RemittanceAdvice remittanceAdvice = new RemittanceAdviceAssembler().fromResource(res);
 //
 //        remittanceAdvice.persist();
-//        
+//
 //        HttpHeaders headers = new HttpHeaders();
 //        URI location =
 //                ServletUriComponentsBuilder.fromCurrentRequestUri().
