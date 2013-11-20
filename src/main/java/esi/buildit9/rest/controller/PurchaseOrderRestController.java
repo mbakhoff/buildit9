@@ -1,6 +1,7 @@
 package esi.buildit9.rest.controller;
 
 
+import esi.buildit9.RBAC;
 import esi.buildit9.domain.*;
 import esi.buildit9.interop.InteropImplementation;
 import esi.buildit9.rest.PurchaseOrderAssembler;
@@ -62,6 +63,8 @@ public class PurchaseOrderRestController {
     @RequestMapping(value = "pos", method = RequestMethod.POST)
     @MethodLookup(METHOD_CREATE_ORDER)
     public ResponseEntity<Void> createOrder(@RequestBody PurchaseOrderResource res) {
+        RBAC.assertAuthority(RBAC.ROLE_SITE_ENGINEER);
+
         PurchaseOrder order = new PurchaseOrderAssembler().fromResource(res);
         order.setOrderStatus(OrderStatus.WAITING_APPROVAL);
 
@@ -93,7 +96,16 @@ public class PurchaseOrderRestController {
     @MethodLookup(METHOD_UPDATE_ORDER)
     public ResponseEntity<Void> updateOrder(@PathVariable Long id, @RequestBody PurchaseOrderResource res) {
         PurchaseOrder order = getCheckedOrder(id);
-        order.setOrderStatus(OrderStatus.WAITING_APPROVAL);
+
+        if (order.getOrderStatus() == OrderStatus.WAITING_APPROVAL || order.getOrderStatus() == OrderStatus.CREATED) {
+            RBAC.assertAuthority(RBAC.ROLE_WORKS_ENGINEER, RBAC.ROLE_RENTIT, RBAC.ROLE_SITE_ENGINEER);
+        } else {
+            RBAC.assertAuthority(RBAC.ROLE_WORKS_ENGINEER, RBAC.ROLE_RENTIT);
+        }
+
+        // i don't we should allow updating the status randomly
+        //order.setOrderStatus(OrderStatus.WAITING_APPROVAL);
+
         order.setRentit(RentIt.getOrCreateRentIt(res.getRentit()));
         order.setSite(Site.getOrCreateSite(res.getSiteAddress()));
         order.setSiteEngineerName(res.getSiteEngineerName());
@@ -122,6 +134,8 @@ public class PurchaseOrderRestController {
     @RequestMapping(value = "pos/{id}", method = RequestMethod.DELETE)
     @MethodLookup(METHOD_CLOSE_BY_ID)
     public ResponseEntity<Void> closeOrder(@PathVariable Long id) {
+        RBAC.assertAuthority(RBAC.ROLE_WORKS_ENGINEER);
+
         PurchaseOrder order = getCheckedOrder(id);
         order.setOrderStatus(OrderStatus.CLOSED);
         order.persist();
@@ -131,6 +145,8 @@ public class PurchaseOrderRestController {
     @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.POST)
     @MethodLookup(METHOD_APPROVE_BY_ID)
     public ResponseEntity<PurchaseOrderResource> approveOrder(@PathVariable Long id) {
+        RBAC.assertAuthority(RBAC.ROLE_WORKS_ENGINEER);
+
         PurchaseOrder order = getCheckedOrder(id);
         order.setOrderStatus(OrderStatus.APPROVED);
         order.persist();
@@ -154,6 +170,8 @@ public class PurchaseOrderRestController {
     @RequestMapping(value = "pos/{id}/confirm", method = RequestMethod.POST)
     @MethodLookup(METHOD_RENTIT_CONFIRMED)
     public ResponseEntity<Void> confirmedOrder(@PathVariable Long id) {
+        RBAC.assertAuthority(RBAC.ROLE_RENTIT);
+
         PurchaseOrder order = getCheckedOrder(id);
         order.setOrderStatus(OrderStatus.RENTIT_CONFIRMED);
         order.persist();
@@ -163,6 +181,8 @@ public class PurchaseOrderRestController {
     @RequestMapping(value = "pos/{id}/confirm", method = RequestMethod.DELETE)
     @MethodLookup(METHOD_RENTIT_REJECTED)
     public ResponseEntity<Void> rejectedOrder(@PathVariable Long id) {
+        RBAC.assertAuthority(RBAC.ROLE_RENTIT);
+
         PurchaseOrder order = getCheckedOrder(id);
         order.setOrderStatus(OrderStatus.RENTIT_REJECTED);
         order.persist();
@@ -172,6 +192,8 @@ public class PurchaseOrderRestController {
     @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.DELETE)
     @MethodLookup(METHOD_REJECT_BY_ID)
     public ResponseEntity<PurchaseOrderResource> rejectOrder(@PathVariable Long id) {
+        RBAC.assertAuthority(RBAC.ROLE_WORKS_ENGINEER);
+
         PurchaseOrder order = getCheckedOrder(id);
         order.setOrderStatus(OrderStatus.REJECTED);
         order.persist();
