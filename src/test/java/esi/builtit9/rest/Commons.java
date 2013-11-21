@@ -45,4 +45,21 @@ public class Commons {
         client.addFilter(new HTTPBasicAuthFilter("admin", "admin"));
         return client;
     }
+
+    public static Client withBasicAuthUser(Client client) {
+        client.addFilter(new HTTPBasicAuthFilter("user", "user"));
+        return client;
+    }
+    public static Client withBasicAuthSiteEngineer(Client client) {
+        client.addFilter(new HTTPBasicAuthFilter("siteEngineer", "user"));
+        return client;
+    }
+    public static Client withBasicAuthWorksEngineer(Client client) {
+        client.addFilter(new HTTPBasicAuthFilter("worksEngineer", "user"));
+        return client;
+    }
+    public static Client withBasicAuthRentit(Client client) {
+        client.addFilter(new HTTPBasicAuthFilter("rentit", "rentit"));
+        return client;
+    }
 }
