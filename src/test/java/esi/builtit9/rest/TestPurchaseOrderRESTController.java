@@ -150,24 +150,6 @@ public class TestPurchaseOrderRESTController {
     }
 
     @Test
-    public void testCancelPurchaseOrderWorks() throws Exception {
-        Client client = withBasicAuthWorksEngineer(Client.create());
-        WebResource webResource = client.resource(Commons.URL_POS);
-        PurchaseOrderResource newResource = Commons.createPurchaseOrderResource();
-
-        ClientResponse response = webResource.type(MediaType.APPLICATION_XML)
-                .accept(MediaType.APPLICATION_XML).post(ClientResponse.class, newResource);
-
-        String requestUrl = Commons.URL_POS +"/"+ Commons.getEntityId(response);
-
-        webResource = client.resource(requestUrl);
-        response = webResource.type(MediaType.APPLICATION_XML)
-                .accept(MediaType.APPLICATION_XML).delete(ClientResponse.class);
-        assertFalse(response.getStatus() == ClientResponse.Status.OK.getStatusCode());
-
-    }
-
-    @Test
     public void testCheckStatus() throws Exception {
         Client client = withBasicAuth(Client.create());
         WebResource webResource = client.resource(Commons.URL_POS);
