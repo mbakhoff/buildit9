@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord
+@RooJpaActiveRecord(finders = { "findInvoicesByPurchaseOrder" })
 public class Invoice {
 
     /**
@@ -24,4 +24,8 @@ public class Invoice {
     private InvoiceStatus status;
 
     private Long idAtRentit;
+
+    public boolean isMarkedForPayment() {
+        return status == InvoiceStatus.APPROVED || status == InvoiceStatus.COMPLETED;
+    }
 }

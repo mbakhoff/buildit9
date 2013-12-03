@@ -14,6 +14,7 @@ import javax.mail.internet.InternetAddress;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import java.util.Calendar;
+import java.util.List;
 
 public class InvoiceHelper {
 
@@ -74,5 +75,23 @@ public class InvoiceHelper {
 
         invoice.setStatus(InvoiceStatus.COMPLETED);
         invoice.persist();
+    }
+
+    public static boolean hasExistingInvoiceForPayment(PurchaseOrder purchaseOrder) {
+        List<Invoice> invoices = Invoice.findInvoicesByPurchaseOrder(purchaseOrder).getResultList();
+        for (Invoice invoice : invoices) {
+            if (invoice.isMarkedForPayment()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static MailMessage createMessage(String text, String to) {
+    	MailMessage message = new SimpleMailMessage();
+    	message.setTo(to);
+    	message.setSubject("Builtit9 invoice reply");
+    	message.setText(text);
+    	return message;
     }
 }
