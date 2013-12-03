@@ -1,12 +1,20 @@
 package esi.buildit9.web.se;
+import esi.buildit9.RBAC;
+import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.util.Arrays;
+import java.util.List;
 
 @RequestMapping("/se/po")
 @Controller
@@ -28,5 +36,54 @@ public class POSEController {
         }
         return "se/po/list";
     }
-	
+
+    @RequestMapping(params = "form", produces = "text/html")
+    public String createForm(Model uiModel) {
+        PurchaseOrder purchaseOrder = new PurchaseOrder();
+        purchaseOrder.setSiteEngineerName(RBAC.getUser());
+        populateEditForm(uiModel, purchaseOrder);
+        return "se/po/create";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
+    public String create(@Valid PurchaseOrder purchaseOrder, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        checkOrderStatus(purchaseOrder, bindingResult);
+        if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, purchaseOrder);
+            return "se/po/create";
+        }
+        uiModel.asMap().clear();
+        purchaseOrder.persist();
+        return "redirect:/se/po/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
+    public String update(@Valid PurchaseOrder purchaseOrder, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
+        checkIfValidOrderUpdate(purchaseOrder, bindingResult);
+        if (bindingResult.hasErrors()) {
+            populateEditForm(uiModel, purchaseOrder);
+            return "se/po/update";
+        }
+        uiModel.asMap().clear();
+        purchaseOrder.merge();
+        return "redirect:/se/po/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
+    }
+
+    private static void checkOrderStatus(PurchaseOrder purchaseOrder, BindingResult bindingResult) {
+        final List<OrderStatus> allowedStatuses = Arrays.asList(
+                OrderStatus.CREATED,
+                OrderStatus.WAITING_APPROVAL,
+                OrderStatus.CLOSED);
+        if (!allowedStatuses.contains(purchaseOrder.getOrderStatus())) {
+            bindingResult.reject(null, "Illegal order status");
+        }
+    }
+
+    private void checkIfValidOrderUpdate(PurchaseOrder purchaseOrder, BindingResult bindingResult) {
+        PurchaseOrder oldState = PurchaseOrder.findPurchaseOrder(purchaseOrder.getId());
+        if (oldState.getOrderStatus() != OrderStatus.CREATED) {
+            bindingResult.reject(null, "SEs can only update orders in status Created");
+        }
+        checkOrderStatus(purchaseOrder, bindingResult);
+    }
 }

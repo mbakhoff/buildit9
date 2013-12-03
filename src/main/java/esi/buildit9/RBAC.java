@@ -18,16 +18,22 @@ public class RBAC {
     public static final String ROLE_WORKS_ENGINEER = "ROLE_WORKS_ENGINEER";
 
     public static void assertAuthority(String ... anyOf) {
+        if (!hasAuthority(anyOf)) {
+            throw new UnauthorizedAccessException("RBAC access denied. Operation requires one of " + Arrays.toString(anyOf));
+        }
+    }
+
+    public static boolean hasAuthority(String ... anyOf) {
         Set<String> granted = getAuthorities();
         if (granted.contains(ROLE_ADMIN)) {
-            return;
+            return true;
         }
         for (String authority : anyOf) {
             if (granted.contains(authority)) {
-                return;
+                return true;
             }
         }
-        throw new UnauthorizedAccessException("RBAC access denied. Operation requires one of " + Arrays.toString(anyOf));
+        return false;
     }
 
     public static Set<String> getAuthorities() {
