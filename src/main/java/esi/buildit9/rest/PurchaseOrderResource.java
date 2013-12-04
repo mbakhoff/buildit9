@@ -1,27 +1,30 @@
 package esi.buildit9.rest;
 
-import esi.buildit9.domain.OrderStatus;
-import esi.buildit9.rest.util.ExtendedResourceSupport;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Calendar;
 
 @RooJavaBean
 @XmlRootElement(name = "purchaseorder")
-public class PurchaseOrderResource extends ExtendedResourceSupport {
+@XmlAccessorType(XmlAccessType.FIELD)
+public class PurchaseOrderResource {
 
-	private Long internalId;
+    private String rentitOrderId;
+    private String builditOrderId;
+    private String plantId;
     private String buildit;
     private String rentit;
     private String siteAddress;
-    private OrderStatus orderStatus;
-    private float totalPrice;
-    private String siteEngineerName;
-    private String worksEngineerName;
-    private String plantId;
-    private String plantName;
+    private String status;
+    private Float total;
     private Calendar startDate;
     private Calendar endDate;
+
+    private String plantName;
+    private String siteEngineerName;
+    private String worksEngineerName;
 
 }

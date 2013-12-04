@@ -38,7 +38,7 @@ public class PlantController {
     	List<PlantResource> plants = service.getAllPlants();
 
         CreatePurchaseOrderDTO dto = new CreatePurchaseOrderDTO();
-        dto.createFromPlants(plants);
+        dto.setLinesFromPlants(plants);
 
 
         addCommonObjects(uiModel);
@@ -63,7 +63,7 @@ public class PlantController {
     	req.setEndDate(convert(dto.getEndDate()));
 
     	List<PlantResource> plants = service.getPlantsBetween(req);
-        dto.createFromPlants(plants);
+        dto.setLinesFromPlants(plants);
 
     	addCommonObjects(uiModel);
         uiModel.addAttribute("createPurchaseOrderForm",dto);

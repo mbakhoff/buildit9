@@ -3,10 +3,15 @@
 
 package esi.buildit9.web;
 
-import esi.buildit9.domain.*;
+import esi.buildit9.domain.Invoice;
+import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.RemittanceAdvice;
+import esi.buildit9.domain.RentIt;
+import esi.buildit9.domain.Site;
 import esi.buildit9.security.AssignmentsDerp;
 import esi.buildit9.security.Authorities;
 import esi.buildit9.security.Users;
+import esi.buildit9.web.ApplicationConversionServiceFactoryBean;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.format.FormatterRegistry;
@@ -42,7 +47,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<PurchaseOrder, String> ApplicationConversionServiceFactoryBean.getPurchaseOrderToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.PurchaseOrder, java.lang.String>() {
             public String convert(PurchaseOrder purchaseOrder) {
-                return new StringBuilder().append(purchaseOrder.getTotalPrice()).append(' ').append(purchaseOrder.getPlantExternalId()).append(' ').append(purchaseOrder.getPlantName()).append(' ').append(purchaseOrder.getStartDate()).toString();
+                return new StringBuilder().append(purchaseOrder.getPlantExternalId()).append(' ').append(purchaseOrder.getPlantName()).append(' ').append(purchaseOrder.getTotalPrice()).append(' ').append(purchaseOrder.getStartDate()).toString();
             }
         };
     }

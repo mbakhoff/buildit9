@@ -3,7 +3,7 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_esi_buildit9_domain_PurchaseOrder" modelAttribute="purchaseOrder" path="/se/po" versionField="Version" z="26XflpY7yqtTj13ZJaR07YlRw5k=">
-        <field:input field="totalPrice" id="c_esi_buildit9_domain_PurchaseOrder_totalPrice" z="W9wRfgQ91MQTmwrJpndSXdeyVFQ="/>
+        <field:input field="totalPrice" id="c_esi_buildit9_domain_PurchaseOrder_totalPrice" validationMessageCode="field_invalid_number" z="IFXtYhxh0JM/tOu3pb215M65Zts="/>
         <field:input field="site" id="c_esi_buildit9_domain_PurchaseOrder_site" z="W1zIQ2ydEPczr9vKSsYg/rOHhK0="/>
         <field:input field="rentit" id="c_esi_buildit9_domain_PurchaseOrder_rentit" z="BMrX+zPXl4/05xtFpZ7koV218gA="/>
         <field:select field="orderStatus" id="c_esi_buildit9_domain_PurchaseOrder_orderStatus" items="${orderstatuses}" path="orderstatuses" z="vveq1qdi2ZP9WeOPRKWtrwRE3es="/>

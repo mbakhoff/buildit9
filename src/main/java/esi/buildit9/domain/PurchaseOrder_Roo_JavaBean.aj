@@ -7,14 +7,6 @@ import java.util.Calendar;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
     
-    public float PurchaseOrder.getTotalPrice() {
-        return this.totalPrice;
-    }
-    
-    public void PurchaseOrder.setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-    
     public Site PurchaseOrder.getSite() {
         return this.site;
     }
@@ -45,6 +37,14 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public void PurchaseOrder.setPlantName(String plantName) {
         this.plantName = plantName;
+    }
+    
+    public Float PurchaseOrder.getTotalPrice() {
+        return this.totalPrice;
+    }
+    
+    public void PurchaseOrder.setTotalPrice(Float totalPrice) {
+        this.totalPrice = totalPrice;
     }
     
     public OrderStatus PurchaseOrder.getOrderStatus() {

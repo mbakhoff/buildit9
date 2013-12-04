@@ -9,13 +9,9 @@ import javax.persistence.ManyToOne;
 @RooJpaActiveRecord(finders = { "findInvoicesByPurchaseOrder" })
 public class Invoice {
 
-    /**
-     */
     @ManyToOne
     private PurchaseOrder purchaseOrder;
 
-    /**
-     */
     @ManyToOne
     private RentIt rentit;
 

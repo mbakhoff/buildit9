@@ -17,7 +17,7 @@ public class Site {
     public static Site getOrCreateSite(String siteAddress) {
         Site site;
         try {
-            site = findSitesByAddressEquals(siteAddress).getSingleResult();//.findRentItsByNameEquals(name).getSingleResult();
+            site = findSitesByAddressEquals(siteAddress).getSingleResult();
         } catch (DataRetrievalFailureException ee) {
             site = new Site();
             site.setAddress(siteAddress);

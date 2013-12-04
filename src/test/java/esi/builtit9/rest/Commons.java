@@ -4,7 +4,6 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.buildit9.rest.PurchaseOrderResource;
-import esi.buildit9.rest.controller.PurchaseOrderRestController;
 
 import java.util.Calendar;
 
@@ -19,14 +18,14 @@ public class Commons {
         newResource.setSiteAddress("Address");
         newResource.setEndDate(Calendar.getInstance());
         newResource.setStartDate(Calendar.getInstance());
-        newResource.setTotalPrice(1000000);
+        newResource.setTotal(1000000f);
         newResource.setPlantId("1");
 
         return newResource;
     }
 
     public static String getEntityId(ClientResponse response) {
-        String entityId = response.getHeaders().getFirst(PurchaseOrderRestController.HEADER_ENTITY_ID);
+        String entityId = response.getHeaders().getFirst("EntityId");
         if (entityId == null) {
             throw new RuntimeException("HTTP header did not contain entity id");
         }

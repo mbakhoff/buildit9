@@ -51,7 +51,7 @@ public class Team9Rest implements RentitInterop.Rest {
         if (request.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
             throw new RemoteHostException(request);
         }
-        return request.getEntity(PlantResourceList.class).getPlant();
+        return request.getEntity(PlantResourceList.class).getPlants();
     }
 
     private String getFindUrl(String name, DateMidnight startDate, DateMidnight endDate) {

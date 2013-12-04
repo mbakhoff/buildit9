@@ -13,40 +13,38 @@ import java.util.List;
 
 @RooJavaBean
 public class CreatePurchaseOrderDTO {
-    //private AddLinesDTO addLines;
-    //private PlantQueryDTO plantsQuery;
+
     private String nameLike;
     private String siteAddress;
     private String worksEngineerName;
+    private String selectedPlantId;
+    private String selectedPlantName;
+    private OrderStatus orderStatus;
+    private List<PlantLineDTO> searchLines;
 
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "MM")
     private Calendar startDate;
+
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "MM")
     private Calendar endDate;
 
     public CreatePurchaseOrderDTO() {
         orderStatus = OrderStatus.CREATED;
+        searchLines = new ArrayList<PlantLineDTO>();
     }
 
-    private String selectedPlantId;
-    private String selectedPlantName;
-
-    private OrderStatus orderStatus;
-
-    private List<PlantLineDTO> searchLines =new ArrayList<PlantLineDTO>();
-
-    public void createFromPlants(List<PlantResource> plantList) {
-        List<PlantLineDTO> l=new ArrayList<PlantLineDTO>();
-        for (PlantResource plant:plantList){
-            PlantLineDTO pl=new PlantLineDTO();
+    public void setLinesFromPlants(List<PlantResource> plantList) {
+        searchLines = new ArrayList<PlantLineDTO>();
+        for (PlantResource plant : plantList) {
+            PlantLineDTO pl = new PlantLineDTO();
             pl.setChecked(false);
             pl.setId(plant.getId());
             pl.setName(plant.getName());
             pl.setDescription(plant.getDescription());
-            l.add(pl);
+            searchLines.add(pl);
         }
-        searchLines=l;
     }
+
 }

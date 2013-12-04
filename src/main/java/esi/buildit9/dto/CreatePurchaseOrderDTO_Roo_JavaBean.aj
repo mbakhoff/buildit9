@@ -4,7 +4,8 @@
 package esi.buildit9.dto;
 
 import esi.buildit9.domain.OrderStatus;
-
+import esi.buildit9.dto.CreatePurchaseOrderDTO;
+import esi.buildit9.dto.PlantLineDTO;
 import java.util.Calendar;
 import java.util.List;
 
@@ -32,22 +33,6 @@ privileged aspect CreatePurchaseOrderDTO_Roo_JavaBean {
     
     public void CreatePurchaseOrderDTO.setWorksEngineerName(String worksEngineerName) {
         this.worksEngineerName = worksEngineerName;
-    }
-    
-    public Calendar CreatePurchaseOrderDTO.getStartDate() {
-        return this.startDate;
-    }
-    
-    public void CreatePurchaseOrderDTO.setStartDate(Calendar startDate) {
-        this.startDate = startDate;
-    }
-    
-    public Calendar CreatePurchaseOrderDTO.getEndDate() {
-        return this.endDate;
-    }
-    
-    public void CreatePurchaseOrderDTO.setEndDate(Calendar endDate) {
-        this.endDate = endDate;
     }
     
     public String CreatePurchaseOrderDTO.getSelectedPlantId() {
@@ -80,6 +65,22 @@ privileged aspect CreatePurchaseOrderDTO_Roo_JavaBean {
     
     public void CreatePurchaseOrderDTO.setSearchLines(List<PlantLineDTO> searchLines) {
         this.searchLines = searchLines;
+    }
+    
+    public Calendar CreatePurchaseOrderDTO.getStartDate() {
+        return this.startDate;
+    }
+    
+    public void CreatePurchaseOrderDTO.setStartDate(Calendar startDate) {
+        this.startDate = startDate;
+    }
+    
+    public Calendar CreatePurchaseOrderDTO.getEndDate() {
+        return this.endDate;
+    }
+    
+    public void CreatePurchaseOrderDTO.setEndDate(Calendar endDate) {
+        this.endDate = endDate;
     }
     
 }

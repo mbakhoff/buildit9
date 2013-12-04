@@ -3,18 +3,32 @@
 
 package esi.buildit9.rest;
 
-import esi.buildit9.domain.OrderStatus;
-
 import java.util.Calendar;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
-    public Long PurchaseOrderResource.getInternalId() {
-        return this.internalId;
+    public String PurchaseOrderResource.getRentitOrderId() {
+        return this.rentitOrderId;
     }
     
-    public void PurchaseOrderResource.setInternalId(Long internalId) {
-        this.internalId = internalId;
+    public void PurchaseOrderResource.setRentitOrderId(String rentitOrderId) {
+        this.rentitOrderId = rentitOrderId;
+    }
+    
+    public String PurchaseOrderResource.getBuilditOrderId() {
+        return this.builditOrderId;
+    }
+    
+    public void PurchaseOrderResource.setBuilditOrderId(String builditOrderId) {
+        this.builditOrderId = builditOrderId;
+    }
+    
+    public String PurchaseOrderResource.getPlantId() {
+        return this.plantId;
+    }
+    
+    public void PurchaseOrderResource.setPlantId(String plantId) {
+        this.plantId = plantId;
     }
     
     public String PurchaseOrderResource.getBuildit() {
@@ -41,52 +55,20 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.siteAddress = siteAddress;
     }
     
-    public OrderStatus PurchaseOrderResource.getOrderStatus() {
-        return this.orderStatus;
+    public String PurchaseOrderResource.getStatus() {
+        return this.status;
     }
     
-    public void PurchaseOrderResource.setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
+    public void PurchaseOrderResource.setStatus(String status) {
+        this.status = status;
     }
     
-    public float PurchaseOrderResource.getTotalPrice() {
-        return this.totalPrice;
+    public Float PurchaseOrderResource.getTotal() {
+        return this.total;
     }
     
-    public void PurchaseOrderResource.setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
-    
-    public String PurchaseOrderResource.getSiteEngineerName() {
-        return this.siteEngineerName;
-    }
-    
-    public void PurchaseOrderResource.setSiteEngineerName(String siteEngineerName) {
-        this.siteEngineerName = siteEngineerName;
-    }
-    
-    public String PurchaseOrderResource.getWorksEngineerName() {
-        return this.worksEngineerName;
-    }
-    
-    public void PurchaseOrderResource.setWorksEngineerName(String worksEngineerName) {
-        this.worksEngineerName = worksEngineerName;
-    }
-    
-    public String PurchaseOrderResource.getPlantId() {
-        return this.plantId;
-    }
-    
-    public void PurchaseOrderResource.setPlantId(String plantId) {
-        this.plantId = plantId;
-    }
-    
-    public String PurchaseOrderResource.getPlantName() {
-        return this.plantName;
-    }
-    
-    public void PurchaseOrderResource.setPlantName(String plantName) {
-        this.plantName = plantName;
+    public void PurchaseOrderResource.setTotal(Float total) {
+        this.total = total;
     }
     
     public Calendar PurchaseOrderResource.getStartDate() {
@@ -103,6 +85,30 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
     public void PurchaseOrderResource.setEndDate(Calendar endDate) {
         this.endDate = endDate;
+    }
+    
+    public String PurchaseOrderResource.getPlantName() {
+        return this.plantName;
+    }
+    
+    public void PurchaseOrderResource.setPlantName(String plantName) {
+        this.plantName = plantName;
+    }
+    
+    public String PurchaseOrderResource.getSiteEngineerName() {
+        return this.siteEngineerName;
+    }
+    
+    public void PurchaseOrderResource.setSiteEngineerName(String siteEngineerName) {
+        this.siteEngineerName = siteEngineerName;
+    }
+    
+    public String PurchaseOrderResource.getWorksEngineerName() {
+        return this.worksEngineerName;
+    }
+    
+    public void PurchaseOrderResource.setWorksEngineerName(String worksEngineerName) {
+        this.worksEngineerName = worksEngineerName;
     }
     
 }

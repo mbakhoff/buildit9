@@ -14,14 +14,11 @@ import java.util.Calendar;
 @RooJpaActiveRecord
 public class RemittanceAdvice {
 
-    /**
-     */
     @ManyToOne
     private Invoice invoice;
 
-    /**
-     */
     @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "M-")
     private Calendar payDay;
+
 }
