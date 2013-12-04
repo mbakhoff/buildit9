@@ -3,6 +3,7 @@
 
 package esi.buildit9.rest;
 
+import esi.buildit9.rest.PurchaseOrderResource;
 import java.util.Calendar;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {

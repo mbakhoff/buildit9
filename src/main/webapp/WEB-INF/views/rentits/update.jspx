@@ -4,7 +4,6 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:update id="fu_esi_buildit9_domain_RentIt" modelAttribute="rentIt" path="/rentits" versionField="Version" z="mHEmPEdiVjcDWu1QijZDCKeD8ng=">
         <field:input field="name" id="c_esi_buildit9_domain_RentIt_name" z="do9VERARM5++OLM1R7rJtgzy47Y="/>
-        <field:select field="provider" id="c_esi_buildit9_domain_RentIt_adapter" items="${rentitadapterses}" path="rentitadapterses" z="mjd5D6PVPK/ary7HqHziKD2tpio="/>
         <field:select field="provider" id="c_esi_buildit9_domain_RentIt_provider" items="${interopimplementations}" path="interopimplementations" z="cocyHms57iVxdwragYlxTJ/jcQc="/>
     </form:update>
 </div>

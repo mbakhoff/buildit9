@@ -15,7 +15,7 @@
         <field:display field="lines" id="c_esi_buildit9_domain_PurchaseOrder_lines" object="${purchaseorderlines}" z="user-managed"/>
       </form:update> -->
         <input type="submit" value="Update status"/>
-        <field:input field="totalPrice" id="c_esi_buildit9_domain_PurchaseOrder_totalPrice" z="W9wRfgQ91MQTmwrJpndSXdeyVFQ="/>
+        <field:input field="totalPrice" id="c_esi_buildit9_domain_PurchaseOrder_totalPrice" validationMessageCode="field_invalid_number" z="IFXtYhxh0JM/tOu3pb215M65Zts="/>
         <field:input field="site" id="c_esi_buildit9_domain_PurchaseOrder_site" z="W1zIQ2ydEPczr9vKSsYg/rOHhK0="/>
         <field:input field="rentit" id="c_esi_buildit9_domain_PurchaseOrder_rentit" z="BMrX+zPXl4/05xtFpZ7koV218gA="/>
         <field:input field="plantExternalId" id="c_esi_buildit9_domain_PurchaseOrder_plantExternalId" z="99f9he5JCQmvdHizzw9BEoxrR2c="/>
