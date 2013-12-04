@@ -4,10 +4,6 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <menu:menu id="_menu" z="nZaf43BjUg1iM0v70HJVEsXDopc=">
-        <!--<menu:category id="c_purchaseorderline" z="uQ0OF4bed8agP64HCgEyFx4zFws=">-->
-            <!--<menu:item id="i_purchaseorderline_new" messageCode="global_menu_new" url="/purchaseorderlines?form" z="0WIUPT+8gFZZMo0v8uINaPVenz0="/>-->
-            <!--<menu:item id="i_purchaseorderline_list" messageCode="global_menu_list" url="/purchaseorderlines?page=1&amp;size=${empty param.size ? 10 : param.size}" z="WNXxpjb+yJd1QBJ2gfs6XLODqLo="/>-->
-        <!--</menu:category>-->
         <sec:authorize ifAllGranted="ROLE_SITE_ENGINEER">
             <menu:category id="c_purchaseorder" z="user-managed">
                 <menu:item id="i_controller__plantsindex_id" messageCode="global_generic" url="/plants/index" z="Z9cDMn5g9wZ2ix2gpcPLDr81Bs4="/>

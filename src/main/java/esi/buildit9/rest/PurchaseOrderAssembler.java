@@ -13,11 +13,9 @@ import java.util.Set;
 
 public class PurchaseOrderAssembler {
 
-	private final PurchaseOrderLineAssembler lineAssembler;
     private final MethodLookupHelper linker;
 
 	public PurchaseOrderAssembler() {
-        lineAssembler = new PurchaseOrderLineAssembler();
         linker = new MethodLookupHelper(PurchaseOrderRestController.class);
 	}
 
@@ -29,9 +27,12 @@ public class PurchaseOrderAssembler {
         res.setBuildit("builtit9"); //TODO this must e changed.. someday
 		res.setRentit(getName(order));
         res.setSiteAddress(getAddress(order));
-        res.setPurchaseOrderLines(lineAssembler.toResource(order.getLines()));
 		res.setTotalPrice(order.getTotalPrice());
 		res.setWorksEngineerName(order.getWorksEngineerName());
+        res.setPlantId(order.getPlantExternalId());
+        res.setPlantName(order.getPlantName());
+        res.setStartDate(order.getStartDate());
+        res.setEndDate(order.getEndDate());
         return res;
     }
 

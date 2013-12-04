@@ -5,10 +5,13 @@
     <form:update id="fu_esi_buildit9_domain_PurchaseOrder" modelAttribute="purchaseOrder" path="/purchaseorders" versionField="Version" z="3XV9G5nlDlhytFE0w1CV2EeIB2U=">
         <field:input field="totalPrice" id="c_esi_buildit9_domain_PurchaseOrder_totalPrice" z="W9wRfgQ91MQTmwrJpndSXdeyVFQ="/>
         <field:input field="siteEngineerName" id="c_esi_buildit9_domain_PurchaseOrder_siteEngineerName" z="LMaENWtPR49FGEm/XhxvEICgtws="/>
-        <field:select field="site" id="c_esi_buildit9_domain_PurchaseOrder_site" itemValue="id" items="${sites}" path="/sites" z="W1zIQ2ydEPczr9vKSsYg/rOHhK0="/>
-        <field:select field="rentit" id="c_esi_buildit9_domain_PurchaseOrder_rentit" itemValue="id" items="${rentits}" path="/rentits" z="BMrX+zPXl4/05xtFpZ7koV218gA="/>
+        <field:select field="site" id="c_esi_buildit9_domain_PurchaseOrder_site" itemValue="id" items="${sites}" path="/sites" z="user-managed"/>
+        <field:select field="rentit" id="c_esi_buildit9_domain_PurchaseOrder_rentit" itemValue="id" items="${rentits}" path="/rentits" z="user-managed"/>
         <field:select field="orderStatus" id="c_esi_buildit9_domain_PurchaseOrder_orderStatus" items="${orderstatuses}" path="orderstatuses" z="vveq1qdi2ZP9WeOPRKWtrwRE3es="/>
-        <field:select field="worksEngineerName" id="c_esi_buildit9_domain_PurchaseOrder_worksEngineerName" items="${username}" path="/security/users" z="M0rns5X1ujHj3i65NH2SN0/wJGE="/>
-        <field:input field="lines" id="c_esi_buildit9_domain_PurchaseOrder_lines" z="tAYiFh9bY+60ui1AQajRAtXLDL0="/>
+        <field:select field="worksEngineerName" id="c_esi_buildit9_domain_PurchaseOrder_worksEngineerName" items="${username}" path="/security/users" z="user-managed"/>
+        <field:input field="plantExternalId" id="c_esi_buildit9_domain_PurchaseOrder_plantExternalId" z="99f9he5JCQmvdHizzw9BEoxrR2c="/>
+        <field:input field="plantName" id="c_esi_buildit9_domain_PurchaseOrder_plantName" z="Iryi2ghRZIi0f6aCWXMnlP/FoGg="/>
+        <field:datetime dateTimePattern="${purchaseOrder_startdate_date_format}" field="startDate" id="c_esi_buildit9_domain_PurchaseOrder_startDate" z="e27zBUSOhFx2zuIwRHO59hN1bag="/>
+        <field:datetime dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="c_esi_buildit9_domain_PurchaseOrder_endDate" z="/A/WL4gKuqr2j5bcTTK641y3Cu0="/>
     </form:update>
 </div>

@@ -1,15 +1,14 @@
 package esi.buildit9.web;
 
 
-import java.util.*;
-
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-
-import esi.buildit9.domain.*;
-import esi.buildit9.domain.OrderStatus;
+import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.RentIt;
+import esi.buildit9.domain.Site;
 import esi.buildit9.dto.CreatePurchaseOrderDTO;
 import esi.buildit9.dto.PlantLineDTO;
+import esi.buildit9.soap.client.PlantResource;
+import esi.buildit9.soap.client.PlantSoapService;
+import esi.buildit9.soap.client.PlantsAvailableRequest;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -17,9 +16,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import esi.buildit9.soap.client.*;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 @RequestMapping("/plants/**")
 @Controller
@@ -67,7 +73,7 @@ public class PlantController {
     @RequestMapping(params = "addLines", method = RequestMethod.POST)
     public String addLines(@ModelAttribute("createPurchaseOrderForm") CreatePurchaseOrderDTO dto,
                            Model uiModel) {
-        addPurchaseOrderLines(dto);
+        addSelectedPlant(dto);
 
         addCommonObjects(uiModel);
         uiModel.addAttribute("createPurchaseOrderForm", dto);
@@ -75,19 +81,21 @@ public class PlantController {
     }
 
     @RequestMapping(params = "create",method = RequestMethod.POST)
-    public String create(@ModelAttribute("createPurchaseOrderForm") CreatePurchaseOrderDTO dto,
-                           Model uiModel){
+    public String create(@ModelAttribute("createPurchaseOrderForm") CreatePurchaseOrderDTO dto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+
 
         PurchaseOrder po = new PurchaseOrder();
         po.setOrderStatus(dto.getOrderStatus());
-
-        po.setLines(new HashSet<PurchaseOrderLine>(dto.getAddedLines()));
+        po.setPlantExternalId(dto.getSelectedPlantId());
+        po.setPlantName(dto.getSelectedPlantName());
+        po.setStartDate(dto.getStartDate());
+        po.setEndDate(dto.getEndDate());
         po.setSite(Site.getOrCreateSite(dto.getSiteAddress()));
         po.setRentit(RentIt.getOrCreateRentIt("Rentit9"));//TODO:Remove hard coded for integration
         po.setWorksEngineerName(dto.getWorksEngineerName());
         po.setSiteEngineerName(authentication.getName());
-
         po.persist();
 
         return "redirect:/purchaseorders";
@@ -106,32 +114,12 @@ public class PlantController {
         uiModel.addAttribute("plantsAvailableStartDate", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
     }
 
-    private void addPurchaseOrderLines(CreatePurchaseOrderDTO dto) {
-
-        Calendar startDate = dto.getStartDate();
-        Calendar endDate = dto.getEndDate();
-        setToNow(startDate, endDate);
-
-
-        for (PlantLineDTO pl:dto.getSearchLines()){
-            if (pl.getChecked()==true){
-                PurchaseOrderLine pr =new PurchaseOrderLine();
-                pr.setPlantExternalId(pl.getId().toString());
-                pr.setPlantName(pl.getName());
-                pr.setStartDate(startDate);
-                pr.setEndDate(endDate);
-                dto.getAddedLines().add(pr);
+    private void addSelectedPlant(CreatePurchaseOrderDTO dto) {
+        for (PlantLineDTO pl : dto.getSearchLines()) {
+            if (pl.getChecked()) {
+                dto.setSelectedPlantId(pl.getId().toString());
+                dto.setSelectedPlantName(pl.getName());
             }
-        }
-
-    }
-
-    private void setToNow(Calendar startDate, Calendar endDate) {
-        if (startDate==null){
-            startDate=Calendar.getInstance();
-        }
-        if (endDate==null){
-            endDate=Calendar.getInstance();
         }
     }
 

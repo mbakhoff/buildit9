@@ -3,12 +3,7 @@
 
 package esi.buildit9.domain;
 
-import esi.buildit9.domain.OrderStatus;
-import esi.buildit9.domain.PurchaseOrder;
-import esi.buildit9.domain.PurchaseOrderLine;
-import esi.buildit9.domain.RentIt;
-import esi.buildit9.domain.Site;
-import java.util.Set;
+import java.util.Calendar;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
     
@@ -36,12 +31,44 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.rentit = rentit;
     }
     
+    public String PurchaseOrder.getPlantExternalId() {
+        return this.plantExternalId;
+    }
+    
+    public void PurchaseOrder.setPlantExternalId(String plantExternalId) {
+        this.plantExternalId = plantExternalId;
+    }
+    
+    public String PurchaseOrder.getPlantName() {
+        return this.plantName;
+    }
+    
+    public void PurchaseOrder.setPlantName(String plantName) {
+        this.plantName = plantName;
+    }
+    
     public OrderStatus PurchaseOrder.getOrderStatus() {
         return this.orderStatus;
     }
     
     public void PurchaseOrder.setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
+    }
+    
+    public Calendar PurchaseOrder.getStartDate() {
+        return this.startDate;
+    }
+    
+    public void PurchaseOrder.setStartDate(Calendar startDate) {
+        this.startDate = startDate;
+    }
+    
+    public Calendar PurchaseOrder.getEndDate() {
+        return this.endDate;
+    }
+    
+    public void PurchaseOrder.setEndDate(Calendar endDate) {
+        this.endDate = endDate;
     }
     
     public String PurchaseOrder.getSiteEngineerName() {
@@ -58,14 +85,6 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     
     public void PurchaseOrder.setWorksEngineerName(String worksEngineerName) {
         this.worksEngineerName = worksEngineerName;
-    }
-    
-    public Set<PurchaseOrderLine> PurchaseOrder.getLines() {
-        return this.lines;
-    }
-    
-    public void PurchaseOrder.setLines(Set<PurchaseOrderLine> lines) {
-        this.lines = lines;
     }
     
 }

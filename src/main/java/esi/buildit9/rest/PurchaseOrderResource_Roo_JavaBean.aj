@@ -4,8 +4,8 @@
 package esi.buildit9.rest;
 
 import esi.buildit9.domain.OrderStatus;
-import esi.buildit9.rest.PurchaseOrderLineListResource;
-import esi.buildit9.rest.PurchaseOrderResource;
+
+import java.util.Calendar;
 
 privileged aspect PurchaseOrderResource_Roo_JavaBean {
     
@@ -73,12 +73,36 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.worksEngineerName = worksEngineerName;
     }
     
-    public PurchaseOrderLineListResource PurchaseOrderResource.getPurchaseOrderLines() {
-        return this.purchaseOrderLines;
+    public String PurchaseOrderResource.getPlantId() {
+        return this.plantId;
     }
     
-    public void PurchaseOrderResource.setPurchaseOrderLines(PurchaseOrderLineListResource purchaseOrderLines) {
-        this.purchaseOrderLines = purchaseOrderLines;
+    public void PurchaseOrderResource.setPlantId(String plantId) {
+        this.plantId = plantId;
+    }
+    
+    public String PurchaseOrderResource.getPlantName() {
+        return this.plantName;
+    }
+    
+    public void PurchaseOrderResource.setPlantName(String plantName) {
+        this.plantName = plantName;
+    }
+    
+    public Calendar PurchaseOrderResource.getStartDate() {
+        return this.startDate;
+    }
+    
+    public void PurchaseOrderResource.setStartDate(Calendar startDate) {
+        this.startDate = startDate;
+    }
+    
+    public Calendar PurchaseOrderResource.getEndDate() {
+        return this.endDate;
+    }
+    
+    public void PurchaseOrderResource.setEndDate(Calendar endDate) {
+        this.endDate = endDate;
     }
     
 }

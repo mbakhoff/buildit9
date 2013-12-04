@@ -9,6 +9,9 @@
         <field:display field="orderStatus" id="s_esi_buildit9_domain_PurchaseOrder_orderStatus" object="${purchaseorder}" z="9/iaEfEBgWoTXCekqssJ79JPj2M="/>
         <field:display field="siteEngineerName" id="s_esi_buildit9_domain_PurchaseOrder_siteEngineerName" object="${purchaseorder}" z="x2VEW5W0gFiZcsUHK1T7kHiNisU="/>
         <field:display field="worksEngineerName" id="s_esi_buildit9_domain_PurchaseOrder_worksEngineerName" object="${purchaseorder}" z="nsApI4jzn5o6cYEsSYvbhjXvUqQ="/>
-        <field:display field="lines" id="s_esi_buildit9_domain_PurchaseOrder_lines" object="${purchaseorder}" z="cliJFc0En9v6fq2wP3IJS9F+3xE="/>
+        <field:display field="plantExternalId" id="s_esi_buildit9_domain_PurchaseOrder_plantExternalId" object="${purchaseorder}" z="WqzgyCtCqCfFPIGWalRyRbWed/k="/>
+        <field:display field="plantName" id="s_esi_buildit9_domain_PurchaseOrder_plantName" object="${purchaseorder}" z="l5DcsrIbnPYtPvXibn6b/qcUFtg="/>
+        <field:display calendar="true" dateTimePattern="${purchaseOrder_startdate_date_format}" field="startDate" id="s_esi_buildit9_domain_PurchaseOrder_startDate" object="${purchaseorder}" z="p3B9CX5pRN94v4lgcRtBe1i34EY="/>
+        <field:display calendar="true" dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="s_esi_buildit9_domain_PurchaseOrder_endDate" object="${purchaseorder}" z="/4bqArF3QwBc0kEeLqiAV+fnRyA="/>
     </page:show>
 </div>

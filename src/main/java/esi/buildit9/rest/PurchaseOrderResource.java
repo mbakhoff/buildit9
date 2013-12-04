@@ -5,6 +5,7 @@ import esi.buildit9.rest.util.ExtendedResourceSupport;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Calendar;
 
 @RooJavaBean
 @XmlRootElement(name = "purchaseorder")
@@ -18,6 +19,9 @@ public class PurchaseOrderResource extends ExtendedResourceSupport {
     private float totalPrice;
     private String siteEngineerName;
     private String worksEngineerName;
+    private String plantId;
+    private String plantName;
+    private Calendar startDate;
+    private Calendar endDate;
 
-    private PurchaseOrderLineListResource purchaseOrderLines;
 }

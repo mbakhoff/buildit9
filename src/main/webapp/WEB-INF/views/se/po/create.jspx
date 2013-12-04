@@ -9,7 +9,10 @@
         <field:select field="orderStatus" id="c_esi_buildit9_domain_PurchaseOrder_orderStatus" items="${orderstatuses}" path="orderstatuses" z="vveq1qdi2ZP9WeOPRKWtrwRE3es="/>
         <field:input field="siteEngineerName" id="c_esi_buildit9_domain_PurchaseOrder_siteEngineerName" z="LMaENWtPR49FGEm/XhxvEICgtws="/>
         <field:input field="worksEngineerName" id="c_esi_buildit9_domain_PurchaseOrder_worksEngineerName" z="M0rns5X1ujHj3i65NH2SN0/wJGE="/>
-        <field:input field="lines" id="c_esi_buildit9_domain_PurchaseOrder_lines" z="tAYiFh9bY+60ui1AQajRAtXLDL0="/>
+        <field:input field="plantExternalId" id="c_esi_buildit9_domain_PurchaseOrder_plantExternalId" z="99f9he5JCQmvdHizzw9BEoxrR2c="/>
+        <field:input field="plantName" id="c_esi_buildit9_domain_PurchaseOrder_plantName" z="Iryi2ghRZIi0f6aCWXMnlP/FoGg="/>
+        <field:datetime dateTimePattern="${purchaseOrder_startdate_date_format}" field="startDate" id="c_esi_buildit9_domain_PurchaseOrder_startDate" z="e27zBUSOhFx2zuIwRHO59hN1bag="/>
+        <field:datetime dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="c_esi_buildit9_domain_PurchaseOrder_endDate" z="/A/WL4gKuqr2j5bcTTK641y3Cu0="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_esi_buildit9_domain_PurchaseOrder" render="${not empty dependencies}" z="IlT2lajQHJxmBToMuo6Qroq9sD8="/>
 </div>

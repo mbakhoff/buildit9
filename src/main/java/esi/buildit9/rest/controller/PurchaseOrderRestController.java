@@ -2,10 +2,12 @@ package esi.buildit9.rest.controller;
 
 
 import esi.buildit9.RBAC;
-import esi.buildit9.domain.*;
+import esi.buildit9.domain.OrderStatus;
+import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.domain.RentIt;
+import esi.buildit9.domain.Site;
 import esi.buildit9.interop.InteropImplementation;
 import esi.buildit9.rest.PurchaseOrderAssembler;
-import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderListResource;
 import esi.buildit9.rest.PurchaseOrderResource;
 import esi.buildit9.rest.util.HttpHelpers;
@@ -70,10 +72,11 @@ public class PurchaseOrderRestController {
 
         PurchaseOrder order = new PurchaseOrderAssembler().fromResource(res);
         order.setOrderStatus(OrderStatus.WAITING_APPROVAL);
-
+        order.setPlantExternalId(res.getPlantId());
+        order.setPlantName(res.getPlantName());
+        order.setStartDate(res.getStartDate());
+        order.setEndDate(res.getEndDate());
         order.persist();
-
-        attachLines(order, res.getPurchaseOrderLines().orderLines);
 
         HttpHeaders headers = new HttpHeaders();
         URI location =
@@ -114,11 +117,11 @@ public class PurchaseOrderRestController {
         order.setSiteEngineerName(res.getSiteEngineerName());
         order.setTotalPrice(res.getTotalPrice());
         order.setWorksEngineerName(res.getWorksEngineerName());
+        order.setPlantExternalId(res.getPlantId());
+        order.setPlantName(res.getPlantName());
+        order.setStartDate(res.getStartDate());
+        order.setEndDate(res.getEndDate());
         order.persist();
-
-        deleteLines(order);
-
-        attachLines(order, res.getPurchaseOrderLines().orderLines);
 
         HttpHeaders headers = new HttpHeaders();
         URI location =
@@ -126,12 +129,6 @@ public class PurchaseOrderRestController {
                         pathSegment(order.getId().toString()).build().toUri();
         headers.setLocation(location);
         return new ResponseEntity<Void>(headers, HttpStatus.OK);
-    }
-
-    private void deleteLines(PurchaseOrder order) {
-        for (PurchaseOrderLine line : order.getLines()) {
-            line.remove();
-        }
     }
 
     @RequestMapping(value = "pos/{id}", method = RequestMethod.DELETE)
@@ -204,23 +201,6 @@ public class PurchaseOrderRestController {
         PurchaseOrderResource resource = assembler.toResource(order);
         resource.add(linker.buildLink(METHOD_UPDATE_ORDER, order.getId()));
         return new ResponseEntity<PurchaseOrderResource>(resource, HttpStatus.OK);
-    }
-
-    private void attachLines(PurchaseOrder order, List<PurchaseOrderLineResource> purchaseOrderLines) {
-        for (PurchaseOrderLineResource res : purchaseOrderLines) {
-            attachLine(order, res);
-        }
-    }
-
-    private void attachLine(PurchaseOrder order, PurchaseOrderLineResource res) {
-        PurchaseOrderLine line = new PurchaseOrderLine();
-        line.setPlantExternalId(res.getPlantId());
-        line.setPlantName(res.getPlantName());
-        line.setStartDate(res.getStartDate());
-        line.setEndDate(res.getEndDate());
-        line.setTotalCost(res.getTotalCost()); // TODO: recalculate
-        line.setPurchaseOrder(order);
-        line.persist();
     }
 
     private static PurchaseOrder getCheckedOrder(Long id) {

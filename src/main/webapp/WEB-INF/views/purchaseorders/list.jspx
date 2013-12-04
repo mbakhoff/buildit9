@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<div xmlns:jsp="http://java.sun.com/JSP/Page" 
-xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" 
-xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <jsp:output omit-xml-declaration="yes"/>
     <page:list id="pl_esi_buildit9_domain_PurchaseOrder" items="${purchaseorders}" z="qMYWAXz66gAlqOkZ+5Sgi1t8pHk=">
         <table:table data="${purchaseorders}" id="l_esi_buildit9_domain_PurchaseOrder" path="/purchaseorders" z="BbEwNfi7T7D2+q/vsEH6P7huW9E=">
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_totalPrice" property="totalPrice" z="/gC+KPPEEtQcBYJxjJ2iYXn+fMY="/>
-            <table:column id="c_esi_buildit9_domain_PurchaseOrder_siteEngineerName" property="siteEngineerName" z="UA2gtjoPOYUQxSQ0+tizErnMCPc="/>
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_site" property="site" z="W3UUNAB4HOSI1MhnG/bk/mR+378="/>
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_rentit" property="rentit" z="hE49tU2hFYPRpgkXJVsLcQBci5k="/>
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_orderStatus" property="orderStatus" z="pNsZW3JUyAtbZnaB+2io8Mc4zWg="/>
-            <table:column id="c_esi_buildit9_domain_PurchaseOrder_worksEngineerName" property="worksEngineerName" z="P0Ewpq5jCrRxPIRU1dpqUIjbQSg="/>
+            <table:column id="c_esi_buildit9_domain_PurchaseOrder_plantExternalId" property="plantExternalId" z="/jAaCrUFh/D3hTbKxBvkjp44g7k="/>
+            <table:column id="c_esi_buildit9_domain_PurchaseOrder_plantName" property="plantName" z="NWj7h2FPXVJVDmFrvCdQwExv6x4="/>
         </table:table>
     </page:list>
 </div>

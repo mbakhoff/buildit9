@@ -3,8 +3,6 @@ package esi.builtit9.rest;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
-import esi.buildit9.rest.PurchaseOrderLineListResource;
-import esi.buildit9.rest.PurchaseOrderLineResource;
 import esi.buildit9.rest.PurchaseOrderResource;
 import esi.buildit9.rest.controller.PurchaseOrderRestController;
 
@@ -19,16 +17,10 @@ public class Commons {
         newResource.setBuildit("Buildit");
         newResource.setRentit("Rentit");
         newResource.setSiteAddress("Address");
-
-        PurchaseOrderLineResource newResourceLine = new PurchaseOrderLineResource();
-        newResourceLine.setEndDate(Calendar.getInstance());
-        newResourceLine.setStartDate(Calendar.getInstance());
-        newResourceLine.setTotalCost(1000000);
-        newResourceLine.setPlantId("1");
-
-        PurchaseOrderLineListResource orderLineListResource =new PurchaseOrderLineListResource();
-        orderLineListResource.orderLines.add(newResourceLine);
-        newResource.setPurchaseOrderLines(orderLineListResource);
+        newResource.setEndDate(Calendar.getInstance());
+        newResource.setStartDate(Calendar.getInstance());
+        newResource.setTotalPrice(1000000);
+        newResource.setPlantId("1");
 
         return newResource;
     }
