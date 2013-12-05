@@ -164,7 +164,7 @@ public class TestPurchaseOrderRESTController {
         WebResource webResourceById = client.resource(requestUrl);
         PurchaseOrderResource purchaseOrder = webResourceById.get(PurchaseOrderResource.class);
 
-        assertEquals(OrderStatus.WAITING_APPROVAL, purchaseOrder.getStatus());
+        assertEquals(OrderStatus.WAITING_APPROVAL.toString(), purchaseOrder.getStatus());
     }
 
     @Test
@@ -182,7 +182,7 @@ public class TestPurchaseOrderRESTController {
         WebResource webResourceById = client.resource(requestUrl);
         PurchaseOrderResource purchaseOrder = webResourceById.get(PurchaseOrderResource.class);
 
-        assertEquals(OrderStatus.WAITING_APPROVAL, purchaseOrder.getStatus());
+        assertEquals(OrderStatus.WAITING_APPROVAL.toString(), purchaseOrder.getStatus());
     }
 
 }
