@@ -10,76 +10,47 @@
     <spring:message code="label_plants_index" htmlEscape="false" var="title"/>
     <util:panel id="title" title="${title}">
         <spring:message code="application_name" htmlEscape="false" var="app_name"/>
+        <p style="color:red;">${errors}</p>
         <form:form modelAttribute="createPurchaseOrderForm">
 
-            <h2>Purchase order</h2>
+            <h2>Create a purchase order</h2>
             <hr/>
-            <field:select field="orderStatus" id="c_esi_buildit9_domain_purchaseOrder_orderStatus"
-                          items="${orderstatuses}" path="orderstatuses"/>
-            <field:input id="s_esi_buildit9_domain_Site_address"
-                         field="siteAddress"/>
-            <field:input field="worksEngineerName" id="c_esi_buildit9_domain_PurchaseOrder_worksEngineerName"/>
+            <field:input field="siteAddress" label="Site address"
+                    id="c_esi_buildit9_domain_plantQueryDTO_siteAddress"/>
+            <field:input field="worksEngineerName" label="Works engineer"
+                    id="c_esi_buildit9_domain_plantQueryDTO_worksEngineerName"/>
+            <field:datetime field="startDate" dateTimePattern="${plantsAvailableStartDate}" label="Start date"
+                    id="c_esi_buildit9_domain_plantQueryDTO_startDate"/>
+            <field:datetime field="endDate" dateTimePattern="${plantsAvailableEndDate}" label="End date"
+                    id="c_esi_buildit9_domain_plantQueryDTO_endDate"/>
 
-            <h3>Items</h3>
             <table>
-                <c:forEach var="line" items="${createPurchaseOrderForm.addedLines}" varStatus="x">
-                    <tr>
-                        <td>
-                            <input type="hidden" id="addedLines${x.index}.plantExternalId" value="addedLines[${x.index}].plantExternalId"/>
-                            ${line.plantExternalId}
-                        </td>
-                        <td>
-                            <input type="hidden" id="addedLines${x.index}.plantName" value="addedLines[${x.index}].plantName"/>
-                            ${line.plantName}
-                        </td>
-                        <td>
-                            <field:datetime field="addedLines[${x.index}].startDate" label=" " id="addedLines${x.index}.startDate"
-                                            dateTimePattern="${addedStart}"/>
-                        </td>
-                        <td>
-                            <field:datetime field="addedLines[${x.index}].endDate" label=" " id="addedLines${x.index}.endDate"
-                                            dateTimePattern="${addedEnd}"/>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
-            <input type="submit" value="Create" name="create"/>
-
-            <h2>Search</h2>
-            <hr/>
-
-            <field:input label="Name contains" id="c_esi_buildit9_domain_plantQueryDTO_nameLike"
-                         field="nameLike"/>
-            <field:datetime id="c_esi_buildit9_domain_plantQueryDTO_startDate" field="startDate"
-                            dateTimePattern="${plantsAvailableStartDate}" label="Start date"/>
-            <field:datetime id="c_esi_buildit9_domain_plantQueryDTO_endDate" field="endDate"
-                            dateTimePattern="${plantsAvailableEndDate}" label="End date"/>
-            <input type="submit" value="Search" name="search"/>
-
-            <h2>Add lines</h2>
-            <hr/>
-            <table>
+                <tr class="plant">
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
                 <c:forEach var="plant" items="${createPurchaseOrderForm.searchLines}" varStatus="x">
                     <tr class="plant">
                         <td>
-                            <input type="checkbox" id="searchLines${x.index}"
-                            name="searchLines[${x.index}].checked"
-                            value="true"/>
-                            <input type="hidden" name="_searchLines[${x.index}].checked" value="on"/>
-                        </td>
-                        <td>
                             <form:hidden path="searchLines[${x.index}].id"/>
-                            ${plant.id}
-                        </td>
-                        <td>
-                            <form:hidden path="searchLines[${x.index}].name"></form:hidden>
+                            <form:hidden path="searchLines[${x.index}].name"/>
+                            <form:hidden path="searchLines[${x.index}].description"/>
+                            <form:hidden path="searchLines[${x.index}].price"/>
+                            <form:radiobutton path="selectedItem" value="${x.index}" label=""
+                                    id="c_esi_buildit9_domain_plantQueryDTO_selectedItem_${x.index}"/>
+
                             ${plant.name}
                         </td>
+                        <td>${plant.description}</td>
+                        <td>${plant.price}</td>
                     </tr>
                 </c:forEach>
             </table>
+            <field:input label="Name contains" field="nameLike" id="c_esi_buildit9_domain_plantQueryDTO_nameLike" />
+            <input type="submit" value="Search" name="search"/>
+            <input type="submit" value="Create" name="create"/>
 
-            <input type="submit" value="Add Lines" name="addLines"/>
         </form:form>
     </util:panel>
 </div>

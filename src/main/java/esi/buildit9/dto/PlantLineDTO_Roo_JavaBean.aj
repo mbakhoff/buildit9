@@ -7,14 +7,6 @@ import esi.buildit9.dto.PlantLineDTO;
 
 privileged aspect PlantLineDTO_Roo_JavaBean {
     
-    public Boolean PlantLineDTO.getChecked() {
-        return this.checked;
-    }
-    
-    public void PlantLineDTO.setChecked(Boolean checked) {
-        this.checked = checked;
-    }
-    
     public Long PlantLineDTO.getId() {
         return this.id;
     }
@@ -37,6 +29,14 @@ privileged aspect PlantLineDTO_Roo_JavaBean {
     
     public void PlantLineDTO.setDescription(String description) {
         this.description = description;
+    }
+    
+    public Float PlantLineDTO.getPrice() {
+        return this.price;
+    }
+    
+    public void PlantLineDTO.setPrice(Float price) {
+        this.price = price;
     }
     
 }

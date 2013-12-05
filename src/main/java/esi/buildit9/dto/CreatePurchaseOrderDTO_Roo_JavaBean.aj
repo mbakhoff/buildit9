@@ -3,7 +3,6 @@
 
 package esi.buildit9.dto;
 
-import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.dto.CreatePurchaseOrderDTO;
 import esi.buildit9.dto.PlantLineDTO;
 import java.util.Calendar;
@@ -35,28 +34,12 @@ privileged aspect CreatePurchaseOrderDTO_Roo_JavaBean {
         this.worksEngineerName = worksEngineerName;
     }
     
-    public String CreatePurchaseOrderDTO.getSelectedPlantId() {
-        return this.selectedPlantId;
+    public Integer CreatePurchaseOrderDTO.getSelectedItem() {
+        return this.selectedItem;
     }
     
-    public void CreatePurchaseOrderDTO.setSelectedPlantId(String selectedPlantId) {
-        this.selectedPlantId = selectedPlantId;
-    }
-    
-    public String CreatePurchaseOrderDTO.getSelectedPlantName() {
-        return this.selectedPlantName;
-    }
-    
-    public void CreatePurchaseOrderDTO.setSelectedPlantName(String selectedPlantName) {
-        this.selectedPlantName = selectedPlantName;
-    }
-    
-    public OrderStatus CreatePurchaseOrderDTO.getOrderStatus() {
-        return this.orderStatus;
-    }
-    
-    public void CreatePurchaseOrderDTO.setOrderStatus(OrderStatus orderStatus) {
-        this.orderStatus = orderStatus;
+    public void CreatePurchaseOrderDTO.setSelectedItem(Integer selectedItem) {
+        this.selectedItem = selectedItem;
     }
     
     public List<PlantLineDTO> CreatePurchaseOrderDTO.getSearchLines() {
