@@ -13,6 +13,7 @@
         <field:input field="plantName" id="c_esi_buildit9_domain_PurchaseOrder_plantName" z="Iryi2ghRZIi0f6aCWXMnlP/FoGg="/>
         <field:datetime dateTimePattern="${purchaseOrder_startdate_date_format}" field="startDate" id="c_esi_buildit9_domain_PurchaseOrder_startDate" z="e27zBUSOhFx2zuIwRHO59hN1bag="/>
         <field:datetime dateTimePattern="${purchaseOrder_enddate_date_format}" field="endDate" id="c_esi_buildit9_domain_PurchaseOrder_endDate" z="/A/WL4gKuqr2j5bcTTK641y3Cu0="/>
+        <field:input field="idAtRentit" id="c_esi_buildit9_domain_PurchaseOrder_idAtRentit" z="hKk0MTWKP/qGJy00lEZezU2ndII="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_esi_buildit9_domain_PurchaseOrder" render="${not empty dependencies}" z="IlT2lajQHJxmBToMuo6Qroq9sD8="/>
 </div>

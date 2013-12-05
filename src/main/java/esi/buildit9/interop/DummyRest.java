@@ -19,7 +19,12 @@ public class DummyRest implements RentitInterop.Rest {
         return new ArrayList<PlantResource>();
     }
 
-	@Override
+    @Override
+    public List<PlantResource> getPlants() {
+        return new ArrayList<PlantResource>();
+    }
+
+    @Override
 	public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
 		System.out.println(DummyRest.class.getCanonicalName() + " remittanceAdvice submit");		
 	}

@@ -7,9 +7,9 @@
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_totalPrice" property="totalPrice" z="/gC+KPPEEtQcBYJxjJ2iYXn+fMY="/>
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_site" property="site" z="W3UUNAB4HOSI1MhnG/bk/mR+378="/>
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_rentit" property="rentit" z="hE49tU2hFYPRpgkXJVsLcQBci5k="/>
-            <table:column id="c_esi_buildit9_domain_PurchaseOrder_orderStatus" property="orderStatus" z="pNsZW3JUyAtbZnaB+2io8Mc4zWg="/>
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_plantExternalId" property="plantExternalId" z="/jAaCrUFh/D3hTbKxBvkjp44g7k="/>
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_plantName" property="plantName" z="NWj7h2FPXVJVDmFrvCdQwExv6x4="/>
+            <table:column id="c_esi_buildit9_domain_PurchaseOrder_idAtRentit" property="idAtRentit" z="SiudogkKVbbQOAOHbNyqmOldtlA="/>
         </table:table>
     </page:list>
 </div>

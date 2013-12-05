@@ -47,7 +47,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<PurchaseOrder, String> ApplicationConversionServiceFactoryBean.getPurchaseOrderToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.PurchaseOrder, java.lang.String>() {
             public String convert(PurchaseOrder purchaseOrder) {
-                return new StringBuilder().append(purchaseOrder.getPlantExternalId()).append(' ').append(purchaseOrder.getPlantName()).append(' ').append(purchaseOrder.getTotalPrice()).append(' ').append(purchaseOrder.getStartDate()).toString();
+                return new StringBuilder().append(purchaseOrder.getPlantExternalId()).append(' ').append(purchaseOrder.getIdAtRentit()).append(' ').append(purchaseOrder.getPlantName()).append(' ').append(purchaseOrder.getTotalPrice()).toString();
             }
         };
     }

@@ -35,6 +35,14 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
         this.plantExternalId = plantExternalId;
     }
     
+    public String PurchaseOrder.getIdAtRentit() {
+        return this.idAtRentit;
+    }
+    
+    public void PurchaseOrder.setIdAtRentit(String idAtRentit) {
+        this.idAtRentit = idAtRentit;
+    }
+    
     public String PurchaseOrder.getPlantName() {
         return this.plantName;
     }

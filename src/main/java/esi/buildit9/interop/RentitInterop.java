@@ -15,6 +15,7 @@ public interface RentitInterop {
         void submitOrder(PurchaseOrder order);
         void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice);
         List<esi.buildit9.rest.PlantResource> getAvailablePlantsBetween(String nameLike, Calendar startDate, Calendar endDate);
+        List<esi.buildit9.rest.PlantResource> getPlants();
     }
 
     public static interface Soap {

@@ -20,6 +20,8 @@ public class PurchaseOrder {
 
     private String plantExternalId;
 
+    private String idAtRentit;
+
     private String plantName;
 
     private Float totalPrice;

@@ -54,6 +54,17 @@ public class Team9Rest implements RentitInterop.Rest {
         return request.getEntity(PlantResourceList.class).getPlants();
     }
 
+    @Override
+    public List<PlantResource> getPlants() {
+        WebResource webResource = getClient().resource(RENTIT_PLANTS);
+        ClientResponse request = webResource.get(ClientResponse.class);
+
+        if (request.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
+            throw new RemoteHostException(request);
+        }
+        return request.getEntity(PlantResourceList.class).getPlants();
+    }
+
     private String getFindUrl(String name, DateMidnight startDate, DateMidnight endDate) {
         DateTimeFormatter fmt = ISODateTimeFormat.yearMonthDay();
         return String.format("%s/find?name=%s&start=%s&end=%s",
