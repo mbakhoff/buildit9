@@ -47,10 +47,6 @@
         <context:exclude-filter expression=".*_Roo_.*" type="regex"/>
         <context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
     </context:component-scan>
-    <bean class="java.net.URI" id="dbUrl">
-        <constructor-arg value="${DATABASE_URL}"/>
-        <!-- postgres://mlmgsbkcxqefcq:LcKfsUCn4lBY5ipMjYrJLRyU4r@ec2-54-228-235-198.eu-west-1.compute.amazonaws.com:5432/d57hjl61s8s0gv -->
-    </bean>
     <bean class="esi.buildit9.DatabaseUriResolver" id="dbResolver" />
     <bean class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" id="dataSource">
         <property name="driverClassName" value="${database.driverClassName}"/>
