@@ -30,15 +30,15 @@ public class Team1Rest implements RentitInterop.Rest {
         plant.setId(Long.parseLong(order.getPlantExternalId()));
 
         esi.buildit9.interop.rentit1.PurchaseOrderResource res = new PurchaseOrderResource();
-        res.setPoExtensionRejectionlink(null); // TODO
-        res.setPoRejectionlink(null); // TODO
+        res.setPoExtensionRejectionlink(getRejectUrl(order));
+        res.setPoRejectionlink(getRejectUrl(order));
         res.setPlantId(plant);
         res.setCommentt("request from builtit9");
         res.setCustomerEmail("buildit9esi@gmail.com");
         res.setStartdate(order.getStartDate().getTime());
         res.setEnddate(order.getEndDate().getTime());
         res.setPrice(BigDecimal.valueOf(order.getTotalPrice()));
-        res.setStatus(POstatus.OPEN);
+        res.setStatus(POstatus.PENDING_CONFIRMATION);
 
         ClientResponse createRequest = getClient().resource(RENTIT_POS)
                 .type(MediaType.APPLICATION_XML)
@@ -51,6 +51,10 @@ public class Team1Rest implements RentitInterop.Rest {
         } else {
             throw new RemoteHostException(createRequest);
         }
+    }
+
+    private String getRejectUrl(PurchaseOrder order) {
+        return String.format("https://buildit9.herokuapp.com/rest/pos/%d/rentitreject", order.getId());
     }
 
     private Long extractCreatedId(ClientResponse createRequest) {

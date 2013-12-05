@@ -95,7 +95,7 @@ public class PurchaseOrderRestController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.POST)
+    @RequestMapping(value = "pos/{id}/weaccept", method = RequestMethod.POST)
     public ResponseEntity<PurchaseOrderResource> approveOrder(@PathVariable Long id) {
         RBAC.assertAuthority(RBAC.ROLE_WORKS_ENGINEER);
 
@@ -109,37 +109,7 @@ public class PurchaseOrderRestController {
         return new ResponseEntity<PurchaseOrderResource>(resource, HttpStatus.OK);
     }
 
-    private static void sendToRentit(PurchaseOrder order) {
-        InteropImplementation provider = order.getRentit().getProvider();
-        if (provider == null) {
-            provider = InteropImplementation.Dummy;
-        }
-        provider.getRest().submitOrder(order);
-    }
-
-    @RequestMapping(value = "pos/{id}/confirm", method = RequestMethod.POST)
-    public ResponseEntity<Void> confirmedOrder(@PathVariable Long id) {
-        RBAC.assertAuthority(RBAC.ROLE_RENTIT);
-
-        PurchaseOrder order = getCheckedOrder(id);
-        order.setOrderStatus(OrderStatus.RENTIT_CONFIRMED);
-        order.persist();
-
-        return new ResponseEntity<Void>(HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "pos/{id}/confirm", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> rejectedOrder(@PathVariable Long id) {
-        RBAC.assertAuthority(RBAC.ROLE_RENTIT);
-
-        PurchaseOrder order = getCheckedOrder(id);
-        order.setOrderStatus(OrderStatus.RENTIT_REJECTED);
-        order.persist();
-
-        return new ResponseEntity<Void>(HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "pos/{id}/accept", method = RequestMethod.DELETE)
+    @RequestMapping(value = "pos/{id}/wereject", method = RequestMethod.POST)
     public ResponseEntity<PurchaseOrderResource> rejectOrder(@PathVariable Long id) {
         RBAC.assertAuthority(RBAC.ROLE_WORKS_ENGINEER);
 
@@ -149,6 +119,36 @@ public class PurchaseOrderRestController {
 
         PurchaseOrderResource resource = assembler.toResource(order);
         return new ResponseEntity<PurchaseOrderResource>(resource, HttpStatus.OK);
+    }
+
+    private static void sendToRentit(PurchaseOrder order) {
+        InteropImplementation provider = order.getRentit().getProvider();
+        if (provider == null) {
+            provider = InteropImplementation.Dummy;
+        }
+        provider.getRest().submitOrder(order);
+    }
+
+    @RequestMapping(value = "pos/{id}/rentitconfirm", method = RequestMethod.POST)
+    public ResponseEntity<Void> confirmedByRentit(@PathVariable Long id) {
+        RBAC.assertAuthority(RBAC.ROLE_RENTIT);
+
+        PurchaseOrder order = getCheckedOrder(id);
+        order.setOrderStatus(OrderStatus.RENTIT_CONFIRMED);
+        order.persist();
+
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "pos/{id}/rentitreject", method = RequestMethod.POST)
+    public ResponseEntity<Void> rejectedByRentit(@PathVariable Long id) {
+        RBAC.assertAuthority(RBAC.ROLE_RENTIT);
+
+        PurchaseOrder order = getCheckedOrder(id);
+        order.setOrderStatus(OrderStatus.RENTIT_REJECTED);
+        order.persist();
+
+        return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
     private static PurchaseOrder getCheckedOrder(Long id) {
