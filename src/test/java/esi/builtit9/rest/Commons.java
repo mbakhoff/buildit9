@@ -50,7 +50,7 @@ public class Commons {
         return client;
     }
     public static Client withBasicAuthRentit(Client client) {
-        client.addFilter(new HTTPBasicAuthFilter("rentit", "rentit"));
+        client.addFilter(new HTTPBasicAuthFilter("rentit9", "rentit9"));
         return client;
     }
 }

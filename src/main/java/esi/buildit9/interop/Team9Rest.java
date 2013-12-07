@@ -86,7 +86,7 @@ public class Team9Rest implements RentitInterop.Rest {
 
     private static Client getClient() {
         Client client = Client.create();
-        client.addFilter(new HTTPBasicAuthFilter("buildit", "buildit"));
+        client.addFilter(new HTTPBasicAuthFilter("buildit9", "buildit9"));
         return client;
     }
 

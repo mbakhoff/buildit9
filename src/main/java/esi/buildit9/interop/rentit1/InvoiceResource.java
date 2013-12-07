@@ -10,7 +10,6 @@ import java.math.BigDecimal;
 public class InvoiceResource {
 
     private long invoiceId;
-
     private long purchaseOrderId;
     private BigDecimal total;
     private String date;

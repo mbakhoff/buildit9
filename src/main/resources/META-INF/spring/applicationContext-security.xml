@@ -30,6 +30,9 @@
                 <user name="rand" password="rand" authorities="ROLE_SITE_ENGINEER" />
                 <user name="worksEngineer" password="user" authorities="ROLE_WORKS_ENGINEER" />
                 <user name="rentit" password="rentit" authorities="ROLE_RENTIT" />
+
+                <user name="rentit1" password="rentit1" authorities="ROLE_RENTIT" />
+                <user name="rentit9" password="rentit9" authorities="ROLE_RENTIT" />
             </user-service>
         </authentication-provider>
         <authentication-provider>
