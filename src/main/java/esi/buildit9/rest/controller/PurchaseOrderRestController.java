@@ -4,7 +4,7 @@ package esi.buildit9.rest.controller;
 import esi.buildit9.RBAC;
 import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
-import esi.buildit9.interop.InteropImplementation;
+import esi.buildit9.interop.RentitInterop;
 import esi.buildit9.rest.PurchaseOrderAssembler;
 import esi.buildit9.rest.PurchaseOrderListResource;
 import esi.buildit9.rest.PurchaseOrderResource;
@@ -122,11 +122,8 @@ public class PurchaseOrderRestController {
     }
 
     private static void sendToRentit(PurchaseOrder order) {
-        InteropImplementation provider = order.getRentit().getProvider();
-        if (provider == null) {
-            provider = InteropImplementation.Dummy;
-        }
-        provider.getRest().submitOrder(order);
+        RentitInterop provider = order.getRentit().getInterop();
+        provider.submitOrder(order);
     }
 
     @RequestMapping(value = "pos/{id}/rentitconfirm", method = RequestMethod.POST)

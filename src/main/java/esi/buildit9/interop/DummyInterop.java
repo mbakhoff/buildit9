@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class DummyRest implements RentitInterop.Rest {
+public class DummyInterop implements RentitInterop {
     @Override
     public void submitOrder(PurchaseOrder order) {
-        System.out.println(DummyRest.class.getCanonicalName() + " dummy submit");
+        System.out.println(DummyInterop.class.getCanonicalName() + " dummy submit");
     }
 
     @Override
@@ -26,6 +26,6 @@ public class DummyRest implements RentitInterop.Rest {
 
     @Override
 	public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
-		System.out.println(DummyRest.class.getCanonicalName() + " remittanceAdvice submit");		
+		System.out.println(DummyInterop.class.getCanonicalName() + " remittanceAdvice submit");
 	}
 }

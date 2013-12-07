@@ -3,7 +3,7 @@ package esi.builtit9.interop;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.Site;
 import esi.buildit9.interop.RentitInterop;
-import esi.buildit9.interop.rentit1.Team1Rest;
+import esi.buildit9.interop.rentit1.Team1Interop;
 import esi.buildit9.rest.PlantResource;
 import org.joda.time.DateMidnight;
 import org.junit.Assert;
@@ -19,7 +19,7 @@ import java.util.List;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class Team1RestTest {
 
-    private final RentitInterop.Rest api = new Team1Rest();
+    private final RentitInterop api = new Team1Interop();
 
     @Test
     public void testGetAllPlants() throws Exception {

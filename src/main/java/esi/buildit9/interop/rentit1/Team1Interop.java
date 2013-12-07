@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Team1Rest implements RentitInterop.Rest {
+public class Team1Interop implements RentitInterop {
 
     private static final String RENTIT_PLANTS = "https://rentit1.herokuapp.com/rest/plants";
     private static final String RENTIT_POS = "https://rentit1.herokuapp.com/rest/pos";

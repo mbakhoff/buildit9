@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.Calendar;
 import java.util.List;
 
-public class Team9Rest implements RentitInterop.Rest {
+public class Team9Interop implements RentitInterop {
 
     public static final String RENTIT_POS = "https://rentit9.herokuapp.com/rest/pos";
     public static final String RENTIT_PLANTS = "https://rentit9.herokuapp.com/rest/plants";
@@ -24,7 +24,7 @@ public class Team9Rest implements RentitInterop.Rest {
     private final PurchaseOrderAssembler assembler;
     private final RemittanceAdviceAssembler remittanceAssembler;
 
-    public Team9Rest() {
+    public Team9Interop() {
         assembler = new PurchaseOrderAssembler();
         remittanceAssembler = new RemittanceAdviceAssembler();
     }

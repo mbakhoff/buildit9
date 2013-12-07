@@ -1,7 +1,7 @@
 package esi.buildit9.web.we;
 import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
-import esi.buildit9.interop.InteropImplementation;
+import esi.buildit9.interop.RentitInterop;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +29,8 @@ public class POWEController {
         boolean statusChanged = cleanCopy.getOrderStatus() != purchaseOrder.getOrderStatus();
 
         if (statusChanged && purchaseOrder.getOrderStatus() == OrderStatus.APPROVED) {
-            InteropImplementation interop = purchaseOrder.getRentit().getProvider();
-            interop.getRest().submitOrder(purchaseOrder);
+            RentitInterop interop = purchaseOrder.getRentit().getInterop();
+            interop.submitOrder(purchaseOrder);
         }
 
 		uiModel.asMap().clear();

@@ -1,6 +1,7 @@
 package esi.buildit9.domain;
 
 import esi.buildit9.interop.InteropImplementation;
+import esi.buildit9.interop.RentitInterop;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
@@ -29,5 +30,13 @@ public class RentIt {
 
         }
         return rentIt;
+    }
+
+    public RentitInterop getInterop() {
+        if (provider == null) {
+            System.err.println("warning: no interop defined for rentit " + getName());
+            return InteropImplementation.Dummy.getImpl();
+        }
+        return provider.getImpl();
     }
 }
