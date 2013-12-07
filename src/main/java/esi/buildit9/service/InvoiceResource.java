@@ -5,7 +5,7 @@ import org.springframework.roo.addon.javabean.RooJavaBean;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @RooJavaBean
-@XmlRootElement
+@XmlRootElement(name = "invoice")
 public class InvoiceResource {
 
     private Long id;

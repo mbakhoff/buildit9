@@ -29,11 +29,11 @@ public class InvoiceMailPreprocessor {
     }
 
     @ServiceActivator
-    public InvoiceSDO process(Message msg) throws MessagingException, IOException, ParserConfigurationException, SAXException {
+    public InvoiceSDO process(Message msg) throws IOException, MessagingException, SAXException {
         Multipart content = getMultipart(msg);
         for (int i = 0; i < content.getCount(); i++) {
             BodyPart part = content.getBodyPart(i);
-            if (isXml(part) && part.getFileName().startsWith("invoice")) {
+            if (isInvoiceXml(part)) {
                 Document document = builder.parse(part.getInputStream());
                 return new InvoiceSDO(document, msg.getFrom());
             }
@@ -41,9 +41,9 @@ public class InvoiceMailPreprocessor {
         throw new IllegalArgumentException("message does not contain an invoice");
     }
 
-    private static boolean isXml(BodyPart bodyPart) throws MessagingException {
-        String contentType = bodyPart.getContentType();
-        return contentType.equalsIgnoreCase("text/xml") || contentType.equalsIgnoreCase("application/xml");
+    private static boolean isInvoiceXml(BodyPart part) throws MessagingException {
+        String fileName = part.getFileName();
+        return fileName != null && fileName.toLowerCase().contains("invoice");
     }
 
     private static Multipart getMultipart(Message msg) throws IOException, MessagingException {
