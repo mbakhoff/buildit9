@@ -7,11 +7,6 @@ import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
-import esi.buildit9.web.PurchaseOrderController;
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import org.joda.time.format.DateTimeFormat;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.ui.Model;
@@ -22,6 +17,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.UriUtils;
 import org.springframework.web.util.WebUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 
 privileged aspect PurchaseOrderController_Roo_Controller {
     
@@ -64,18 +64,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         return "purchaseorders/list";
     }
-    
-    @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    public String PurchaseOrderController.update(@Valid PurchaseOrder purchaseOrder, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, purchaseOrder);
-            return "purchaseorders/update";
-        }
-        uiModel.asMap().clear();
-        purchaseOrder.merge();
-        return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
-    }
-    
+
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String PurchaseOrderController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, PurchaseOrder.findPurchaseOrder(id));
