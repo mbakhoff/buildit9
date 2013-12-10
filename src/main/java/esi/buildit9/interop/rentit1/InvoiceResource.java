@@ -12,8 +12,15 @@ public class InvoiceResource {
     private long invoiceId;
     private long purchaseOrderId;
     private BigDecimal total;
+    private String rentitEmailAddress;
     private String date;
 
+    public String getRentitEmailAddress() {
+        return rentitEmailAddress;
+    }
+    public void setRentitEmailAddress(String rentitEmailAddress) {
+        this.rentitEmailAddress = rentitEmailAddress;
+    }
     public long getInvoiceId() {
         return invoiceId;
     }
