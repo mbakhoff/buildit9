@@ -1,7 +1,5 @@
 package esi.buildit9.interop;
 
-import esi.buildit9.interop.Team1Interop;
-
 public enum InteropImplementation {
 
     Team9 {
@@ -15,6 +13,13 @@ public enum InteropImplementation {
         @Override
         public RentitInterop getImpl() {
             return new Team1Interop();
+        }
+    },
+
+    Team30 {
+        @Override
+        public RentitInterop getImpl() {
+            return new Team30Interop();
         }
     },
 
