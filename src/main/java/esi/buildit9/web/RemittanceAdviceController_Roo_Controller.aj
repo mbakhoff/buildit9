@@ -22,17 +22,6 @@ import org.springframework.web.util.WebUtils;
 
 privileged aspect RemittanceAdviceController_Roo_Controller {
     
-    @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    public String RemittanceAdviceController.create(@Valid RemittanceAdvice remittanceAdvice, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-        if (bindingResult.hasErrors()) {
-            populateEditForm(uiModel, remittanceAdvice);
-            return "remittanceadvices/create";
-        }
-        uiModel.asMap().clear();
-        remittanceAdvice.persist();
-        return "redirect:/remittanceadvices/" + encodeUrlPathSegment(remittanceAdvice.getId().toString(), httpServletRequest);
-    }
-    
     @RequestMapping(params = "form", produces = "text/html")
     public String RemittanceAdviceController.createForm(Model uiModel) {
         populateEditForm(uiModel, new RemittanceAdvice());
