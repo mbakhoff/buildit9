@@ -33,13 +33,14 @@ public class PurchaseOrderController {
         PurchaseOrder cleanCopy = PurchaseOrder.findPurchaseOrder(purchaseOrder.getId());
         boolean statusChanged = cleanCopy.getOrderStatus() != purchaseOrder.getOrderStatus();
 
+        uiModel.asMap().clear();
+        purchaseOrder.merge();
+
         if (statusChanged && purchaseOrder.getOrderStatus() == OrderStatus.APPROVED) {
             RentitInterop interop = purchaseOrder.getRentit().getInterop();
             interop.submitOrder(purchaseOrder);
         }
 
-        uiModel.asMap().clear();
-        purchaseOrder.persist();
         return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
     }
     
