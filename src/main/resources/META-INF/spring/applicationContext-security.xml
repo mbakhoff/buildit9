@@ -33,6 +33,7 @@
 
                 <user name="rentit1" password="rentit1" authorities="ROLE_RENTIT" />
                 <user name="rentit9" password="rentit9" authorities="ROLE_RENTIT" />
+                <user name="rentit30" password="rentit30" authorities="ROLE_RENTIT" />
             </user-service>
         </authentication-provider>
         <authentication-provider>
