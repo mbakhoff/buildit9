@@ -54,6 +54,16 @@ public class Team1Interop implements RentitInterop {
         }
     }
 
+    @Override
+    public void updateOrder(PurchaseOrder order) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void cancelOrder(PurchaseOrder order) {
+        throw new UnsupportedOperationException();
+    }
+
     private String getRejectUrl(PurchaseOrder order) {
         return String.format("https://buildit9.herokuapp.com/rest/pos/%d/rentitreject", order.getId());
     }

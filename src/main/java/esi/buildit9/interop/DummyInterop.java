@@ -11,7 +11,17 @@ import java.util.List;
 public class DummyInterop implements RentitInterop {
     @Override
     public void submitOrder(PurchaseOrder order) {
-        System.out.println(DummyInterop.class.getCanonicalName() + " dummy submit");
+        log("order submitted");
+    }
+
+    @Override
+    public void updateOrder(PurchaseOrder order) {
+        log("order updated");
+    }
+
+    @Override
+    public void cancelOrder(PurchaseOrder order) {
+        log("order cancelled");
     }
 
     @Override
@@ -26,6 +36,10 @@ public class DummyInterop implements RentitInterop {
 
     @Override
 	public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
-		System.out.println(DummyInterop.class.getCanonicalName() + " remittanceAdvice submit");
+		log("remittanceAdvice submit");
 	}
+
+    private static void log(String message) {
+        System.out.println(DummyInterop.class.getCanonicalName() + " " + message);
+    }
 }
