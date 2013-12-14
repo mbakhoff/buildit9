@@ -28,7 +28,10 @@ import java.util.List;
 public class Team30Interop implements RentitInterop {
 
     public static final String RENTIT_PO = "http://rentit30.herokuapp.com/rest/po";
-    public static final String RENTIT_PO_UPDATE = "http://rentit30.herokuapp.com/rest/po/update";
+    public static final String RENTIT_PO_EXTEND = "http://rentit30.herokuapp.com/rest/po/update";
+    public static final String RENTIT_PO_UPDATE = "http://rentit30.herokuapp.com/rest/po/modify";
+    public static final String RENTIT_PO_CANCEL = "http://rentit30.herokuapp.com/rest/po/cancel";
+
     public static final String RENTIT_PLANTS="http://rentit30.herokuapp.com/rest/plants";
     public static final String RENTIT_PLANTS_AVAILABLE = "http://rentit30.herokuapp.com/rest/plants/available";
 
@@ -84,12 +87,32 @@ public class Team30Interop implements RentitInterop {
 
     @Override
     public void extendOrder(PurchaseOrder order) {
-
+        PurchaseOrderResource result = updateOrder(order,RENTIT_PO_EXTEND);
     }
 
     @Override
     public void cancelOrder(PurchaseOrder order) {
+        String requestUrl= getCancelPurchaseOrderUrl(order);
+        cancelOrder(order,requestUrl);
+    }
 
+    public PurchaseOrderResource cancelOrder(PurchaseOrder order,String requestUrl){
+
+        WebResource webResource = getClient().resource(requestUrl);
+
+        ClientResponse request = webResource.get(ClientResponse.class);
+
+        if (request.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
+            throw new RemoteHostException(request);
+        }
+
+        PurchaseOrderResource result= request.getEntity(PurchaseOrderResource.class);
+
+        return result;
+    }
+
+    public String getCancelPurchaseOrderUrl(PurchaseOrder order){
+        return RENTIT_PO_CANCEL + "/" + order.getIdAtRentit();
     }
 
     @Override
@@ -183,13 +206,17 @@ public class Team30Interop implements RentitInterop {
 
     public PurchaseOrderResource toPOR(PurchaseOrder order){
         PurchaseOrderResource purchaseOrderResource = new PurchaseOrderResource();
-        if (!order.getIdAtRentit().isEmpty()) purchaseOrderResource.setPoId(Long.getLong(order.getIdAtRentit()));
+
+        if (order.getIdAtRentit()!=null) {
+            Long poid=Long.parseLong(order.getIdAtRentit());
+            purchaseOrderResource.setPoId(poid);
+        }
 
         purchaseOrderResource.setEnd(order.getEndDate().getTime());
         purchaseOrderResource.setStart(order.getStartDate().getTime());
         purchaseOrderResource.setCredentials("rentit:rentit");
-        purchaseOrderResource.setEmail("");
-        purchaseOrderResource.setGetlink("http://rentit30.herokuapp.com/rest/po/"+order.getId());
+        purchaseOrderResource.setEmail("buildit9esi@gmail.com");
+        purchaseOrderResource.setServer("http://rentit30.herokuapp.com/rest/po/"+order.getId());
         purchaseOrderResource.setHireRequestId(order.getId());
         purchaseOrderResource.setPlant(getPlant(order.getPlantExternalId()));
         purchaseOrderResource.setPrice(order.getTotalPrice().doubleValue());
