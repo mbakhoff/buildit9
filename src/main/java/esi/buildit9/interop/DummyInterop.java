@@ -3,6 +3,7 @@ package esi.buildit9.interop;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
 import esi.buildit9.rest.PlantResource;
+import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -42,7 +43,7 @@ public class DummyInterop implements RentitInterop {
     }
 
     @Override
-	public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
+	public void submitRemittanceAdvice(ApplicationContext ctx, RemittanceAdvice remittanceAdvice) {
 		log("remittanceAdvice submit");
 	}
 

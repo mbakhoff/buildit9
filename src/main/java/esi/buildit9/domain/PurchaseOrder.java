@@ -17,7 +17,8 @@ public class PurchaseOrder {
 	
     private static final String QUERY_ORDERS_FOR_WORKERS =
             "FROM PurchaseOrder AS order WHERE " +
-                    "order.orderStatus != :postatus";
+                    "order.orderStatus != :postatus AND " +
+                    "order.orderStatus != :postatus2";
 
     @ManyToOne
     private Site site;
@@ -53,6 +54,7 @@ public class PurchaseOrder {
                 QUERY_ORDERS_FOR_WORKERS,
                 PurchaseOrder.class);
         query.setParameter("postatus", OrderStatus.WAITING_APPROVAL);
+        query.setParameter("postatus2", OrderStatus.CREATED);
         return query.getResultList();
     }
 

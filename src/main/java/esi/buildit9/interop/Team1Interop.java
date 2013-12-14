@@ -4,6 +4,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
+import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
 import esi.buildit9.interop.rentit1.POExtensionResource;
@@ -14,7 +15,13 @@ import esi.buildit9.rest.PlantResource;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.springframework.context.ApplicationContext;
+import org.springframework.mail.javamail.JavaMailSender;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.ws.rs.core.MediaType;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -109,8 +116,20 @@ public class Team1Interop implements RentitInterop {
     }
 
     @Override
-    public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
-        throw new UnsupportedOperationException();
+    public void submitRemittanceAdvice(ApplicationContext ctx, RemittanceAdvice remittanceAdvice) {
+        JavaMailSender sender = ctx.getBean(JavaMailSender.class);
+        Invoice invoice = remittanceAdvice.getInvoice();
+        try {
+            MimeMessage msg = sender.createMimeMessage();
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(invoice.getSenderEmail()));
+            msg.setSubject("remittance advice");
+            msg.setText(String.format("Remittance Advice for Purchase Order Id:-%d-\nInvoice Id:-%d-\n",
+                    invoice.getPurchaseOrder().getId(),
+                    invoice.getId()));
+            sender.send(msg);
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
@@ -129,16 +148,6 @@ public class Team1Interop implements RentitInterop {
         DateTimeFormatter fmt = ISODateTimeFormat.yearMonthDay();
         return String.format("%s?plantName=%s&startDate=%s&endDate=%s",
                 RENTIT_PLANTS, name, startDate.toString(fmt), endDate.toString(fmt));
-    }
-
-    private esi.buildit9.interop.rentit1.PurchaseOrderResource getOrder(long id) {
-        WebResource webResource = getClient().resource(RENTIT_POS + "/" + id);
-        ClientResponse request = webResource.get(ClientResponse.class);
-
-        if (request.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
-            throw new RemoteHostException(request);
-        }
-        return request.getEntity(esi.buildit9.interop.rentit1.PurchaseOrderResource.class);
     }
 
     @Override

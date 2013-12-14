@@ -38,7 +38,7 @@ public class InvoiceController {
 
         if (wasApproved(oldStatus, submittedStatus)) {
             InvoiceHelper.sendManuallyApproved(applicationContext, submitted);
-            InvoiceHelper.createAndSendRemittanceAdvice(submitted);
+            InvoiceHelper.createAndSendRemittanceAdvice(applicationContext, submitted);
             submitted.setStatus(InvoiceStatus.COMPLETED);
             submitted.merge();
         }

@@ -66,12 +66,12 @@ public class InvoiceHelper {
         new OutgoingChannel(context).send(message);
     }
 
-    public static void createAndSendRemittanceAdvice(Invoice invoice) {
+    public static void createAndSendRemittanceAdvice(ApplicationContext ctx, Invoice invoice) {
     	RemittanceAdvice remittanceAdvice = new RemittanceAdvice();
     	remittanceAdvice.setInvoice(invoice);
     	remittanceAdvice.setPayDay(Calendar.getInstance());
     	remittanceAdvice.persist();
-    	invoice.getRentit().getInterop().submitRemittanceAdvice(remittanceAdvice);
+    	invoice.getRentit().getInterop().submitRemittanceAdvice(ctx, remittanceAdvice);
 
         invoice.setStatus(InvoiceStatus.COMPLETED);
         invoice.persist();
