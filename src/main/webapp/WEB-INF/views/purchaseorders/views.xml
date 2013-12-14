@@ -4,13 +4,16 @@
     <definition extends="default" name="purchaseorders/list">
         <put-attribute name="body" value="/WEB-INF/views/purchaseorders/list.jspx"/>
     </definition>
-<definition extends="default" name="purchaseorders/show">
+	<definition extends="default" name="purchaseorders/show">
         <put-attribute name="body" value="/WEB-INF/views/purchaseorders/show.jspx"/>
     </definition>
-<definition extends="default" name="purchaseorders/create">
+	<definition extends="default" name="purchaseorders/create">
         <put-attribute name="body" value="/WEB-INF/views/purchaseorders/create.jspx"/>
     </definition>
-<definition extends="default" name="purchaseorders/update">
+	<definition extends="default" name="purchaseorders/update">
         <put-attribute name="body" value="/WEB-INF/views/purchaseorders/update.jspx"/>
+    </definition>
+    <definition extends="default" name="purchaseorders/all/list">
+        <put-attribute name="body" value="/WEB-INF/views/purchaseorders/list.jspx"/>
     </definition>
 </tiles-definitions>
