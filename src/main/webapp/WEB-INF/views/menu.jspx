@@ -36,6 +36,9 @@
                 <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" url="/se/po?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
             </menu:category>
         </sec:authorize>
+        <menu:category id="c_purchaseorder" z="user-managed">
+            <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" label="List all POs for all users" url="/purchaseorders?page=1&amp;size=${empty param.size ? 10 : param.size}" z="user-managed"/>
+        </menu:category>
         <menu:category id="c_remittanceadvice" z="+IT6zNB9yTzdnF/vS8JQB0NgwEs=">
             <menu:item id="i_remittanceadvice_new" messageCode="global_menu_new" url="/remittanceadvices?form" z="mdaqxtYc+2uDpIFZjG8iTphKjv8="/>
             <menu:item id="i_remittanceadvice_list" messageCode="global_menu_list" url="/remittanceadvices?page=1&amp;size=${empty param.size ? 10 : param.size}" z="/Vws+8CGeCRDPu06fspidky19QQ="/>
