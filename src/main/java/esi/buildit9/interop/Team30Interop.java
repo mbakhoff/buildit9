@@ -94,7 +94,14 @@ public class Team30Interop implements RentitInterop {
 
     @Override
     public void submitRemittanceAdvice(ApplicationContext ctx, RemittanceAdvice remittanceAdvice) {
+        String orderId = remittanceAdvice.getInvoice().getPurchaseOrder().getIdAtRentit();
+        ClientResponse request = getClient().resource(String.format("%s/acceptInvoice/%s", RENTIT_PO, orderId))
+                .get(ClientResponse.class);
 
+        int status = request.getStatus();
+        if (status != ClientResponse.Status.OK.getStatusCode()) {
+            throw new RemoteHostException(request);
+        }
     }
 
     @Override
