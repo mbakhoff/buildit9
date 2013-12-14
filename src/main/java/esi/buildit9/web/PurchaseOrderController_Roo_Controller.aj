@@ -64,7 +64,7 @@ privileged aspect PurchaseOrderController_Roo_Controller {
         addDateTimeFormatPatterns(uiModel);
         return "purchaseorders/list";
     }
-
+    
     @RequestMapping(value = "/{id}", params = "form", produces = "text/html")
     public String PurchaseOrderController.updateForm(@PathVariable("id") Long id, Model uiModel) {
         populateEditForm(uiModel, PurchaseOrder.findPurchaseOrder(id));

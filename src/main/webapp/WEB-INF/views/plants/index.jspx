@@ -24,6 +24,12 @@
             <field:datetime field="endDate" dateTimePattern="${plantsAvailableEndDate}" label="End date"
                     id="c_esi_buildit9_domain_plantQueryDTO_endDate"/>
 
+            <field:select field="rentIt" id="c_esi_buildit9_domain_PurchaseOrder_rentit" itemValue="id" items="${rentits}" path="/rentits" z="user-managed"/>
+
+            <div>Search</div>
+            <hr/>
+            <field:input label="Name contains" field="nameLike" id="c_esi_buildit9_domain_plantQueryDTO_nameLike" />
+
             <table>
                 <tr class="plant">
                     <th>Name</th>
@@ -47,7 +53,6 @@
                     </tr>
                 </c:forEach>
             </table>
-            <field:input label="Name contains" field="nameLike" id="c_esi_buildit9_domain_plantQueryDTO_nameLike" />
             <input type="submit" value="Search" name="search"/>
             <input type="submit" value="Create" name="create"/>
 

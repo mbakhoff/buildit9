@@ -3,6 +3,7 @@
 
 package esi.buildit9.dto;
 
+import esi.buildit9.domain.RentIt;
 import esi.buildit9.dto.CreatePurchaseOrderDTO;
 import esi.buildit9.dto.PlantLineDTO;
 import java.util.Calendar;
@@ -40,6 +41,14 @@ privileged aspect CreatePurchaseOrderDTO_Roo_JavaBean {
     
     public void CreatePurchaseOrderDTO.setSelectedItem(Integer selectedItem) {
         this.selectedItem = selectedItem;
+    }
+    
+    public RentIt CreatePurchaseOrderDTO.getRentIt() {
+        return this.rentIt;
+    }
+    
+    public void CreatePurchaseOrderDTO.setRentIt(RentIt rentIt) {
+        this.rentIt = rentIt;
     }
     
     public List<PlantLineDTO> CreatePurchaseOrderDTO.getSearchLines() {

@@ -8,13 +8,10 @@ import esi.buildit9.domain.RentIt;
 import esi.buildit9.domain.Site;
 import esi.buildit9.dto.CreatePurchaseOrderDTO;
 import esi.buildit9.dto.PlantLineDTO;
-import esi.buildit9.soap.client.PlantResource;
-import esi.buildit9.soap.client.PlantSoapService;
-import esi.buildit9.soap.client.PlantsAvailableRequest;
+import esi.buildit9.interop.RentitInterop;
 import org.joda.time.DateMidnight;
 import org.joda.time.Days;
 import org.joda.time.format.DateTimeFormat;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,20 +21,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 @RequestMapping("/plants/**")
 @Controller
 public class PlantController {
-    @Autowired
-    private PlantSoapService service;
+    //@Autowired
+    //private PlantSoapService service;
 
     @RequestMapping
     public String index(Model uiModel) {
-        List<PlantResource> plants = service.getAllPlants();
 
         CreatePurchaseOrderDTO dto = new CreatePurchaseOrderDTO();
-        dto.setLinesFromPlants(plants);
 
         addCommonObjects(uiModel);
         uiModel.addAttribute("createPurchaseOrderForm", dto);
@@ -48,12 +46,11 @@ public class PlantController {
     @RequestMapping(params = "search", method = RequestMethod.POST)
     public String search(@ModelAttribute("createPurchaseOrderForm") CreatePurchaseOrderDTO dto, Model uiModel) {
 
-        PlantsAvailableRequest req = new PlantsAvailableRequest();
-        req.setNameLike(dto.getNameLike());
-        req.setStartDate(convert(dto.getEndDate()));
-        req.setEndDate(convert(dto.getEndDate()));
+        RentitInterop interop= dto.getRentIt().getInterop();
 
-        List<PlantResource> plants = service.getPlantsBetween(req);
+        List<esi.buildit9.rest.PlantResource> plants =
+                interop.getAvailablePlantsBetween(dto.getNameLike(),dto.getStartDate(),dto.getEndDate());
+
         dto.setLinesFromPlants(plants);
 
         addCommonObjects(uiModel);
@@ -94,7 +91,7 @@ public class PlantController {
         order.setEndDate(dto.getEndDate());
         order.setTotalPrice(calculateDuration(dto) * selectedLine.getPrice());
         order.setSite(Site.getOrCreateSite(dto.getSiteAddress()));
-        order.setRentit(RentIt.findRentItsByNameEquals("rentit9").getSingleResult());
+        order.setRentit(dto.getRentIt());
         order.setWorksEngineerName(dto.getWorksEngineerName());
         order.setSiteEngineerName(RBAC.getUser());
         return order;
@@ -131,6 +128,7 @@ public class PlantController {
         uiModel.addAttribute("plantsAvailableEndDate", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("plantsAvailableStartDate", DateTimeFormat.patternForStyle("MM", LocaleContextHolder.getLocale()));
         uiModel.addAttribute("sites", Site.findAllSites());
+        uiModel.addAttribute("rentits", RentIt.findAllRentIts());
     }
 
     private static XMLGregorianCalendar convert(Calendar calendar) {

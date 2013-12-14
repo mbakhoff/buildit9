@@ -17,6 +17,7 @@ import javax.validation.Valid;
 @Controller
 @RooWebScaffold(path = "purchaseorders", formBackingObject = PurchaseOrder.class)
 public class PurchaseOrderController {
+
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
     public String update(@Valid PurchaseOrder purchaseOrder, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
