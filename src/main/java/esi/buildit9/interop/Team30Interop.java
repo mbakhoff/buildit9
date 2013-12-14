@@ -37,13 +37,9 @@ public class Team30Interop implements RentitInterop {
 
     @Override
     public void submitOrder(PurchaseOrder order) {
-
         String requestUrl = RENTIT_PO;
-
         PurchaseOrderResource result=submitOrder(order,requestUrl);
-
-        order.setPlantExternalId(result.getPoId().toString());
-
+        order.setIdAtRentit(result.getPoId().toString());
         order.persist();
     }
 
