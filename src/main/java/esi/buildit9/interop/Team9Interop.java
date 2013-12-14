@@ -44,7 +44,15 @@ public class Team9Interop implements RentitInterop {
 
     @Override
     public void updateOrder(PurchaseOrder order) {
-        throw new UnsupportedOperationException();
+        PurchaseOrderResource res = assembler.toResource(order);
+        ClientResponse createRequest = getClient().resource(RENTIT_POS + "/" + order.getIdAtRentit())
+                .type(MediaType.APPLICATION_XML)
+                .put(ClientResponse.class, res);
+
+        int status = createRequest.getStatus();
+        if (status != ClientResponse.Status.OK.getStatusCode()) {
+            throw new RemoteHostException(createRequest);
+        }
     }
 
     @Override
@@ -54,7 +62,14 @@ public class Team9Interop implements RentitInterop {
 
     @Override
     public void cancelOrder(PurchaseOrder order) {
-        throw new UnsupportedOperationException();
+        ClientResponse createRequest = getClient().resource(RENTIT_POS + "/" + order.getIdAtRentit())
+                .type(MediaType.APPLICATION_XML)
+                .delete(ClientResponse.class);
+
+        int status = createRequest.getStatus();
+        if (status != ClientResponse.Status.OK.getStatusCode()) {
+            throw new RemoteHostException(createRequest);
+        }
     }
 
     @Override
