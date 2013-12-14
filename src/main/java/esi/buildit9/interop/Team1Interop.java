@@ -7,16 +7,21 @@ import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
+import esi.buildit9.domain.RentIt;
 import esi.buildit9.interop.rentit1.POExtensionResource;
 import esi.buildit9.interop.rentit1.POstatus;
 import esi.buildit9.interop.rentit1.PlantResourceList;
 import esi.buildit9.interop.rentit1.PurchaseOrderResource;
 import esi.buildit9.rest.PlantResource;
+import esi.buildit9.service.InvoiceHelper;
+import esi.buildit9.service.InvoiceResource;
+import esi.buildit9.service.InvoiceSDO;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.context.ApplicationContext;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.w3c.dom.Document;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -159,6 +164,12 @@ public class Team1Interop implements RentitInterop {
             throw new RemoteHostException(request);
         }
         return toLocalPlants(request.getEntity(PlantResourceList.class).getPlantResources());
+    }
+
+    @Override
+    public InvoiceSDO parseInvoice(RentIt rentIt, Document document) {
+        InvoiceResource res = InvoiceHelper.unmarshall(document, InvoiceResource.class);
+        return new InvoiceSDO(rentIt, res.getId(), res.getPo(), res.getTotal());
     }
 
     private static List<PlantResource> toLocalPlants(List<esi.buildit9.interop.rentit1.PlantResource> plants) {

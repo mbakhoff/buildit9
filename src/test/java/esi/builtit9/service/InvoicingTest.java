@@ -18,20 +18,6 @@ import org.springframework.integration.message.GenericMessage;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-
-import javax.mail.Address;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.IOException;
-import java.io.PipedInputStream;
-import java.io.PipedOutputStream;
 
 @ContextConfiguration(locations = "classpath:/META-INF/spring/applicationContext*.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -40,19 +26,7 @@ public class InvoicingTest {
     @Autowired
     private DirectChannel invoiceChannel;
 
-    private final DocumentBuilder builder;
-    private final Marshaller marshaller;
-
     private RentIt rentIt;
-
-    public InvoicingTest() {
-        try {
-            builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            marshaller = JAXBContext.newInstance(InvoiceResource.class).createMarshaller();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     @Before
     public void setUp() throws Exception {
@@ -73,7 +47,8 @@ public class InvoicingTest {
         invoice.setPo(1L);
         invoice.setTotal(49.99f);
         invoice.setId(1L);
-        invoiceChannel.send(createMessage(invoice));
+        invoiceChannel.send(new GenericMessage<>(
+                new InvoiceSDO(rentIt, invoice.getId(), invoice.getPo(), invoice.getTotal())));
     }
 
     @Test
@@ -90,7 +65,7 @@ public class InvoicingTest {
         invoice.setId(1L);
 
         try {
-            new InvoiceAutomaticProcessor().process(createInvoiceSdo(invoice));
+            new InvoiceAutomaticProcessor().process(new InvoiceSDO(rentIt, invoice.getId(), invoice.getPo(), invoice.getTotal()));
         } catch (RemoteHostException ignored) {
         }
     }
@@ -109,24 +84,9 @@ public class InvoicingTest {
         invoice.setId(1L);
 
         try {
-            new InvoiceHumanAssistedHandling().process(createInvoiceSdo(invoice));
+            new InvoiceHumanAssistedHandling().process(new InvoiceSDO(rentIt, invoice.getId(), invoice.getPo(), invoice.getTotal()));
         } catch (RemoteHostException ignored) {
         }
-    }
-
-    private GenericMessage<InvoiceSDO> createMessage(InvoiceResource invoice) throws Exception {
-        return new GenericMessage<InvoiceSDO>(createInvoiceSdo(invoice));
-    }
-
-    private InvoiceSDO createInvoiceSdo(InvoiceResource invoice) throws IOException, JAXBException, SAXException, AddressException {
-        PipedOutputStream pipeOut = new PipedOutputStream();
-        PipedInputStream pipeIn = new PipedInputStream(pipeOut);
-        marshaller.marshal(invoice, pipeOut);
-        pipeOut.close();
-        Document document = builder.parse(pipeIn);
-        pipeIn.close();
-        Address[] from = new Address[] { new InternetAddress("rentit9esi@gmail.com") };
-        return new InvoiceSDO(document, from);
     }
 
 }
