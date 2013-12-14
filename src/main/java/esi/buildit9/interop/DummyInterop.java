@@ -31,11 +31,13 @@ public class DummyInterop implements RentitInterop {
 
     @Override
     public List<PlantResource> getAvailablePlantsBetween(String nameLike, Calendar startDate, Calendar endDate) {
+        log("returning plants");
         return new ArrayList<PlantResource>();
     }
 
     @Override
     public List<PlantResource> getPlants() {
+        log("returning plants");
         return new ArrayList<PlantResource>();
     }
 
