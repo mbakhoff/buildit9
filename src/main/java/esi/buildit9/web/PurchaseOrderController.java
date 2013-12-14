@@ -1,8 +1,13 @@
 package esi.buildit9.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.interop.RentitInterop;
+
+import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,5 +41,19 @@ public class PurchaseOrderController {
         uiModel.asMap().clear();
         purchaseOrder.merge();
         return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
+    }
+    
+    @RequestMapping(value = "/all", produces = "text/html")
+    public String all(Model uiModel) {
+    	addDeliverables(uiModel, PurchaseOrder.getPOsForWorkers());
+        return "purchaseorders/all";
+    }
+    
+    private static void addDeliverables(Model uiModel, List<PurchaseOrder> ordersForWorkers) {
+        List<PurchaseOrder> deliveries = new ArrayList<PurchaseOrder>();
+        for (PurchaseOrder orderLine : ordersForWorkers) {
+            deliveries.add(orderLine);
+        }
+        uiModel.addAttribute("plants", deliveries);
     }
 }

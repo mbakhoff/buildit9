@@ -2,6 +2,9 @@ package esi.buildit9.web.se;
 import esi.buildit9.RBAC;
 import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.interop.RentitInterop;
+import org.joda.time.DateMidnight;
+import org.joda.time.Days;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.joda.time.Days.*;
 
 @RequestMapping("/se/po")
 @Controller
@@ -63,6 +68,14 @@ public class POSEController {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, purchaseOrder);
             return "se/po/update";
+        }
+        if (Days.daysBetween(new DateMidnight(purchaseOrder.getStartDate()), new DateMidnight()).getDays() <= 1){
+            throw new IllegalArgumentException("Rejecting the Purchase Order is not allowed!" +
+                    "Cancellations are allowed until the day before the plant is due to be delivered!");
+        } else if (purchaseOrder.getOrderStatus() == OrderStatus.APPROVED ||
+                purchaseOrder.getOrderStatus() == OrderStatus.RENTIT_CONFIRMED) {
+            RentitInterop provider = purchaseOrder.getRentit().getInterop();
+            provider.cancelOrder(purchaseOrder);
         }
         uiModel.asMap().clear();
         purchaseOrder.merge();
