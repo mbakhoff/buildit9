@@ -17,7 +17,7 @@ public class PurchaseOrder {
 	
     private static final String QUERY_ORDERS_FOR_WORKERS =
             "FROM PurchaseOrder AS order WHERE " +
-                    "order.status != :postatus";
+                    "order.orderStatus != :postatus";
 
     @ManyToOne
     private Site site;
