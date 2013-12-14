@@ -49,7 +49,7 @@ public class Team9Interop implements RentitInterop {
 
         String id = createRequest.getHeaders().getFirst("EntityId");
         order.setIdAtRentit(id);
-        order.merge();
+        order.persist();
     }
 
     @Override

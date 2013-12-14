@@ -49,7 +49,7 @@ public class Team1Interop implements RentitInterop {
         int status = createRequest.getStatus();
         if (status == ClientResponse.Status.CREATED.getStatusCode()) {
             order.setIdAtRentit(extractCreatedId(createRequest).toString());
-            order.merge();
+            order.persist();
         } else {
             throw new RemoteHostException(createRequest);
         }

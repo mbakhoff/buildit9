@@ -39,7 +39,7 @@ public class PurchaseOrderController {
         }
 
         uiModel.asMap().clear();
-        purchaseOrder.merge();
+        purchaseOrder.persist();
         return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
     }
     
