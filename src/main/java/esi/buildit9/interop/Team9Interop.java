@@ -46,6 +46,10 @@ public class Team9Interop implements RentitInterop {
         if (status != ClientResponse.Status.CREATED.getStatusCode()) {
             throw new RemoteHostException(createRequest);
         }
+
+        String id = createRequest.getHeaders().getFirst("EntityId");
+        order.setIdAtRentit(id);
+        order.merge();
     }
 
     @Override
