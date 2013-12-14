@@ -37,7 +37,7 @@
             </menu:category>
         </sec:authorize>
         <menu:category id="c_purchaseorder" label="POs for all users" z="user-managed">
-            <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" label="List all POs for all users" url="/purchaseorders/listall" z="user-managed"/>
+            <menu:item id="i_purchaseorder_list" label="List all POs for all users" messageCode="global_menu_list" url="/purchaseorders/listall" z="user-managed"/>
         </menu:category>
         <menu:category id="c_remittanceadvice" z="+IT6zNB9yTzdnF/vS8JQB0NgwEs=">
             <menu:item id="i_remittanceadvice_new" messageCode="global_menu_new" url="/remittanceadvices?form" z="mdaqxtYc+2uDpIFZjG8iTphKjv8="/>
@@ -56,6 +56,12 @@
                 <menu:item id="i_authorities_new" messageCode="global_menu_new" url="/security/authoroties?form" z="KObEhJaYOVjEjjiitqW4fKpeWzA="/>
                 <menu:item id="i_authorities_list" messageCode="global_menu_list" url="/security/authoroties?page=1&amp;size=${empty param.size ? 10 : param.size}" z="jXBZuokPYR5o/if39Bkp1XAXtbs="/>
             </menu:category>
+        </sec:authorize>
+        <sec:authorize ifAnyGranted="ROLE_SITE_ENGINEER,ROLE_ADMIN">
+        <menu:category id="c_extend" z="HlmeNFAH0YYFWqxBTntlaGJYV4o=">
+            <menu:item id="i_extend_new" messageCode="global_menu_new" url="/se?form" z="ap0x9hGeWrl9neuyBqSJaPVLXl4="/>
+            <menu:item id="i_extend_list" messageCode="global_menu_list" url="/se?page=1&amp;size=${empty param.size ? 10 : param.size}" z="nN+TGaoktcqE6O4buaBshc1OBpo="/>
+        </menu:category>
         </sec:authorize>
     </menu:menu>
 </div>
