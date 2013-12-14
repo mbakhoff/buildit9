@@ -17,6 +17,21 @@ public class Team30Interop implements RentitInterop {
     }
 
     @Override
+    public void updateOrder(PurchaseOrder order) {
+
+    }
+
+    @Override
+    public void extendOrder(PurchaseOrder order) {
+
+    }
+
+    @Override
+    public void cancelOrder(PurchaseOrder order) {
+
+    }
+
+    @Override
     public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
 
     }
