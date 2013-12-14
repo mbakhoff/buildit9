@@ -3,7 +3,6 @@
 
 package esi.buildit9.web;
 
-import esi.buildit9.domain.Extend;
 import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
@@ -20,30 +19,6 @@ import org.springframework.format.FormatterRegistry;
 privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService {
     
     declare @type: ApplicationConversionServiceFactoryBean: @Configurable;
-    
-    public Converter<Extend, String> ApplicationConversionServiceFactoryBean.getExtendToStringConverter() {
-        return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.Extend, java.lang.String>() {
-            public String convert(Extend extend) {
-                return new StringBuilder().append(extend.getEndDate()).toString();
-            }
-        };
-    }
-    
-    public Converter<Long, Extend> ApplicationConversionServiceFactoryBean.getIdToExtendConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.Long, esi.buildit9.domain.Extend>() {
-            public esi.buildit9.domain.Extend convert(java.lang.Long id) {
-                return Extend.findExtend(id);
-            }
-        };
-    }
-    
-    public Converter<String, Extend> ApplicationConversionServiceFactoryBean.getStringToExtendConverter() {
-        return new org.springframework.core.convert.converter.Converter<java.lang.String, esi.buildit9.domain.Extend>() {
-            public esi.buildit9.domain.Extend convert(String id) {
-                return getObject().convert(getObject().convert(id, Long.class), Extend.class);
-            }
-        };
-    }
     
     public Converter<Invoice, String> ApplicationConversionServiceFactoryBean.getInvoiceToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.Invoice, java.lang.String>() {
@@ -238,9 +213,6 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     }
     
     public void ApplicationConversionServiceFactoryBean.installLabelConverters(FormatterRegistry registry) {
-        registry.addConverter(getExtendToStringConverter());
-        registry.addConverter(getIdToExtendConverter());
-        registry.addConverter(getStringToExtendConverter());
         registry.addConverter(getInvoiceToStringConverter());
         registry.addConverter(getIdToInvoiceConverter());
         registry.addConverter(getStringToInvoiceConverter());
