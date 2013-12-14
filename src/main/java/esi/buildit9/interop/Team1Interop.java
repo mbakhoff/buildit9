@@ -1,4 +1,4 @@
-package esi.buildit9.interop.rentit1;
+package esi.buildit9.interop;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -6,8 +6,9 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
-import esi.buildit9.interop.RemoteHostException;
-import esi.buildit9.interop.RentitInterop;
+import esi.buildit9.interop.rentit1.POstatus;
+import esi.buildit9.interop.rentit1.PlantResourceList;
+import esi.buildit9.interop.rentit1.PurchaseOrderResource;
 import esi.buildit9.rest.PlantResource;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormatter;

@@ -3,7 +3,7 @@ package esi.builtit9.interop;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.Site;
 import esi.buildit9.interop.RentitInterop;
-import esi.buildit9.interop.rentit1.Team1Interop;
+import esi.buildit9.interop.Team1Interop;
 import esi.buildit9.rest.PlantResource;
 import org.joda.time.DateMidnight;
 import org.junit.Assert;

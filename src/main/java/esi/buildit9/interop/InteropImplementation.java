@@ -1,6 +1,6 @@
 package esi.buildit9.interop;
 
-import esi.buildit9.interop.rentit1.Team1Interop;
+import esi.buildit9.interop.Team1Interop;
 
 public enum InteropImplementation {
 
