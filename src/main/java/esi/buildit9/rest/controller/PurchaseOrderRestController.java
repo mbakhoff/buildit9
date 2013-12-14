@@ -117,10 +117,6 @@ public class PurchaseOrderRestController {
         RBAC.assertAuthority(RBAC.ROLE_WORKS_ENGINEER);
 
         PurchaseOrder order = getCheckedOrder(id);
-        if (Days.daysBetween(new DateMidnight(order.getStartDate()), new DateMidnight()).getDays() <= 1){
-            throw new IllegalArgumentException("Rejecting the Purchase Order is not allowed!" +
-                    "Cancellations are allowed until the day before the plant is due to be delivered!");
-        }
         order.setOrderStatus(OrderStatus.REJECTED);
         order.persist();
 

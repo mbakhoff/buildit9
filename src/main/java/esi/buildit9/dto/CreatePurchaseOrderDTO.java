@@ -1,6 +1,7 @@
 package esi.buildit9.dto;
 
-import esi.buildit9.soap.client.PlantResource;
+import esi.buildit9.domain.RentIt;
+import esi.buildit9.rest.PlantResource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
@@ -16,8 +17,9 @@ public class CreatePurchaseOrderDTO {
     private String nameLike;
     private String siteAddress;
     private String worksEngineerName;
-
     private Integer selectedItem;
+    private RentIt rentIt;
+
     private List<PlantLineDTO> searchLines;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -34,6 +36,7 @@ public class CreatePurchaseOrderDTO {
 
     public void setLinesFromPlants(List<PlantResource> plantList) {
         searchLines = new ArrayList<PlantLineDTO>();
+        if (plantList.isEmpty()) return;
         for (PlantResource plant : plantList) {
             searchLines.add(createLine(plant));
         }
