@@ -43,10 +43,10 @@ public class PurchaseOrderController {
         return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
     }
     
-    @RequestMapping(value = "/all", produces = "text/html")
+    @RequestMapping(value = "/listall", produces = "text/html")
     public String all(Model uiModel) {
     	addDeliverables(uiModel, PurchaseOrder.getPOsForWorkers());
-        return "purchaseorders/all";
+        return "purchaseorders/listall";
     }
     
     private static void addDeliverables(Model uiModel, List<PurchaseOrder> ordersForWorkers) {
@@ -54,6 +54,6 @@ public class PurchaseOrderController {
         for (PurchaseOrder orderLine : ordersForWorkers) {
             deliveries.add(orderLine);
         }
-        uiModel.addAttribute("plants", deliveries);
+        uiModel.addAttribute("purchaseordersall", deliveries);
     }
 }

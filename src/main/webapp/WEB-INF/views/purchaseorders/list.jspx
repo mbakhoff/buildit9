@@ -10,6 +10,7 @@
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_plantExternalId" property="plantExternalId" z="/jAaCrUFh/D3hTbKxBvkjp44g7k="/>
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_plantName" property="plantName" z="NWj7h2FPXVJVDmFrvCdQwExv6x4="/>
             <table:column id="c_esi_buildit9_domain_PurchaseOrder_idAtRentit" property="idAtRentit" z="SiudogkKVbbQOAOHbNyqmOldtlA="/>
+            <table:column id="s_esi_buildit9_domain_PurchaseOrder_orderStatus" property="orderStatus" z="user-managed"/>
         </table:table>
     </page:list>
 </div>

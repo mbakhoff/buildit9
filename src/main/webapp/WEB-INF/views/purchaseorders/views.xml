@@ -13,7 +13,7 @@
 	<definition extends="default" name="purchaseorders/update">
         <put-attribute name="body" value="/WEB-INF/views/purchaseorders/update.jspx"/>
     </definition>
-    <definition extends="default" name="purchaseorders/all/list">
-        <put-attribute name="body" value="/WEB-INF/views/purchaseorders/list.jspx"/>
+    <definition extends="default" name="purchaseorders/listall">
+        <put-attribute name="body" value="/WEB-INF/views/purchaseorders/listall.jspx"/>
     </definition>
 </tiles-definitions>
