@@ -215,7 +215,7 @@ public class Team30Interop implements RentitInterop {
         purchaseOrderResource.setEnd(order.getEndDate().getTime());
         purchaseOrderResource.setStart(order.getStartDate().getTime());
         purchaseOrderResource.setCredentials("rentit:rentit");
-        purchaseOrderResource.setEmail("");
+        purchaseOrderResource.setEmail("buildit9esi@gmail.com");
         purchaseOrderResource.setServer("http://rentit30.herokuapp.com/rest/po/"+order.getId());
         purchaseOrderResource.setHireRequestId(order.getId());
         purchaseOrderResource.setPlant(getPlant(order.getPlantExternalId()));
