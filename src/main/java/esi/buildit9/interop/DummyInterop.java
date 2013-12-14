@@ -20,6 +20,11 @@ public class DummyInterop implements RentitInterop {
     }
 
     @Override
+    public void extendOrder(PurchaseOrder order) {
+        log("order extended");
+    }
+
+    @Override
     public void cancelOrder(PurchaseOrder order) {
         log("order cancelled");
     }

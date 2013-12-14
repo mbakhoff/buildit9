@@ -10,6 +10,7 @@ public interface RentitInterop {
 
     void submitOrder(PurchaseOrder order);
     void updateOrder(PurchaseOrder order);
+    void extendOrder(PurchaseOrder order);
     void cancelOrder(PurchaseOrder order);
     void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice);
     List<esi.buildit9.rest.PlantResource> getAvailablePlantsBetween(String nameLike, Calendar startDate, Calendar endDate);

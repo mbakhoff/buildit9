@@ -48,6 +48,11 @@ public class Team9Interop implements RentitInterop {
     }
 
     @Override
+    public void extendOrder(PurchaseOrder order) {
+        updateOrder(order);
+    }
+
+    @Override
     public void cancelOrder(PurchaseOrder order) {
         throw new UnsupportedOperationException();
     }
