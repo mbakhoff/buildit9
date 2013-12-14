@@ -54,6 +54,21 @@ public class Team1Interop implements RentitInterop {
         }
     }
 
+    @Override
+    public void updateOrder(PurchaseOrder order) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void extendOrder(PurchaseOrder order) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void cancelOrder(PurchaseOrder order) {
+        throw new UnsupportedOperationException();
+    }
+
     private String getRejectUrl(PurchaseOrder order) {
         return String.format("https://buildit9.herokuapp.com/rest/pos/%d/rentitreject", order.getId());
     }
@@ -84,6 +99,16 @@ public class Team1Interop implements RentitInterop {
         DateTimeFormatter fmt = ISODateTimeFormat.yearMonthDay();
         return String.format("%s?plantName=%s&startDate=%s&endDate=%s",
                 RENTIT_PLANTS, name, startDate.toString(fmt), endDate.toString(fmt));
+    }
+
+    private esi.buildit9.interop.rentit1.PurchaseOrderResource getOrder(long id) {
+        WebResource webResource = getClient().resource(RENTIT_POS + "/" + id);
+        ClientResponse request = webResource.get(ClientResponse.class);
+
+        if (request.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
+            throw new RemoteHostException(request);
+        }
+        return request.getEntity(esi.buildit9.interop.rentit1.PurchaseOrderResource.class);
     }
 
     @Override

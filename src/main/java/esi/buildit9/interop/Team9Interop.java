@@ -43,6 +43,21 @@ public class Team9Interop implements RentitInterop {
     }
 
     @Override
+    public void updateOrder(PurchaseOrder order) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void extendOrder(PurchaseOrder order) {
+        updateOrder(order);
+    }
+
+    @Override
+    public void cancelOrder(PurchaseOrder order) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public List<PlantResource> getAvailablePlantsBetween(String nameLike, Calendar startDate, Calendar endDate) {
         WebResource webResource = getClient().resource(
                 getFindUrl(nameLike, new DateMidnight(startDate), new DateMidnight(endDate)));
