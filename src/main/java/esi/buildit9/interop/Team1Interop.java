@@ -6,6 +6,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
+import esi.buildit9.interop.rentit1.POExtensionResource;
 import esi.buildit9.interop.rentit1.POstatus;
 import esi.buildit9.interop.rentit1.PlantResourceList;
 import esi.buildit9.interop.rentit1.PurchaseOrderResource;
@@ -27,19 +28,7 @@ public class Team1Interop implements RentitInterop {
 
     @Override
     public void submitOrder(PurchaseOrder order) {
-        esi.buildit9.interop.rentit1.PlantResource plant = new esi.buildit9.interop.rentit1.PlantResource();
-        plant.setId(Long.parseLong(order.getPlantExternalId()));
-
-        esi.buildit9.interop.rentit1.PurchaseOrderResource res = new PurchaseOrderResource();
-        res.setPoExtensionRejectionlink(getRejectUrl(order));
-        res.setPoRejectionlink(getRejectUrl(order));
-        res.setPlantId(plant);
-        res.setCommentt("request from builtit9");
-        res.setCustomerEmail("buildit9esi@gmail.com");
-        res.setStartdate(order.getStartDate().getTime());
-        res.setEnddate(order.getEndDate().getTime());
-        res.setPrice(BigDecimal.valueOf(order.getTotalPrice()));
-        res.setStatus(POstatus.PENDING_CONFIRMATION);
+        PurchaseOrderResource res = prepareOrder(order);
 
         ClientResponse createRequest = getClient().resource(RENTIT_POS)
                 .type(MediaType.APPLICATION_XML)
@@ -54,19 +43,60 @@ public class Team1Interop implements RentitInterop {
         }
     }
 
+    private PurchaseOrderResource prepareOrder(PurchaseOrder order) {
+        esi.buildit9.interop.rentit1.PlantResource plant = new esi.buildit9.interop.rentit1.PlantResource();
+        plant.setId(Long.parseLong(order.getPlantExternalId()));
+
+        PurchaseOrderResource res = new PurchaseOrderResource();
+        res.setPoExtensionRejectionlink(getRejectUrl(order));
+        res.setPoRejectionlink(getRejectUrl(order));
+        res.setPlantId(plant);
+        res.setCommentt("request from builtit9");
+        res.setCustomerEmail("buildit9esi@gmail.com");
+        res.setStartdate(order.getStartDate().getTime());
+        res.setEnddate(order.getEndDate().getTime());
+        res.setPrice(BigDecimal.valueOf(order.getTotalPrice()));
+        res.setStatus(POstatus.PENDING_CONFIRMATION);
+        return res;
+    }
+
     @Override
     public void updateOrder(PurchaseOrder order) {
-        throw new UnsupportedOperationException();
+        PurchaseOrderResource res = prepareOrder(order);
+
+        ClientResponse updateRequest = getClient().resource(RENTIT_POS + "/" + order.getIdAtRentit())
+                .type(MediaType.APPLICATION_XML)
+                .post(ClientResponse.class, res);
+
+        if (updateRequest.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
+            throw new RemoteHostException(updateRequest);
+        }
     }
 
     @Override
     public void extendOrder(PurchaseOrder order) {
-        throw new UnsupportedOperationException();
+        POExtensionResource res = new POExtensionResource();
+        res.setStartdate(order.getStartDate().getTime());
+        res.setEnddate(order.getEndDate().getTime());
+        res.setPrice(BigDecimal.valueOf(order.getTotalPrice()));
+
+        ClientResponse extendRequest = getClient().resource(RENTIT_POS + "/" + order.getIdAtRentit() + "/updates")
+                .type(MediaType.APPLICATION_XML)
+                .post(ClientResponse.class, res);
+
+        if (extendRequest.getStatus() != ClientResponse.Status.CREATED.getStatusCode()) {
+            throw new RemoteHostException(extendRequest);
+        }
     }
 
     @Override
     public void cancelOrder(PurchaseOrder order) {
-        throw new UnsupportedOperationException();
+        ClientResponse updateRequest = getClient().resource(RENTIT_POS + "/" + order.getIdAtRentit() + "/cancel")
+                .type(MediaType.APPLICATION_XML)
+                .delete(ClientResponse.class);
+        if (updateRequest.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
+            throw new RemoteHostException(updateRequest);
+        }
     }
 
     private String getRejectUrl(PurchaseOrder order) {
