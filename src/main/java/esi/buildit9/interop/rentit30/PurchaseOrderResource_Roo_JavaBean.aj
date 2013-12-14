@@ -90,12 +90,12 @@ privileged aspect PurchaseOrderResource_Roo_JavaBean {
         this.email = email;
     }
     
-    public String PurchaseOrderResource.getGetlink() {
-        return this.getlink;
+    public String PurchaseOrderResource.getServer() {
+        return this.server;
     }
     
-    public void PurchaseOrderResource.setGetlink(String getlink) {
-        this.getlink = getlink;
+    public void PurchaseOrderResource.setServer(String server) {
+        this.server = server;
     }
     
     public String PurchaseOrderResource.getCredentials() {

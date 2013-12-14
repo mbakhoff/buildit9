@@ -2,6 +2,7 @@ package esi.buildit9.interop.rentit30;
 
 import org.springframework.roo.addon.javabean.RooJavaBean;
 
+import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -20,12 +21,13 @@ public class PurchaseOrderResource{
 	private Integer siteId;
 	private POStatus status;
 	private Boolean paid;
-	
+
+    @Transient
 	private Date startDate;
-	
+	@Transient
 	private Date endDate;
     private String email;
-    private String getlink;
+    private String server;
     private String credentials;
 
 	@XmlJavaTypeAdapter(DateAdapter.class)
