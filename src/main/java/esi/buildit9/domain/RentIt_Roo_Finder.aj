@@ -3,6 +3,7 @@
 
 package esi.buildit9.domain;
 
+import esi.buildit9.domain.RentIt;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 

@@ -112,7 +112,7 @@ public class Team30Interop implements RentitInterop {
     }
 
     public String getCancelPurchaseOrderUrl(PurchaseOrder order){
-        return RENTIT_PO_CANCEL + "/" + order.getPlantExternalId();
+        return RENTIT_PO_CANCEL + "/" + order.getIdAtRentit();
     }
 
     @Override
