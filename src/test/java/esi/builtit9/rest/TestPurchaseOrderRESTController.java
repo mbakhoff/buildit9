@@ -4,14 +4,8 @@ package esi.builtit9.rest;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
-import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.buildit9.domain.OrderStatus;
-import esi.buildit9.interop.RemoteHostException;
-import esi.buildit9.interop.rentit30.PlantResourceList;
 import esi.buildit9.rest.PurchaseOrderResource;
-import org.joda.time.DateMidnight;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 import org.junit.Test;
 
 import javax.ws.rs.core.MediaType;
@@ -189,33 +183,6 @@ public class TestPurchaseOrderRESTController {
         PurchaseOrderResource purchaseOrder = webResourceById.get(PurchaseOrderResource.class);
 
         assertEquals(OrderStatus.WAITING_APPROVAL.toString(), purchaseOrder.getStatus());
-    }
-
-    @Test
-    public void testTeam30InteropSearch(){
-        String requestUrl=getFindUrl("Truck", new DateMidnight(), new DateMidnight().plus(1));
-
-        WebResource webResource = getClient().resource(requestUrl);
-        ClientResponse request = webResource.get(ClientResponse.class);
-
-        if (request.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
-            throw new RemoteHostException(request);
-        }
-        PlantResourceList plants= request.getEntity(esi.buildit9.interop.rentit30.PlantResourceList.class);
-
-        assertNotNull(plants);
-    }
-
-    private String getFindUrl(String name, DateMidnight startDate, DateMidnight endDate) {
-        DateTimeFormatter fmt = ISODateTimeFormat.yearMonthDay();
-        return String.format("%s?name=%s&start=%s&end=%s",
-                "http://rentit30.herokuapp.com/rest/plants/available", name, startDate.toString(fmt), endDate.toString(fmt));
-    }
-
-    private static Client getClient() {
-        Client client = Client.create();
-        client.addFilter(new HTTPBasicAuthFilter("buildit", "buildit"));
-        return client;
     }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.roo.addon.tostring.RooToString;
 
 @RooJavaBean
 @RooToString
-@RooJpaActiveRecord(finders = { "findRentItsByNameEquals" })
+@RooJpaActiveRecord(finders = { "findRentItsByNameEquals", "findRentItsByEmailEquals" })
 public class RentIt {
 
     /**
@@ -17,6 +17,8 @@ public class RentIt {
     private String name;
 
     private InteropImplementation provider;
+
+    private String email;
 
     public static RentIt getOrCreateRentIt(String name) {
         RentIt rentIt;

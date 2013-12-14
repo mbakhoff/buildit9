@@ -9,6 +9,14 @@ import javax.persistence.TypedQuery;
 
 privileged aspect RentIt_Roo_Finder {
     
+    public static TypedQuery<RentIt> RentIt.findRentItsByEmailEquals(String email) {
+        if (email == null || email.length() == 0) throw new IllegalArgumentException("The email argument is required");
+        EntityManager em = RentIt.entityManager();
+        TypedQuery<RentIt> q = em.createQuery("SELECT o FROM RentIt AS o WHERE o.email = :email", RentIt.class);
+        q.setParameter("email", email);
+        return q;
+    }
+    
     public static TypedQuery<RentIt> RentIt.findRentItsByNameEquals(String name) {
         if (name == null || name.length() == 0) throw new IllegalArgumentException("The name argument is required");
         EntityManager em = RentIt.entityManager();

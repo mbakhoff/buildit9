@@ -18,10 +18,10 @@ import java.util.List;
 
 public class InvoiceHelper {
 
-    public static InvoiceResource unmarshall(Document invoice) {
+    public static <T> T unmarshall(Document invoice, Class<T> resourceClass) {
         try {
-            JAXBContext ctx = JAXBContext.newInstance(InvoiceResource.class);
-            return  (InvoiceResource) ctx.createUnmarshaller().unmarshal(invoice);
+            JAXBContext ctx = JAXBContext.newInstance(resourceClass);
+            return resourceClass.cast(ctx.createUnmarshaller().unmarshal(invoice));
         } catch (JAXBException e) {
             throw new RuntimeException(e);
         }
@@ -36,8 +36,8 @@ public class InvoiceHelper {
         throw new IllegalArgumentException("not an InternetAddress");
     }
 
-    public static Invoice persist(InvoiceResource invoiceResource, PurchaseOrder purchaseOrder, String address, final InvoiceStatus status) {
-        if (!invoiceResource.getPo().equals(purchaseOrder.getId())) {
+    public static Invoice persist(InvoiceSDO invoiceResource, PurchaseOrder purchaseOrder, String address, InvoiceStatus status) {
+        if (!invoiceResource.po.equals(purchaseOrder.getId())) {
             throw new IllegalArgumentException("PO id mismatch");
         }
         Invoice invoice = new Invoice();
@@ -45,7 +45,7 @@ public class InvoiceHelper {
         invoice.setPurchaseOrder(purchaseOrder);
         invoice.setStatus(status);
         invoice.setSenderEmail(address);
-        invoice.setIdAtRentit(invoiceResource.getId());
+        invoice.setIdAtRentit(invoiceResource.id);
         invoice.persist();
         return invoice;
     }
@@ -66,12 +66,12 @@ public class InvoiceHelper {
         new OutgoingChannel(context).send(message);
     }
 
-    public static void createAndSendRemittanceAdvice(Invoice invoice) {
+    public static void createAndSendRemittanceAdvice(ApplicationContext ctx, Invoice invoice) {
     	RemittanceAdvice remittanceAdvice = new RemittanceAdvice();
     	remittanceAdvice.setInvoice(invoice);
     	remittanceAdvice.setPayDay(Calendar.getInstance());
     	remittanceAdvice.persist();
-    	invoice.getRentit().getInterop().submitRemittanceAdvice(remittanceAdvice);
+    	invoice.getRentit().getInterop().submitRemittanceAdvice(ctx, remittanceAdvice);
 
         invoice.setStatus(InvoiceStatus.COMPLETED);
         invoice.persist();

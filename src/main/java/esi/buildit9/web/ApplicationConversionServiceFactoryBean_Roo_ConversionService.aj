@@ -120,7 +120,7 @@ privileged aspect ApplicationConversionServiceFactoryBean_Roo_ConversionService 
     public Converter<RentIt, String> ApplicationConversionServiceFactoryBean.getRentItToStringConverter() {
         return new org.springframework.core.convert.converter.Converter<esi.buildit9.domain.RentIt, java.lang.String>() {
             public String convert(RentIt rentIt) {
-                return new StringBuilder().append(rentIt.getName()).toString();
+                return new StringBuilder().append(rentIt.getName()).append(' ').append(rentIt.getEmail()).toString();
             }
         };
     }

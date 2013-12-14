@@ -3,6 +3,8 @@ package esi.buildit9.service;
 import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.mail.MailMessage;
 import org.springframework.stereotype.Component;
@@ -10,26 +12,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class InvoiceAutomaticProcessor {
 
+    @Autowired
+    private ApplicationContext ctx;
+
     @ServiceActivator
     public MailMessage process(InvoiceSDO invoiceSDO) {
-    	InvoiceResource invoiceResource = InvoiceHelper.unmarshall(invoiceSDO.document);
-    	float documentTotal = invoiceResource.getTotal();
-    	long documentPO = invoiceResource.getPo();
-        PurchaseOrder purchaseOrder = PurchaseOrder.findPurchaseOrder(documentPO);
-    	String address = InvoiceHelper.tryGetSender(invoiceSDO.from);
-
+        PurchaseOrder purchaseOrder = PurchaseOrder.findPurchaseOrder(invoiceSDO.po);
+    	String address = invoiceSDO.rentIt.getEmail();
     	if (purchaseOrder != null) {
             float poTotal = purchaseOrder.getTotalPrice();
-            if (documentTotal != poTotal) {
+            if (invoiceSDO.total != poTotal) {
                 return InvoiceHelper.createMessage("Error with invoice - totals don't match!", address);
             } else if (InvoiceHelper.hasExistingInvoiceForPayment(purchaseOrder)) {
-                return InvoiceHelper.createMessage("Purchase order " + documentPO + " already accepted or completed!", address);
+                return InvoiceHelper.createMessage("Purchase order " + invoiceSDO.po + " already accepted or completed!", address);
             } else {
-                Invoice invoice = InvoiceHelper.persist(invoiceResource, purchaseOrder, address, InvoiceStatus.APPROVED);
-                InvoiceHelper.createAndSendRemittanceAdvice(invoice);
+                Invoice invoice = InvoiceHelper.persist(invoiceSDO, purchaseOrder, address, InvoiceStatus.APPROVED);
+                InvoiceHelper.createAndSendRemittanceAdvice(ctx, invoice);
                 invoice.setStatus(InvoiceStatus.COMPLETED);
                 invoice.persist();
-                return InvoiceHelper.createMessage("Thank you for the invoice with PO" + documentPO + "!", address);
+                return InvoiceHelper.createMessage("Thank you for the invoice with PO" + invoiceSDO.po + "!", address);
             }
         } else {
 			return InvoiceHelper.createMessage("Error with invoice - no such PO id!", address);

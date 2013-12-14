@@ -24,4 +24,12 @@ privileged aspect RentIt_Roo_JavaBean {
         this.provider = provider;
     }
     
+    public String RentIt.getEmail() {
+        return this.email;
+    }
+    
+    public void RentIt.setEmail(String email) {
+        this.email = email;
+    }
+    
 }

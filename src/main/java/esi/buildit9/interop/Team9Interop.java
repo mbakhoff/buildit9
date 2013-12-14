@@ -6,10 +6,16 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
+import esi.buildit9.domain.RentIt;
 import esi.buildit9.rest.*;
+import esi.buildit9.service.InvoiceHelper;
+import esi.buildit9.service.InvoiceResource;
+import esi.buildit9.service.InvoiceSDO;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.springframework.context.ApplicationContext;
+import org.w3c.dom.Document;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Calendar;
@@ -102,7 +108,7 @@ public class Team9Interop implements RentitInterop {
     }
 
     @Override
-	public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
+	public void submitRemittanceAdvice(ApplicationContext ctx, RemittanceAdvice remittanceAdvice) {
 		RemittanceAdviceResource res = remittanceAssembler.toResource(remittanceAdvice);
         ClientResponse createRequest = getClient().resource(RENTIT_RA)
                 .type(MediaType.APPLICATION_XML)
@@ -113,6 +119,12 @@ public class Team9Interop implements RentitInterop {
             throw new RemoteHostException(createRequest);
         }
 	}
+
+    @Override
+    public InvoiceSDO parseInvoice(RentIt rentIt, Document document) {
+        InvoiceResource res = InvoiceHelper.unmarshall(document, InvoiceResource.class);
+        return new InvoiceSDO(rentIt, res.getId(), res.getPo(), res.getTotal());
+    }
 
     private static Client getClient() {
         Client client = Client.create();

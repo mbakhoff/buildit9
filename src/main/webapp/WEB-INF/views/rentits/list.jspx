@@ -6,6 +6,7 @@
         <table:table data="${rentits}" id="l_esi_buildit9_domain_RentIt" path="/rentits" z="MCVJaE3dF0TPHmCp/10yA3euU/c=">
             <table:column id="c_esi_buildit9_domain_RentIt_name" property="name" z="CSzhoEfMryIxAgLY0kEOUn1LgYE="/>
             <table:column id="c_esi_buildit9_domain_RentIt_provider" property="provider" z="zzDk3AXbrDG14Ow+wz5JAQBxaRQ="/>
+            <table:column id="c_esi_buildit9_domain_RentIt_email" property="email" z="S5LZfUOQHcRHSUYMq0GR+K5tVlk="/>
         </table:table>
     </page:list>
 </div>
