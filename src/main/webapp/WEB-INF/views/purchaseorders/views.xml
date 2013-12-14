@@ -14,6 +14,6 @@
         <put-attribute name="body" value="/WEB-INF/views/purchaseorders/update.jspx"/>
     </definition>
     <definition extends="default" name="purchaseorders/all/list">
-        <put-attribute name="body" value="/WEB-INF/views/purchaseorders/list.jspx"/>
+        <put-attribute name="body" value="/WEB-INF/views/purchaseorders/all/list.jspx"/>
     </definition>
 </tiles-definitions>
