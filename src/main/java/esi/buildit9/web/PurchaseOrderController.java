@@ -38,7 +38,7 @@ public class PurchaseOrderController {
 
         if (statusChanged && purchaseOrder.getOrderStatus() == OrderStatus.APPROVED) {
             RentitInterop interop = purchaseOrder.getRentit().getInterop();
-            interop.submitOrder(purchaseOrder);
+            interop.submitOrder(PurchaseOrder.findPurchaseOrder(purchaseOrder.getId()));
         }
 
         return "redirect:/purchaseorders/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
