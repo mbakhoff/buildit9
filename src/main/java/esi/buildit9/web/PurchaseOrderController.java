@@ -75,7 +75,7 @@ public class PurchaseOrderController {
         } catch (RemoteHostException ex) {
             uiModel.addAttribute("orders", PurchaseOrder.findAllPurchaseOrders());
             uiModel.addAttribute("extension", extension);
-            uiModel.addAttribute("error", ex.getMessage());
+            uiModel.addAttribute("error", ex.status + ":" + ex.getMessage());
             return "purchaseorders/extend";
         }
     }
