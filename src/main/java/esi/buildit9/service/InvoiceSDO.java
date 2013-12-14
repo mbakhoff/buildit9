@@ -1,16 +1,19 @@
 package esi.buildit9.service;
 
-import org.w3c.dom.Document;
-
-import javax.mail.Address;
+import esi.buildit9.domain.RentIt;
 
 public class InvoiceSDO {
 
-    public final Document document;
-    public final Address[] from;
+    public final RentIt rentIt;
+    public final Long id;
+    public final Long po;
+    public final Float total;
 
-    public InvoiceSDO(Document document, Address[] from) {
-        this.document = document;
-        this.from = from;
+    public InvoiceSDO(RentIt rentIt, Long id, Long po, Float total) {
+        this.rentIt = rentIt;
+        this.id = id;
+        this.po = po;
+        this.total = total;
     }
+
 }

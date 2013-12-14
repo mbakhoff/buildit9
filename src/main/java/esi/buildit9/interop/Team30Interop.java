@@ -6,14 +6,18 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.filter.HTTPBasicAuthFilter;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
+import esi.buildit9.domain.RentIt;
 import esi.buildit9.interop.rentit30.POStatus;
 import esi.buildit9.interop.rentit30.PlantResourceList;
 import esi.buildit9.interop.rentit30.PurchaseOrderResource;
 import esi.buildit9.rest.PlantResource;
+import esi.buildit9.service.InvoiceHelper;
+import esi.buildit9.service.InvoiceSDO;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.context.ApplicationContext;
+import org.w3c.dom.Document;
 
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
@@ -185,5 +189,12 @@ public class Team30Interop implements RentitInterop {
         purchaseOrderResource.setStatus(POStatus.PENDING_CONFIRMATION);
 
         return purchaseOrderResource;
+    }
+
+    @Override
+    public InvoiceSDO parseInvoice(RentIt rentIt, Document document) {
+        esi.buildit9.interop.rentit30.InvoiceResource res =
+                InvoiceHelper.unmarshall(document, esi.buildit9.interop.rentit30.InvoiceResource.class);
+        return new InvoiceSDO(rentIt, res.invoiceId, res.poId, res.total.floatValue());
     }
 }

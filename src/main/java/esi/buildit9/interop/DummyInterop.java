@@ -2,8 +2,11 @@ package esi.buildit9.interop;
 
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.domain.RemittanceAdvice;
+import esi.buildit9.domain.RentIt;
 import esi.buildit9.rest.PlantResource;
+import esi.buildit9.service.InvoiceSDO;
 import org.springframework.context.ApplicationContext;
+import org.w3c.dom.Document;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -40,6 +43,12 @@ public class DummyInterop implements RentitInterop {
     public List<PlantResource> getPlants() {
         log("returning plants");
         return new ArrayList<PlantResource>();
+    }
+
+    @Override
+    public InvoiceSDO parseInvoice(RentIt rentIt, Document document) {
+        log("not parsing invoice using default resource");
+        return null;
     }
 
     @Override

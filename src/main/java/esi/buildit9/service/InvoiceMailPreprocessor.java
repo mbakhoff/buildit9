@@ -1,15 +1,13 @@
 package esi.buildit9.service;
 
 
+import esi.buildit9.domain.RentIt;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
+import javax.mail.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -35,10 +33,15 @@ public class InvoiceMailPreprocessor {
             BodyPart part = content.getBodyPart(i);
             if (isInvoiceXml(part)) {
                 Document document = builder.parse(part.getInputStream());
-                return new InvoiceSDO(document, msg.getFrom());
+                return getInvoiceSDO(document, InvoiceHelper.tryGetSender(msg.getFrom()));
             }
         }
         throw new IllegalArgumentException("message does not contain an invoice");
+    }
+
+    private InvoiceSDO getInvoiceSDO(Document doc, String sender) {
+        RentIt rentIt = RentIt.findRentItsByEmailEquals(sender).getSingleResult();
+        return rentIt.getInterop().parseInvoice(rentIt, doc);
     }
 
     private static boolean isInvoiceXml(BodyPart part) throws MessagingException {

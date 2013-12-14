@@ -5,5 +5,6 @@
     <form:update id="fu_esi_buildit9_domain_RentIt" modelAttribute="rentIt" path="/rentits" versionField="Version" z="mHEmPEdiVjcDWu1QijZDCKeD8ng=">
         <field:input field="name" id="c_esi_buildit9_domain_RentIt_name" z="do9VERARM5++OLM1R7rJtgzy47Y="/>
         <field:select field="provider" id="c_esi_buildit9_domain_RentIt_provider" items="${interopimplementations}" path="interopimplementations" z="cocyHms57iVxdwragYlxTJ/jcQc="/>
+        <field:input field="email" id="c_esi_buildit9_domain_RentIt_email" validationMessageCode="field_invalid_email" z="H9cSNzpaLl+86R0KmAJY5SQRUJ4="/>
     </form:update>
 </div>
