@@ -37,7 +37,8 @@
             </menu:category>
         </sec:authorize>
         <menu:category id="c_purchaseorder" label="POs for all users" z="user-managed">
-            <menu:item id="i_purchaseorder_list" messageCode="global_menu_list" label="List all POs for all users" url="/purchaseorders/listall" z="user-managed"/>
+            <menu:item id="i_purchaseorder_list" label="List all POs for all users" url="/purchaseorders/listall" z="user-managed"/>
+            <menu:item id="i_purchaseorder_extend" label="Extend PO" url="/purchaseorders/extend" z="user-managed"/>
         </menu:category>
         <menu:category id="c_remittanceadvice" z="+IT6zNB9yTzdnF/vS8JQB0NgwEs=">
             <menu:item id="i_remittanceadvice_new" messageCode="global_menu_new" url="/remittanceadvices?form" z="mdaqxtYc+2uDpIFZjG8iTphKjv8="/>

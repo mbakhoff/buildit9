@@ -1,12 +1,10 @@
 package esi.buildit9.domain;
-import org.joda.time.DateMidnight;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.roo.addon.javabean.RooJavaBean;
 import org.springframework.roo.addon.jpa.activerecord.RooJpaActiveRecord;
 import org.springframework.roo.addon.tostring.RooToString;
 
 import javax.persistence.*;
-
 import java.util.Calendar;
 import java.util.List;
 
@@ -48,6 +46,11 @@ public class PurchaseOrder {
     private String siteEngineerName;
 
     private String worksEngineerName;
+
+    public String getLabel() {
+        // used in JSPs
+        return String.format("order %d to %s", getId(), rentit.getName());
+    }
     
     public static List<PurchaseOrder> getPOsForWorkers() {
         TypedQuery<PurchaseOrder> query = entityManager().createQuery(

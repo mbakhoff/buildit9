@@ -1,13 +1,9 @@
 package esi.buildit9.web;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
+import esi.buildit9.interop.RemoteHostException;
 import esi.buildit9.interop.RentitInterop;
-
-import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 @RequestMapping("/purchaseorders")
 @Controller
@@ -56,4 +56,56 @@ public class PurchaseOrderController {
         }
         uiModel.addAttribute("purchaseordersall", deliveries);
     }
+
+    @RequestMapping(value = "/extend")
+    public String startExtension(Model uiModel) {
+        uiModel.addAttribute("orders", PurchaseOrder.findAllPurchaseOrders());
+        uiModel.addAttribute("extension", new ExtensionDto());
+        return "purchaseorders/extend";
+    }
+
+    @RequestMapping(value = "/extend", method = RequestMethod.POST)
+    public String tryExtend(@Valid ExtensionDto extension, BindingResult bindingResult, Model uiModel) {
+        PurchaseOrder order = PurchaseOrder.findPurchaseOrder(extension.getOrderId());
+        order.setEndDate(toCalendar(extension));
+        try {
+            order.getRentit().getInterop().extendOrder(order);
+            order.merge();
+            return "redirect:/purchaseorders/"+order.getId();
+        } catch (RemoteHostException ex) {
+            uiModel.addAttribute("orders", PurchaseOrder.findAllPurchaseOrders());
+            uiModel.addAttribute("extension", extension);
+            uiModel.addAttribute("error", ex.getMessage());
+            return "purchaseorders/extend";
+        }
+    }
+
+    private Calendar toCalendar(ExtensionDto extension) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(extension.getEndDate());
+        return cal;
+    }
+
+    public static class ExtensionDto {
+
+        private Long orderId;
+        private Date endDate;
+
+        public Long getOrderId() {
+            return orderId;
+        }
+
+        public void setOrderId(Long orderId) {
+            this.orderId = orderId;
+        }
+
+        public Date getEndDate() {
+            return endDate;
+        }
+
+        public void setEndDate(Date endDate) {
+            this.endDate = endDate;
+        }
+    }
+
 }
