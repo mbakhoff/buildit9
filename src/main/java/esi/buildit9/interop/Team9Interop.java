@@ -10,6 +10,7 @@ import esi.buildit9.rest.*;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.springframework.context.ApplicationContext;
 
 import javax.ws.rs.core.MediaType;
 import java.util.Calendar;
@@ -102,7 +103,7 @@ public class Team9Interop implements RentitInterop {
     }
 
     @Override
-	public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
+	public void submitRemittanceAdvice(ApplicationContext ctx, RemittanceAdvice remittanceAdvice) {
 		RemittanceAdviceResource res = remittanceAssembler.toResource(remittanceAdvice);
         ClientResponse createRequest = getClient().resource(RENTIT_RA)
                 .type(MediaType.APPLICATION_XML)

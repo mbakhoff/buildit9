@@ -3,12 +3,17 @@ package esi.buildit9.service;
 import esi.buildit9.domain.Invoice;
 import esi.buildit9.domain.InvoiceStatus;
 import esi.buildit9.domain.PurchaseOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.integration.annotation.ServiceActivator;
 import org.springframework.mail.MailMessage;
 import org.springframework.stereotype.Component;
 
 @Component
 public class InvoiceAutomaticProcessor {
+
+    @Autowired
+    private ApplicationContext ctx;
 
     @ServiceActivator
     public MailMessage process(InvoiceSDO invoiceSDO) {
@@ -26,7 +31,7 @@ public class InvoiceAutomaticProcessor {
                 return InvoiceHelper.createMessage("Purchase order " + documentPO + " already accepted or completed!", address);
             } else {
                 Invoice invoice = InvoiceHelper.persist(invoiceResource, purchaseOrder, address, InvoiceStatus.APPROVED);
-                InvoiceHelper.createAndSendRemittanceAdvice(invoice);
+                InvoiceHelper.createAndSendRemittanceAdvice(ctx, invoice);
                 invoice.setStatus(InvoiceStatus.COMPLETED);
                 invoice.persist();
                 return InvoiceHelper.createMessage("Thank you for the invoice with PO" + documentPO + "!", address);

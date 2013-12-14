@@ -11,6 +11,7 @@ import esi.buildit9.rest.PlantResource;
 import org.joda.time.DateMidnight;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,7 +45,7 @@ public class Team30Interop implements RentitInterop {
     }
 
     @Override
-    public void submitRemittanceAdvice(RemittanceAdvice remittanceAdvice) {
+    public void submitRemittanceAdvice(ApplicationContext ctx, RemittanceAdvice remittanceAdvice) {
 
     }
 
