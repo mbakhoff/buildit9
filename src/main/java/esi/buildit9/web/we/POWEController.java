@@ -1,4 +1,5 @@
 package esi.buildit9.web.we;
+
 import esi.buildit9.domain.OrderStatus;
 import esi.buildit9.domain.PurchaseOrder;
 import esi.buildit9.interop.RentitInterop;
@@ -19,7 +20,6 @@ public class POWEController {
 	
 	@RequestMapping(method = RequestMethod.PUT, produces = "text/html")
 	public String update(@Valid PurchaseOrder purchaseOrder, BindingResult	bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
-	
 		if (bindingResult.hasErrors()) { 
 			populateEditForm(uiModel, purchaseOrder);
 			return "we/po/update";
@@ -27,14 +27,15 @@ public class POWEController {
 
         PurchaseOrder cleanCopy = PurchaseOrder.findPurchaseOrder(purchaseOrder.getId());
         boolean statusChanged = cleanCopy.getOrderStatus() != purchaseOrder.getOrderStatus();
+
+        uiModel.asMap().clear();
 		purchaseOrder.merge();
 
         if (statusChanged && purchaseOrder.getOrderStatus() == OrderStatus.APPROVED) {
             RentitInterop interop = purchaseOrder.getRentit().getInterop();
-            interop.submitOrder(purchaseOrder);
+            interop.submitOrder(PurchaseOrder.findPurchaseOrder(purchaseOrder.getId()));
         }
 
-        uiModel.asMap().clear();
         return "redirect:/we/po/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
 	}
 	
