@@ -17,11 +17,14 @@ public class InvoiceHumanAssistedHandling {
         if (order != null) {
             if (Math.abs(order.getTotalPrice() - invoiceSDO.total) >= 1f) {
                 String message = "Total of PO " + order.getId() + " did not match. Expected " + order.getTotalPrice();
+                System.err.printf("total of invoice %d didnt match%n", invoiceSDO.id);
                 return InvoiceHelper.createMessage(message, senderEmail);
             } else if (InvoiceHelper.hasExistingInvoiceForPayment(order)) {
+                System.err.printf("invoice already exists for po %d%n", invoiceSDO.po);
                 return InvoiceHelper.createMessage("Invoice already exists for order " + order.getId(), senderEmail);
             } else {
                 InvoiceHelper.persist(invoiceSDO, order, senderEmail, InvoiceStatus.PENDING);
+                System.err.println("persisted invoice");
                 return InvoiceHelper.createMessage("Invoice for "+order.getId()+" received", senderEmail);
             }
         } else {
