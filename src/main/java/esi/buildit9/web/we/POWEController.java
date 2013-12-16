@@ -27,16 +27,15 @@ public class POWEController {
 
         PurchaseOrder cleanCopy = PurchaseOrder.findPurchaseOrder(purchaseOrder.getId());
         boolean statusChanged = cleanCopy.getOrderStatus() != purchaseOrder.getOrderStatus();
+		purchaseOrder.merge();
 
         if (statusChanged && purchaseOrder.getOrderStatus() == OrderStatus.APPROVED) {
             RentitInterop interop = purchaseOrder.getRentit().getInterop();
             interop.submitOrder(purchaseOrder);
         }
 
-		uiModel.asMap().clear();
-		purchaseOrder.merge();
-		
-		return "redirect:/we/po/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
+        uiModel.asMap().clear();
+        return "redirect:/we/po/" + encodeUrlPathSegment(purchaseOrder.getId().toString(), httpServletRequest);
 	}
 	
 }
