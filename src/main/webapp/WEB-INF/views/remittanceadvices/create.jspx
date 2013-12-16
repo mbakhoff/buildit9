@@ -4,7 +4,7 @@
     <jsp:output omit-xml-declaration="yes"/>
     <form:create id="fc_esi_buildit9_domain_RemittanceAdvice" modelAttribute="remittanceAdvice" path="/remittanceadvices" render="${empty dependencies}" z="+wWoC6kv4vMzrnXW16bLjhEYoD8=">
         <field:select field="invoice" id="c_esi_buildit9_domain_RemittanceAdvice_invoice" itemValue="id" items="${invoices}" path="/invoices" z="csgwv6KYK7PiICW3wkb9PPdkW8c="/>
-        <field:datetime dateTimePattern="${remittanceAdvice_payday_date_format}" field="payDay" id="c_esi_buildit9_domain_RemittanceAdvice_payDay" z="EK2gTSebkwqhX2GR8Ux1ZJnjt0Y="/>
+        <field:datetime dateTimePattern="${remittanceAdvice_payday_date_format}" field="paymentDate" id="c_esi_buildit9_domain_RemittanceAdvice_payDay" z="EK2gTSebkwqhX2GR8Ux1ZJnjt0Y="/>
     </form:create>
     <form:dependency dependencies="${dependencies}" id="d_esi_buildit9_domain_RemittanceAdvice" render="${not empty dependencies}" z="cXMlpdxD4zsMnwWxHeOFkEneObQ="/>
 </div>

@@ -3,25 +3,24 @@
 
 package esi.buildit9.rest;
 
-import esi.buildit9.rest.RemittanceAdviceResource;
 import java.util.Calendar;
 
 privileged aspect RemittanceAdviceResource_Roo_JavaBean {
     
-    public Long RemittanceAdviceResource.getInvoiceId() {
-        return this.invoiceId;
+    public Long RemittanceAdviceResource.getRentitInvoiceId() {
+        return this.rentitInvoiceId;
     }
     
-    public void RemittanceAdviceResource.setInvoiceId(Long invoiceId) {
-        this.invoiceId = invoiceId;
+    public void RemittanceAdviceResource.setRentitInvoiceId(Long rentitInvoiceId) {
+        this.rentitInvoiceId = rentitInvoiceId;
     }
     
-    public Calendar RemittanceAdviceResource.getPayDay() {
-        return this.payDay;
+    public Calendar RemittanceAdviceResource.getPaymentDate() {
+        return this.paymentDate;
     }
     
-    public void RemittanceAdviceResource.setPayDay(Calendar payDay) {
-        this.payDay = payDay;
+    public void RemittanceAdviceResource.setPaymentDate(Calendar paymentDate) {
+        this.paymentDate = paymentDate;
     }
     
 }

@@ -8,8 +8,8 @@ public class RemittanceAdviceAssembler {
     
     public RemittanceAdviceResource toResource(RemittanceAdvice advice) {
 		RemittanceAdviceResource res = new RemittanceAdviceResource();
-		res.setInvoiceId(advice.getInvoice().getIdAtRentit());
-		res.setPayDay(Calendar.getInstance());
+		res.setRentitInvoiceId(advice.getInvoice().getIdAtRentit());
+		res.setPaymentDate(Calendar.getInstance());
     	return res;
 	}
 

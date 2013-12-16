@@ -13,7 +13,7 @@ import java.util.Calendar;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class RemittanceAdviceResource {
 	
-	private Long invoiceId;
-	private Calendar payDay;
+	private Long rentitInvoiceId;
+	private Calendar paymentDate;
 	
 }

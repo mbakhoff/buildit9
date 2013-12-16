@@ -5,7 +5,7 @@
     <page:list id="pl_esi_buildit9_domain_RemittanceAdvice" items="${remittanceadvices}" z="f8fKXDPUMDIGzyPjZC8wWkofVnI=">
         <table:table data="${remittanceadvices}" id="l_esi_buildit9_domain_RemittanceAdvice" path="/remittanceadvices" z="PpxIrtRnUsOZ7hcCvA5RD0lUhGs=">
             <table:column id="c_esi_buildit9_domain_RemittanceAdvice_invoice" property="invoice" z="CqedegzbcqJ29qx8V04X27XdMPA="/>
-            <table:column calendar="true" dateTimePattern="${remittanceAdvice_payday_date_format}" id="c_esi_buildit9_domain_RemittanceAdvice_payDay" property="payDay" z="Nhxk771iJRBjrk5LQETvGJmjU10="/>
+            <table:column calendar="true" dateTimePattern="${remittanceAdvice_payday_date_format}" id="c_esi_buildit9_domain_RemittanceAdvice_payDay" property="paymentDate" z="Nhxk771iJRBjrk5LQETvGJmjU10="/>
         </table:table>
     </page:list>
 </div>
