@@ -27,9 +27,9 @@ public class InvoiceAutomaticProcessor {
                 return InvoiceHelper.createMessage("Purchase order " + invoiceSDO.po + " already accepted or completed!", address);
             } else {
                 Invoice invoice = InvoiceHelper.persist(invoiceSDO, purchaseOrder, address, InvoiceStatus.APPROVED);
-                InvoiceHelper.createAndSendRemittanceAdvice(ctx, invoice);
                 invoice.setStatus(InvoiceStatus.COMPLETED);
                 invoice.persist();
+                InvoiceHelper.createAndSendRemittanceAdvice(ctx, invoice);
                 return InvoiceHelper.createMessage("Thank you for the invoice with PO" + invoiceSDO.po + "!", address);
             }
         } else {
