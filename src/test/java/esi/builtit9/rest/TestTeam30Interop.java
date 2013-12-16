@@ -117,7 +117,7 @@ public class TestTeam30Interop {
 
         order.setIdAtRentit(resource.getPoId().toString());
 
-        PurchaseOrderResource result=interop.cancelOrder(order,interop.getCancelPurchaseOrderUrl(order));
+        PurchaseOrderResource result=interop.cancelOrder(interop.getCancelPurchaseOrderUrl(order));
 
         assertEquals(result.getStatus(), POStatus.CANCELLED);
 

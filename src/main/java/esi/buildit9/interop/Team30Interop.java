@@ -32,18 +32,18 @@ public class Team30Interop implements RentitInterop {
     public static final String RENTIT_PO_UPDATE = "http://rentit30.herokuapp.com/rest/po/modify";
     public static final String RENTIT_PO_CANCEL = "http://rentit30.herokuapp.com/rest/po/cancel";
 
-    public static final String RENTIT_PLANTS="http://rentit30.herokuapp.com/rest/plants";
+    public static final String RENTIT_PLANTS = "http://rentit30.herokuapp.com/rest/plants";
     public static final String RENTIT_PLANTS_AVAILABLE = "http://rentit30.herokuapp.com/rest/plants/available";
 
     @Override
     public void submitOrder(PurchaseOrder order) {
         String requestUrl = RENTIT_PO;
-        PurchaseOrderResource result=submitOrder(order,requestUrl);
+        PurchaseOrderResource result = submitOrder(order, requestUrl);
         order.setIdAtRentit(result.getPoId().toString());
         order.persist();
     }
 
-    public PurchaseOrderResource submitOrder(PurchaseOrder order,String requestUrl){
+    public PurchaseOrderResource submitOrder(PurchaseOrder order, String requestUrl) {
         PurchaseOrderResource resource = toPOR(order);
 
         ClientResponse request = getClient().resource(requestUrl)
@@ -55,16 +55,15 @@ public class Team30Interop implements RentitInterop {
             throw new RemoteHostException(request);
         }
 
-        PurchaseOrderResource result = request.getEntity(PurchaseOrderResource.class);
-        return result;
+        return request.getEntity(PurchaseOrderResource.class);
     }
 
     @Override
     public void updateOrder(PurchaseOrder order) {
-        PurchaseOrderResource result = updateOrder(order,RENTIT_PO_UPDATE);
+        updateOrder(order, RENTIT_PO_UPDATE);
     }
 
-    public PurchaseOrderResource updateOrder(PurchaseOrder order, String requestUrl){
+    public PurchaseOrderResource updateOrder(PurchaseOrder order, String requestUrl) {
         PurchaseOrderResource resource = toPOR(order);
 
         ClientResponse request = getClient().resource(requestUrl)
@@ -76,38 +75,30 @@ public class Team30Interop implements RentitInterop {
             throw new RemoteHostException(request);
         }
 
-        PurchaseOrderResource result = request.getEntity(PurchaseOrderResource.class);
-
-        return result;
+        return request.getEntity(PurchaseOrderResource.class);
     }
 
     @Override
     public void extendOrder(PurchaseOrder order) {
-        PurchaseOrderResource result = updateOrder(order,RENTIT_PO_EXTEND);
+        updateOrder(order, RENTIT_PO_EXTEND);
     }
 
     @Override
     public void cancelOrder(PurchaseOrder order) {
-        String requestUrl= getCancelPurchaseOrderUrl(order);
-        cancelOrder(order,requestUrl);
+        cancelOrder(getCancelPurchaseOrderUrl(order));
     }
 
-    public PurchaseOrderResource cancelOrder(PurchaseOrder order,String requestUrl){
-
+    public PurchaseOrderResource cancelOrder(String requestUrl) {
         WebResource webResource = getClient().resource(requestUrl);
-
         ClientResponse request = webResource.get(ClientResponse.class);
-
         if (request.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
             throw new RemoteHostException(request);
         }
 
-        PurchaseOrderResource result= request.getEntity(PurchaseOrderResource.class);
-
-        return result;
+        return request.getEntity(PurchaseOrderResource.class);
     }
 
-    public String getCancelPurchaseOrderUrl(PurchaseOrder order){
+    public String getCancelPurchaseOrderUrl(PurchaseOrder order) {
         return RENTIT_PO_CANCEL + "/" + order.getIdAtRentit();
     }
 
@@ -125,7 +116,7 @@ public class Team30Interop implements RentitInterop {
 
     @Override
     public List<PlantResource> getAvailablePlantsBetween(String nameLike, Calendar startDate, Calendar endDate) {
-        String requestUrl=getFindUrl(nameLike, new DateMidnight(startDate), new DateMidnight(endDate));
+        String requestUrl = getFindUrl(nameLike, new DateMidnight(startDate), new DateMidnight(endDate));
 
         WebResource webResource = getClient().resource(requestUrl);
         ClientResponse request = webResource.get(ClientResponse.class);
@@ -133,11 +124,10 @@ public class Team30Interop implements RentitInterop {
         if (request.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
             throw new RemoteHostException(request);
         }
-        PlantResourceList plants= request.getEntity(esi.buildit9.interop.rentit30.PlantResourceList.class);
+        PlantResourceList plants = request.getEntity(esi.buildit9.interop.rentit30.PlantResourceList.class);
 
         return toLocalPlants(plants.getPlants());
     }
-
 
 
     private String getFindUrl(String name, DateMidnight startDate, DateMidnight endDate) {
@@ -148,12 +138,11 @@ public class Team30Interop implements RentitInterop {
 
     @Override
     public List<PlantResource> getPlants() {
-        PlantResourceList plants= getAllPlantsResourceList();
-
+        PlantResourceList plants = getAllPlantsResourceList();
         return toLocalPlants(plants.getPlants());
     }
 
-    public PlantResourceList getAllPlantsResourceList(){
+    public PlantResourceList getAllPlantsResourceList() {
         WebResource webResource = getClient().resource(RENTIT_PLANTS);
         ClientResponse request = webResource.get(ClientResponse.class);
 
@@ -186,8 +175,8 @@ public class Team30Interop implements RentitInterop {
         return client;
     }
 
-    public esi.buildit9.interop.rentit30.PlantResource getPlant(String plantId){
-        String requestUrl=RENTIT_PLANTS+"/"+plantId;
+    public esi.buildit9.interop.rentit30.PlantResource getPlant(String plantId) {
+        String requestUrl = RENTIT_PLANTS + "/" + plantId;
 
         WebResource webResource = getClient().resource(requestUrl);
         ClientResponse request = webResource.get(ClientResponse.class);
@@ -195,24 +184,22 @@ public class Team30Interop implements RentitInterop {
         if (request.getStatus() != ClientResponse.Status.OK.getStatusCode()) {
             throw new RemoteHostException(request);
         }
-        esi.buildit9.interop.rentit30.PlantResource plant= request.getEntity(esi.buildit9.interop.rentit30.PlantResource.class);
 
-        return plant;
+        return request.getEntity(esi.buildit9.interop.rentit30.PlantResource.class);
     }
 
-    public PurchaseOrderResource toPOR(PurchaseOrder order){
+    public PurchaseOrderResource toPOR(PurchaseOrder order) {
         PurchaseOrderResource purchaseOrderResource = new PurchaseOrderResource();
 
-        if (order.getIdAtRentit()!=null) {
-            Long poid=Long.parseLong(order.getIdAtRentit());
-            purchaseOrderResource.setPoId(poid);
+        if (order.getIdAtRentit() != null) {
+            purchaseOrderResource.setPoId(Long.parseLong(order.getIdAtRentit()));
         }
 
         purchaseOrderResource.setEnd(order.getEndDate().getTime());
         purchaseOrderResource.setStart(order.getStartDate().getTime());
         purchaseOrderResource.setCredentials("rentit:rentit");
         purchaseOrderResource.setEmail("buildit9esi@gmail.com");
-        purchaseOrderResource.setServer("http://rentit30.herokuapp.com/rest/po/"+order.getId());
+        purchaseOrderResource.setServer("http://rentit30.herokuapp.com/rest/po/" + order.getId());
         purchaseOrderResource.setHireRequestId(order.getId());
         purchaseOrderResource.setPlant(getPlant(order.getPlantExternalId()));
         purchaseOrderResource.setPrice(order.getTotalPrice().doubleValue());

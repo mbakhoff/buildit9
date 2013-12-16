@@ -61,4 +61,7 @@ public class PurchaseOrder {
         return query.getResultList();
     }
 
+    public String getIdAtRentit() {
+        return idAtRentit == null || idAtRentit.length() == 0 ? null : idAtRentit;
+    }
 }

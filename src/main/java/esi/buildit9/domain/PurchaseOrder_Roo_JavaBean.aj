@@ -3,10 +3,6 @@
 
 package esi.buildit9.domain;
 
-import esi.buildit9.domain.OrderStatus;
-import esi.buildit9.domain.PurchaseOrder;
-import esi.buildit9.domain.RentIt;
-import esi.buildit9.domain.Site;
 import java.util.Calendar;
 
 privileged aspect PurchaseOrder_Roo_JavaBean {
@@ -34,11 +30,7 @@ privileged aspect PurchaseOrder_Roo_JavaBean {
     public void PurchaseOrder.setPlantExternalId(String plantExternalId) {
         this.plantExternalId = plantExternalId;
     }
-    
-    public String PurchaseOrder.getIdAtRentit() {
-        return this.idAtRentit;
-    }
-    
+
     public void PurchaseOrder.setIdAtRentit(String idAtRentit) {
         this.idAtRentit = idAtRentit;
     }
