@@ -36,11 +36,12 @@ public class InvoiceController {
         uiModel.asMap().clear();
         submitted.merge();
 
+        submitted = Invoice.findInvoice(submitted.getId());
         if (wasApproved(oldStatus, submittedStatus)) {
             InvoiceHelper.sendManuallyApproved(applicationContext, submitted);
             InvoiceHelper.createAndSendRemittanceAdvice(applicationContext, submitted);
             submitted.setStatus(InvoiceStatus.COMPLETED);
-            submitted.merge();
+            submitted.persist();
         }
         if (wasRejected(oldStatus, submittedStatus)) {
             InvoiceHelper.sendManuallyRejected(applicationContext, submitted);
