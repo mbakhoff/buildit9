@@ -54,6 +54,10 @@ public class Team9Interop implements RentitInterop {
 
     @Override
     public void updateOrder(PurchaseOrder order) {
+        if (order.getIdAtRentit() == null) {
+            throw new IllegalArgumentException("PO not sent to rentit yet");
+        }
+
         PurchaseOrderResource res = assembler.toResource(order);
         ClientResponse createRequest = getClient().resource(RENTIT_POS + "/" + order.getIdAtRentit())
                 .type(MediaType.APPLICATION_XML)
