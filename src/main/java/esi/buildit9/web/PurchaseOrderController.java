@@ -6,6 +6,7 @@ import esi.buildit9.interop.RemoteHostException;
 import esi.buildit9.interop.RentitInterop;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,7 @@ import java.util.List;
 public class PurchaseOrderController {
 
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
+    @Transactional
     public String update(@Valid PurchaseOrder purchaseOrder, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         if (bindingResult.hasErrors()) {
             populateEditForm(uiModel, purchaseOrder);
