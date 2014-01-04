@@ -5,6 +5,7 @@
     <spring:url value="/we/po" var="url"/>
     <sform:form action="${url}" id="fu_esi_buildit9_domain_PurchaseOrder" method="PUT" modelAttribute="purchaseOrder">
         <sform:hidden path="id"/>
+        <sform:hidden path="version"/>
         <field:select field="orderStatus" id="c_esi_buildit9_domain_PurchaseOrder_orderStatus" items="${orderstatuses}" path="orderstatuses" z="vveq1qdi2ZP9WeOPRKWtrwRE3es="/>
         <input type="submit" value="Update status"/>
 
