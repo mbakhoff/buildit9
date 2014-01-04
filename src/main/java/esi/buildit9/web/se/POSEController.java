@@ -8,7 +8,6 @@ import org.joda.time.Days;
 import org.springframework.roo.addon.web.mvc.controller.scaffold.RooWebScaffold;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Arrays;
 import java.util.List;
+
+import static org.joda.time.Days.*;
 
 @RequestMapping("/se/po")
 @Controller
@@ -50,7 +51,6 @@ public class POSEController {
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "text/html")
-    @Transactional
     public String create(@Valid PurchaseOrder purchaseOrder, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         checkOrderStatus(purchaseOrder, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -63,7 +63,6 @@ public class POSEController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, produces = "text/html")
-    @Transactional
     public String update(@Valid PurchaseOrder purchaseOrder, BindingResult bindingResult, Model uiModel, HttpServletRequest httpServletRequest) {
         checkIfValidOrderUpdate(purchaseOrder, bindingResult);
         if (bindingResult.hasErrors()) {
